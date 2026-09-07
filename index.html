@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExpoJuy 2026 | La Muestra Multisectorial más importante del Norte Argentino</title>
+  
+  <!-- Meta SEO -->
+  <meta name="description" content="Sitio Oficial ExpoJuy 2026 - 17ª Edición Internacional de la Muestra Multisectorial en Ciudad Cultural, San Salvador de Jujuy. Litio, Transición Energética, Agroindustria, Rondas de Negocios B2B y Tecnología.">
+  <meta name="keywords" content="ExpoJuy, Jujuy, Litio, Transición Energética, Corredor Bioceánico, Agroindustria, Rondas de Negocios, Ciudad Cultural">
+  <meta name="author" content="Cámara de Comercio Exterior de Jujuy">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- Site Header Root -->
+  <div id="header-root"></div>
+
+  <!-- Main Dynamic View Container -->
+  <main id="main-content" class="view-route-container"></main>
+
+  <!-- Site Footer Root -->
+  <div id="footer-root"></div>
+
+  <!-- Global Modal Overlay (Tickets, Exhibitor Details, B2B Registration) -->
+  <div id="ticket-modal" class="modal-overlay">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="closeTicketModal()"><i class="fa-solid fa-xmark"></i></button>
+      <div id="ticket-modal-content"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules & Components -->
+  <script src="js/data.js"></script>
+  <script src="js/components/navbar.js"></script>
+  <script src="js/components/interactive-map.js"></script>
+  <script src="js/components/ticket-store.js"></script>
+  <script src="js/components/exhibitors.js"></script>
+  <script src="js/components/agenda.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

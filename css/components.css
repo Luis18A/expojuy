@@ -1,0 +1,298 @@
+/* ExpoJuy 2026 - Component Styles (Matching Reference Design Spec) */
+
+/* Header Floating Pill Navbar */
+.site-header {
+  position: fixed;
+  top: 16px;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.header-container {
+  pointer-events: auto;
+  background: rgba(117, 82, 242, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 8px 24px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  box-shadow: 0 10px 30px rgba(115, 13, 217, 0.25);
+  width: 92%;
+  max-width: var(--max-width);
+}
+
+.brand-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo-text {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+.brand-logo-tagline {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.nav-link {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  padding: 8px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.2s ease;
+  z-index: 100;
+}
+
+.nav-item:hover .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: var(--color-dark-text);
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+
+.dropdown-link:hover {
+  background: rgba(117, 82, 242, 0.1);
+  color: var(--color-primary-dark);
+}
+
+/* Hero Section Banner */
+.hero-section {
+  position: relative;
+  min-height: 520px;
+  margin-top: 0;
+  padding: 140px 0 80px;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(7, 11, 20, 0.8) 100%),
+              url('screencapture-expojuy-camcomexjujuy-com-ar-2026-09-02-17_13_39.png') center/cover no-repeat;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-size: 3.8rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+
+/* Feature Block (2 Column) */
+.feature-block-section {
+  padding: 80px 0;
+}
+
+.feature-graphic-card {
+  height: 100%;
+  min-height: 380px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(41, 199, 217, 0.2) 0%, rgba(169, 136, 242, 0.3) 50%, rgba(242, 242, 242, 1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-graphic-svg {
+  width: 220px;
+  height: 220px;
+}
+
+/* FAQS Layout */
+.faqs-section-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 48px;
+  align-items: start;
+  padding: 60px 0;
+}
+
+.faqs-main-heading {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+}
+
+.faq-item-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: transform 0.2s ease;
+}
+
+.faq-item-card:hover {
+  transform: translateX(4px);
+}
+
+.faq-bullet-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(117, 82, 242, 0.12);
+  color: var(--color-primary-mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Ticker / Sponsors Logos */
+.sponsors-ticker-section {
+  text-align: center;
+  padding: 50px 0;
+  border-top: 1px solid rgba(117, 82, 242, 0.1);
+}
+
+.sponsors-ticker-label {
+  font-size: 0.9rem;
+  color: var(--color-muted-text);
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.sponsors-ticker {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.sponsor-logo-item {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #94A3B8;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+}
+
+.sponsor-logo-item:hover {
+  color: var(--color-primary-dark);
+}
+
+/* Footer Light Theme */
+.site-footer {
+  background: #FFFFFF;
+  border-top: 1px solid rgba(117, 82, 242, 0.12);
+  padding: 60px 0 30px;
+  margin-top: 60px;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-col-title {
+  font-size: 1rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 16px;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: var(--color-muted-text);
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--color-primary-mid);
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 0.85rem;
+  color: var(--color-muted-text);
+}
