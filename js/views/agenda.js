@@ -139,6 +139,10 @@ export function initAgendaSystem() {
         toggleSaveActivity(actId);
       });
     });
+
+    if (typeof window.applyTranslations === 'function') {
+      window.applyTranslations(localStorage.getItem('expojuy_lang') || 'es');
+    }
   }
 
   function toggleSaveActivity(actId) {

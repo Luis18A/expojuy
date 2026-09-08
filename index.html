@@ -1,336 +1,254 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>ExpoJuy 2026 · Feria Multisectorial del NOA y Corredor Bioceánico</title>
-  <meta name="description" content="ExpoJuy 2026 conecta el talento, la industria y el trabajo de Jujuy con el Corredor Bioceánico e inversores internacionales. 9 al 12 de Octubre en la Ciudad Cultural."/>
-
-  <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-
-  <!-- Tailwind CSS Framework -->
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>ExpoJuy 2026</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link href="css/base.css" rel="stylesheet" />
+  <link href="css/components.css" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "primary": "#5500a6",
-            "primary-container": "#730dd9",
-            "primary-fixed": "#eddcff",
-            "on-primary-fixed": "#290055",
-            "secondary": "#6039dc",
-            "secondary-container": "#7957f7",
-            "secondary-fixed": "#e6deff",
-            "on-secondary-fixed": "#1d0061",
-            "tertiary": "#00454c",
-            "tertiary-container": "#005e67",
-            "tertiary-fixed": "#93f1ff",
-            "on-tertiary-fixed": "#001f23",
-            "tertiary-fixed-dim": "#46d9eb",
-            "surface": "#f9f9f9",
-            "surface-container-low": "#f3f3f3",
-            "surface-container": "#eeeeee",
-            "surface-container-high": "#e8e8e8",
-            "surface-container-lowest": "#ffffff",
-            "on-surface": "#1a1c1c",
-            "on-surface-variant": "#4b4355",
-            "outline": "#7d7387",
-            "outline-variant": "#cec2d8"
-          },
-          fontFamily: {
-            "ambit": ["Ambit", "Plus Jakarta Sans", "sans-serif"],
-            "body": ["Ambit", "Plus Jakarta Sans", "sans-serif"]
-          },
-          spacing: {
-            "gutter-desktop": "1.5rem",
-            "gutter-mobile": "1rem",
-            "container-max": "1280px",
-            "space-xs": "0.5rem",
-            "space-sm": "0.75rem",
-            "space-md": "1rem",
-            "space-lg": "1.5rem",
-            "space-xl": "2rem",
-            "space-2xl": "3rem",
-            "space-3xl": "4rem"
-          }
-        }
-      }
-    };
-  </script>
-
-  <!-- Modular Stylesheet -->
-  <link rel="stylesheet" href="./css/styles.css"/>
+  <script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-primary": "#d8baff", "tertiary-fixed": "#93f1ff", "on-surface": "#1a1c1c", "on-error": "#ffffff", "surface": "#f9f9f9", "on-secondary-container": "#fffbff", "surface-tint": "#7d24e3", "outline": "#7d7387", "background": "#f9f9f9", "secondary-fixed-dim": "#cbbeff", "on-primary": "#ffffff", "tertiary": "#00454c", "secondary": "#6039dc", "on-secondary": "#ffffff", "surface-bright": "#f9f9f9", "primary-container": "#730dd9", "primary-fixed-dim": "#d8baff", "surface-container": "#eeeeee", "on-tertiary-fixed-variant": "#004f57", "surface-container-low": "#f3f3f3", "tertiary-container": "#005e67", "surface-variant": "#e2e2e2", "error-container": "#ffdad6", "surface-container-high": "#e8e8e8", "on-secondary-fixed-variant": "#4a18c7", "on-error-container": "#93000a", "on-primary-container": "#dabdff", "primary-fixed": "#eddcff", "on-primary-fixed-variant": "#6200bd", "error": "#ba1a1a", "on-secondary-fixed": "#1d0061", "on-background": "#1a1c1c", "inverse-on-surface": "#f1f1f1", "on-tertiary-fixed": "#001f23", "inverse-surface": "#2f3131", "surface-container-lowest": "#ffffff", "primary": "#5500a6", "outline-variant": "#cec2d8", "surface-dim": "#dadada", "on-tertiary-container": "#4adcee", "on-surface-variant": "#4b4355", "tertiary-fixed-dim": "#46d9eb", "secondary-fixed": "#e6deff", "secondary-container": "#7957f7", "on-tertiary": "#ffffff", "surface-container-highest": "#e2e2e2", "on-primary-fixed": "#290055" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.75rem", "space-2xl": "3rem", "space-md": "1rem", "container-max": "1280px", "space-xxs": "0.25rem", "space-3xl": "4rem", "space-lg": "1.5rem", "space-xl": "2rem", "gutter-desktop": "1.5rem", "space-xs": "0.5rem", "gutter-mobile": "1rem" }, "fontFamily": { "display-hero": ["Ambit", "Plus Jakarta Sans"], "body-lg": ["Ambit", "Plus Jakarta Sans"], "label-md": ["Ambit", "Plus Jakarta Sans"], "title-md": ["Ambit", "Plus Jakarta Sans"], "headline-lg": ["Ambit", "Plus Jakarta Sans"], "headline-lg-mobile": ["Ambit", "Plus Jakarta Sans"], "headline-sm": ["Ambit", "Plus Jakarta Sans"], "headline-md": ["Ambit", "Plus Jakarta Sans"], "label-lg": ["Ambit", "Plus Jakarta Sans"], "display-hero-mobile": ["Ambit", "Plus Jakarta Sans"], "body-md": ["Ambit", "Plus Jakarta Sans"], "caption": ["Ambit", "Plus Jakarta Sans"] }, "fontSize": { "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "800" }], "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "title-md": ["18px", { "lineHeight": "26px", "fontWeight": "600" }], "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }], "display-hero-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }], "caption": ["11px", { "lineHeight": "14px", "fontWeight": "500" }] } } } };</script>
 </head>
-<body class="bg-surface font-body text-on-surface antialiased flex flex-col min-h-screen">
 
-  <!-- ==========================================================================
-       HEADER & NAVIGATION (SPA NAVBAR WITH LANGUAGE TRANSLATOR ES / EN)
-       ========================================================================== -->
-  <header class="fixed top-0 w-full z-50 glass-header transition-all">
-    <div class="h-20 max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop flex items-center justify-between gap-space-md">
-      
-      <!-- Brand Logo -->
-      <a class="flex items-center gap-space-xs focus:outline-none cursor-pointer nav-trigger" data-path="home" href="#home">
-        <div class="px-space-sm py-space-xs rounded-xl bg-primary-container text-white flex flex-col justify-center shadow-md">
-          <span class="font-ambit font-extrabold text-lg leading-none tracking-tight">EXPOJUY 2026</span>
-          <span class="text-[10px] tracking-wider mt-0.5 uppercase opacity-90">9-12 OCT · CIUDAD CULTURAL</span>
-        </div>
-      </a>
-
-      <!-- Desktop Nav Links -->
-      <nav class="hidden xl:flex items-center gap-space-lg">
-        <a class="nav-link font-ambit font-semibold text-on-surface-variant hover:text-primary-container transition-colors py-1 cursor-pointer nav-trigger active" data-path="home" data-i18n="nav_expo" href="#home">La Expo</a>
-        <a class="nav-link font-ambit font-semibold text-on-surface-variant hover:text-primary-container transition-colors py-1 cursor-pointer nav-trigger" data-path="b2b" data-i18n="nav_b2b" href="#b2b">Vinculate B2B</a>
-        <a class="nav-link font-ambit font-semibold text-on-surface-variant hover:text-primary-container transition-colors py-1 cursor-pointer nav-trigger" data-path="expositores" data-i18n="nav_expositores" href="#expositores">Expositores</a>
-        <a class="nav-link font-ambit font-semibold text-on-surface-variant hover:text-primary-container transition-colors py-1 cursor-pointer nav-trigger" data-path="agenda" data-i18n="nav_agenda" href="#agenda">Agenda</a>
-        <a class="nav-link font-ambit font-semibold text-on-surface-variant hover:text-primary-container transition-colors py-1 cursor-pointer nav-trigger" data-path="visita" data-i18n="nav_visita" href="#visita">Visitá y Mapa</a>
-      </nav>
-
-      <!-- Right Action Controls -->
-      <div class="flex items-center gap-space-sm">
-        <!-- Language Switcher Translator ES / EN -->
-        <div class="flex items-center bg-surface-container-low rounded-full p-1 border border-outline-variant/40">
-          <button id="btn-lang-es" class="px-3 py-1 rounded-full bg-white text-primary-container font-ambit font-bold text-xs shadow-sm transition-all" type="button">ES</button>
-          <button id="btn-lang-en" class="px-3 py-1 rounded-full text-on-surface-variant hover:text-on-surface font-ambit font-semibold text-xs transition-all" type="button">EN</button>
-        </div>
-
-        <!-- Buy Tickets Primary CTA -->
-        <button class="hidden sm:inline-flex items-center justify-center h-11 px-6 rounded-full bg-primary-container hover:bg-secondary transition-all text-white font-ambit font-bold text-sm shadow-[0_4px_14px_rgba(115,13,217,0.35)] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 action-buy-tickets" type="button">
-          <span class="material-symbols-outlined text-[18px] mr-1.5">confirmation_number</span>
-          <span data-i18n="btn_buy_tickets">Comprar entradas</span>
-        </button>
-
-        <!-- User Profile Quick Action -->
-        <button id="btn-user-profile" class="w-10 h-10 rounded-full bg-primary-fixed hover:bg-secondary-fixed text-primary flex items-center justify-center transition-all shadow-sm" title="Mi Cuenta / Credencial" type="button">
-          <span class="material-symbols-outlined text-[20px]">person</span>
-        </button>
-
-        <!-- Mobile Menu Toggle -->
-        <button id="btn-mobile-menu" class="xl:hidden w-10 h-10 rounded-xl bg-surface-container-low text-on-surface flex items-center justify-center" type="button">
-          <span class="material-symbols-outlined">menu</span>
-        </button>
+<body class="bg-surface font-body-md text-body-md text-on-surface antialiased">
+  <header class="fixed top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_4px_20px_-2px_rgba(17,24,39,0.05),0_2px_6px_-1px_rgba(17,24,39,0.02)]">
+  <div class="h-20 max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop flex items-center justify-between gap-space-md">
+    <a class="flex items-center gap-space-xs focus:outline-none cursor-pointer" href="home.html">
+      <div class="px-space-sm py-space-xs rounded-xl bg-surface-container-low flex flex-col justify-center">
+        <span class="font-headline-sm text-headline-sm text-primary-container leading-none tracking-tight">EXPOJUY 2026</span>
+        <span class="font-caption text-caption text-primary tracking-wider mt-1 uppercase">9-12 OCT 2026 · CIUDAD CULTURAL</span>
       </div>
-
+    </a>
+    <nav class="hidden xl:flex items-center gap-space-lg">
+      <a class="nav-link font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" href="home.html">La Expo</a>
+      <a class="nav-link font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" href="b2b.html">Vinculate B2B</a>
+      <a class="nav-link font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" href="expositores.html">Expositores</a>
+      <a class="nav-link font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" href="agenda.html">Agenda</a>
+      <a class="nav-link font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" href="visita.html">Visitá</a>
+    </nav>
+    <div class="flex items-center gap-space-sm">
+      <div class="flex items-center bg-surface-container-low rounded-full p-space-xxs">
+        <button id="btn-lang-es" class="px-space-xs py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md shadow-[0_1px_4px_rgba(0,0,0,0.06)]" type="button">ES</button>
+        <button id="btn-lang-en" class="px-space-xs py-1 rounded-full text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" type="button">EN</button>
+      </div>
+      <a class="hidden sm:inline-flex items-center justify-center h-12 px-space-lg rounded-full bg-primary-container hover:bg-secondary transition-all text-on-primary font-label-lg text-label-lg shadow-[0_4px_14px_rgba(115,13,217,0.3)]" href="visita.html">Comprar entradas</a>
+      <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+        <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+      </div>
     </div>
-
-    <!-- Mobile Navigation Drawer -->
-    <div id="mobile-nav-drawer" class="hidden xl:hidden bg-surface-container-lowest border-b border-outline-variant px-6 py-4 flex-col gap-3 shadow-xl">
-      <a class="nav-trigger font-ambit font-bold py-2 text-primary-container border-b border-surface-container" data-path="home" data-i18n="nav_expo" href="#home">La Expo</a>
-      <a class="nav-trigger font-ambit font-semibold py-2 text-on-surface-variant hover:text-primary-container border-b border-surface-container" data-path="b2b" data-i18n="nav_b2b" href="#b2b">Vinculate B2B</a>
-      <a class="nav-trigger font-ambit font-semibold py-2 text-on-surface-variant hover:text-primary-container border-b border-surface-container" data-path="expositores" data-i18n="nav_expositores" href="#expositores">Expositores</a>
-      <a class="nav-trigger font-ambit font-semibold py-2 text-on-surface-variant hover:text-primary-container border-b border-surface-container" data-path="agenda" data-i18n="nav_agenda" href="#agenda">Agenda Oficial</a>
-      <a class="nav-trigger font-ambit font-semibold py-2 text-on-surface-variant hover:text-primary-container border-b border-surface-container" data-path="visita" data-i18n="nav_visita" href="#visita">Visitá y Mapa del Predio</a>
-      <button class="w-full mt-2 h-12 rounded-full bg-primary-container text-white font-ambit font-bold text-sm shadow-md action-buy-tickets" type="button" data-i18n="btn_buy_tickets">
-        Comprar entradas
-      </button>
-    </div>
-  </header>
-
-  <!-- ==========================================================================
-       MAIN VIEWS CONTAINER (SPA ROUTER TARGETS)
-       ========================================================================== -->
-  <main class="w-full pt-20 flex-1">
-
-    <!-- VISTA 1: HOME / LA EXPO -->
-    <div id="view-home" class="view-container active-view">
-      <!-- HERO SECTION -->
-      <section class="w-full bg-surface-container-low py-12 lg:py-20 relative overflow-hidden">
-        <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            <div class="lg:col-span-7 flex flex-col gap-5">
-              <div class="flex flex-wrap items-center gap-2">
-                <span class="inline-flex items-center px-4 py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed font-ambit font-bold text-xs tracking-wider uppercase shadow-sm" data-i18n="hero_eyebrow">
-                  17.ª EDICIÓN MULTISECTORIAL · 9 AL 12 DE OCTUBRE DE 2026
-                </span>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-on-surface-variant font-ambit font-semibold text-xs shadow-sm" data-i18n="hero_location">
-                  <span class="material-symbols-outlined text-tertiary text-[16px]">location_on</span>
-                  CIUDAD CULTURAL · SAN SALVADOR DE JUJUY
-                </span>
+  </div>
+</header>
+  <main class="w-full pt-20 bg-surface">
+    <div class="flex flex-col w-full">
+      <!-- SECTION 1: HERO SECTION -->
+      <section class="max-w-container-max mx-auto w-full px-gutter-mobile lg:px-gutter-desktop pt-space-md pb-space-lg">
+        <div class="relative bg-surface-container-lowest rounded-2xl p-space-lg lg:p-space-2xl shadow-[0_4px_20px_-2px_rgba(17,24,39,0.05),0_2px_6px_-1px_rgba(17,24,39,0.02)] overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-surface-container-low/60 via-transparent to-primary-fixed/20 pointer-events-none"></div>
+          <div class="relative z-10 flex flex-col lg:flex-row gap-space-xl items-start lg:items-center justify-between">
+            <div class="flex flex-col gap-space-md max-w-3xl">
+              <div class="inline-flex items-center gap-2 self-start px-space-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-md text-label-md tracking-wider uppercase shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                <span>17.ª Edición Multisectorial · 9 al 12 de Octubre 2026</span>
               </div>
-
-              <h1 class="font-ambit font-extrabold text-4xl sm:text-5xl lg:text-6xl text-on-surface tracking-tight leading-tight" data-i18n="hero_title">
-                Jujuy en el <span class="text-primary-container underline decoration-tertiary-fixed-dim/60 decoration-wavy">centro de todo.</span>
+              <h1 class="font-display-hero text-display-hero text-on-surface tracking-tight">
+                ExpoJuy 2026: <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-container to-secondary">Jujuy en el centro de todo.</span>
               </h1>
-
-              <p class="font-ambit text-base sm:text-lg text-on-surface-variant max-w-2xl leading-relaxed" data-i18n="hero_desc">
-                ExpoJuy 2026 conecta el talento, el trabajo y la capacidad productiva jujeña con oportunidades de negocio, inversión e integración regional a través del Corredor Bioceánico.
+              <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                El evento multisectorial más relevante del Norte Grande. Conectá el talento, la industria y la capacidad productiva de Jujuy con el <strong class="text-on-surface font-semibold">Corredor Bioceánico</strong> e inversores internacionales.
               </p>
-
-              <div class="flex flex-wrap items-center gap-4 pt-2">
-                <button class="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full bg-primary-container hover:bg-secondary text-white font-ambit font-bold text-base shadow-md transition-all hover:-translate-y-0.5 nav-trigger" data-path="b2b">
-                  <span data-i18n="btn_b2b_participate">Participá de las Rondas B2B</span>
-                  <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-                </button>
-                <button class="inline-flex items-center justify-center h-12 px-7 rounded-full bg-white hover:bg-surface-container text-secondary font-ambit font-bold text-base shadow-sm transition-all hover:-translate-y-0.5 nav-trigger" data-path="agenda" data-i18n="btn_view_agenda">
-                  Ver agenda completa
-                </button>
-              </div>
-
-              <div class="mt-4 flex flex-wrap items-center gap-6 pt-2 border-t border-outline-variant/30">
-                <div class="flex items-center gap-2">
-                  <span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim animate-ping"></span>
-                  <span class="font-ambit font-bold text-xs text-on-surface-variant" data-i18n="hero_ticker_1">Corredor Bioceánico Integrado</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span class="w-3 h-3 rounded-full bg-secondary"></span>
-                  <span class="font-ambit font-bold text-xs text-on-surface-variant" data-i18n="hero_ticker_2">4 Países Confirmados (AR, CL, PY, BR)</span>
-                </div>
+              <div class="flex flex-wrap items-center gap-space-sm pt-space-xs">
+                <a class="h-12 px-space-xl rounded-full bg-primary-container hover:bg-secondary text-on-primary font-label-lg text-label-lg transition-all shadow-[0_4px_14px_rgba(115,13,217,0.3)] flex items-center gap-2 hover:-translate-y-0.5 cursor-pointer" href="b2b.html">
+                  <span>Participá de las Rondas B2B</span>
+                  <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </a>
+                <a class="h-12 px-space-lg rounded-full bg-transparent hover:bg-primary-fixed/30 text-primary-container font-label-lg text-label-lg transition-all flex items-center gap-2 cursor-pointer" href="agenda.html">
+                  <span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                  <span>Ver agenda y entradas</span>
+                </a>
               </div>
             </div>
 
-            <!-- Video Preview / 3D Interactive Card -->
-            <div class="lg:col-span-5">
-              <div class="relative bg-white rounded-3xl p-4 shadow-xl border border-outline-variant/40">
-                <div class="aspect-video w-full rounded-2xl bg-surface-container flex flex-col items-center justify-center relative overflow-hidden group cursor-pointer" id="btn-open-video-tour">
-                  <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1000&q=80" alt="ExpoJuy Predio 3D" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
-                  <div class="absolute inset-0 bg-primary-container/40 backdrop-blur-[2px] group-hover:bg-primary-container/30 transition-colors"></div>
-                  
-                  <div class="relative z-10 w-16 h-16 rounded-full bg-white text-primary-container flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined text-[36px] ml-1">play_arrow</span>
-                  </div>
-                  <div class="relative z-10 mt-3 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-on-surface font-ambit font-bold text-xs shadow-md" data-i18n="hero_video_label">
-                    Ver Recorrido 3D &amp; Video Institucional
-                  </div>
-                  
-                  <div class="absolute top-3 right-3 bg-tertiary-container text-white px-3 py-1 rounded-full text-[10px] font-ambit font-bold flex items-center gap-1 shadow-md">
-                    <span class="material-symbols-outlined text-[14px]">videocam</span> 4K PREVIEW
-                  </div>
+            <!-- Quick Metrics Card Cluster -->
+            <div class="w-full lg:w-80 flex flex-col gap-space-sm shrink-0">
+              <div class="p-space-md rounded-xl bg-surface-container-low/80 flex items-center gap-space-sm backdrop-blur-sm">
+                <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary-container flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-[24px]">event</span>
                 </div>
-
-                <div class="mt-4 px-2 flex items-center justify-between">
-                  <div class="flex items-center gap-2">
-                    <span class="material-symbols-outlined text-primary-container text-[22px]">domain</span>
-                    <span class="font-ambit font-bold text-xs text-on-surface" data-i18n="hero_venue">Ciudad Cultural · Pabellones A, B y Exterior</span>
-                  </div>
-                  <span class="font-ambit font-extrabold text-xs text-tertiary uppercase bg-tertiary-fixed px-2.5 py-0.5 rounded-md">15.000 m²</span>
+                <div>
+                  <p class="font-label-lg text-label-lg text-on-surface font-bold">9 al 12 Octubre 2026</p>
+                  <p class="font-caption text-caption text-on-surface-variant">4 días de exposición multisectorial</p>
                 </div>
               </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- EXPERIENCIAS DISPONIBLES (PÚBLICO, EXPOSITOR, B2B) -->
-      <section class="w-full py-16 bg-surface">
-        <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
-          <div class="flex flex-col gap-1 mb-10 text-center md:text-left">
-            <span class="font-ambit font-bold text-xs uppercase tracking-wider text-primary-container" data-i18n="exp_eyebrow">Accesos Personalizados</span>
-            <h2 class="font-ambit font-extrabold text-3xl sm:text-4xl text-on-surface" data-i18n="exp_title">Elegí tu experiencia en ExpoJuy 2026</h2>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Público -->
-            <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all border border-outline-variant/30 flex flex-col justify-between h-full group hover:-translate-y-1">
-              <div>
-                <div class="flex items-center justify-between mb-6">
-                  <span class="px-3.5 py-1 rounded-full bg-surface-container-low text-on-surface-variant font-ambit font-bold text-xs" data-i18n="card_pub_badge">Público General</span>
-                  <div class="w-12 h-12 rounded-2xl bg-primary-fixed text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined text-[26px]">confirmation_number</span>
-                  </div>
+              <div class="p-space-md rounded-xl bg-surface-container-low/80 flex items-center gap-space-sm backdrop-blur-sm">
+                <div class="w-12 h-12 rounded-xl bg-secondary-container/15 text-secondary flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-[24px]">location_on</span>
                 </div>
-                <h3 class="font-ambit font-bold text-2xl text-on-surface mb-2" data-i18n="card_pub_title">Quiero visitar</h3>
-                <p class="font-ambit text-sm text-on-surface-variant mb-6 leading-relaxed" data-i18n="card_pub_desc">
-                  Agenda de espectáculos, compra de entradas anticipadas, mapa interactivo y accesos peatonales ágiles.
-                </p>
-              </div>
-              <button class="inline-flex items-center justify-between w-full h-12 px-5 rounded-2xl bg-surface-container hover:bg-primary-fixed text-primary font-ambit font-bold text-sm transition-colors nav-trigger" data-path="visita">
-                <span data-i18n="btn_plan_visit">Planificar mi visita</span>
-                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-              </button>
-            </div>
-
-            <!-- Expositor -->
-            <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all border border-outline-variant/30 flex flex-col justify-between h-full group hover:-translate-y-1">
-              <div>
-                <div class="flex items-center justify-between mb-6">
-                  <span class="px-3.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-ambit font-bold text-xs" data-i18n="card_exp_badge">Empresas &amp; PyMEs</span>
-                  <div class="w-12 h-12 rounded-2xl bg-secondary-container text-white flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined text-[26px]">storefront</span>
-                  </div>
+                <div>
+                  <p class="font-label-lg text-label-lg text-on-surface font-bold">Ciudad Cultural</p>
+                  <p class="font-caption text-caption text-on-surface-variant">San Salvador de Jujuy</p>
                 </div>
-                <h3 class="font-ambit font-bold text-2xl text-on-surface mb-2" data-i18n="card_exp_title">Quiero exponer</h3>
-                <p class="font-ambit text-sm text-on-surface-variant mb-6 leading-relaxed" data-i18n="card_exp_desc">
-                  Disponibilidad de stands, manual del expositor, equipamiento ferial y contacto directo con la gerencia.
-                </p>
               </div>
-              <button class="inline-flex items-center justify-between w-full h-12 px-5 rounded-2xl bg-secondary hover:bg-primary-container text-white font-ambit font-bold text-sm transition-colors action-reserve-stand">
-                <span data-i18n="btn_reserve_stand">Reservar un stand</span>
-                <span class="material-symbols-outlined text-[20px]">add_business</span>
-              </button>
-            </div>
-
-            <!-- B2B Inversores -->
-            <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all border border-outline-variant/30 flex flex-col justify-between h-full group hover:-translate-y-1">
-              <div>
-                <div class="flex items-center justify-between mb-6">
-                  <span class="px-3.5 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-ambit font-bold text-xs" data-i18n="card_b2b_badge">Inversores &amp; Compradores</span>
-                  <div class="w-12 h-12 rounded-2xl bg-tertiary text-white flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined text-[26px]">handshake</span>
-                  </div>
+              <div class="p-space-md rounded-xl bg-surface-container-low/80 flex items-center gap-space-sm backdrop-blur-sm">
+                <div class="w-12 h-12 rounded-xl bg-tertiary-container/15 text-tertiary-container flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-[24px]">groups</span>
                 </div>
-                <h3 class="font-ambit font-bold text-2xl text-on-surface mb-2" data-i18n="card_b2b_title">Busco oportunidades</h3>
-                <p class="font-ambit text-sm text-on-surface-variant mb-6 leading-relaxed" data-i18n="card_b2b_desc">
-                  Conexión directa con sectores productivos, agendas bilaterales y Rondas B2B internacionales de negocios.
-                </p>
+                <div>
+                  <p class="font-label-lg text-label-lg text-on-surface font-bold">+250 Expositores</p>
+                  <p class="font-caption text-caption text-on-surface-variant">Empresas, PyMEs e instituciones</p>
+                </div>
               </div>
-              <button class="inline-flex items-center justify-between w-full h-12 px-5 rounded-2xl bg-primary-container hover:bg-secondary text-white font-ambit font-bold text-sm transition-colors action-register-b2b">
-                <span data-i18n="btn_enter_b2b">Ingresar a Rondas B2B</span>
-                <span class="material-symbols-outlined text-[20px]">verified</span>
-              </button>
             </div>
           </div>
         </div>
       </section>
-
-      <!-- METRICAS DE EXPOJUY -->
-      <section class="w-full py-16 bg-surface-container-low">
+      <!-- SECTION 2: BLOQUE "ELEGÍ TU EXPERIENCIA" -->
+      <section class="w-full py-space-2xl bg-surface">
         <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div class="lg:col-span-5 flex flex-col gap-3">
-              <span class="font-ambit font-bold text-xs uppercase tracking-wider text-primary-container" data-i18n="metrics_eyebrow">Trayectoria &amp; Futuro</span>
-              <h2 class="font-ambit font-extrabold text-3xl lg:text-4xl text-on-surface leading-snug" data-i18n="metrics_title">
+          <div class="flex flex-col gap-space-xxs mb-space-lg text-center md:text-left">
+            <span class="font-caption text-caption uppercase tracking-wider text-primary font-bold">Accesos
+              Personalizados</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">Elegí tu experiencia en ExpoJuy 2026</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+            <!-- Card 1: Visitante -->
+            <div
+              class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-md hover:shadow-xl transition-shadow flex flex-col justify-between h-full">
+              <div>
+                <div class="flex items-center justify-between mb-space-md">
+                  <span
+                    class="px-space-sm py-1 rounded-full bg-surface-container-low text-on-surface-variant font-label-md text-label-md font-semibold">
+                    Público General
+                  </span>
+                  <div class="w-12 h-12 rounded-full bg-primary-fixed text-primary flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[24px]">confirmation_number</span>
+                  </div>
+                </div>
+                <h3 class="font-headline-md text-headline-md text-on-surface mb-space-xs">Quiero visitar</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+                  Agenda de espectáculos, compra de entradas con descuento, mapa interactivo y accesos peatonales
+                  ágiles.
+                </p>
+              </div>
+              <a class="inline-flex items-center justify-between w-full h-12 px-space-md rounded-xl bg-surface-container hover:bg-surface-container-high text-primary font-label-lg text-label-lg transition-colors"
+                data-path="visita" href="#">
+                <span>Planificar mi visita</span>
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </a>
+            </div>
+            <!-- Card 2: Expositor -->
+            <div
+              class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-md hover:shadow-xl transition-shadow flex flex-col justify-between h-full">
+              <div>
+                <div class="flex items-center justify-between mb-space-md">
+                  <span
+                    class="px-space-sm py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md font-semibold">
+                    Empresas &amp; PyMEs
+                  </span>
+                  <div
+                    class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[24px]">storefront</span>
+                  </div>
+                </div>
+                <h3 class="font-headline-md text-headline-md text-on-surface mb-space-xs">Quiero exponer</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+                  Disponibilidad de stands, manual del expositor, equipamiento ferial y contacto directo con la gerencia
+                  comercial.
+                </p>
+              </div>
+              <a class="inline-flex items-center justify-between w-full h-12 px-space-md rounded-xl bg-secondary hover:bg-primary-container text-on-secondary font-label-lg text-label-lg transition-colors"
+                data-path="expositores" href="#">
+                <span>Reservar un stand</span>
+                <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+              </a>
+            </div>
+            <!-- Card 3: B2B -->
+            <div
+              class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-md hover:shadow-xl transition-shadow flex flex-col justify-between h-full">
+              <div>
+                <div class="flex items-center justify-between mb-space-md">
+                  <span
+                    class="px-space-sm py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md font-semibold">
+                    Inversores &amp; Compradores
+                  </span>
+                  <div class="w-12 h-12 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[24px]">handshake</span>
+                  </div>
+                </div>
+                <h3 class="font-headline-md text-headline-md text-on-surface mb-space-xs">Busco oportunidades</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+                  Conexión directa con sectores productivos, agendas bilaterales y Rondas B2B internacionales de
+                  negocios.
+                </p>
+              </div>
+              <a class="inline-flex items-center justify-between w-full h-12 px-space-md rounded-xl bg-primary-container hover:bg-secondary text-on-primary font-label-lg text-label-lg transition-colors"
+                data-path="vinculate-b2b" href="#">
+                <span>Ingresar a Rondas B2B</span>
+                <span class="material-symbols-outlined text-[18px]">verified</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION 3: QUÉ ES EXPOJUY -->
+      <section class="w-full py-space-2xl bg-surface-container-low">
+        <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+            <div class="lg:col-span-5 flex flex-col gap-space-xs">
+              <span class="font-caption text-caption uppercase tracking-wider text-primary font-bold">Trayectoria &amp;
+                Futuro</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface">
                 La feria que conecta producción, talento y oportunidades.
               </h2>
-              <p class="font-ambit text-base text-on-surface-variant mt-2 leading-relaxed" data-i18n="metrics_desc">
-                ExpoJuy 2026 es la 17.ª edición de la feria multisectorial de Jujuy. Reúne empresas, emprendedores, instituciones y delegaciones internacionales del Corredor Bioceánico.
+              <p class="font-body-lg text-body-lg text-on-surface-variant mt-space-xs">
+                ExpoJuy 2026 es la 17.ª edición de la feria multisectorial de Jujuy. Reúne empresas, emprendedores,
+                instituciones, visitantes y delegaciones vinculadas a los sectores estratégicos de la provincia y la
+                región.
               </p>
             </div>
             <div class="lg:col-span-7">
-              <div class="grid grid-cols-2 gap-4">
-                <div class="p-6 rounded-3xl bg-white shadow-sm flex flex-col justify-between border border-outline-variant/30">
-                  <span class="font-ambit font-extrabold text-5xl text-primary-container">17</span>
-                  <div class="mt-4">
-                    <p class="font-ambit font-bold text-base text-on-surface" data-i18n="metric_1_title">Ediciones</p>
-                    <p class="font-ambit text-xs text-on-surface-variant mt-0.5" data-i18n="metric_1_subtitle">Trayectoria regional consolidada</p>
+              <div class="grid grid-cols-2 sm:grid-cols-2 gap-space-md">
+                <div class="p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+                  <span class="font-display-hero text-display-hero text-primary-container leading-none">17</span>
+                  <div>
+                    <p class="font-title-md text-title-md text-on-surface font-bold mt-space-xs">Ediciones</p>
+                    <p class="font-caption text-caption text-on-surface-variant mt-1">Trayectoria regional consolidada
+                    </p>
                   </div>
                 </div>
-                <div class="p-6 rounded-3xl bg-white shadow-sm flex flex-col justify-between border border-outline-variant/30">
-                  <span class="font-ambit font-extrabold text-5xl text-tertiary-container">4</span>
-                  <div class="mt-4">
-                    <p class="font-ambit font-bold text-base text-on-surface" data-i18n="metric_2_title">Países</p>
-                    <p class="font-ambit text-xs text-on-surface-variant mt-0.5" data-i18n="metric_2_subtitle">Integración del Corredor Bioceánico</p>
+                <div class="p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+                  <span class="font-display-hero text-display-hero text-tertiary-container leading-none">4</span>
+                  <div>
+                    <p class="font-title-md text-title-md text-on-surface font-bold mt-space-xs">Países</p>
+                    <p class="font-caption text-caption text-on-surface-variant mt-1">Integración del Corredor
+                      Bioceánico</p>
                   </div>
                 </div>
-                <div class="p-6 rounded-3xl bg-white shadow-sm flex flex-col justify-between border border-outline-variant/30">
-                  <span class="font-ambit font-extrabold text-5xl text-secondary">+250</span>
-                  <div class="mt-4">
-                    <p class="font-ambit font-bold text-base text-on-surface" data-i18n="metric_3_title">Expositores</p>
-                    <p class="font-ambit text-xs text-on-surface-variant mt-0.5" data-i18n="metric_3_subtitle">Stands de industria, minería y agro</p>
+                <div class="p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+                  <span class="font-display-hero text-display-hero text-secondary leading-none">+250</span>
+                  <div>
+                    <p class="font-title-md text-title-md text-on-surface font-bold mt-space-xs">Expositores</p>
+                    <p class="font-caption text-caption text-on-surface-variant mt-1">Contenido demostrativo proyectado
+                    </p>
                   </div>
                 </div>
-                <div class="p-6 rounded-3xl bg-white shadow-sm flex flex-col justify-between border border-outline-variant/30">
-                  <span class="font-ambit font-extrabold text-5xl text-primary">+40k</span>
-                  <div class="mt-4">
-                    <p class="font-ambit font-bold text-base text-on-surface" data-i18n="metric_4_title">Visitantes</p>
-                    <p class="font-ambit text-xs text-on-surface-variant mt-0.5" data-i18n="metric_4_subtitle">Estimación de afluencia general</p>
+                <div class="p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+                  <span class="font-display-hero text-display-hero text-primary leading-none">+40k</span>
+                  <div>
+                    <p class="font-title-md text-title-md text-on-surface font-bold mt-space-xs">Visitantes</p>
+                    <p class="font-caption text-caption text-on-surface-variant mt-1">Estimación de afluencia general
+                    </p>
                   </div>
                 </div>
               </div>
@@ -338,661 +256,1073 @@
           </div>
         </div>
       </section>
-
-      <!-- CORREDOR BIOCEÁNICO INFOGRÁFICO INTERACTIVO -->
-      <section class="w-full py-16 bg-surface">
+      <!-- SECTION 4: CORREDOR BIOCEÁNICO -->
+      <section class="w-full py-space-2xl bg-surface">
         <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
-          <div class="bg-white rounded-3xl p-8 lg:p-12 shadow-lg border border-outline-variant/40">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div class="lg:col-span-5 flex flex-col gap-4">
-                <span class="font-ambit font-bold text-xs uppercase tracking-wider text-tertiary" data-i18n="corridor_eyebrow">Eje Geopolítico y Comercial</span>
-                <h2 class="font-ambit font-extrabold text-3xl lg:text-4xl text-on-surface" data-i18n="corridor_title">Una región conectada por más que rutas.</h2>
-                <p class="font-ambit text-sm text-on-surface-variant leading-relaxed" data-i18n="corridor_desc">
-                  El Corredor Bioceánico abre nuevas posibilidades de integración entre Argentina, Chile, Paraguay y Brasil. ExpoJuy transforma esa conexión en encuentros, proyectos y contratos.
+          <div class="bg-surface-container-lowest rounded-2xl p-space-lg lg:p-space-2xl shadow-md">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+              <div class="lg:col-span-5 flex flex-col gap-space-xs">
+                <span class="font-caption text-caption uppercase tracking-wider text-tertiary font-bold">Eje Geopolítico
+                  y Comercial</span>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">
+                  Una región conectada por más que rutas.
+                </h2>
+                <p class="font-body-md text-body-md text-on-surface-variant mt-space-xs">
+                  El Corredor Bioceánico abre nuevas posibilidades de integración entre Argentina, Chile, Paraguay y
+                  Brasil. ExpoJuy transforma esa conexión en encuentros, proyectos y oportunidades concretas.
                 </p>
-                <div class="pt-2">
-                  <button class="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-tertiary hover:bg-tertiary-container text-white font-ambit font-bold text-sm transition-all shadow-md nav-trigger" data-path="b2b">
-                    <span data-i18n="btn_know_corridor">Conocé las Rondas Bioceánicas</span>
+                <div class="pt-space-md">
+                  <a class="inline-flex items-center gap-2 h-12 px-space-lg rounded-full bg-tertiary hover:bg-tertiary-container text-on-tertiary font-label-lg text-label-lg shadow-sm transition-colors"
+                    href="#">
+                    <span>Conocé el Corredor Bioceánico</span>
                     <span class="material-symbols-outlined text-[18px]">hub</span>
-                  </button>
+                  </a>
                 </div>
               </div>
-
+              <!-- Interactive Infographic Wireframe Placeholder -->
               <div class="lg:col-span-7">
-                <div class="bg-surface-container-low rounded-2xl p-5 flex flex-col gap-4">
+                <div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-sm relative">
                   <div class="flex items-center justify-between">
-                    <span class="font-ambit font-bold text-sm text-on-surface" data-i18n="corridor_map_title">Esquema Bioceánico Eje Capricornio</span>
-                    <span class="px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-ambit font-bold text-xs">Paso de Jama - Jujuy</span>
+                    <span class="font-label-md text-label-md text-on-surface font-bold">Esquema Bioceánico
+                      Multimodal</span>
+                    <span
+                      class="px-space-xs py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed font-caption text-caption font-bold">Eje
+                      Capricornio</span>
                   </div>
-                  <div class="h-64 w-full bg-white rounded-xl relative overflow-hidden flex items-center justify-center p-4 border border-outline-variant/30">
-                    <svg class="w-full h-full" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M 60 120 C 180 80, 320 160, 540 100" fill="none" stroke="#7552F2" stroke-dasharray="6,6" stroke-width="4"></path>
-                      <path d="M 60 120 C 180 80, 320 160, 540 100" fill="none" stroke="#29C7D9" stroke-width="3"></path>
-                      
-                      <!-- Node Chile -->
-                      <g class="cursor-pointer map-pin" onclick="window.showToast('Chile: Puertos de Antofagasta e Iquique conectados con Jujuy via Jama', 'info')">
-                        <circle cx="60" cy="120" r="12" fill="#005E67"></circle>
-                        <circle cx="60" cy="120" r="20" fill="#4ADCEE" fill-opacity="0.25"></circle>
-                        <text x="60" y="158" font-size="11" font-weight="700" fill="#1A1C1C" text-anchor="middle">Antofagasta / Iquique</text>
-                        <text x="60" y="172" font-size="9" fill="#4B4355" text-anchor="middle">CHILE (Pacífico)</text>
-                      </g>
-
-                      <!-- Node Jujuy -->
-                      <g class="cursor-pointer map-pin" onclick="window.showToast('Jujuy: Epicentro logístico e industrial del NOA', 'success')">
-                        <circle cx="210" cy="98" r="16" fill="#730DD9"></circle>
-                        <circle cx="210" cy="98" r="28" fill="#7552F2" fill-opacity="0.35"></circle>
-                        <text x="210" y="62" font-size="13" font-weight="800" fill="#5500A6" text-anchor="middle">JUJUY / NOA</text>
-                        <text x="210" y="78" font-size="9" font-weight="700" fill="#730DD9" text-anchor="middle">Epicentro ExpoJuy 2026</text>
-                      </g>
-
-                      <!-- Node Paraguay -->
-                      <g class="cursor-pointer map-pin" onclick="window.showToast('Paraguay: Corredor vial Chaco Central', 'info')">
-                        <circle cx="360" cy="140" r="12" fill="#00454C"></circle>
-                        <circle cx="360" cy="140" r="20" fill="#46D9EB" fill-opacity="0.25"></circle>
-                        <text x="360" y="178" font-size="11" font-weight="700" fill="#1A1C1C" text-anchor="middle">Chaco Central</text>
-                        <text x="360" y="192" font-size="9" fill="#4B4355" text-anchor="middle">PARAGUAY</text>
-                      </g>
-
-                      <!-- Node Brasil -->
-                      <g class="cursor-pointer map-pin" onclick="window.showToast('Brasil: Porto Murtinho y Puerto Santos', 'info')">
-                        <circle cx="540" cy="100" r="12" fill="#6039DC"></circle>
-                        <circle cx="540" cy="100" r="20" fill="#CBBEFF" fill-opacity="0.3"></circle>
-                        <text x="540" y="138" font-size="11" font-weight="700" fill="#1A1C1C" text-anchor="middle">P. Murtinho / Santos</text>
-                        <text x="540" y="152" font-size="9" fill="#4B4355" text-anchor="middle">BRASIL (Atlántico)</text>
-                      </g>
+                  <!-- Schematic Map SVG Diagram -->
+                  <div
+                    class="h-64 w-full bg-surface-container rounded-lg relative overflow-hidden flex items-center justify-center">
+                    <svg class="w-full h-full p-4" viewbox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+                      <!-- Connection Path -->
+                      <path d="M 60 120 C 180 80, 320 160, 540 100" fill="none" stroke="#7552F2" stroke-dasharray="6,6"
+                        stroke-width="4"></path>
+                      <path d="M 60 120 C 180 80, 320 160, 540 100" fill="none" stroke="#29C7D9" stroke-width="2">
+                      </path>
+                      <!-- Node 1: Chile -->
+                      <circle cx="60" cy="120" fill="#005E67" r="10"></circle>
+                      <circle cx="60" cy="120" fill="#4ADCEE" fill-opacity="0.25" r="18"></circle>
+                      <text fill="#1A1C1C" font-size="11" font-weight="700" text-anchor="middle" x="60"
+                        y="155">Antofagasta / Iquique</text>
+                      <text fill="#4B4355" font-size="9" text-anchor="middle" x="60" y="170">CHILE (Pacífico)</text>
+                      <!-- Node 2: Jujuy (Hub) -->
+                      <circle cx="210" cy="98" fill="#730DD9" r="14"></circle>
+                      <circle cx="210" cy="98" fill="#7552F2" fill-opacity="0.3" r="26"></circle>
+                      <text fill="#5500A6" font-size="13" font-weight="800" text-anchor="middle" x="210" y="65">JUJUY /
+                        NOA</text>
+                      <text fill="#730DD9" font-size="9" font-weight="600" text-anchor="middle" x="210" y="80">Epicentro
+                        Logístico</text>
+                      <!-- Node 3: Paraguay -->
+                      <circle cx="360" cy="140" fill="#00454C" r="10"></circle>
+                      <circle cx="360" cy="140" fill="#46D9EB" fill-opacity="0.25" r="18"></circle>
+                      <text fill="#1A1C1C" font-size="11" font-weight="700" text-anchor="middle" x="360" y="175">Chaco
+                        Central</text>
+                      <text fill="#4B4355" font-size="9" text-anchor="middle" x="360" y="190">PARAGUAY</text>
+                      <!-- Node 4: Brasil -->
+                      <circle cx="540" cy="100" fill="#6039DC" r="10"></circle>
+                      <circle cx="540" cy="100" fill="#CBBEFF" fill-opacity="0.3" r="18"></circle>
+                      <text fill="#1A1C1C" font-size="11" font-weight="700" text-anchor="middle" x="540" y="135">P.
+                        Murtinho / Santos</text>
+                      <text fill="#4B4355" font-size="9" text-anchor="middle" x="540" y="150">BRASIL (Atlántico)</text>
                     </svg>
                   </div>
-                  <div class="grid grid-cols-4 gap-2 text-center text-xs">
-                    <div class="p-2 bg-white rounded-lg shadow-sm">
-                      <p class="text-on-surface-variant font-medium">Paso de Jama</p>
-                      <p class="font-bold text-on-surface">Chile</p>
+                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-space-xs text-center">
+                    <div class="p-2 bg-surface-container-lowest rounded-lg">
+                      <p class="font-caption text-caption text-on-surface-variant">Paso de Jama</p>
+                      <p class="font-label-md text-label-md text-on-surface font-bold">Chile</p>
                     </div>
-                    <div class="p-2 bg-white rounded-lg shadow-sm border border-primary-container/30">
-                      <p class="text-primary-container font-medium">Nodo Central</p>
-                      <p class="font-bold text-primary">Jujuy</p>
+                    <div class="p-2 bg-surface-container-lowest rounded-lg">
+                      <p class="font-caption text-caption text-on-surface-variant">Nodo Central</p>
+                      <p class="font-label-md text-label-md text-primary font-bold">Jujuy</p>
                     </div>
-                    <div class="p-2 bg-white rounded-lg shadow-sm">
-                      <p class="text-on-surface-variant font-medium">Chaco Bioceánico</p>
-                      <p class="font-bold text-on-surface">Paraguay</p>
+                    <div class="p-2 bg-surface-container-lowest rounded-lg">
+                      <p class="font-caption text-caption text-on-surface-variant">Ruta Bioceánica</p>
+                      <p class="font-label-md text-label-md text-on-surface font-bold">Paraguay</p>
                     </div>
-                    <div class="p-2 bg-white rounded-lg shadow-sm">
-                      <p class="text-on-surface-variant font-medium">Puerto Santos</p>
-                      <p class="font-bold text-on-surface">Brasil</p>
+                    <div class="p-2 bg-surface-container-lowest rounded-lg">
+                      <p class="font-caption text-caption text-on-surface-variant">Puerto Santos</p>
+                      <p class="font-label-md text-label-md text-on-surface font-bold">Brasil</p>
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </section>
-    </div>
-
-    <!-- VISTA 2: RONDAS B2B -->
-    <div id="view-b2b" class="view-container">
-      <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop py-10">
-        <div class="bg-primary rounded-3xl p-8 lg:p-12 text-white shadow-xl relative overflow-hidden mb-12">
-          <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div class="lg:col-span-7 flex flex-col gap-4">
-              <span class="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-white/10 text-tertiary-fixed font-ambit font-bold text-xs uppercase w-fit" data-i18n="b2b_banner_eyebrow">
-                <span class="material-symbols-outlined text-[16px]">handshake</span>
-                Acreditación Comercial Bioceánica
-              </span>
-              <h1 class="font-ambit font-extrabold text-4xl lg:text-5xl leading-tight" data-i18n="b2b_banner_title">
-                Rondas de Vinculación B2B ExpoJuy 2026
-              </h1>
-              <p class="font-ambit text-base text-primary-fixed leading-relaxed" data-i18n="b2b_banner_desc">
-                Reuniones de negocios programadas uno a uno entre empresas locales, proveedores y delegaciones compradoras de Chile, Paraguay y Brasil.
-              </p>
-              <div class="pt-2">
-                <button class="inline-flex items-center gap-2 h-12 px-8 rounded-full bg-white text-primary-container font-ambit font-bold text-sm shadow-lg hover:bg-surface-container transition-all action-register-b2b" type="button">
-                  <span class="material-symbols-outlined text-[18px]">how_to_reg</span>
-                  <span data-i18n="btn_register_company_b2b">Inscribir mi Empresa en Rondas B2B</span>
+      <!-- SECTION 5: ECOSISTEMA PRODUCTIVO -->
+      <section class="w-full py-space-2xl bg-surface-container-low">
+        <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
+            <div>
+              <span class="font-caption text-caption uppercase tracking-wider text-primary font-bold">Sectores
+                Estratégicos</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface mt-space-xxs">
+                El desarrollo de Jujuy tiene muchas formas. Una misma dirección.
+              </h2>
+            </div>
+            <a class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-secondary transition-colors font-bold whitespace-nowrap"
+              href="#">
+              <span>Explorá los sectores</span>
+              <span class="material-symbols-outlined text-[18px]">east</span>
+            </a>
+          </div>
+          <!-- 6 Sector Cards Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-md">
+            <!-- 1. Minería y Energía -->
+            <div
+              class="group bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm hover:shadow-lg transition-all cursor-pointer flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed mb-space-md group-hover:scale-105 transition-transform">
+                  <span class="material-symbols-outlined text-[26px]">bolt</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Minería y energía</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Litio, parque solar Cauchari, minerales estratégicos y transición energética internacional.
+                </p>
+              </div>
+              <div class="mt-space-md flex items-center gap-1 font-label-md text-label-md text-primary font-semibold">
+                <span>Ver empresas del sector</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </div>
+            </div>
+            <!-- 2. Agroindustria -->
+            <div
+              class="group bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm hover:shadow-lg transition-all cursor-pointer flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed mb-space-md group-hover:scale-105 transition-transform">
+                  <span class="material-symbols-outlined text-[26px]">eco</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Agroindustria</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Tabaco, caña de azúcar, bioetanol, cítricos, legumbres y cadena agroalimentaria de exportación.
+                </p>
+              </div>
+              <div class="mt-space-md flex items-center gap-1 font-label-md text-label-md text-primary font-semibold">
+                <span>Ver empresas del sector</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </div>
+            </div>
+            <!-- 3. Tecnología -->
+            <div
+              class="group bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm hover:shadow-lg transition-all cursor-pointer flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed mb-space-md group-hover:scale-105 transition-transform">
+                  <span class="material-symbols-outlined text-[26px]">memory</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Tecnología</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Software, data centers de altura, biotecnología aplicada e infraestructura de conectividad.
+                </p>
+              </div>
+              <div class="mt-space-md flex items-center gap-1 font-label-md text-label-md text-primary font-semibold">
+                <span>Ver empresas del sector</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </div>
+            </div>
+            <!-- 4. Industria y Comercio -->
+            <div
+              class="group bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm hover:shadow-lg transition-all cursor-pointer flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-on-surface mb-space-md group-hover:scale-105 transition-transform">
+                  <span class="material-symbols-outlined text-[26px]">precision_manufacturing</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Industria y comercio</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Manufactura local, parques industriales, logística multimodal y comercio exterior.
+                </p>
+              </div>
+              <div class="mt-space-md flex items-center gap-1 font-label-md text-label-md text-primary font-semibold">
+                <span>Ver empresas del sector</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </div>
+            </div>
+            <!-- 5. Turismo y Servicios -->
+            <div
+              class="group bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm hover:shadow-lg transition-all cursor-pointer flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-tertiary-fixed-dim flex items-center justify-center text-on-tertiary-fixed-variant mb-space-md group-hover:scale-105 transition-transform">
+                  <span class="material-symbols-outlined text-[26px]">travel_explore</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Turismo y servicios</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Quebrada, Puna, Valles y Yungas: hotelería sustentable, gastronomía y turismo de reuniones.
+                </p>
+              </div>
+              <div class="mt-space-md flex items-center gap-1 font-label-md text-label-md text-primary font-semibold">
+                <span>Ver empresas del sector</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </div>
+            </div>
+            <!-- 6. Emprendimientos -->
+            <div
+              class="group bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm hover:shadow-lg transition-all cursor-pointer flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-secondary-fixed-dim flex items-center justify-center text-on-secondary-fixed-variant mb-space-md group-hover:scale-105 transition-transform">
+                  <span class="material-symbols-outlined text-[26px]">lightbulb</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Emprendimientos</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Innovación local de impacto, artesanías con valor agregado, diseño y cooperativas regionales.
+                </p>
+              </div>
+              <div class="mt-space-md flex items-center gap-1 font-label-md text-label-md text-primary font-semibold">
+                <span>Ver empresas del sector</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION 6: PREVIEW RONDAS DE VINCULACIÓN B2B -->
+      <section class="w-full py-space-2xl bg-surface">
+        <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
+          <div
+            class="bg-primary rounded-2xl p-space-lg lg:p-space-2xl text-on-primary shadow-xl relative overflow-hidden">
+            <!-- Background subtle glow shapes -->
+            <div
+              class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-secondary-container opacity-30 blur-3xl pointer-events-none">
+            </div>
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+              <div class="lg:col-span-7 flex flex-col gap-space-sm">
+                <span
+                  class="inline-flex items-center gap-1 px-space-sm py-1 rounded-full bg-on-primary/10 text-tertiary-fixed font-label-md text-label-md font-bold uppercase w-fit">
+                  <span class="material-symbols-outlined text-[16px]">handshake</span>
+                  Rondas de Negocios Internacionales
+                </span>
+                <h2 class="font-headline-lg text-headline-lg text-on-primary leading-tight">
+                  Donde las oportunidades se encuentran.
+                </h2>
+                <p class="font-body-lg text-body-lg text-primary-fixed leading-relaxed">
+                  Reuniones B2B para vincular empresas, compradores, inversores y proveedores de Argentina, Chile,
+                  Paraguay y Brasil en un entorno profesional diseñado para cerrar acuerdos.
+                </p>
+                <div class="pt-space-xs">
+                  <a class="inline-flex items-center gap-2 h-12 px-space-xl rounded-full bg-primary-container hover:bg-secondary text-on-primary font-label-lg text-label-lg shadow-md transition-transform hover:-translate-y-0.5"
+                    data-path="vinculate-b2b" href="#">
+                    <span>Registrá mi empresa</span>
+                    <span class="material-symbols-outlined text-[18px]">how_to_reg</span>
+                  </a>
+                </div>
+              </div>
+              <div class="lg:col-span-5 flex flex-col gap-space-sm">
+                <div
+                  class="p-space-md rounded-xl bg-surface-container-lowest/10 backdrop-blur-md flex items-start gap-space-sm">
+                  <div
+                    class="w-10 h-10 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[22px]">event_available</span>
+                  </div>
+                  <div>
+                    <p class="font-label-lg text-label-lg text-on-primary font-bold">Agendamiento pre-evento</p>
+                    <p class="font-caption text-caption text-on-primary/80">Seleccioná perfiles y coordiná reuniones
+                      antes de llegar al predio ferial.</p>
+                  </div>
+                </div>
+                <div
+                  class="p-space-md rounded-xl bg-surface-container-lowest/10 backdrop-blur-md flex items-start gap-space-sm">
+                  <div
+                    class="w-10 h-10 rounded-lg bg-primary-fixed text-on-primary-fixed flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[22px]">table_restaurant</span>
+                  </div>
+                  <div>
+                    <p class="font-label-lg text-label-lg text-on-primary font-bold">Mesas temáticas sectoriales</p>
+                    <p class="font-caption text-caption text-on-primary/80">Espacios exclusivos para minería,
+                      agroindustria, servicios y comercio exterior.</p>
+                  </div>
+                </div>
+                <div
+                  class="p-space-md rounded-xl bg-surface-container-lowest/10 backdrop-blur-md flex items-start gap-space-sm">
+                  <div
+                    class="w-10 h-10 rounded-lg bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[22px]">translate</span>
+                  </div>
+                  <div>
+                    <p class="font-label-lg text-label-lg text-on-primary font-bold">Traducción y soporte técnico</p>
+                    <p class="font-caption text-caption text-on-primary/80">Asistencia trilingüe (Español, Portugués,
+                      Inglés) para delegaciones internacionales.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION 7: PREVIEW DE AGENDA -->
+      <section class="w-full py-space-2xl bg-surface-container-low">
+        <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
+            <div>
+              <span class="font-caption text-caption uppercase tracking-wider text-primary font-bold">Programa
+                Oficial</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface mt-space-xxs">
+                Cuatro días para conectar, aprender y vivir Jujuy.
+              </h2>
+            </div>
+            <a class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-secondary font-bold transition-colors"
+              data-path="agenda" href="#">
+              <span>Ver agenda completa</span>
+              <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+            </a>
+          </div>
+          <!-- Day Filter Tabs (Interactive Mockup) -->
+          <div class="flex flex-wrap gap-space-xs mb-space-lg">
+            <button
+              class="px-space-md py-2 rounded-full bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-sm"
+              type="button">
+              Viernes 9 Oct
+            </button>
+            <button
+              class="px-space-md py-2 rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant font-label-md text-label-md font-semibold transition-colors"
+              type="button">
+              Sábado 10 Oct
+            </button>
+            <button
+              class="px-space-md py-2 rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant font-label-md text-label-md font-semibold transition-colors"
+              type="button">
+              Domingo 11 Oct
+            </button>
+            <button
+              class="px-space-md py-2 rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant font-label-md text-label-md font-semibold transition-colors"
+              type="button">
+              Lunes 12 Oct
+            </button>
+          </div>
+          <!-- 3 Activity Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+            <!-- Activity 1 -->
+            <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-space-xs">
+                  <span
+                    class="px-space-xs py-1 rounded-md bg-primary-fixed text-on-primary-fixed font-caption text-caption font-bold">
+                    10:30 hs
+                  </span>
+                  <span class="text-caption font-caption text-outline font-semibold">Contenido demostrativo</span>
+                </div>
+                <span
+                  class="inline-block px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-caption text-caption font-semibold uppercase mb-space-xs">
+                  Conferencia Central
+                </span>
+                <h3 class="font-title-md text-title-md text-on-surface font-bold mb-space-xs">
+                  Apertura Oficial &amp; Foro Corredor Bioceánico
+                </h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+                  Presentación de autoridades provinciales, delegaciones de Chile, Paraguay y Brasil.
+                </p>
+              </div>
+              <div class="pt-space-sm flex items-center justify-between">
+                <div class="flex items-center gap-1 text-on-surface-variant font-caption text-caption">
+                  <span class="material-symbols-outlined text-[16px]">location_on</span>
+                  <span>Auditorio Principal A</span>
+                </div>
+                <button class="font-label-md text-label-md text-primary hover:text-secondary font-bold" type="button">
+                  Ver detalle
                 </button>
               </div>
             </div>
-
-            <div class="lg:col-span-5 flex flex-col gap-4">
-              <div class="p-4 rounded-2xl bg-white/10 backdrop-blur-md flex items-start gap-3">
-                <span class="material-symbols-outlined text-tertiary-fixed text-[24px] shrink-0">event_available</span>
-                <div>
-                  <p class="font-ambit font-bold text-sm" data-i18n="b2b_feature_1_title">Agendamiento Pre-Evento</p>
-                  <p class="font-ambit text-xs opacity-80" data-i18n="b2b_feature_1_desc">Coordinación anticipada de perfiles de contraparte.</p>
+            <!-- Activity 2 -->
+            <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-space-xs">
+                  <span
+                    class="px-space-xs py-1 rounded-md bg-tertiary-fixed text-on-tertiary-fixed font-caption text-caption font-bold">
+                    14:00 hs
+                  </span>
+                  <span class="text-caption font-caption text-outline font-semibold">Contenido demostrativo</span>
                 </div>
+                <span
+                  class="inline-block px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-caption text-caption font-semibold uppercase mb-space-xs">
+                  Ronda Sectorial
+                </span>
+                <h3 class="font-title-md text-title-md text-on-surface font-bold mb-space-xs">
+                  Mesa de Oportunidades en Cadena de Valor del Litio
+                </h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+                  Encuentro exclusivo entre operadoras mineras y proveedores locales jujeños.
+                </p>
               </div>
-              <div class="p-4 rounded-2xl bg-white/10 backdrop-blur-md flex items-start gap-3">
-                <span class="material-symbols-outlined text-primary-fixed text-[24px] shrink-0">table_restaurant</span>
-                <div>
-                  <p class="font-ambit font-bold text-sm" data-i18n="b2b_feature_2_title">Mesas Sectoriales Exclusivas</p>
-                  <p class="font-ambit text-xs opacity-80" data-i18n="b2b_feature_2_desc">Minería, Agroindustria, Servicios y Tecnología.</p>
+              <div class="pt-space-sm flex items-center justify-between">
+                <div class="flex items-center gap-1 text-on-surface-variant font-caption text-caption">
+                  <span class="material-symbols-outlined text-[16px]">location_on</span>
+                  <span>Sala de Negocios B</span>
                 </div>
+                <button class="font-label-md text-label-md text-primary hover:text-secondary font-bold" type="button">
+                  Ver detalle
+                </button>
               </div>
-              <div class="p-4 rounded-2xl bg-white/10 backdrop-blur-md flex items-start gap-3">
-                <span class="material-symbols-outlined text-secondary-fixed text-[24px] shrink-0">translate</span>
-                <div>
-                  <p class="font-ambit font-bold text-sm" data-i18n="b2b_feature_3_title">Soporte Trilingüe</p>
-                  <p class="font-ambit text-xs opacity-80" data-i18n="b2b_feature_3_desc">Asistencia en Español, Portugués e Inglés.</p>
+            </div>
+            <!-- Activity 3 -->
+            <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-space-xs">
+                  <span
+                    class="px-space-xs py-1 rounded-md bg-secondary-fixed text-on-secondary-fixed font-caption text-caption font-bold">
+                    18:00 hs
+                  </span>
+                  <span class="text-caption font-caption text-outline font-semibold">Contenido demostrativo</span>
                 </div>
+                <span
+                  class="inline-block px-space-xs py-0.5 rounded bg-surface-container text-on-surface-variant font-caption text-caption font-semibold uppercase mb-space-xs">
+                  Panel &amp; Networking
+                </span>
+                <h3 class="font-title-md text-title-md text-on-surface font-bold mb-space-xs">
+                  Panel: Ecosistema Tech y Economía del Conocimiento en el NOA
+                </h3>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+                  Startups, desarrollo de talento y exportación de servicios desde Jujuy al mundo.
+                </p>
+              </div>
+              <div class="pt-space-sm flex items-center justify-between">
+                <div class="flex items-center gap-1 text-on-surface-variant font-caption text-caption">
+                  <span class="material-symbols-outlined text-[16px]">location_on</span>
+                  <span>Espacio Innovación</span>
+                </div>
+                <button class="font-label-md text-label-md text-primary hover:text-secondary font-bold" type="button">
+                  Ver detalle
+                </button>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Delegaciones -->
-        <h2 class="font-ambit font-extrabold text-2xl text-on-surface mb-6" data-i18n="b2b_delegations_title">Delegaciones Internacionales Confirmadas</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          <div class="bg-white rounded-2xl p-6 shadow-sm border border-outline-variant/30 flex flex-col gap-2">
-            <span class="px-3 py-1 rounded-md bg-red-100 text-red-700 font-ambit font-bold text-xs w-fit">CHILE</span>
-            <h3 class="font-ambit font-bold text-base text-on-surface">Región de Antofagasta &amp; Tarapacá</h3>
-            <p class="font-ambit text-xs text-on-surface-variant" data-i18n="b2b_chile_desc">Operadores portuarios, logística minera y proveedores de servicios industriales.</p>
+      </section>
+      <!-- SECTION 8: PREVIEW DE EXPOSITORES -->
+      <section class="w-full py-space-2xl bg-surface">
+        <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
+          <div class="flex flex-col gap-space-xs mb-space-lg">
+            <span class="font-caption text-caption uppercase tracking-wider text-primary font-bold">Directorio
+              Comercial</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface">
+              Quienes mueven las oportunidades de Jujuy.
+            </h2>
           </div>
-          <div class="bg-white rounded-2xl p-6 shadow-sm border border-outline-variant/30 flex flex-col gap-2">
-            <span class="px-3 py-1 rounded-md bg-blue-100 text-blue-700 font-ambit font-bold text-xs w-fit">PARAGUAY</span>
-            <h3 class="font-ambit font-bold text-base text-on-surface">Chaco Central &amp; Boquerón</h3>
-            <p class="font-ambit text-xs text-on-surface-variant" data-i18n="b2b_py_desc">Sector agroganadero, biocarburantes y transporte pesado de carga internacional.</p>
-          </div>
-          <div class="bg-white rounded-2xl p-6 shadow-sm border border-outline-variant/30 flex flex-col gap-2">
-            <span class="px-3 py-1 rounded-md bg-green-100 text-green-700 font-ambit font-bold text-xs w-fit">BRASIL</span>
-            <h3 class="font-ambit font-bold text-base text-on-surface">Mato Grosso do Sul &amp; Santos</h3>
-            <p class="font-ambit text-xs text-on-surface-variant" data-i18n="b2b_br_desc">Comercio exterior, exportadores de grano y maquinarias pesadas.</p>
-          </div>
-          <div class="bg-white rounded-2xl p-6 shadow-sm border border-outline-variant/30 flex flex-col gap-2">
-            <span class="px-3 py-1 rounded-md bg-purple-100 text-purple-700 font-ambit font-bold text-xs w-fit">ARGENTINA</span>
-            <h3 class="font-ambit font-bold text-base text-on-surface">Región NOA (Jujuy, Salta, Tucumán)</h3>
-            <p class="font-ambit text-xs text-on-surface-variant" data-i18n="b2b_ar_desc">Productores de litio, biotecnología, alimentos con denominación de origen y turismo.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- VISTA 3: EXPOSITORES -->
-    <div id="view-expositores" class="view-container">
-      <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop py-10">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-          <div>
-            <span class="font-ambit font-bold text-xs uppercase tracking-wider text-primary-container" data-i18n="exhibitors_eyebrow">Directorio Comercial</span>
-            <h1 class="font-ambit font-extrabold text-3xl lg:text-4xl text-on-surface mt-1" data-i18n="exhibitors_title">Expositores ExpoJuy 2026</h1>
-            <p class="font-ambit text-sm text-on-surface-variant mt-1" data-i18n="exhibitors_subtitle">Explorá las empresas, marcas y organismos presentes en el predio ferial.</p>
-          </div>
-          <button class="inline-flex items-center gap-2 h-11 px-6 rounded-full bg-secondary text-white font-ambit font-bold text-xs shadow-md action-reserve-stand">
-            <span class="material-symbols-outlined text-[18px]">add_business</span>
-            <span data-i18n="btn_reserve_space">Reservar espacio de Stand</span>
-          </button>
-        </div>
-
-        <div class="bg-white p-5 rounded-3xl shadow-sm border border-outline-variant/30 mb-8 flex flex-col gap-4">
-          <div class="relative w-full">
-            <span class="material-symbols-outlined text-outline absolute left-4 top-1/2 -translate-y-1/2 text-[20px]">search</span>
-            <input type="text" id="exhibitorSearchInput" placeholder="Buscar por nombre de empresa, producto o número de stand..." class="w-full h-12 pl-12 pr-4 rounded-full bg-surface-container-low font-ambit text-sm outline-none focus:ring-2 focus:ring-primary-container transition-all"/>
-          </div>
-
-          <div class="flex items-center gap-2 overflow-x-auto pb-1" id="exhibitorCategoryChips">
-            <button class="ex-chip active px-4 py-1.5 rounded-full font-ambit font-bold text-xs bg-primary-container text-white shadow-sm" data-category="all" data-i18n="chip_all">Todos</button>
-            <button class="ex-chip px-4 py-1.5 rounded-full font-ambit font-semibold text-xs bg-surface-container-low text-on-surface-variant hover:text-on-surface" data-category="Minería" data-i18n="chip_mining">Minería y Energía</button>
-            <button class="ex-chip px-4 py-1.5 rounded-full font-ambit font-semibold text-xs bg-surface-container-low text-on-surface-variant hover:text-on-surface" data-category="Agroindustria" data-i18n="chip_agro">Agroindustria</button>
-            <button class="ex-chip px-4 py-1.5 rounded-full font-ambit font-semibold text-xs bg-surface-container-low text-on-surface-variant hover:text-on-surface" data-category="Tecnología" data-i18n="chip_tech">Tecnología &amp; Software</button>
-            <button class="ex-chip px-4 py-1.5 rounded-full font-ambit font-semibold text-xs bg-surface-container-low text-on-surface-variant hover:text-on-surface" data-category="Industria" data-i18n="chip_industry">Industria &amp; Logística</button>
-            <button class="ex-chip px-4 py-1.5 rounded-full font-ambit font-semibold text-xs bg-surface-container-low text-on-surface-variant hover:text-on-surface" data-category="Turismo" data-i18n="chip_tourism">Turismo &amp; Servicios</button>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="exhibitorsGrid"></div>
-      </div>
-    </div>
-
-    <!-- VISTA 4: AGENDA -->
-    <div id="view-agenda" class="view-container">
-      <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop py-10">
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/30">
-          <div>
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-ambit font-bold text-xs uppercase mb-2" data-i18n="agenda_header_badge">
-              <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
-              CRONOGRAMA OFICIAL · CIUDAD CULTURAL
+          <!-- Search Input & Filter Chips Mockup -->
+          <div class="bg-surface-container-low rounded-2xl p-space-md mb-space-lg flex flex-col gap-space-md">
+            <!-- Search Input -->
+            <div class="relative w-full">
+              <span
+                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-[22px]">search</span>
+              <input
+                class="w-full h-12 pl-12 pr-4 rounded-full bg-surface-container-lowest text-on-surface font-body-md text-body-md outline-none shadow-sm placeholder:text-outline focus:shadow-md transition-shadow"
+                placeholder="Buscá una empresa, rubro o producto..." type="text" />
             </div>
-            <h1 class="font-ambit font-extrabold text-3xl lg:text-4xl text-on-surface" data-i18n="agenda_header_title">Agenda ExpoJuy 2026</h1>
-            <p class="font-ambit text-sm text-on-surface-variant mt-1" data-i18n="agenda_header_subtitle">Charlas magistrales, conferencias sectoriales y espectáculos en vivo.</p>
-          </div>
-          <div class="flex items-center gap-3 bg-surface-container-low px-4 py-3 rounded-2xl">
-            <span class="material-symbols-outlined text-primary-container text-[28px]">event_available</span>
-            <div>
-              <div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider" data-i18n="agenda_period_label">Muestra General</div>
-              <div class="font-ambit font-bold text-sm text-on-surface">9 al 12 de Octubre, 2026</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex flex-wrap gap-2 mb-8 p-1.5 bg-surface-container-low rounded-2xl">
-          <button class="day-tab flex-1 min-w-[130px] py-3 px-4 rounded-xl font-ambit font-bold text-sm transition-all bg-primary-container text-white shadow-sm flex items-center justify-center gap-2" data-day="jue">
-            <span class="material-symbols-outlined text-[18px]">calendar_today</span>
-            Jue 9 Oct
-          </button>
-          <button class="day-tab flex-1 min-w-[130px] py-3 px-4 rounded-xl font-ambit font-semibold text-sm transition-all text-on-surface-variant hover:bg-white hover:text-on-surface flex items-center justify-center gap-2" data-day="vie">
-            <span class="material-symbols-outlined text-[18px]">event</span>
-            Vie 10 Oct
-          </button>
-          <button class="day-tab flex-1 min-w-[130px] py-3 px-4 rounded-xl font-ambit font-semibold text-sm transition-all text-on-surface-variant hover:bg-white hover:text-on-surface flex items-center justify-center gap-2" data-day="sab">
-            <span class="material-symbols-outlined text-[18px]">event</span>
-            Sáb 11 Oct
-          </button>
-          <button class="day-tab flex-1 min-w-[130px] py-3 px-4 rounded-xl font-ambit font-semibold text-sm transition-all text-on-surface-variant hover:bg-white hover:text-on-surface flex items-center justify-center gap-2" data-day="dom">
-            <span class="material-symbols-outlined text-[18px]">event</span>
-            Dom 12 Oct
-          </button>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div class="lg:col-span-8 flex flex-col gap-6" id="agendaTimeline"></div>
-
-          <aside class="lg:col-span-4 sticky top-28">
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-outline-variant/30 flex flex-col gap-4">
-              <div class="flex items-center justify-between pb-3 border-b border-surface-container">
-                <div class="flex items-center gap-2">
-                  <div class="w-8 h-8 rounded-xl bg-primary-container text-white flex items-center justify-center">
-                    <span class="material-symbols-outlined text-[18px]">bookmark</span>
-                  </div>
-                  <span class="font-ambit font-bold text-base text-on-surface" data-i18n="my_agenda_title">Mi Agenda Guardada</span>
-                </div>
-                <span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-primary font-ambit font-extrabold text-xs" id="savedAgendaCounter">0</span>
-              </div>
-
-              <div id="savedAgendaList" class="flex flex-col gap-3 max-h-[380px] overflow-y-auto pr-1">
-                <div class="text-center py-8 text-on-surface-variant text-xs" data-i18n="my_agenda_empty">
-                  <span class="material-symbols-outlined text-outline text-[32px] block mb-2">bookmark_border</span>
-                  No has guardado actividades aún.<br/>Explorá la agenda y presioná "+ Agendar".
-                </div>
-              </div>
-
-              <button id="btn-export-agenda" class="w-full py-2.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-ambit font-bold text-xs transition-colors flex items-center justify-center gap-2" type="button">
-                <span class="material-symbols-outlined text-[16px]">download</span>
-                <span data-i18n="btn_export_pdf">Descargar Resumen en PDF</span>
+            <!-- Filter Chips -->
+            <div class="flex items-center gap-space-xs overflow-x-auto pb-1">
+              <button
+                class="px-space-sm py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md font-bold whitespace-nowrap shadow-sm"
+                type="button">
+                Todos
+              </button>
+              <button
+                class="px-space-sm py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md font-semibold whitespace-nowrap hover:bg-surface-container transition-colors"
+                type="button">
+                Minería y energía
+              </button>
+              <button
+                class="px-space-sm py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md font-semibold whitespace-nowrap hover:bg-surface-container transition-colors"
+                type="button">
+                Agroindustria
+              </button>
+              <button
+                class="px-space-sm py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md font-semibold whitespace-nowrap hover:bg-surface-container transition-colors"
+                type="button">
+                Tecnología
+              </button>
+              <button
+                class="px-space-sm py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md font-semibold whitespace-nowrap hover:bg-surface-container transition-colors"
+                type="button">
+                Industria
+              </button>
+              <button
+                class="px-space-sm py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md font-semibold whitespace-nowrap hover:bg-surface-container transition-colors"
+                type="button">
+                Turismo
+              </button>
+              <button
+                class="px-space-sm py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md font-semibold whitespace-nowrap hover:bg-surface-container transition-colors"
+                type="button">
+                Servicios
               </button>
             </div>
-          </aside>
-        </div>
-      </div>
-    </div>
-
-    <!-- VISTA 5: VISITÁ Y MAPA -->
-    <div id="view-visita" class="view-container">
-      <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop py-10">
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/30">
-          <div>
-            <span class="font-ambit font-bold text-xs uppercase tracking-wider text-primary-container" data-i18n="visit_eyebrow">Guía del Visitante</span>
-            <h1 class="font-ambit font-extrabold text-3xl lg:text-4xl text-on-surface mt-1" data-i18n="visit_title">Visitá y Mapa del Predio Ferial</h1>
-            <p class="font-ambit text-sm text-on-surface-variant mt-1" data-i18n="visit_subtitle">Ubicación, accesos, transporte, horarios y distribución de pabellones en la Ciudad Cultural.</p>
           </div>
-          <button class="inline-flex items-center gap-2 h-12 px-7 rounded-full bg-primary-container hover:bg-secondary text-white font-ambit font-bold text-sm shadow-md transition-all action-buy-tickets">
-            <span class="material-symbols-outlined text-[18px]">confirmation_number</span>
-            <span data-i18n="btn_buy_tickets_now">Comprar entradas ahora</span>
-          </button>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 lg:p-8 shadow-md border border-outline-variant/40 mb-12">
-          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
-            <h2 class="font-ambit font-bold text-xl text-on-surface" data-i18n="map_section_title">Plano Interactivo del Predio Ferial</h2>
-            <div class="flex flex-wrap items-center gap-2 text-xs">
-              <button class="map-filter-btn active px-3 py-1 rounded-full bg-primary-container text-white font-ambit font-bold" data-target="all" data-i18n="map_filter_all">Ver Todo</button>
-              <button class="map-filter-btn px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant font-ambit font-semibold" data-target="pab-a">Pabellón A</button>
-              <button class="map-filter-btn px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant font-ambit font-semibold" data-target="pab-b">Pabellón B</button>
-              <button class="map-filter-btn px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant font-ambit font-semibold" data-target="esc-central" data-i18n="map_filter_stage">Escenario Central</button>
-            </div>
-          </div>
-
-          <div class="relative w-full aspect-[16/9] bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/30 p-4 flex items-center justify-center">
-            <svg class="w-full h-full" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0" y="0" width="800" height="450" fill="#F3F3F3"/>
-              <rect x="30" y="180" width="60" height="90" rx="10" fill="#E2E2E2" stroke="#7D7387" stroke-width="2"/>
-              <text x="60" y="230" font-size="11" font-weight="700" fill="#1A1C1C" text-anchor="middle">Acceso Principal</text>
-
-              <g class="map-pavilion" id="svg-pab-a" onclick="window.selectPavilion('Pabellón A · Minería &amp; Energía', 'Stands C-01 a C-40. Expositores de litio, proveedores y tecnología pesada.')">
-                <rect x="130" y="60" width="220" height="140" rx="16" fill="#730DD9" fill-opacity="0.85" stroke="#5500A6" stroke-width="3"/>
-                <text x="240" y="125" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">PABELLÓN A</text>
-                <text x="240" y="145" font-size="11" fill="#EDDCFF" text-anchor="middle">Minería, Energía e Industria</text>
-              </g>
-
-              <g class="map-pavilion" id="svg-pab-b" onclick="window.selectPavilion('Pabellón B · Agroindustria &amp; Turismo', 'Stands B-01 a B-50. Alimentos, artesanías, bioetanol y oferta turística.')">
-                <rect x="130" y="240" width="220" height="140" rx="16" fill="#6039DC" fill-opacity="0.85" stroke="#4A18C7" stroke-width="3"/>
-                <text x="240" y="305" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">PABELLÓN B</text>
-                <text x="240" y="325" font-size="11" fill="#E6DEFF" text-anchor="middle">Agro, Turismo y Emprendedores</text>
-              </g>
-
-              <g class="map-pavilion" id="svg-b2b" onclick="window.selectPavilion('Salas de Negocios B2B &amp; Auditorio', 'Espacio exclusivo de reuniones bilaterales y conferencias magistrales.')">
-                <rect x="390" y="60" width="160" height="140" rx="16" fill="#005E67" fill-opacity="0.9" stroke="#00454C" stroke-width="3"/>
-                <text x="470" y="125" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">SALAS B2B</text>
-                <text x="470" y="145" font-size="10" fill="#93F1FF" text-anchor="middle">Auditorio &amp; Rondas</text>
-              </g>
-
-              <g class="map-pavilion" id="svg-gourmet" onclick="window.selectPavilion('Patio Gourmet &amp; Cocina Andina', 'Food trucks, maridaje de vinos de altura y gastronomía jujeña.')">
-                <rect x="390" y="240" width="160" height="140" rx="16" fill="#29C7D9" fill-opacity="0.85" stroke="#005E67" stroke-width="3"/>
-                <text x="470" y="305" font-size="14" font-weight="800" fill="#1A1C1C" text-anchor="middle">PATIO GOURMET</text>
-                <text x="470" y="325" font-size="10" fill="#001F23" text-anchor="middle">Vinos de Altura &amp; Food Trucks</text>
-              </g>
-
-              <g class="map-pavilion" id="svg-esc-central" onclick="window.selectPavilion('Escenario Central Exterior', 'Espectáculos en vivo, galas folclóricas y recitales de cierre.')">
-                <circle cx="670" cy="220" r="75" fill="#7957F7" fill-opacity="0.85" stroke="#6039DC" stroke-width="3"/>
-                <text x="670" y="215" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">ESCENARIO</text>
-                <text x="670" y="235" font-size="10" fill="#FFFFFF" text-anchor="middle">CENTRAL</text>
-              </g>
-            </svg>
-          </div>
-
-          <div id="pavilionInfoCard" class="mt-4 p-4 rounded-2xl bg-surface-container-low flex items-center justify-between border border-outline-variant/30">
-            <div>
-              <h4 id="pavilionInfoTitle" class="font-ambit font-bold text-base text-primary-container" data-i18n="map_prompt_title">Hacé clic en cualquier área del plano</h4>
-              <p id="pavilionInfoDesc" class="font-ambit text-xs text-on-surface-variant" data-i18n="map_prompt_desc">Seleccioná un pabellón o sector para ver detalles de stands y servicios disponibles.</p>
-            </div>
-            <button class="px-4 py-2 rounded-xl bg-white hover:bg-surface-container text-primary font-ambit font-bold text-xs shadow-sm action-reserve-stand">
-              <span data-i18n="btn_reserve_stand_here">Reservar Stand aquí</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- ==========================================================================
-       FOOTER (INSTITUTIONAL & LINKS)
-       ========================================================================== -->
-  <footer class="bg-surface-container-low border-t border-outline-variant/40 pt-12 pb-8 mt-auto">
-    <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-        <div>
-          <div class="px-3 py-1.5 rounded-xl bg-primary-container text-white font-ambit font-extrabold text-base leading-none w-fit mb-3">
-            EXPOJUY 2026
-          </div>
-          <p class="font-ambit text-xs text-on-surface-variant leading-relaxed">
-            Organizado por la Cámara de Comercio Exterior de Jujuy. 17.ª Edición Multisectorial del NOA y el Corredor Bioceánico.
-          </p>
-        </div>
-        <div>
-          <h4 class="font-ambit font-bold text-sm text-on-surface mb-3">Navegación</h4>
-          <ul class="flex flex-col gap-2 font-ambit text-xs text-on-surface-variant">
-            <li><a class="hover:text-primary-container transition-colors cursor-pointer nav-trigger" data-path="home" data-i18n="nav_expo">La Expo</a></li>
-            <li><a class="hover:text-primary-container transition-colors cursor-pointer nav-trigger" data-path="b2b" data-i18n="nav_b2b">Rondas B2B</a></li>
-            <li><a class="hover:text-primary-container transition-colors cursor-pointer nav-trigger" data-path="expositores" data-i18n="nav_expositores">Expositores</a></li>
-            <li><a class="hover:text-primary-container transition-colors cursor-pointer nav-trigger" data-path="agenda" data-i18n="nav_agenda">Agenda Oficial</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-ambit font-bold text-sm text-on-surface mb-3">Sede &amp; Accesos</h4>
-          <p class="font-ambit text-xs text-on-surface-variant leading-relaxed">
-            Ciudad Cultural, San Salvador de Jujuy.<br/>
-            Predio Ferial Abierto: 10:00 a 22:00 hs.<br/>
-            Acceso vehicular por Av. Bolivia.
-          </p>
-        </div>
-        <div>
-          <h4 class="font-ambit font-bold text-sm text-on-surface mb-3">Contacto Comercial</h4>
-          <p class="font-ambit text-xs text-on-surface-variant leading-relaxed mb-3">
-            gerencia@expojuy.com.ar<br/>
-            +54 (0388) 423-5555
-          </p>
-          <button id="btn-footer-contact" class="px-4 py-2 rounded-full bg-white hover:bg-surface-container text-primary font-ambit font-bold text-xs border border-outline-variant/40 shadow-sm" type="button">
-            Enviar Consulta Directa
-          </button>
-        </div>
-      </div>
-      <div class="pt-6 border-t border-outline-variant/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-on-surface-variant">
-        <span>&copy; 2026 ExpoJuy · Todos los derechos reservados. Cámara de Comercio Exterior de Jujuy.</span>
-        <span>Tipografía Oficial: Ambit Local &amp; Plus Jakarta Sans</span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ==========================================================================
-       MODAL POPUPS SYSTEM
-       ========================================================================== -->
-
-  <!-- 1. TICKET PURCHASE CHECKOUT MODAL -->
-  <div id="modal-ticket" class="modal-backdrop">
-    <div class="modal-card modal-lg p-6 sm:p-8">
-      
-      <div class="flex items-center justify-between pb-4 border-b border-surface-container mb-6">
-        <div class="flex items-center gap-2">
-          <span class="material-symbols-outlined text-primary-container text-[24px]">confirmation_number</span>
-          <h3 class="font-ambit font-bold text-xl text-on-surface">Venta Oficial de Entradas ExpoJuy 2026</h3>
-        </div>
-        <button class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center modal-close" type="button">&times;</button>
-      </div>
-
-      <!-- Step 1: Ticket Selection Form -->
-      <div id="ticket-step-form" class="flex flex-col gap-6">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <!-- Option 1: General -->
-          <div class="ticket-opt border-2 border-primary-container bg-primary-fixed/20 p-4 rounded-2xl cursor-pointer hover:border-primary-container transition-all" data-type="Pase General 1 Día" data-price="4500">
-            <span class="px-2.5 py-0.5 rounded-full bg-primary-container text-white font-ambit font-bold text-[10px]">MÁS POPULAR</span>
-            <h4 class="font-ambit font-bold text-base text-on-surface mt-2">Pase General 1 Día</h4>
-            <p class="text-xs text-on-surface-variant mt-1">Acceso a pabellones y shows del día seleccionado.</p>
-            <div class="mt-4 font-ambit font-extrabold text-xl text-primary-container">$4.500 ARS</div>
-          </div>
-          <!-- Option 2: Ejecutivo -->
-          <div class="ticket-opt border-2 border-outline-variant p-4 rounded-2xl cursor-pointer hover:border-primary-container transition-all" data-type="Pase Ejecutivo B2B" data-price="12000">
-            <span class="px-2.5 py-0.5 rounded-full bg-tertiary-container text-white font-ambit font-bold text-[10px]">BUSINESS</span>
-            <h4 class="font-ambit font-bold text-base text-on-surface mt-2">Pase Ejecutivo B2B</h4>
-            <p class="text-xs text-on-surface-variant mt-1">Acceso total + Sala VIP &amp; Rondas de Negocios.</p>
-            <div class="mt-4 font-ambit font-extrabold text-xl text-tertiary-container">$12.000 ARS</div>
-          </div>
-          <!-- Option 3: Pase Completo 4 Días -->
-          <div class="ticket-opt border-2 border-outline-variant p-4 rounded-2xl cursor-pointer hover:border-primary-container transition-all" data-type="Pase 4 Días Completo" data-price="14000">
-            <span class="px-2.5 py-0.5 rounded-full bg-secondary text-white font-ambit font-bold text-[10px]">FULL PASS</span>
-            <h4 class="font-ambit font-bold text-base text-on-surface mt-2">Pase 4 Días Completo</h4>
-            <p class="text-xs text-on-surface-variant mt-1">Ingreso ilimitado los 4 días de muestra ferial.</p>
-            <div class="mt-4 font-ambit font-extrabold text-xl text-secondary">$14.000 ARS</div>
-          </div>
-        </div>
-
-        <!-- Quantity & Form -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block font-ambit font-bold text-xs text-on-surface mb-1">Cantidad de Entradas</label>
-            <div class="flex items-center gap-3 bg-surface-container-low p-1.5 rounded-xl border border-outline-variant/40 w-fit">
-              <button id="btn-qty-minus" class="w-8 h-8 rounded-lg bg-white font-bold text-sm text-on-surface shadow-sm" type="button">-</button>
-              <span id="ticket-qty" class="font-ambit font-bold text-base px-2">1</span>
-              <button id="btn-qty-plus" class="w-8 h-8 rounded-lg bg-white font-bold text-sm text-on-surface shadow-sm" type="button">+</button>
-            </div>
-          </div>
-          <div>
-            <label class="block font-ambit font-bold text-xs text-on-surface mb-1">Titular de la Compra</label>
-            <input type="text" id="ticket-name" placeholder="Nombre y Apellido completo..." required class="w-full h-11 px-4 rounded-xl bg-surface-container-low font-ambit text-sm outline-none border border-outline-variant/40"/>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block font-ambit font-bold text-xs text-on-surface mb-1">Correo Electrónico (Para recibir la entrada)</label>
-            <input type="email" id="ticket-email" placeholder="ejemplo@correo.com" required class="w-full h-11 px-4 rounded-xl bg-surface-container-low font-ambit text-sm outline-none border border-outline-variant/40"/>
-          </div>
-          <div>
-            <label class="block font-ambit font-bold text-xs text-on-surface mb-1">Método de Pago Simulado</label>
-            <select id="ticket-payment" class="w-full h-11 px-4 rounded-xl bg-surface-container-low font-ambit text-sm outline-none border border-outline-variant/40">
-              <option>Mercado Pago / Débito</option>
-              <option>Tarjeta de Crédito (Visa / Mastercard)</option>
-              <option>Transferencia Bancaria Directa</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="pt-4 border-t border-surface-container flex items-center justify-between">
-          <div>
-            <span class="text-xs text-on-surface-variant">Total a abonar:</span>
-            <div id="ticket-total-price" class="font-ambit font-extrabold text-2xl text-primary-container">$4.500 ARS</div>
-          </div>
-          <button id="btn-confirm-ticket-purchase" class="px-8 h-12 rounded-full bg-primary-container hover:bg-secondary text-white font-ambit font-bold text-sm shadow-md transition-all">
-            Finalizar Compra
-          </button>
-        </div>
-      </div>
-
-      <!-- Step 2: Cartel / Banner COMPRA FINALIZADA EXITOSAMENTE -->
-      <div id="ticket-step-success" class="hidden flex-col items-center text-center py-4 gap-4">
-        <div class="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center shadow-lg">
-          <span class="material-symbols-outlined text-[40px]">check_circle</span>
-        </div>
-        
-        <h3 class="font-ambit font-extrabold text-2xl text-on-surface">¡COMPRA FINALIZADA EXITOSAMENTE!</h3>
-        <p class="font-ambit text-xs text-on-surface-variant max-w-md">
-          Tu entrada oficial ha sido emitida y enviada a tu correo electrónico registrado. Presentá el código QR en el acceso a la Ciudad Cultural.
-        </p>
-
-        <!-- Simulated Ticket Receipt Box -->
-        <div class="ticket-receipt-card w-full max-w-md p-6 rounded-2xl my-2 text-left shadow-sm">
-          <div class="flex items-center justify-between border-b border-primary-container/20 pb-3 mb-3">
-            <span class="font-ambit font-bold text-xs text-primary-container uppercase">ENTRADA OFICIAL EXPOJUY 2026</span>
-            <span id="receipt-order-id" class="font-mono text-xs font-bold text-on-surface">N° EXP-98241</span>
-          </div>
-          <div class="grid grid-cols-2 gap-2 text-xs">
-            <div>
-              <span class="text-on-surface-variant block">Titular:</span>
-              <span id="receipt-name" class="font-bold text-on-surface">Luis Canaviri</span>
-            </div>
-            <div>
-              <span class="text-on-surface-variant block">Pase:</span>
-              <span id="receipt-type" class="font-bold text-on-surface">Pase General 1 Día</span>
-            </div>
-            <div>
-              <span class="text-on-surface-variant block">Cantidad:</span>
-              <span id="receipt-qty" class="font-bold text-on-surface">1 entrada</span>
-            </div>
-            <div>
-              <span class="text-on-surface-variant block">Monto Pagado:</span>
-              <span id="receipt-amount" class="font-bold text-green-700">$4.500 ARS</span>
-            </div>
-          </div>
-
-          <!-- QR Code Placeholder -->
-          <div class="mt-4 pt-3 border-t border-primary-container/20 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <div class="w-14 h-14 bg-on-surface rounded-lg flex items-center justify-center text-white font-mono text-[8px] p-1 text-center">
-                [ QR CODE ]
+          <!-- 3 Demonstrable Company Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mb-space-lg">
+            <!-- Company 1 -->
+            <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-space-sm mb-space-sm">
+                  <div
+                    class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed font-bold text-headline-sm">
+                    LS
+                  </div>
+                  <div>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">Litio Solar Jujuy S.A.</h3>
+                    <span class="font-caption text-caption text-tertiary font-bold uppercase">Minería y Energía</span>
+                  </div>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+                  Desarrollo de soluciones de almacenamiento en baterías de litio y suministros para la industria
+                  fotovoltaica.
+                </p>
               </div>
-              <span class="text-[10px] text-on-surface-variant">Acceso Válido 9-12 Oct 2026</span>
+              <div class="pt-space-xs">
+                <span
+                  class="inline-block px-space-sm py-1 rounded-md bg-surface-container-low text-on-surface-variant font-caption text-caption font-semibold">
+                  Stand C-14 · Pabellón Industrial (Contenido demostrativo)
+                </span>
+              </div>
             </div>
-            <span class="px-2.5 py-1 rounded-full bg-green-100 text-green-800 font-ambit font-bold text-[10px]">Aguardando Lectura</span>
+            <!-- Company 2 -->
+            <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-space-sm mb-space-sm">
+                  <div
+                    class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed font-bold text-headline-sm">
+                    VA
+                  </div>
+                  <div>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">Valles Andinos Bio</h3>
+                    <span class="font-caption text-caption text-secondary font-bold uppercase">Agroindustria</span>
+                  </div>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+                  Producción de legumbres y alimentos deshidratados de alta pureza con denominación de origen Jujuy.
+                </p>
+              </div>
+              <div class="pt-space-xs">
+                <span
+                  class="inline-block px-space-sm py-1 rounded-md bg-surface-container-low text-on-surface-variant font-caption text-caption font-semibold">
+                  Stand A-08 · Pabellón Agro (Contenido demostrativo)
+                </span>
+              </div>
+            </div>
+            <!-- Company 3 -->
+            <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-space-sm mb-space-sm">
+                  <div
+                    class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold text-headline-sm">
+                    QT
+                  </div>
+                  <div>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">Quebrada Tech Labs</h3>
+                    <span class="font-caption text-caption text-primary font-bold uppercase">Tecnología</span>
+                  </div>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+                  Desarrollo de software agronómico satelital y soluciones IoT para control hídrico en zonas áridas.
+                </p>
+              </div>
+              <div class="pt-space-xs">
+                <span
+                  class="inline-block px-space-sm py-1 rounded-md bg-surface-container-low text-on-surface-variant font-caption text-caption font-semibold">
+                  Stand T-03 · Espacio Tech (Contenido demostrativo)
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap items-center justify-center gap-space-md">
+            <a class="inline-flex items-center justify-center h-12 px-space-lg rounded-full bg-primary hover:bg-secondary text-on-primary font-label-lg text-label-lg shadow-md transition-colors"
+              data-path="expositores" href="#">
+              Explorá el directorio completo
+            </a>
+            <a class="inline-flex items-center justify-center h-12 px-space-lg rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-lg text-label-lg shadow-sm transition-colors"
+              href="#">
+              Ver mapa del predio
+            </a>
           </div>
         </div>
-
-        <div class="flex flex-wrap items-center gap-3">
-          <button id="btn-download-receipt" class="px-6 h-11 rounded-full bg-primary-container text-white font-ambit font-bold text-xs shadow-sm" type="button">
-            Descargar Entrada PDF
-          </button>
-          <button class="px-6 h-11 rounded-full bg-surface-container text-on-surface font-ambit font-bold text-xs modal-close" type="button">
-            Cerrar Ventana
-          </button>
+      </section>
+      <!-- SECTION 9: PREVIEW "PLANIFICÁ TU VISITA" -->
+      <section class="w-full py-space-2xl bg-surface-container-low">
+        <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
+            <div>
+              <span class="font-caption text-caption uppercase tracking-wider text-primary font-bold">Guía
+                Práctica</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface mt-space-xxs">
+                Todo listo para vivir ExpoJuy.
+              </h2>
+            </div>
+            <a class="inline-flex items-center gap-2 h-12 px-space-lg rounded-full bg-primary-container hover:bg-secondary text-on-primary font-label-lg text-label-lg shadow-md transition-colors"
+              data-path="visita" href="#">
+              <span>Planificá tu visita</span>
+              <span class="material-symbols-outlined text-[18px]">directions_walk</span>
+            </a>
+          </div>
+          <!-- 4 Feature Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+            <!-- 1: Entradas -->
+            <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-space-md">
+                  <span class="material-symbols-outlined text-[26px]">local_activity</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">Entradas</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Precios anticipados, accesos generales diarios, beneficios para jubilados, menores y estudiantes
+                  universitarios.
+                </p>
+              </div>
+              <div class="mt-space-md pt-space-xs">
+                <a class="font-label-md text-label-md text-primary font-bold hover:underline"
+                  data-path="comprar-entradas" href="#">
+                  Comprar entradas →
+                </a>
+              </div>
+            </div>
+            <!-- 2: Mapa del predio -->
+            <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary mb-space-md">
+                  <span class="material-symbols-outlined text-[26px]">map</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">Mapa del predio</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Pabellones cubiertos, áreas de exposición exterior, patios gastronómicos regionales y escenarios
+                  musicales.
+                </p>
+              </div>
+              <div class="mt-space-md pt-space-xs">
+                <span class="font-label-md text-label-md text-secondary font-bold cursor-pointer hover:underline">
+                  Descargar PDF →
+                </span>
+              </div>
+            </div>
+            <!-- 3: Cómo llegar -->
+            <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-tertiary mb-space-md">
+                  <span class="material-symbols-outlined text-[26px]">directions_bus</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">Cómo llegar</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Líneas de transporte urbano directo a Ciudad Cultural, accesos vehiculares rápidos y estacionamiento
+                  vigilado.
+                </p>
+              </div>
+              <div class="mt-space-md pt-space-xs">
+                <span class="font-label-md text-label-md text-tertiary font-bold cursor-pointer hover:underline">
+                  Ver recorridos →
+                </span>
+              </div>
+            </div>
+            <!-- 4: Accesibilidad -->
+            <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary mb-space-md">
+                  <span class="material-symbols-outlined text-[26px]">accessible_forward</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">Accesibilidad</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Rampas de acceso universal, sanitarios adaptados, señalética inclusiva y puntos de atención
+                  prioritaria.
+                </p>
+              </div>
+              <div class="mt-space-md pt-space-xs">
+                <span class="font-label-md text-label-md text-primary font-bold cursor-pointer hover:underline">
+                  Conocer protocolos →
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+      <!-- SECTION 10: BLOQUE HUMANO -->
+      <section class="w-full py-space-2xl bg-surface">
+        <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
+          <div class="max-w-2xl mb-space-lg">
+            <span class="font-caption text-caption uppercase tracking-wider text-primary font-bold">Comunidad y
+              Desarrollo</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface mt-space-xxs">
+              El valor de Jujuy está en su gente.
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant mt-space-xs">
+              Historias reales de trabajadores, cooperativas, profesionales, investigadoras y emprendedores que con su
+              dedicación diaria construyen la matriz productiva y el futuro de nuestra provincia.
+            </p>
+          </div>
+          <!-- 3 Testimonial Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mb-space-lg">
+            <!-- Story 1 -->
+            <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-14 h-14 rounded-full bg-surface-container mb-space-md flex items-center justify-center text-on-surface-variant">
+                  <span class="material-symbols-outlined text-[28px]">engineering</span>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface italic mb-space-md">
+                  "La feria nos permitió conectar con proveedores internacionales para tecnificar nuestra planta en
+                  Palpalá sin intermediarios."
+                </p>
+              </div>
+              <div>
+                <p class="font-headline-sm text-headline-sm text-on-surface">Ing. Carlos Morales</p>
+                <p class="font-caption text-caption text-primary font-bold">Metalmecánica Jujuy · Sector Industria</p>
+              </div>
+            </div>
+            <!-- Story 2 -->
+            <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-14 h-14 rounded-full bg-surface-container mb-space-md flex items-center justify-center text-on-surface-variant">
+                  <span class="material-symbols-outlined text-[28px]">science</span>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface italic mb-space-md">
+                  "Presentar nuestros avances en biotecnología en ExpoJuy nos abrió puertas con fondos de inversión de
+                  la región."
+                </p>
+              </div>
+              <div>
+                <p class="font-headline-sm text-headline-sm text-on-surface">Dra. Valeria Farfán</p>
+                <p class="font-caption text-caption text-secondary font-bold">Investigadora CONICET-UNJu · Sector
+                  Tecnología</p>
+              </div>
+            </div>
+            <!-- Story 3 -->
+            <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col justify-between">
+              <div>
+                <div
+                  class="w-14 h-14 rounded-full bg-surface-container mb-space-md flex items-center justify-center text-on-surface-variant">
+                  <span class="material-symbols-outlined text-[28px]">agriculture</span>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface italic mb-space-md">
+                  "Como cooperativa de la Quebrada, pudimos comercializar directo a cadenas gastronómicas de todo el
+                  país."
+                </p>
+              </div>
+              <div>
+                <p class="font-headline-sm text-headline-sm text-on-surface">Elena Quispe</p>
+                <p class="font-caption text-caption text-tertiary font-bold">Cooperativa Agrícola Andina · Sector Agro
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <a class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-secondary font-bold transition-colors"
+              href="#">
+              <span>Conocé las historias completas</span>
+              <span class="material-symbols-outlined text-[18px]">east</span>
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION 11: FAQ INTERACTIVO (DESIGN.MD Layout) -->
+      <section class="w-full py-space-2xl bg-surface-container-low">
+        <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+            <!-- Left Column: Title FAQS -->
+            <div class="lg:col-span-4 flex flex-col gap-space-sm">
+              <span class="font-caption text-caption uppercase tracking-wider text-primary font-bold">Dudas Frecuentes</span>
+              <h2 class="font-display-hero text-display-hero text-primary-container font-black tracking-tight">
+                FAQS
+              </h2>
+              <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                Todo lo que necesitás saber sobre acreditaciones, stands, rondas B2B y accesos a ExpoJuy 2026.
+              </p>
+              <div class="pt-space-xs">
+                <a class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-secondary font-bold cursor-pointer" href="visita.html">
+                  <span>¿Tenés otra consulta? Ir a Visitá</span>
+                  <span class="material-symbols-outlined text-[18px]">east</span>
+                </a>
+              </div>
+            </div>
 
+            <!-- Right Column: Accordion with Geometric Bullets (●, ◆, ▲) -->
+            <div class="lg:col-span-8 flex flex-col gap-space-sm" id="faq-accordion-group">
+              <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm border border-surface-container">
+                <button class="faq-toggle w-full flex items-center justify-between gap-space-sm text-left cursor-pointer" type="button">
+                  <div class="flex items-center gap-3">
+                    <span class="text-primary font-bold text-lg select-none">●</span>
+                    <span class="font-headline-sm text-headline-sm text-on-surface font-bold">¿Cuáles son las fechas, horarios y ubicación de ExpoJuy 2026?</span>
+                  </div>
+                  <span class="material-symbols-outlined chevron-icon text-primary transition-transform text-[24px]">expand_more</span>
+                </button>
+                <div class="faq-panel pt-space-sm mt-space-xs border-t border-surface-container font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  La 17.ª edición se llevará a cabo del <strong>9 al 12 de octubre de 2026</strong> en el predio ferial Ciudad Cultural, San Salvador de Jujuy. El horario general de exposición es de 10:00 a 22:00 hs.
+                </div>
+              </div>
+
+              <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm border border-surface-container">
+                <button class="faq-toggle w-full flex items-center justify-between gap-space-sm text-left cursor-pointer" type="button">
+                  <div class="flex items-center gap-3">
+                    <span class="text-secondary font-bold text-lg select-none">◆</span>
+                    <span class="font-headline-sm text-headline-sm text-on-surface font-bold">¿Cómo puedo participar como expositor o reservar un stand?</span>
+                  </div>
+                  <span class="material-symbols-outlined chevron-icon text-primary transition-transform text-[24px]">expand_more</span>
+                </button>
+                <div class="faq-panel hidden pt-space-sm mt-space-xs border-t border-surface-container font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  Las empresas y PyMEs pueden consultar el catálogo comercial y solicitar planos de modulación en la sección <a href="expositores.html" class="text-primary font-bold underline">Expositores</a> o comunicándose con la Cámara de Comercio Exterior.
+                </div>
+              </div>
+
+              <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm border border-surface-container">
+                <button class="faq-toggle w-full flex items-center justify-between gap-space-sm text-left cursor-pointer" type="button">
+                  <div class="flex items-center gap-3">
+                    <span class="text-tertiary font-bold text-lg select-none">▲</span>
+                    <span class="font-headline-sm text-headline-sm text-on-surface font-bold">¿Qué requisitos se necesitan para las Rondas B2B?</span>
+                  </div>
+                  <span class="material-symbols-outlined chevron-icon text-primary transition-transform text-[24px]">expand_more</span>
+                </button>
+                <div class="faq-panel hidden pt-space-sm mt-space-xs border-t border-surface-container font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  El registro está abierto a productores formales y empresas de Argentina y países del Corredor Bioceánico (Chile, Paraguay, Brasil). Inscribite en el formulario de la sección <a href="b2b.html" class="text-primary font-bold underline">Vinculate B2B</a>.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION 12: NOVEDADES & COMUNICADOS -->
+      <section class="w-full py-space-2xl bg-surface">
+        <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
+            <div>
+              <span class="font-caption text-caption uppercase tracking-wider text-primary font-bold">Prensa y
+                Novedades</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface mt-space-xxs">
+                Últimos comunicados de la organización
+              </h2>
+            </div>
+            <a class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-secondary font-bold transition-colors"
+              href="#">
+              <span>Ver todas las noticias</span>
+              <span class="material-symbols-outlined text-[18px]">east</span>
+            </a>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+            <!-- News 1 -->
+            <div
+              class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="h-44 bg-surface-container flex items-center justify-center text-outline">
+                  <span class="material-symbols-outlined text-[36px]">newspaper</span>
+                </div>
+                <div class="p-space-md">
+                  <span class="font-caption text-caption text-primary font-bold uppercase">15 Mayo 2026</span>
+                  <h3 class="font-title-md text-title-md text-on-surface font-bold mt-1 mb-space-xs">
+                    Se confirman 14 delegaciones empresariales del Corredor Bioceánico
+                  </h3>
+                  <p class="font-body-md text-body-md text-on-surface-variant">
+                    Representantes de Antofagasta y Mato Grosso do Sul confirmaron su participación en las rondas de
+                    negocios.
+                  </p>
+                </div>
+              </div>
+              <div class="px-space-md pb-space-md">
+                <span class="font-label-md text-label-md text-primary font-bold cursor-pointer hover:underline">
+                  Leer más →
+                </span>
+              </div>
+            </div>
+            <!-- News 2 -->
+            <div
+              class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="h-44 bg-surface-container flex items-center justify-center text-outline">
+                  <span class="material-symbols-outlined text-[36px]">campaign</span>
+                </div>
+                <div class="p-space-md">
+                  <span class="font-caption text-caption text-secondary font-bold uppercase">02 Junio 2026</span>
+                  <h3 class="font-title-md text-title-md text-on-surface font-bold mt-1 mb-space-xs">
+                    Apertura formal de venta anticipada de entradas con descuento
+                  </h3>
+                  <p class="font-body-md text-body-md text-on-surface-variant">
+                    Se habilitó la plataforma digital para adquirir pases diarios y abonos para los 4 días de la
+                    muestra.
+                  </p>
+                </div>
+              </div>
+              <div class="px-space-md pb-space-md">
+                <span class="font-label-md text-label-md text-secondary font-bold cursor-pointer hover:underline">
+                  Leer más →
+                </span>
+              </div>
+            </div>
+            <!-- News 3 -->
+            <div
+              class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="h-44 bg-surface-container flex items-center justify-center text-outline">
+                  <span class="material-symbols-outlined text-[36px]">event</span>
+                </div>
+                <div class="p-space-md">
+                  <span class="font-caption text-caption text-tertiary font-bold uppercase">20 Junio 2026</span>
+                  <h3 class="font-title-md text-title-md text-on-surface font-bold mt-1 mb-space-xs">
+                    Publicación del primer avance de la grilla cultural y espectáculos
+                  </h3>
+                  <p class="font-body-md text-body-md text-on-surface-variant">
+                    Músicos, ballets y muestras gastronómicas en vivo formarán parte del escenario principal cada noche.
+                  </p>
+                </div>
+              </div>
+              <div class="px-space-md pb-space-md">
+                <span class="font-label-md text-label-md text-tertiary font-bold cursor-pointer hover:underline">
+                  Leer más →
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION 13: SPONSORS Y ALIADOS ESTRATÉGICOS -->
+      <section class="w-full py-space-xl bg-surface-container-low">
+        <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop">
+          <div class="text-center mb-space-md">
+            <span class="font-caption text-caption uppercase tracking-wider text-outline font-bold">
+              Sponsors y Aliados Estratégicos
+            </span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-space-sm">
+            <div
+              class="h-20 rounded-xl bg-surface-container-lowest flex flex-col items-center justify-center p-2 text-center shadow-sm">
+              <span class="font-label-md text-label-md text-on-surface font-bold">Gobierno de Jujuy</span>
+              <span class="font-caption text-caption text-outline">Auspiciante Oficial</span>
+            </div>
+            <div
+              class="h-20 rounded-xl bg-surface-container-lowest flex flex-col items-center justify-center p-2 text-center shadow-sm">
+              <span class="font-label-md text-label-md text-on-surface font-bold">Banco Macro</span>
+              <span class="font-caption text-caption text-outline">Banco Oficial</span>
+            </div>
+            <div
+              class="h-20 rounded-xl bg-surface-container-lowest flex flex-col items-center justify-center p-2 text-center shadow-sm">
+              <span class="font-label-md text-label-md text-on-surface font-bold">Cámara Comercio Exterior</span>
+              <span class="font-caption text-caption text-outline">Organizador</span>
+            </div>
+            <div
+              class="h-20 rounded-xl bg-surface-container-lowest flex flex-col items-center justify-center p-2 text-center shadow-sm">
+              <span class="font-label-md text-label-md text-on-surface font-bold">Unión Industrial Jujuy</span>
+              <span class="font-caption text-caption text-outline">Soporte Productivo</span>
+            </div>
+            <div
+              class="h-20 rounded-xl bg-surface-container-lowest flex flex-col items-center justify-center p-2 text-center shadow-sm">
+              <span class="font-label-md text-label-md text-on-surface font-bold">Sponsor Platino</span>
+              <span class="font-caption text-caption text-outline">Empresa Energética</span>
+            </div>
+            <div
+              class="h-20 rounded-xl bg-surface-container-lowest flex flex-col items-center justify-center p-2 text-center shadow-sm">
+              <span class="font-label-md text-label-md text-on-surface font-bold">Sponsor Oro</span>
+              <span class="font-caption text-caption text-outline">Logística Regional</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-  </div>
-
-  <!-- 2. STAND RESERVATION MODAL -->
-  <div id="modal-stand" class="modal-backdrop">
-    <div class="modal-card p-6 sm:p-8">
-      <div class="flex items-center justify-between pb-4 border-b border-surface-container mb-6">
-        <h3 class="font-ambit font-bold text-xl text-on-surface">Reserva de Stand Comercial</h3>
-        <button class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center modal-close" type="button">&times;</button>
+  </main>
+  <footer class="w-full bg-surface-container-lowest shadow-[0_-4px_20px_-2px_rgba(17,24,39,0.03)]">
+  <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop pt-space-2xl pb-space-lg">
+    
+    <!-- Header Banner del Footer -->
+    <div class="bg-surface-container-low rounded-xl p-space-lg mb-space-2xl flex flex-col md:flex-row items-center justify-between gap-space-md">
+      <div class="flex flex-col gap-space-xxs">
+        <span class="font-caption text-caption uppercase tracking-wider text-primary font-bold">Lema Oficial</span>
+        <p class="font-headline-sm text-headline-sm text-on-surface">
+          <span class="text-primary-container">ExpoJuy 2026</span> — Conectando países, <span class="text-tertiary-container">creando oportunidades.</span>
+        </p>
       </div>
-      
-      <form id="form-stand-reserve" class="flex flex-col gap-4">
-        <div>
-          <label class="block font-ambit font-bold text-xs mb-1">Nombre de la Empresa / Marca</label>
-          <input type="text" required placeholder="Ej: Soluciones Mineras S.A." class="w-full h-11 px-4 rounded-xl bg-surface-container-low font-ambit text-sm outline-none border border-outline-variant/40"/>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block font-ambit font-bold text-xs mb-1">Superficie Deseada</label>
-            <select class="w-full h-11 px-4 rounded-xl bg-surface-container-low font-ambit text-sm outline-none border border-outline-variant/40">
-              <option>Stand Standard (12 m²)</option>
-              <option>Stand Doble (24 m²)</option>
-              <option>Isla Central (48 m²)</option>
-            </select>
-          </div>
-          <div>
-            <label class="block font-ambit font-bold text-xs mb-1">Pabellón de Interés</label>
-            <select class="w-full h-11 px-4 rounded-xl bg-surface-container-low font-ambit text-sm outline-none border border-outline-variant/40">
-              <option>Pabellón A (Minería &amp; Industria)</option>
-              <option>Pabellón B (Agro &amp; Servicios)</option>
-              <option>Área Exterior (Maquinaria Pesada)</option>
-            </select>
-          </div>
-        </div>
-        <div>
-          <label class="block font-ambit font-bold text-xs mb-1">Correo de Contacto Comercial</label>
-          <input type="email" required placeholder="ventas@empresa.com" class="w-full h-11 px-4 rounded-xl bg-surface-container-low font-ambit text-sm outline-none border border-outline-variant/40"/>
-        </div>
-        <button type="submit" class="w-full h-12 rounded-full bg-secondary hover:bg-primary-container text-white font-ambit font-bold text-sm shadow-md transition-all mt-2">
-          Enviar Solicitud de Reserva
-        </button>
-      </form>
+      <div class="flex flex-wrap items-center gap-space-sm">
+        <span class="px-space-sm py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md">Corredor Bioceánico</span>
+        <span class="px-space-sm py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md">Ronda Internacional</span>
+      </div>
     </div>
-  </div>
 
-  <!-- 3. B2B REGISTRATION MODAL -->
-  <div id="modal-b2b" class="modal-backdrop">
-    <div class="modal-card p-6 sm:p-8">
-      <div class="flex items-center justify-between pb-4 border-b border-surface-container mb-6">
-        <h3 class="font-ambit font-bold text-xl text-on-surface">Inscripción a Rondas B2B</h3>
-        <button class="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center modal-close" type="button">&times;</button>
-      </div>
-      
-      <form id="form-b2b-register" class="flex flex-col gap-4">
-        <div>
-          <label class="block font-ambit font-bold text-xs mb-1">Razón Social de la Empresa</label>
-          <input type="text" required placeholder="Nombre de la empresa..." class="w-full h-11 px-4 rounded-xl bg-surface-container-low font-ambit text-sm outline-none border border-outline-variant/40"/>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
+    <!-- Organizadores Institucionales -->
+    <div class="mb-space-2xl pb-space-lg">
+      <span class="font-caption text-caption uppercase tracking-wider text-outline block mb-space-sm">Organizadores Institucionales</span>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md">
+        <div class="p-space-md rounded-xl bg-surface-container flex items-center gap-space-sm">
+          <span class="material-symbols-outlined text-primary text-[24px]">account_balance</span>
           <div>
-            <label class="block font-ambit font-bold text-xs mb-1">Sector Productivo</label>
-            <select class="w-full h-11 px-4 rounded-xl bg-surface-container-low font-ambit text-sm outline-none border border-outline-variant/40">
-              <option>Minería &amp; Litio</option>
-              <option>Agroindustria &amp; Alimentos</option>
-              <option>Tecnología &amp; Software</option>
-              <option>Logística &amp; Comercio Ext.</option>
-            </select>
-          </div>
-          <div>
-            <label class="block font-ambit font-bold text-xs mb-1">País Objetivo</label>
-            <select class="w-full h-11 px-4 rounded-xl bg-surface-container-low font-ambit text-sm outline-none border border-outline-variant/40">
-              <option>Chile</option>
-              <option>Paraguay</option>
-              <option>Brasil</option>
-              <option>Argentina (NOA)</option>
-            </select>
+            <p class="font-label-lg text-label-lg text-on-surface">Gobierno de Jujuy</p>
+            <p class="font-caption text-caption text-on-surface-variant">Auspiciante Oficial</p>
           </div>
         </div>
-        <div>
-          <label class="block font-ambit font-bold text-xs mb-1">Representante Acreditado</label>
-          <input type="text" required placeholder="Nombre del directivo..." class="w-full h-11 px-4 rounded-xl bg-surface-container-low font-ambit text-sm outline-none border border-outline-variant/40"/>
+        <div class="p-space-md rounded-xl bg-surface-container flex items-center gap-space-sm">
+          <span class="material-symbols-outlined text-secondary-container text-[24px]">public</span>
+          <div>
+            <p class="font-label-lg text-label-lg text-on-surface">Cámara de Comercio Exterior</p>
+            <p class="font-caption text-caption text-on-surface-variant">Entidad Organizadora</p>
+          </div>
         </div>
-        <button type="submit" class="w-full h-12 rounded-full bg-primary-container hover:bg-secondary text-white font-ambit font-bold text-sm shadow-md transition-all mt-2">
-          Confirmar Registro de Acreditación B2B
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- 4. VIDEO / TOUR 3D MODAL -->
-  <div id="modal-video" class="modal-backdrop">
-    <div class="modal-card modal-lg p-4 sm:p-6 bg-black text-white">
-      <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/20">
-        <h3 class="font-ambit font-bold text-base text-white">Recorrido Virtual 3D - Ciudad Cultural ExpoJuy 2026</h3>
-        <button class="w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center modal-close" type="button">&times;</button>
-      </div>
-      <div class="aspect-video w-full rounded-xl overflow-hidden bg-zinc-900 flex flex-col items-center justify-center relative">
-        <div class="text-center p-6">
-          <span class="material-symbols-outlined text-primary-fixed text-[64px] mb-2 animate-bounce">view_in_ar</span>
-          <p class="font-ambit font-bold text-lg text-white">Simulación de Recorrido 3D y Drone 4K</p>
-          <p class="font-ambit text-xs text-white/70 mt-1 max-w-sm">Explorando pabellones A, B, Rondas B2B y accesos peatonales de la Ciudad Cultural.</p>
+        <div class="p-space-md rounded-xl bg-surface-container flex items-center gap-space-sm">
+          <span class="material-symbols-outlined text-tertiary-container text-[24px]">factory</span>
+          <div>
+            <p class="font-label-lg text-label-lg text-on-surface">Unión Industrial de Jujuy</p>
+            <p class="font-caption text-caption text-on-surface-variant">Soporte Productivo</p>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- Columnas de Enlaces del Footer -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-xl mb-space-2xl">
+      <div class="flex flex-col gap-space-xs">
+        <p class="font-title-md text-title-md text-on-surface font-bold">La Expo</p>
+        <ul class="flex flex-col gap-space-xs">
+          <li><a href="home.html" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">Qué es ExpoJuy</a></li>
+          <li><a href="home.html" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">Corredor Bioceánico</a></li>
+          <li><a href="home.html" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">Ecosistema productivo</a></li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-space-xs">
+        <p class="font-title-md text-title-md text-on-surface font-bold">Participación</p>
+        <ul class="flex flex-col gap-space-xs">
+          <li><a href="b2b.html" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">Rondas B2B</a></li>
+          <li><a href="expositores.html" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">Reservar stand</a></li>
+          <li><a href="expositores.html" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">Directorio expositores</a></li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-space-xs">
+        <p class="font-title-md text-title-md text-on-surface font-bold">Visita</p>
+        <ul class="flex flex-col gap-space-xs">
+          <li><a href="agenda.html" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">Agenda de actividades</a></li>
+          <li><a href="visita.html#entradas" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">Entradas y Pases</a></li>
+          <li><a href="visita.html#mapa-predio" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">Plano del predio</a></li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-space-xs">
+        <p class="font-title-md text-title-md text-on-surface font-bold">Contacto</p>
+        <ul class="flex flex-col gap-space-xs">
+          <li><a href="b2b.html#registro-b2b" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">Contacto comercial</a></li>
+          <li><a href="visita.html" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">Acreditaciones prensa</a></li>
+          <li><a href="visita.html" class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-space-sm">
+        <p class="font-title-md text-title-md text-on-surface font-bold">Novedades</p>
+        <p class="font-caption text-caption text-on-surface-variant">Suscribite para recibir actualizaciones de la agenda y rondas de negocios.</p>
+        <form onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte a las novedades de ExpoJuy 2026!'); this.reset();" class="flex items-center gap-space-xxs bg-surface-container rounded-full p-1 pl-space-sm">
+          <input class="bg-transparent border-none outline-none font-body-md text-body-md text-on-surface w-full placeholder:text-outline" placeholder="Tu correo electrónico" required type="email"/>
+          <button class="h-10 px-space-md rounded-full bg-primary-container text-on-primary font-label-md text-label-md hover:bg-secondary transition-colors" type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Pie de página final -->
+    <div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md bg-surface-container-low/50 rounded-xl p-space-md">
+      <p class="font-caption text-caption text-on-surface-variant text-center md:text-left">© 2026 ExpoJuy. Todos los derechos reservados. Contenido demostrativo para prototipo web.</p>
+      <div class="flex items-center gap-space-md">
+        <span class="material-symbols-outlined text-outline hover:text-primary transition-colors cursor-pointer text-[20px]" title="Compartir">share</span>
+        <span class="material-symbols-outlined text-outline hover:text-primary transition-colors cursor-pointer text-[20px]" title="Contacto">mail</span>
+        <span class="material-symbols-outlined text-outline hover:text-primary transition-colors cursor-pointer text-[20px]" title="Idioma">language</span>
+      </div>
+    </div>
+
   </div>
-
-  <!-- 5. TOAST NOTIFICATIONS CONTAINER -->
-  <div id="toast-container"></div>
-
-  <!-- Modular JavaScript Application Entry Point -->
-  <script type="module" src="./js/app.js"></script>
+</footer>
+  <script src="js/main.js"></script>
 </body>
+
 </html>

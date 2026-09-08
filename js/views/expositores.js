@@ -59,11 +59,14 @@ export function initExhibitorsDirectory() {
       </div>
     `).join('');
 
-    document.querySelectorAll('.btn-contact-exhibitor').forEach(btn => {
       btn.addEventListener('click', () => {
         showToast(`Mensaje enviado al stand de ${btn.dataset.name}`, 'success');
       });
     });
+
+    if (typeof window.applyTranslations === 'function') {
+      window.applyTranslations(localStorage.getItem('expojuy_lang') || 'es');
+    }
   }
 
   if (searchInput) {

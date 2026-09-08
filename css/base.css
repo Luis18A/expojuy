@@ -67,6 +67,75 @@ h1, h2, h3, h4, h5, h6, .font-ambit {
   font-family: var(--font-primary);
 }
 
+/* --- Standardized Unified Typography Hierarchy --- */
+.font-display-hero, h1.display-title {
+  font-family: var(--font-primary);
+  font-size: clamp(28px, 4.5vw, 48px);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.font-headline-lg, h2.section-title {
+  font-family: var(--font-primary);
+  font-size: clamp(22px, 3.5vw, 36px);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.font-headline-sm, h3.card-title {
+  font-family: var(--font-primary);
+  font-size: clamp(18px, 2.5vw, 22px);
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.font-title-md {
+  font-family: var(--font-primary);
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+}
+
+.font-body-lg {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+}
+
+.font-body-md {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+}
+
+.font-label-lg {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.font-label-md {
+  font-family: var(--font-primary);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.font-caption {
+  font-family: var(--font-primary);
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
 /* --- Scrollbar --- */
 ::-webkit-scrollbar {
   width: 8px;
