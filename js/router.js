@@ -1,5 +1,5 @@
 /* ==========================================================================
-   EXPOJUY 2026 - SPA ROUTER & VIEW LOADER MODULE
+   EXPOJUY 2026 - SPA ROUTER MODULE
    ========================================================================== */
 
 import { updateDOMTranslations } from './i18n.js';
@@ -11,37 +11,22 @@ export function initRouter() {
   const mobileDrawer = document.getElementById('mobile-nav-drawer');
   const mobileBtn = document.getElementById('btn-mobile-menu');
 
-  async function loadViewContent(path) {
-    const targetContainer = document.getElementById(`view-${path}`);
-    if (!targetContainer) return;
+  function navigateTo(path) {
+    const targetView = document.getElementById(`view-${path}`);
+    if (!targetView) return;
 
-    // If view container is empty or needs dynamic fetch, load from views/[path].html
-    if (targetContainer.children.length === 0) {
-      try {
-        const response = await fetch(`./views/${path}.html`);
-        if (response.ok) {
-          const html = await response.text();
-          // Extract internal view div if present or set directly
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = html;
-          const innerView = tempDiv.querySelector('.view-container') || tempDiv;
-          targetContainer.innerHTML = innerView.innerHTML;
-        }
-      } catch (err) {
-        console.warn(`View fetch for ${path} fallback to embedded static DOM.`);
-      }
-    }
-
-    // Activate view
+    // Toggle active view container
     document.querySelectorAll('.view-container').forEach(view => {
       if (view.id === `view-${path}`) {
         view.classList.add('active-view');
+        view.style.display = 'block';
       } else {
         view.classList.remove('active-view');
+        view.style.display = 'none';
       }
     });
 
-    // Update active nav links
+    // Toggle active link in navbar
     document.querySelectorAll('.nav-link').forEach(link => {
       if (link.dataset.path === path) {
         link.classList.add('active');
@@ -54,10 +39,10 @@ export function initRouter() {
       mobileDrawer.classList.add('hidden');
     }
 
-    // Re-apply current language translations to newly loaded DOM elements
+    // Re-apply translations
     updateDOMTranslations();
 
-    // Trigger view-specific dynamic logic
+    // Trigger view initializations
     if (path === 'expositores') initExhibitorsDirectory();
     if (path === 'agenda') initAgendaSystem();
     if (path === 'visita') initInteractiveMap();
@@ -69,7 +54,7 @@ export function initRouter() {
     const trigger = e.target.closest('.nav-trigger');
     if (trigger) {
       const path = trigger.dataset.path || 'home';
-      loadViewContent(path);
+      navigateTo(path);
     }
   });
 
@@ -79,9 +64,7 @@ export function initRouter() {
     });
   }
 
-  // Hash Navigation Fallback
-  if (window.location.hash) {
-    const cleanHash = window.location.hash.replace('#', '');
-    loadViewContent(cleanHash);
-  }
+  // Initial navigation route check
+  const initialHash = window.location.hash ? window.location.hash.replace('#', '') : 'home';
+  navigateTo(initialHash);
 }
