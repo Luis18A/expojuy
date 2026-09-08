@@ -1,0 +1,91 @@
+<!-- ==========================================================================
+     VISTA 5: VISITÁ Y MAPA DEL PREDIO
+     ========================================================================== -->
+<div id="view-visita" class="view-container">
+  <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop py-10">
+    
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/30">
+      <div>
+        <span class="font-ambit font-bold text-xs uppercase tracking-wider text-primary-container" data-i18n="visit_eyebrow">Guía del Visitante</span>
+        <h1 class="font-ambit font-extrabold text-3xl lg:text-4xl text-on-surface mt-1" data-i18n="visit_title">Visitá y Mapa del Predio Ferial</h1>
+        <p class="font-ambit text-sm text-on-surface-variant mt-1" data-i18n="visit_subtitle">Ubicación, accesos, transporte, horarios y distribución de pabellones en la Ciudad Cultural.</p>
+      </div>
+      <button class="inline-flex items-center gap-2 h-12 px-7 rounded-full bg-primary-container hover:bg-secondary text-white font-ambit font-bold text-sm shadow-md transition-all action-buy-tickets">
+        <span class="material-symbols-outlined text-[18px]">confirmation_number</span>
+        <span data-i18n="btn_buy_tickets_now">Comprar entradas ahora</span>
+      </button>
+    </div>
+
+    <!-- Interactive Map SVG Container -->
+    <div class="bg-white rounded-3xl p-6 lg:p-8 shadow-md border border-outline-variant/40 mb-12">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+        <h2 class="font-ambit font-bold text-xl text-on-surface" data-i18n="map_section_title">Plano Interactivo del Predio Ferial</h2>
+        <div class="flex flex-wrap items-center gap-2 text-xs">
+          <button class="map-filter-btn active px-3 py-1 rounded-full bg-primary-container text-white font-ambit font-bold" data-target="all" data-i18n="map_filter_all">Ver Todo</button>
+          <button class="map-filter-btn px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant font-ambit font-semibold" data-target="pab-a">Pabellón A</button>
+          <button class="map-filter-btn px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant font-ambit font-semibold" data-target="pab-b">Pabellón B</button>
+          <button class="map-filter-btn px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant font-ambit font-semibold" data-target="esc-central" data-i18n="map_filter_stage">Escenario Central</button>
+        </div>
+      </div>
+
+      <!-- Interactive Vector Floorplan -->
+      <div class="relative w-full aspect-[16/9] bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/30 p-4 flex items-center justify-center">
+        <svg class="w-full h-full" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background Grid -->
+          <rect x="0" y="0" width="800" height="450" fill="#F3F3F3"/>
+          
+          <!-- Entrance Acceso Principal -->
+          <rect x="30" y="180" width="60" height="90" rx="10" fill="#E2E2E2" stroke="#7D7387" stroke-width="2"/>
+          <text x="60" y="230" font-size="11" font-weight="700" fill="#1A1C1C" text-anchor="middle">Acceso Principal</text>
+
+          <!-- Pabellón A (Minería & Industria) -->
+          <g class="map-pavilion" id="svg-pab-a" onclick="window.selectPavilion('Pabellón A · Minería &amp; Energía', 'Stands C-01 a C-40. Expositores de litio, proveedores y tecnología pesada.')">
+            <rect x="130" y="60" width="220" height="140" rx="16" fill="#730DD9" fill-opacity="0.85" stroke="#5500A6" stroke-width="3"/>
+            <text x="240" y="125" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">PABELLÓN A</text>
+            <text x="240" y="145" font-size="11" fill="#EDDCFF" text-anchor="middle">Minería, Energía e Industria</text>
+          </g>
+
+          <!-- Pabellón B (Agroindustria & Comercio) -->
+          <g class="map-pavilion" id="svg-pab-b" onclick="window.selectPavilion('Pabellón B · Agroindustria &amp; Turismo', 'Stands B-01 a B-50. Alimentos, artesanías, bioetanol y oferta turística.')">
+            <rect x="130" y="240" width="220" height="140" rx="16" fill="#6039DC" fill-opacity="0.85" stroke="#4A18C7" stroke-width="3"/>
+            <text x="240" y="305" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">PABELLÓN B</text>
+            <text x="240" y="325" font-size="11" fill="#E6DEFF" text-anchor="middle">Agro, Turismo y Emprendedores</text>
+          </g>
+
+          <!-- Sala B2B & Auditorio -->
+          <g class="map-pavilion" id="svg-b2b" onclick="window.selectPavilion('Salas de Negocios B2B &amp; Auditorio', 'Espacio exclusivo de reuniones bilaterales y conferencias magistrales.')">
+            <rect x="390" y="60" width="160" height="140" rx="16" fill="#005E67" fill-opacity="0.9" stroke="#00454C" stroke-width="3"/>
+            <text x="470" y="125" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">SALAS B2B</text>
+            <text x="470" y="145" font-size="10" fill="#93F1FF" text-anchor="middle">Auditorio &amp; Rondas</text>
+          </g>
+
+          <!-- Patio Gastronómico Gourmet -->
+          <g class="map-pavilion" id="svg-gourmet" onclick="window.selectPavilion('Patio Gourmet &amp; Cocina Andina', 'Food trucks, maridaje de vinos de altura y gastronomía jujeña.')">
+            <rect x="390" y="240" width="160" height="140" rx="16" fill="#29C7D9" fill-opacity="0.85" stroke="#005E67" stroke-width="3"/>
+            <text x="470" y="305" font-size="14" font-weight="800" fill="#1A1C1C" text-anchor="middle">PATIO GOURMET</text>
+            <text x="470" y="325" font-size="10" fill="#001F23" text-anchor="middle">Vinos de Altura &amp; Food Trucks</text>
+          </g>
+
+          <!-- Escenario Central Exterior -->
+          <g class="map-pavilion" id="svg-esc-central" onclick="window.selectPavilion('Escenario Central Exterior', 'Espectáculos en vivo, galas folclóricas y recitales de cierre.')">
+            <circle cx="670" cy="220" r="75" fill="#7957F7" fill-opacity="0.85" stroke="#6039DC" stroke-width="3"/>
+            <text x="670" y="215" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">ESCENARIO</text>
+            <text x="670" y="235" font-size="10" fill="#FFFFFF" text-anchor="middle">CENTRAL</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Dynamic Pavilion Selected Card Footer -->
+      <div id="pavilionInfoCard" class="mt-4 p-4 rounded-2xl bg-surface-container-low flex items-center justify-between border border-outline-variant/30">
+        <div>
+          <h4 id="pavilionInfoTitle" class="font-ambit font-bold text-base text-primary-container" data-i18n="map_prompt_title">Hacé clic en cualquier área del plano</h4>
+          <p id="pavilionInfoDesc" class="font-ambit text-xs text-on-surface-variant" data-i18n="map_prompt_desc">Seleccioná un pabellón o sector para ver detalles de stands y servicios disponibles.</p>
+        </div>
+        <button class="px-4 py-2 rounded-xl bg-white hover:bg-surface-container text-primary font-ambit font-bold text-xs shadow-sm action-reserve-stand">
+          <span data-i18n="btn_reserve_stand_here">Reservar Stand aquí</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

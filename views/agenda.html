@@ -1,0 +1,85 @@
+<!-- ==========================================================================
+     VISTA 4: AGENDA OFICIAL & MI AGENDA (TIMELINE + REACTIVE PANEL)
+     ========================================================================== -->
+<div id="view-agenda" class="view-container">
+  <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop py-10">
+    
+    <!-- Header -->
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 bg-white p-8 rounded-3xl shadow-sm border border-outline-variant/30">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-ambit font-bold text-xs uppercase mb-2" data-i18n="agenda_header_badge">
+          <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+          CRONOGRAMA OFICIAL · CIUDAD CULTURAL
+        </div>
+        <h1 class="font-ambit font-extrabold text-3xl lg:text-4xl text-on-surface" data-i18n="agenda_header_title">Agenda ExpoJuy 2026</h1>
+        <p class="font-ambit text-sm text-on-surface-variant mt-1" data-i18n="agenda_header_subtitle">Charlas magistrales, conferencias sectoriales y espectáculos en vivo.</p>
+      </div>
+      <div class="flex items-center gap-3 bg-surface-container-low px-4 py-3 rounded-2xl">
+        <span class="material-symbols-outlined text-primary-container text-[28px]">event_available</span>
+        <div>
+          <div class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider" data-i18n="agenda_period_label">Muestra General</div>
+          <div class="font-ambit font-bold text-sm text-on-surface">9 al 12 de Octubre, 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day Selector Tabs -->
+    <div class="flex flex-wrap gap-2 mb-8 p-1.5 bg-surface-container-low rounded-2xl">
+      <button class="day-tab flex-1 min-w-[130px] py-3 px-4 rounded-xl font-ambit font-bold text-sm transition-all bg-primary-container text-white shadow-sm flex items-center justify-center gap-2" data-day="jue">
+        <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+        Jue 9 Oct
+      </button>
+      <button class="day-tab flex-1 min-w-[130px] py-3 px-4 rounded-xl font-ambit font-semibold text-sm transition-all text-on-surface-variant hover:bg-white hover:text-on-surface flex items-center justify-center gap-2" data-day="vie">
+        <span class="material-symbols-outlined text-[18px]">event</span>
+        Vie 10 Oct
+      </button>
+      <button class="day-tab flex-1 min-w-[130px] py-3 px-4 rounded-xl font-ambit font-semibold text-sm transition-all text-on-surface-variant hover:bg-white hover:text-on-surface flex items-center justify-center gap-2" data-day="sab">
+        <span class="material-symbols-outlined text-[18px]">event</span>
+        Sáb 11 Oct
+      </button>
+      <button class="day-tab flex-1 min-w-[130px] py-3 px-4 rounded-xl font-ambit font-semibold text-sm transition-all text-on-surface-variant hover:bg-white hover:text-on-surface flex items-center justify-center gap-2" data-day="dom">
+        <span class="material-symbols-outlined text-[18px]">event</span>
+        Dom 12 Oct
+      </button>
+    </div>
+
+    <!-- Main 2-Column Grid (Timeline + My Agenda Sticky Panel) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Timeline Activities (8 cols) -->
+      <div class="lg:col-span-8 flex flex-col gap-6" id="agendaTimeline">
+        <!-- Dynamically populated via JS -->
+      </div>
+
+      <!-- Sticky My Agenda Panel (4 cols) -->
+      <aside class="lg:col-span-4 sticky top-28">
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-outline-variant/30 flex flex-col gap-4">
+          <div class="flex items-center justify-between pb-3 border-b border-surface-container">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-xl bg-primary-container text-white flex items-center justify-center">
+                <span class="material-symbols-outlined text-[18px]">bookmark</span>
+              </div>
+              <span class="font-ambit font-bold text-base text-on-surface" data-i18n="my_agenda_title">Mi Agenda Guardada</span>
+            </div>
+            <span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-primary font-ambit font-extrabold text-xs" id="savedAgendaCounter">0</span>
+          </div>
+
+          <!-- List Container -->
+          <div id="savedAgendaList" class="flex flex-col gap-3 max-h-[380px] overflow-y-auto pr-1">
+            <div class="text-center py-8 text-on-surface-variant text-xs" data-i18n="my_agenda_empty">
+              <span class="material-symbols-outlined text-outline text-[32px] block mb-2">bookmark_border</span>
+              No has guardado actividades aún.<br/>Explorá la agenda y presioná "+ Agendar".
+            </div>
+          </div>
+
+          <button id="btn-export-agenda" class="w-full py-2.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-ambit font-bold text-xs transition-colors flex items-center justify-center gap-2" type="button">
+            <span class="material-symbols-outlined text-[16px]">download</span>
+            <span data-i18n="btn_export_pdf">Descargar Resumen en PDF</span>
+          </button>
+        </div>
+      </aside>
+
+    </div>
+
+  </div>
+</div>

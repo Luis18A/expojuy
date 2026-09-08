@@ -1,0 +1,42 @@
+<!-- ==========================================================================
+     VISTA 3: DIRECTORIO DE EXPOSITORES
+     ========================================================================== -->
+<div id="view-expositores" class="view-container">
+  <div class="max-w-container-max mx-auto px-gutter-mobile lg:px-gutter-desktop py-10">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+      <div>
+        <span class="font-ambit font-bold text-xs uppercase tracking-wider text-primary-container" data-i18n="exhibitors_eyebrow">Directorio Comercial</span>
+        <h1 class="font-ambit font-extrabold text-3xl lg:text-4xl text-on-surface mt-1" data-i18n="exhibitors_title">Expositores ExpoJuy 2026</h1>
+        <p class="font-ambit text-sm text-on-surface-variant mt-1" data-i18n="exhibitors_subtitle">Explorá las empresas, marcas y organismos presentes en el predio ferial.</p>
+      </div>
+      <button class="inline-flex items-center gap-2 h-11 px-6 rounded-full bg-secondary text-white font-ambit font-bold text-xs shadow-md action-reserve-stand">
+        <span class="material-symbols-outlined text-[18px]">add_business</span>
+        <span data-i18n="btn_reserve_space">Reservar espacio de Stand</span>
+      </button>
+    </div>
+
+    <!-- Search Bar & Filters -->
+    <div class="bg-white p-5 rounded-3xl shadow-sm border border-outline-variant/30 mb-8 flex flex-col gap-4">
+      <div class="relative w-full">
+        <span class="material-symbols-outlined text-outline absolute left-4 top-1/2 -translate-y-1/2 text-[20px]">search</span>
+        <input type="text" id="exhibitorSearchInput" placeholder="Buscar por nombre de empresa, producto o número de stand..." class="w-full h-12 pl-12 pr-4 rounded-full bg-surface-container-low font-ambit text-sm outline-none focus:ring-2 focus:ring-primary-container transition-all"/>
+      </div>
+
+      <div class="flex items-center gap-2 overflow-x-auto pb-1" id="exhibitorCategoryChips">
+        <button class="ex-chip active px-4 py-1.5 rounded-full font-ambit font-bold text-xs bg-primary-container text-white shadow-sm" data-category="all" data-i18n="chip_all">Todos</button>
+        <button class="ex-chip px-4 py-1.5 rounded-full font-ambit font-semibold text-xs bg-surface-container-low text-on-surface-variant hover:text-on-surface" data-category="Minería" data-i18n="chip_mining">Minería y Energía</button>
+        <button class="ex-chip px-4 py-1.5 rounded-full font-ambit font-semibold text-xs bg-surface-container-low text-on-surface-variant hover:text-on-surface" data-category="Agroindustria" data-i18n="chip_agro">Agroindustria</button>
+        <button class="ex-chip px-4 py-1.5 rounded-full font-ambit font-semibold text-xs bg-surface-container-low text-on-surface-variant hover:text-on-surface" data-category="Tecnología" data-i18n="chip_tech">Tecnología &amp; Software</button>
+        <button class="ex-chip px-4 py-1.5 rounded-full font-ambit font-semibold text-xs bg-surface-container-low text-on-surface-variant hover:text-on-surface" data-category="Industria" data-i18n="chip_industry">Industria &amp; Logística</button>
+        <button class="ex-chip px-4 py-1.5 rounded-full font-ambit font-semibold text-xs bg-surface-container-low text-on-surface-variant hover:text-on-surface" data-category="Turismo" data-i18n="chip_tourism">Turismo &amp; Servicios</button>
+      </div>
+    </div>
+
+    <!-- Exhibitors Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="exhibitorsGrid">
+      <!-- Dynamically populated via JS -->
+    </div>
+
+  </div>
+</div>
