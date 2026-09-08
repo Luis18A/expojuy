@@ -8,7 +8,7 @@ const isProd = process.env.NODE_ENV === 'production';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://luis18a.github.io',
-  base: isProd ? '/prueba1' : '/',
+  base: isProd ? '/expojuy' : '/',
   integrations: [
     tailwind({
       applyBaseStyles: false,
