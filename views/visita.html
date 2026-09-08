@@ -89,3 +89,19 @@
 
   </div>
 </div>
+
+<script>
+  if (!window.selectPavilion) {
+    window.selectPavilion = function(title, desc) {
+      const infoTitle = document.getElementById('pavilionInfoTitle');
+      const infoDesc = document.getElementById('pavilionInfoDesc');
+      if (infoTitle) infoTitle.textContent = title;
+      if (infoDesc) infoDesc.textContent = desc;
+      if (window.showToast) {
+        window.showToast(`Seleccionado: ${title}`, 'info');
+      } else {
+        alert(`Seleccionado: ${title}\n${desc}`);
+      }
+    };
+  }
+</script>

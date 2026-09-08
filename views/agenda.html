@@ -83,3 +83,71 @@
 
   </div>
 </div>
+
+<script>
+  (function() {
+    const sampleActivities = [
+      {
+        id: 'act-1',
+        day: 'jue',
+        time: '10:00 - 11:30 hs',
+        title: 'Inauguración Oficial y Conferencia: El Corredor Bioceánico',
+        speaker: 'Ing. Carlos Morales · Dir. Red Productiva',
+        location: 'Auditorio Principal A',
+        category: 'Negocios',
+        badgeClass: 'bg-primary-fixed text-on-primary-fixed',
+        desc: 'Análisis geopolítico y logístico sobre la integración comercial del NOA argentino con Chile, Paraguay y Brasil.'
+      },
+      {
+        id: 'act-2',
+        day: 'jue',
+        time: '12:30 - 14:00 hs',
+        title: 'Minería de Litio y Transición Energética Regional',
+        speaker: 'Dra. Valeria Farfán · CONICET - UNJu',
+        location: 'Auditorio Principal B',
+        category: 'Tecnología',
+        badgeClass: 'bg-tertiary-fixed text-on-tertiary-fixed',
+        desc: 'Nuevas metodologías de extracción directa sustentable y desarrollo de cadena de valor de litio.'
+      },
+      {
+        id: 'act-3',
+        day: 'jue',
+        time: '15:00 - 17:00 hs',
+        title: 'Ronda Multisectorial Internacional: Sesión 1',
+        speaker: 'Lic. Sofia Meyer · Corredor Bioceánico',
+        location: 'Salas B2B',
+        category: 'Negocios',
+        badgeClass: 'bg-primary-container text-white',
+        desc: 'Mesas de negocios uno a uno programadas con delegaciones compradoras del Cono Sur.'
+      }
+    ];
+
+    function renderAgendaStandalone() {
+      const agendaTimeline = document.getElementById('agendaTimeline');
+      if (!agendaTimeline || agendaTimeline.children.length > 0) return;
+
+      agendaTimeline.innerHTML = sampleActivities.map(act => `
+        <article class="bg-white rounded-3xl p-6 shadow-sm border border-outline-variant/30 hover:shadow-md transition-all flex flex-col gap-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="px-3 py-1 rounded-full font-ambit font-bold text-xs ${act.badgeClass}">${act.time}</span>
+            <span class="text-xs font-ambit font-bold text-outline uppercase">${act.category}</span>
+          </div>
+          <div>
+            <h3 class="font-ambit font-bold text-lg text-on-surface hover:text-primary-container transition-colors">${act.title}</h3>
+            <p class="font-ambit text-xs text-on-surface-variant mt-1 leading-relaxed">${act.desc}</p>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-xs bg-surface-container-low p-2.5 rounded-xl text-on-surface-variant">
+            <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-primary">person</span> <span class="truncate">${act.speaker}</span></div>
+            <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] text-secondary">location_on</span> <span class="truncate">${act.location}</span></div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderAgendaStandalone);
+    } else {
+      renderAgendaStandalone();
+    }
+  })();
+</script>

@@ -64,6 +64,11 @@ export function initRouter() {
     });
   }
 
+  // Initialize all view modules upfront so DOM targets are populated immediately
+  initExhibitorsDirectory();
+  initAgendaSystem();
+  initInteractiveMap();
+
   // Initial navigation route check
   const initialHash = window.location.hash ? window.location.hash.replace('#', '') : 'home';
   navigateTo(initialHash);
