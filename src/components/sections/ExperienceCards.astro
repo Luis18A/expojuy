@@ -1,0 +1,114 @@
+---
+// src/components/sections/ExperienceCards.astro
+// "Elegí tu experiencia" — 3 equal-height audience cards
+import Card from '../ui/Card.astro';
+import Button from '../ui/Button.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Badge from '../ui/Badge.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const cards = [
+  {
+    id: 'publico',
+    territory: 'valles' as const,
+    icon: 'groups',
+    badge: 'Público General',
+    tagline: 'Quiero visitar',
+    title: 'Visitante',
+    desc: 'Agenda de espectáculos, compra de entradas anticipadas, mapa interactivo y accesos peatonales ágiles.',
+    cta: 'Planificar mi visita',
+    href: `${base}visita`,
+    ctaVariant: 'outline' as const,
+  },
+  {
+    id: 'empresas',
+    territory: 'yungas' as const,
+    icon: 'store',
+    badge: 'Empresas & PyMEs',
+    tagline: 'Quiero exponer',
+    title: 'Expositor',
+    desc: 'Disponibilidad de stands, manual del expositor, equipamiento ferial y contacto directo con la gerencia comercial.',
+    cta: 'Reservar un stand',
+    href: `${base}expositores#stand`,
+    ctaVariant: 'outline' as const,
+  },
+  {
+    id: 'inversores',
+    territory: 'puna' as const,
+    icon: 'trending_up',
+    badge: 'Inversores & Compradores',
+    tagline: 'Busco oportunidades',
+    title: 'Inversor / B2B',
+    desc: 'Conexión directa con sectores productivos, agendas bilaterales y Rondas B2B internacionales de negocios.',
+    cta: 'Ingresar a Rondas B2B',
+    href: `${base}b2b`,
+    ctaVariant: 'primary' as const,
+    featured: true,
+  },
+];
+---
+
+<section class="section bg-paper" id="audiencias" aria-label="Elegí tu experiencia en ExpoJuy 2026">
+  <div class="container">
+    <SectionHeader
+      eyebrow="Accesos Personalizados"
+      title="Elegí tu experiencia."
+      lead="Tres puertas de entrada a la feria más dinámica del norte argentino. ¿Cuál es la tuya?"
+      align="center"
+      territory="violet"
+      class="mb-10"
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {cards.map(card => (
+        <Card
+          territory={card.territory}
+          class={card.featured ? 'ring-2 ring-violet-mid ring-offset-2' : ''}
+          aria-label={card.title}
+        >
+          <div class="flex flex-col h-full p-6 gap-4">
+            <!-- Badge + icon -->
+            <div class="flex items-start justify-between">
+              <Badge territory={card.territory}>{card.badge}</Badge>
+              {card.featured && (
+                <span class="text-caption font-bold text-violet-mid uppercase tracking-wider">★ Destacado</span>
+              )}
+            </div>
+
+            <!-- Icon -->
+            <div class={`w-12 h-12 rounded-lg flex items-center justify-center ${
+              card.territory === 'yungas' ? 'bg-yungas/10 text-yungas' :
+              card.territory === 'valles' ? 'bg-valles/10 text-valles' :
+              'bg-puna/10 text-puna'
+            }`}>
+              <span class="material-symbols-outlined text-[26px]" aria-hidden="true">{card.icon}</span>
+            </div>
+
+            <!-- Content -->
+            <div class="flex flex-col gap-2 flex-1">
+              <p class="eyebrow">{card.tagline}</p>
+              <h3 class="text-h3 text-ink">{card.title}</h3>
+              <!-- Equal-height description -->
+              <p class="text-body text-ink/65 leading-relaxed min-h-[5rem]">
+                {card.desc}
+              </p>
+            </div>
+
+            <!-- CTA anchored to bottom -->
+            <div class="pt-2 mt-auto">
+              <Button
+                href={card.href}
+                variant={card.ctaVariant}
+                class="w-full justify-center"
+                icon="arrow_forward"
+              >
+                {card.cta}
+              </Button>
+            </div>
+          </div>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>

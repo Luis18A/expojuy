@@ -1,0 +1,141 @@
+---
+// src/components/layout/Footer.astro
+import Button from '../ui/Button.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const links = {
+  expo: [
+    { href: base, label: 'Qué es ExpoJuy' },
+    { href: `${base}#corredor`, label: 'Corredor Bioceánico' },
+    { href: `${base}#sectores`, label: 'Sectores Estratégicos' },
+  ],
+  participacion: [
+    { href: `${base}b2b`, label: 'Rondas B2B' },
+    { href: `${base}expositores`, label: 'Directorio Expositores' },
+    { href: `${base}expositores#stand`, label: 'Reservar Stand' },
+  ],
+  visita: [
+    { href: `${base}agenda`, label: 'Agenda de Actividades' },
+    { href: `${base}visita#entradas`, label: 'Entradas y Pases' },
+    { href: `${base}visita#mapa`, label: 'Plano del Predio' },
+  ],
+  contacto: [
+    { href: `${base}b2b#form`, label: 'Contacto Comercial' },
+    { href: `${base}visita#faq`, label: 'Preguntas Frecuentes' },
+    { href: `${base}visita#prensa`, label: 'Prensa' },
+  ],
+};
+---
+
+<footer class="bg-white border-t border-ink/8" aria-label="Pie de página">
+  <!-- CTA banner -->
+  <div class="bg-gradient-hero">
+    <div class="container py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="text-white text-center md:text-left">
+        <p class="eyebrow text-white/70">ExpoJuy 2026</p>
+        <p class="text-h3 font-bold mt-1">Conectando países, creando oportunidades.</p>
+        <p class="text-body text-white/70 mt-1">9-12 de Octubre · Ciudad Cultural · Jujuy</p>
+      </div>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <Button href={`${base}visita`} variant="inverse">Comprar entradas</Button>
+        <Button href={`${base}b2b`} variant="outline" class="border-white/40 text-white hover:bg-white/10">Registrarse B2B</Button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Links -->
+  <div class="container py-12">
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+      <!-- Brand column -->
+      <div class="col-span-2 lg:col-span-1 flex flex-col gap-4">
+        <div>
+          <p class="font-bold text-violet-dark text-[18px] tracking-tight">EXPOJUY 2026</p>
+          <p class="text-caption text-ink/50 mt-0.5 uppercase tracking-widest">NOA · CORREDOR BIOCEÁNICO</p>
+        </div>
+        <p class="text-small text-ink/60 leading-relaxed max-w-[220px]">
+          La feria multisectorial más importante del norte argentino.
+        </p>
+        <!-- Organizers -->
+        <div class="flex flex-col gap-2">
+          <p class="text-caption font-semibold text-ink/40 uppercase tracking-wider">Organizadores</p>
+          <p class="text-small text-ink/70">Gobierno de Jujuy</p>
+          <p class="text-small text-ink/70">Cámara de Comercio Exterior</p>
+          <p class="text-small text-ink/70">Unión Industrial de Jujuy</p>
+        </div>
+      </div>
+
+      <!-- La Expo -->
+      <div class="flex flex-col gap-3">
+        <p class="text-small font-bold text-ink uppercase tracking-wide">La Expo</p>
+        <ul class="flex flex-col gap-2">
+          {links.expo.map(l => (
+            <li><a href={l.href} class="text-small text-ink/60 hover:text-violet-dark transition-colors">{l.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Participación -->
+      <div class="flex flex-col gap-3">
+        <p class="text-small font-bold text-ink uppercase tracking-wide">Participación</p>
+        <ul class="flex flex-col gap-2">
+          {links.participacion.map(l => (
+            <li><a href={l.href} class="text-small text-ink/60 hover:text-violet-dark transition-colors">{l.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Visita -->
+      <div class="flex flex-col gap-3">
+        <p class="text-small font-bold text-ink uppercase tracking-wide">Visita</p>
+        <ul class="flex flex-col gap-2">
+          {links.visita.map(l => (
+            <li><a href={l.href} class="text-small text-ink/60 hover:text-violet-dark transition-colors">{l.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Newsletter + Contacto -->
+      <div class="flex flex-col gap-4">
+        <div>
+          <p class="text-small font-bold text-ink uppercase tracking-wide mb-2">Novedades</p>
+          <p class="text-caption text-ink/50 mb-3">Recibí actualizaciones de agenda y rondas.</p>
+          <form class="flex gap-2" onsubmit="event.preventDefault(); this.reset();">
+            <label for="footer-email" class="sr-only">Tu correo electrónico</label>
+            <input
+              id="footer-email"
+              type="email"
+              placeholder="tu@correo.com"
+              required
+              class="flex-1 h-9 px-3 rounded-md text-small bg-paper border border-ink/15 focus:outline-none focus:ring-2 focus:ring-violet-mid"
+            />
+            <button type="submit" class="h-9 px-3 rounded-md bg-violet-dark text-white text-caption font-bold hover:bg-violet-mid transition-colors">
+              →
+            </button>
+          </form>
+        </div>
+
+        <div>
+          <p class="text-small font-bold text-ink uppercase tracking-wide mb-2">Contacto</p>
+          <ul class="flex flex-col gap-2">
+            {links.contacto.map(l => (
+              <li><a href={l.href} class="text-small text-ink/60 hover:text-violet-dark transition-colors">{l.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="border-t border-ink/8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-caption text-ink/40 text-center sm:text-left">
+        © 2026 ExpoJuy. Todos los derechos reservados. Contenido demostrativo.
+      </p>
+      <div class="flex items-center gap-4">
+        <a href="#" class="text-caption text-ink/40 hover:text-ink/70 transition-colors">Privacidad</a>
+        <a href="#" class="text-caption text-ink/40 hover:text-ink/70 transition-colors">Accesibilidad</a>
+        <a href="#" class="text-caption text-ink/40 hover:text-ink/70 transition-colors">Términos</a>
+      </div>
+    </div>
+  </div>
+</footer>

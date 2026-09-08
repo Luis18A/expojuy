@@ -1,0 +1,102 @@
+---
+// src/components/sections/Hero.astro
+import Button from '../ui/Button.astro';
+import Badge from '../ui/Badge.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<section
+  class="relative min-h-[90svh] flex items-center overflow-hidden bg-violet-dark"
+  aria-label="Hero — ExpoJuy 2026"
+>
+  <!-- Gradient background -->
+  <div class="absolute inset-0 bg-gradient-hero opacity-90" aria-hidden="true"></div>
+
+  <!-- Geometric decoration circles -->
+  <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/5 blur-3xl pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute bottom-0 -left-16 w-72 h-72 rounded-full bg-cyan/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+  <!-- Grid pattern overlay -->
+  <div
+    class="absolute inset-0 opacity-[0.04] pointer-events-none"
+    style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 32px 32px;"
+    aria-hidden="true"
+  ></div>
+
+  <div class="container relative z-10 py-20 lg:py-28">
+    <div class="max-w-3xl flex flex-col gap-6">
+
+      <!-- Eyebrow badges -->
+      <div class="flex flex-wrap items-center gap-2 animate-[fadeInUp_0.5s_ease_both]">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill bg-white/15 text-white/90 text-caption font-semibold uppercase tracking-wider border border-white/20">
+          <span class="w-2 h-2 rounded-full bg-cyan animate-pulse flex-shrink-0" aria-hidden="true"></span>
+          17.ª Edición Multisectorial
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill bg-cyan/20 text-cyan text-caption font-semibold uppercase tracking-wider border border-cyan/30">
+          9-12 Oct 2026 · Ciudad Cultural
+        </span>
+      </div>
+
+      <!-- H1 -->
+      <h1
+        class="text-display text-white font-extrabold tracking-tight leading-none animate-[fadeInUp_0.5s_0.1s_ease_both_backwards]"
+        data-label-es="Jujuy en el centro de todo."
+        data-label-en="Jujuy at the center of everything."
+      >
+        Jujuy en el<br />
+        <span class="text-cyan">centro de todo.</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p
+        class="text-body-lg text-white/75 max-w-xl leading-relaxed animate-[fadeInUp_0.5s_0.2s_ease_both_backwards]"
+        data-label-es="ExpoJuy 2026 conecta el talento, la industria y el trabajo jujeño con el Corredor Bioceánico e inversores internacionales."
+        data-label-en="ExpoJuy 2026 connects Jujuy's talent, industry, and workforce with the Bioceanic Corridor and international investors."
+      >
+        ExpoJuy 2026 conecta el talento, la industria y el trabajo jujeño con el Corredor Bioceánico e inversores internacionales.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-3 animate-[fadeInUp_0.5s_0.3s_ease_both_backwards]">
+        <Button href={`${base}visita`} variant="inverse" size="lg" icon="confirmation_number">
+          Comprar entradas
+        </Button>
+        <Button href={`${base}agenda`} variant="outline" size="lg" class="border-white/40 text-white hover:bg-white/10" icon="calendar_month">
+          Ver agenda
+        </Button>
+      </div>
+
+      <!-- Stats strip -->
+      <div
+        class="flex flex-wrap gap-x-8 gap-y-3 pt-4 border-t border-white/15 animate-[fadeInUp_0.5s_0.4s_ease_both_backwards]"
+        role="list"
+        aria-label="Cifras del evento"
+      >
+        {[
+          { value: '+250', label: 'Expositores' },
+          { value: '4', label: 'Países' },
+          { value: '+40K', label: 'Visitantes' },
+          { value: '4', label: 'Días' },
+        ].map(stat => (
+          <div class="flex flex-col" role="listitem">
+            <span class="text-h2 font-extrabold text-white leading-none">{stat.value}</span>
+            <span class="text-caption text-white/55 uppercase tracking-wider">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
+    <span class="material-symbols-outlined text-white/40 text-[28px]">keyboard_arrow_down</span>
+  </div>
+</section>
+
+<style>
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>

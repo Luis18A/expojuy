@@ -1,0 +1,125 @@
+---
+// src/components/sections/StrategicSectors.astro
+// Mobile: horizontal scroll snap | Desktop: 2-col → 3-col grid
+import SectionHeader from '../ui/SectionHeader.astro';
+import Badge from '../ui/Badge.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const sectors = [
+  {
+    territory: 'yungas' as const,
+    icon: 'memory',
+    name: 'Tecnología e Innovación',
+    desc: 'Software, IoT, infraestructura digital y ecosistema emprendedor del norte argentino.',
+    count: '+35 empresas',
+  },
+  {
+    territory: 'puna' as const,
+    icon: 'bolt',
+    name: 'Minería & Energía',
+    desc: 'Litio, cobre, energías renovables y transición energética regional.',
+    count: '+60 expositores',
+  },
+  {
+    territory: 'valles' as const,
+    icon: 'eco',
+    name: 'Agroindustria & Alimentos',
+    desc: 'Producción sustentable, alimentos con identidad territorial y cadenas de exportación.',
+    count: '+45 empresas',
+  },
+  {
+    territory: 'quebrada' as const,
+    icon: 'flight',
+    name: 'Turismo & Servicios',
+    desc: 'MICE, turismo de experiencia, gastronomía y economía creativa.',
+    count: '+30 expositores',
+  },
+  {
+    territory: 'yungas' as const,
+    icon: 'local_shipping',
+    name: 'Industria & Logística',
+    desc: 'Manufactura, metalmecánica, logística transfronteriza y pasos internacionales.',
+    count: '+55 empresas',
+  },
+  {
+    territory: 'valles' as const,
+    icon: 'account_balance',
+    name: 'Servicios Profesionales',
+    desc: 'Legal, financiero, comercio exterior, consultoría e ingeniería de proyectos.',
+    count: '+40 estudios',
+  },
+];
+
+const territoryBg: Record<string, string> = {
+  yungas:   'bg-yungas/8 border-yungas/20',
+  valles:   'bg-valles/8 border-valles/20',
+  puna:     'bg-puna/8 border-puna/20',
+  quebrada: 'bg-quebrada/8 border-quebrada/20',
+};
+
+const territoryIcon: Record<string, string> = {
+  yungas:   'text-yungas bg-yungas/15',
+  valles:   'text-valles bg-valles/15',
+  puna:     'text-puna bg-puna/15',
+  quebrada: 'text-quebrada bg-quebrada/15',
+};
+---
+
+<section class="section bg-paper" id="sectores" aria-label="Sectores estratégicos de ExpoJuy 2026">
+  <div class="container">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+      <SectionHeader
+        eyebrow="Ecosistema Productivo"
+        title="6 sectores, un solo escenario."
+        lead="Jujuy y el Corredor Bioceánico presentes en cada stand."
+        territory="quebrada"
+        class="max-w-xl"
+      />
+      <a href={`${base}expositores`} class="text-small font-semibold text-violet-mid hover:text-violet-dark transition-colors flex items-center gap-1 whitespace-nowrap">
+        Ver todos los expositores
+        <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_forward</span>
+      </a>
+    </div>
+
+    <!-- Mobile: scroll snap carousel | Desktop: grid -->
+    <div
+      class="
+        flex overflow-x-auto snap-x-mandatory gap-4 pb-4 scrollbar-none
+        md:grid md:grid-cols-2 md:overflow-visible md:snap-none lg:grid-cols-3
+      "
+      role="list"
+      aria-label="Sectores productivos"
+    >
+      {sectors.map(sector => (
+        <div
+          class={`
+            snap-start flex-shrink-0 w-[280px] md:w-auto
+            border rounded-md p-5 flex flex-col gap-4 transition-shadow hover:shadow-md
+            ${territoryBg[sector.territory]}
+          `}
+          role="listitem"
+        >
+          <!-- Icon -->
+          <div class={`w-11 h-11 rounded-md flex items-center justify-center flex-shrink-0 ${territoryIcon[sector.territory]}`}>
+            <span class="material-symbols-outlined text-[22px]" aria-hidden="true">{sector.icon}</span>
+          </div>
+
+          <!-- Content -->
+          <div class="flex flex-col gap-1.5 flex-1">
+            <h3 class="text-body font-bold text-ink leading-snug">{sector.name}</h3>
+            <p class="text-small text-ink/60 leading-relaxed">{sector.desc}</p>
+          </div>
+
+          <!-- Count badge -->
+          <Badge territory={sector.territory} size="sm">{sector.count}</Badge>
+        </div>
+      ))}
+    </div>
+
+    <!-- Scroll hint mobile -->
+    <p class="md:hidden text-center text-caption text-ink/40 mt-2" aria-hidden="true">
+      ← Deslizá para explorar →
+    </p>
+  </div>
+</section>

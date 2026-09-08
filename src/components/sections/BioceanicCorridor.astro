@@ -1,0 +1,145 @@
+---
+// src/components/sections/BioceanicCorridor.astro
+// Mobile: vertical timeline | Desktop: horizontal flow — no viewport overflow
+import SectionHeader from '../ui/SectionHeader.astro';
+import Button from '../ui/Button.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const nodes = [
+  {
+    country: 'Brasil',
+    flag: '🇧🇷',
+    city: 'Puerto Santos',
+    desc: 'Puerto de salida al Atlántico',
+    mode: 'ship',
+    color: 'border-yungas bg-yungas/8 text-yungas',
+    iconBg: 'bg-yungas text-white',
+  },
+  {
+    country: 'Paraguay',
+    flag: '🇵🇾',
+    city: 'Asunción',
+    desc: 'Hub logístico ferroviario',
+    mode: 'train',
+    color: 'border-valles bg-valles/8 text-valles',
+    iconBg: 'bg-valles text-white',
+  },
+  {
+    country: 'Argentina',
+    flag: '🇦🇷',
+    city: 'Jujuy — ExpoJuy',
+    desc: 'Corazón del Corredor',
+    mode: 'location_on',
+    featured: true,
+    color: 'border-violet-mid bg-violet-mid/10 text-violet-dark',
+    iconBg: 'bg-gradient-hero text-white',
+  },
+  {
+    country: 'Chile',
+    flag: '🇨🇱',
+    city: 'Puerto Antofagasta',
+    desc: 'Puerto de salida al Pacífico',
+    mode: 'directions_boat',
+    color: 'border-quebrada bg-quebrada/8 text-quebrada',
+    iconBg: 'bg-quebrada text-white',
+  },
+];
+---
+
+<section class="section bg-white" id="corredor" aria-label="Corredor Bioceánico">
+  <div class="container">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+      <!-- Text column -->
+      <div class="flex flex-col gap-6">
+        <SectionHeader
+          eyebrow="Eje Geopolítico y Comercial"
+          title="Una región conectada por más que rutas."
+          lead="El Corredor Bioceánico abre nuevas posibilidades de integración entre Argentina, Chile, Paraguay y Brasil. ExpoJuy transforma esa conexión en encuentros, proyectos y contratos."
+          territory="yungas"
+        />
+
+        <div class="flex flex-col gap-3">
+          {[
+            { icon: 'route', label: '4 países integrados en un eje multimodal' },
+            { icon: 'anchor', label: 'Conexión Atlántico ↔ Pacífico por tierra' },
+            { icon: 'factory', label: 'Paso de Jama como arteria logística central' },
+            { icon: 'groups', label: 'Delegaciones empresariales de toda la región' },
+          ].map(item => (
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-md bg-yungas/10 text-yungas flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-[18px]" aria-hidden="true">{item.icon}</span>
+              </div>
+              <p class="text-small text-ink/75">{item.label}</p>
+            </div>
+          ))}
+        </div>
+
+        <Button href={`${base}b2b`} icon="handshake" size="md">
+          Conocé las Rondas Bioceánicas
+        </Button>
+      </div>
+
+      <!-- Diagram column -->
+      <div class="flex items-center justify-center" aria-label="Diagrama del Corredor Bioceánico">
+
+        <!-- Mobile: Vertical timeline | Desktop: Horizontal flow -->
+        <div class="w-full max-w-md">
+
+          <!-- MOBILE (flex-col) | DESKTOP (hidden) -->
+          <ol class="lg:hidden flex flex-col gap-0" aria-label="Nodos del corredor">
+            {nodes.map((node, i) => (
+              <li class="flex gap-4 items-start">
+                <!-- Line + dot -->
+                <div class="flex flex-col items-center flex-shrink-0">
+                  <div class={`w-10 h-10 rounded-full ${node.iconBg} flex items-center justify-center shadow-sm z-10`}>
+                    <span class="text-[18px]" aria-hidden="true">{node.flag}</span>
+                  </div>
+                  {i < nodes.length - 1 && (
+                    <div class="w-0.5 flex-1 min-h-[40px] bg-ink/10 my-1" aria-hidden="true"></div>
+                  )}
+                </div>
+                <!-- Content -->
+                <div class={`flex-1 border rounded-md p-3 mb-2 ${node.color} ${node.featured ? 'ring-2 ring-violet-mid' : ''}`}>
+                  <p class="text-small font-bold">{node.city} {node.featured && '⭐'}</p>
+                  <p class="text-caption opacity-70">{node.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <!-- DESKTOP: Horizontal flow -->
+          <div class="hidden lg:block" aria-hidden="true">
+            <div class="flex items-center justify-between gap-2">
+              {nodes.map((node, i) => (
+                <div class="flex items-center gap-2 flex-1">
+                  <div class={`flex flex-col items-center gap-2 flex-1 min-w-0`}>
+                    <div class={`w-12 h-12 rounded-full ${node.iconBg} flex items-center justify-center shadow-md ${node.featured ? 'ring-2 ring-violet-mid ring-offset-2 scale-110' : ''} transition-transform`}>
+                      <span class="text-[20px]">{node.flag}</span>
+                    </div>
+                    <div class={`w-full border rounded-md p-2 text-center ${node.color} ${node.featured ? 'ring-1 ring-violet-mid' : ''}`}>
+                      <p class="text-[11px] font-bold leading-tight">{node.city}</p>
+                      <p class="text-[10px] opacity-60 leading-tight mt-0.5">{node.desc}</p>
+                    </div>
+                  </div>
+                  {/* Arrow connector */}
+                  {i < nodes.length - 1 && (
+                    <div class="text-ink/25 text-[18px] flex-shrink-0 -mt-8">
+                      <span class="material-symbols-outlined">arrow_forward</span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Route label */}
+            <p class="text-center text-caption text-ink/40 mt-4 tracking-wider uppercase">
+              Atlántico ← Eje Capricornio → Pacífico
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

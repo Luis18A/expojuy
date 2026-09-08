@@ -1,0 +1,208 @@
+---
+// src/components/layout/Header.astro
+import Button from '../ui/Button.astro';
+
+interface Props {
+  lang?: 'es' | 'en';
+}
+const { lang = 'es' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const navLinks = [
+  { href: `${base}`,            labelEs: 'La Expo',      labelEn: 'The Expo'       },
+  { href: `${base}b2b`,         labelEs: 'Vinculate B2B', labelEn: 'B2B Matchmaking' },
+  { href: `${base}expositores`, labelEs: 'Expositores',  labelEn: 'Exhibitors'     },
+  { href: `${base}agenda`,      labelEs: 'Agenda',       labelEn: 'Schedule'       },
+  { href: `${base}visita`,      labelEs: 'Visitá',       labelEn: 'Visit Us'       },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 inset-x-0 z-50 transition-all duration-normal"
+  aria-label="Navegación principal"
+>
+  <!-- Pill navbar centered (MWC style) -->
+  <div class="container pt-4">
+    <div class="flex items-center justify-between h-16 bg-white/90 backdrop-blur-xl rounded-pill px-5 shadow-md border border-ink/6">
+
+      <!-- Logo -->
+      <a
+        href={base}
+        class="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-mid rounded-lg"
+        aria-label="ExpoJuy 2026 — Inicio"
+      >
+        <div class="flex flex-col leading-none">
+          <span class="font-ambit font-bold text-[18px] text-violet-dark tracking-tight">EXPOJUY 2026</span>
+          <span class="text-[9px] font-semibold tracking-[0.12em] uppercase text-ink/50">CONECTANDO PAÍSES, CREANDO OPORTUNIDADES</span>
+        </div>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden lg:flex items-center gap-1" aria-label="Menú principal">
+        {navLinks.map(link => {
+          const isActive = currentPath === link.href || (link.href !== base && currentPath.startsWith(link.href));
+          return (
+            <a
+              href={link.href}
+              class={[
+                'px-4 py-2 rounded-pill text-small font-semibold transition-all duration-fast',
+                isActive
+                  ? 'bg-violet-dark text-white'
+                  : 'text-ink/70 hover:text-ink hover:bg-paper'
+              ].join(' ')}
+              aria-current={isActive ? 'page' : undefined}
+              data-label-es={link.labelEs}
+              data-label-en={link.labelEn}
+            >
+              {lang === 'en' ? link.labelEn : link.labelEs}
+            </a>
+          );
+        })}
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2">
+        <!-- Language switcher -->
+        <div class="hidden sm:flex items-center bg-paper rounded-pill p-0.5" role="group" aria-label="Seleccionar idioma">
+          <button
+            id="btn-lang-es"
+            type="button"
+            class={`px-3 py-1 rounded-pill text-caption font-bold transition-all ${lang === 'es' ? 'bg-white shadow-sm text-ink' : 'text-ink/50 hover:text-ink'}`}
+            aria-pressed={lang === 'es'}
+          >ES</button>
+          <button
+            id="btn-lang-en"
+            type="button"
+            class={`px-3 py-1 rounded-pill text-caption font-bold transition-all ${lang === 'en' ? 'bg-white shadow-sm text-ink' : 'text-ink/50 hover:text-ink'}`}
+            aria-pressed={lang === 'en'}
+          >EN</button>
+        </div>
+
+        <!-- CTA -->
+        <Button href={`${base}visita`} size="sm" class="hidden sm:inline-flex">
+          Comprar entradas
+        </Button>
+
+        <!-- Mobile hamburger -->
+        <button
+          id="mobile-menu-btn"
+          type="button"
+          class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-paper transition-colors"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span class="material-symbols-outlined text-[22px]" aria-hidden="true">menu</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile drawer -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-[60] hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú de navegación"
+>
+  <!-- Backdrop -->
+  <div id="menu-backdrop" class="absolute inset-0 bg-ink/40 backdrop-blur-sm" aria-hidden="true"></div>
+
+  <!-- Panel -->
+  <div class="absolute top-0 right-0 h-full w-72 bg-white shadow-lg flex flex-col">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-ink/8">
+      <span class="font-bold text-violet-dark">ExpoJuy 2026</span>
+      <button
+        id="mobile-menu-close"
+        type="button"
+        class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-paper"
+        aria-label="Cerrar menú"
+      >
+        <span class="material-symbols-outlined text-[22px]" aria-hidden="true">close</span>
+      </button>
+    </div>
+
+    <nav class="flex flex-col p-5 gap-1 flex-1 overflow-y-auto" aria-label="Menú móvil">
+      {navLinks.map(link => {
+        const isActive = currentPath === link.href || (link.href !== base && currentPath.startsWith(link.href));
+        return (
+          <a
+            href={link.href}
+            class={[
+              'px-4 py-3 rounded-md text-body font-semibold transition-colors',
+              isActive ? 'bg-violet-dark text-white' : 'text-ink hover:bg-paper'
+            ].join(' ')}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {lang === 'en' ? link.labelEn : link.labelEs}
+          </a>
+        );
+      })}
+    </nav>
+
+    <div class="p-5 border-t border-ink/8 flex flex-col gap-3">
+      <!-- Lang switcher mobile -->
+      <div class="flex items-center gap-2" role="group" aria-label="Idioma">
+        <button id="mobile-btn-lang-es" type="button" class={`flex-1 py-2 rounded-pill text-small font-bold border-2 transition-all ${lang === 'es' ? 'bg-violet-dark border-violet-dark text-white' : 'border-ink/20 text-ink/60'}`}>ES</button>
+        <button id="mobile-btn-lang-en" type="button" class={`flex-1 py-2 rounded-pill text-small font-bold border-2 transition-all ${lang === 'en' ? 'bg-violet-dark border-violet-dark text-white' : 'border-ink/20 text-ink/60'}`}>EN</button>
+      </div>
+      <Button href={`${base}visita`} class="w-full justify-center">Comprar entradas</Button>
+    </div>
+  </div>
+</div>
+
+<!-- Spacer for fixed header -->
+<div class="h-24" aria-hidden="true"></div>
+
+<script>
+  // Header scroll behavior
+  const header = document.getElementById('site-header');
+  const observer = new IntersectionObserver(
+    ([entry]) => header?.classList.toggle('shadow-lg', !entry.isIntersecting),
+    { rootMargin: '-80px 0px 0px 0px' }
+  );
+  const sentinel = document.querySelector('main');
+  if (sentinel) observer.observe(sentinel);
+
+  // Mobile menu
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const closeBtn = document.getElementById('mobile-menu-close');
+  const menu = document.getElementById('mobile-menu');
+  const backdrop = document.getElementById('menu-backdrop');
+
+  function openMenu() {
+    menu?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    menuBtn?.setAttribute('aria-expanded', 'true');
+    closeBtn?.focus();
+  }
+  function closeMenu() {
+    menu?.classList.add('hidden');
+    document.body.style.overflow = '';
+    menuBtn?.setAttribute('aria-expanded', 'false');
+    menuBtn?.focus();
+  }
+
+  menuBtn?.addEventListener('click', openMenu);
+  closeBtn?.addEventListener('click', closeMenu);
+  backdrop?.addEventListener('click', closeMenu);
+  menu?.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+
+  // Language switcher
+  function setLang(lang: string) {
+    localStorage.setItem('expojuy_lang', lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dataset.lang = lang;
+    window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
+  }
+
+  document.getElementById('btn-lang-es')?.addEventListener('click', () => setLang('es'));
+  document.getElementById('btn-lang-en')?.addEventListener('click', () => setLang('en'));
+  document.getElementById('mobile-btn-lang-es')?.addEventListener('click', () => setLang('es'));
+  document.getElementById('mobile-btn-lang-en')?.addEventListener('click', () => setLang('en'));
+</script>

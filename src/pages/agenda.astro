@@ -1,0 +1,232 @@
+---
+// src/pages/agenda.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import BottomNav from '../components/layout/BottomNav.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const days = [
+  { id: 'dia-1', label: 'Día 1', date: 'Jue 9 Oct', short: '09/10' },
+  { id: 'dia-2', label: 'Día 2', date: 'Vie 10 Oct', short: '10/10' },
+  { id: 'dia-3', label: 'Día 3', date: 'Sáb 11 Oct', short: '11/10' },
+  { id: 'dia-4', label: 'Día 4', date: 'Dom 12 Oct', short: '12/10' },
+];
+
+const activities = [
+  {
+    day: 'dia-1',
+    time: '09:00',
+    duration: '90 min',
+    title: 'Inauguración Oficial & Conferencia: El Corredor Bioceánico',
+    desc: 'Análisis geopolítico y logístico sobre la integración comercial del NOA con Chile, Paraguay y Brasil.',
+    location: 'Auditorio Principal',
+    type: 'keynote',
+    territory: 'yungas' as const,
+    speaker: 'Panel Institucional',
+  },
+  {
+    day: 'dia-1',
+    time: '11:00',
+    duration: '60 min',
+    title: 'Minería de Litio & Transición Energética Regional',
+    desc: 'Nuevas metodologías de extracción directa sustentable y desarrollo de cadena de valor del litio.',
+    location: 'Auditorio Principal',
+    type: 'conferencia',
+    territory: 'puna' as const,
+    speaker: 'Litio Solar Jujuy S.A.',
+  },
+  {
+    day: 'dia-1',
+    time: '14:00',
+    duration: '180 min',
+    title: 'Ronda Multisectorial Internacional: Sesión 1',
+    desc: 'Mesas de negocios uno a uno programadas con delegaciones compradoras del Cono Sur.',
+    location: 'Salón B2B',
+    type: 'b2b',
+    territory: 'quebrada' as const,
+    speaker: 'Múltiples participantes',
+  },
+  {
+    day: 'dia-2',
+    time: '10:00',
+    duration: '60 min',
+    title: 'Foro Logístico: Puertos Secos y Paso de Jama',
+    desc: 'Facilitación aduanera unificada y optimización de flotas pesadas para el Corredor Bioceánico.',
+    location: 'Sala Técnica A',
+    type: 'foro',
+    territory: 'valles' as const,
+    speaker: 'Logística Corredor Andino',
+  },
+  {
+    day: 'dia-4',
+    time: '17:00',
+    duration: '90 min',
+    title: 'Panel de Cierre: Perspectivas Económicas NOA 2027',
+    desc: 'Conclusiones y presentación de convenios firmados durante la feria ExpoJuy.',
+    location: 'Auditorio Principal',
+    type: 'cierre',
+    territory: 'yungas' as const,
+    speaker: 'Panel Oficial',
+  },
+];
+
+const typeBadge: Record<string, string> = {
+  keynote: 'violet',
+  conferencia: 'yungas',
+  b2b: 'quebrada',
+  foro: 'valles',
+  cierre: 'puna',
+};
+---
+
+<BaseLayout
+  title="Agenda de Actividades — ExpoJuy 2026"
+  description="Cronograma oficial de ExpoJuy 2026: conferencias, rondas B2B, shows y actividades sectoriales del 9 al 12 de Octubre en Ciudad Cultural, Jujuy."
+>
+  <Header />
+  <BottomNav activePage="agenda" />
+
+  <main id="main-content">
+    <!-- Page header -->
+    <section class="section bg-white border-b border-ink/8">
+      <div class="container">
+        <nav aria-label="Ruta de navegación" class="flex items-center gap-2 text-caption text-ink/50 mb-6">
+          <a href={base} class="hover:text-violet-dark transition-colors">Inicio</a>
+          <span aria-hidden="true">/</span>
+          <span class="text-ink font-semibold">Agenda</span>
+        </nav>
+        <SectionHeader
+          eyebrow="Cronograma Oficial · Ciudad Cultural"
+          title="Agenda de Actividades"
+          lead="Charlas magistrales, rondas de vinculación comercial, experiencias culturales y conferencias sectoriales durante los 4 días más dinámicos del Norte Grande."
+          territory="yungas"
+        />
+      </div>
+    </section>
+
+    <!-- Day filter tabs (scrollable on mobile) -->
+    <div class="sticky top-[88px] z-30 bg-white border-b border-ink/8 shadow-sm" role="navigation" aria-label="Filtros por día">
+      <div class="container">
+        <div
+          class="flex overflow-x-auto scrollbar-none gap-1 py-3"
+          role="tablist"
+          aria-label="Seleccioná un día"
+        >
+          <button
+            type="button"
+            class="px-4 py-2 rounded-pill text-small font-semibold bg-violet-dark text-white flex-shrink-0 transition-all"
+            role="tab"
+            aria-selected="true"
+            id="tab-all"
+            aria-controls="activity-list"
+          >
+            Todos los días
+          </button>
+          {days.map(day => (
+            <button
+              type="button"
+              class="px-4 py-2 rounded-pill text-small font-semibold bg-paper text-ink/60 hover:text-ink hover:bg-ink/5 flex-shrink-0 transition-all"
+              role="tab"
+              aria-selected="false"
+              id={`tab-${day.id}`}
+              data-day={day.id}
+            >
+              <span class="hidden sm:inline">{day.date}</span>
+              <span class="sm:hidden">{day.short}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Activities list -->
+    <section class="section bg-paper" id="activity-list">
+      <div class="container">
+        <div class="flex flex-col gap-4" role="list" aria-label="Lista de actividades">
+          {activities.map(act => (
+            <article
+              class="flex flex-col sm:flex-row gap-4 bg-white rounded-md border border-ink/8 p-5 hover:shadow-md transition-shadow"
+              data-day={act.day}
+              role="listitem"
+            >
+              <!-- Time -->
+              <div class="flex-shrink-0 flex sm:flex-col items-center sm:items-start gap-3 sm:gap-1 sm:w-20">
+                <time class="text-h3 font-bold text-ink leading-none">{act.time}</time>
+                <span class="text-caption text-ink/40">{act.duration}</span>
+              </div>
+
+              <!-- Divider mobile -->
+              <div class="hidden sm:block w-0.5 bg-ink/8 self-stretch" aria-hidden="true"></div>
+
+              <!-- Content -->
+              <div class="flex flex-col gap-2 flex-1 min-w-0">
+                <div class="flex flex-wrap items-center gap-2">
+                  <Badge territory={typeBadge[act.type] as any} size="sm">{act.type}</Badge>
+                  <span class="text-caption text-ink/40 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[13px]" aria-hidden="true">location_on</span>
+                    {act.location}
+                  </span>
+                </div>
+                <h3 class="text-body font-bold text-ink leading-snug">{act.title}</h3>
+                <p class="text-small text-ink/60 leading-relaxed">{act.desc}</p>
+                <p class="text-caption text-ink/40">
+                  <span class="material-symbols-outlined text-[13px] align-middle" aria-hidden="true">person</span>
+                  {act.speaker}
+                </p>
+              </div>
+
+              <!-- Save button -->
+              <div class="flex-shrink-0 self-start sm:self-center">
+                <button
+                  type="button"
+                  class="flex items-center gap-1.5 px-3 py-1.5 rounded-pill text-caption font-semibold border border-ink/15 text-ink/60 hover:border-violet-mid hover:text-violet-mid transition-all"
+                  aria-label={`Guardar "${act.title}" en mi agenda`}
+                >
+                  <span class="material-symbols-outlined text-[14px]" aria-hidden="true">bookmark_add</span>
+                  Guardar
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Day filter tabs
+  const tabs = document.querySelectorAll('[role="tab"]');
+  const items = document.querySelectorAll('[data-day]');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const day = tab.getAttribute('data-day');
+
+      tabs.forEach(t => {
+        t.setAttribute('aria-selected', 'false');
+        t.classList.remove('bg-violet-dark', 'text-white');
+        t.classList.add('bg-paper', 'text-ink/60');
+      });
+      tab.setAttribute('aria-selected', 'true');
+      tab.classList.add('bg-violet-dark', 'text-white');
+      tab.classList.remove('bg-paper', 'text-ink/60');
+
+      items.forEach(item => {
+        const el = item as HTMLElement;
+        if (!day || el.dataset.day === day || tab.id === 'tab-all') {
+          el.style.display = '';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

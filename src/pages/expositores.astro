@@ -1,0 +1,210 @@
+---
+// src/pages/expositores.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import BottomNav from '../components/layout/BottomNav.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const sectors = ['Todos', 'Minería & Energía', 'Agroindustria', 'Tecnología', 'Turismo', 'Industria', 'Servicios'];
+
+const exhibitors = [
+  { id: 'litio-solar', name: 'Litio Solar Jujuy S.A.', sector: 'Minería & Energía', stand: 'A-12', territory: 'puna' as const, desc: 'Producción sustentable de carbonato de litio grado batería en Salar de Olaroz.', website: 'https://example.com' },
+  { id: 'agro-jujuy', name: 'AgroJujuy Biocombustibles', sector: 'Agroindustria', stand: 'B-08', territory: 'valles' as const, desc: 'Azúcar, bioetanol y frutas cítricas de exportación con denominación de origen.' },
+  { id: 'noa-tech', name: 'NOA Tech Solutions', sector: 'Tecnología', stand: 'C-03', territory: 'yungas' as const, desc: 'Software de gestión agrícola, IoT e infraestructura de centros de cómputo.' },
+  { id: 'puna-solar', name: 'Puna Solar Energy', sector: 'Minería & Energía', stand: 'A-05', territory: 'puna' as const, desc: 'Parque fotovoltaico a 4.000 msnm. Energía limpia para la red nacional.' },
+  { id: 'quebranda-wines', name: 'Quebrada Wines', sector: 'Turismo', stand: 'B-15', territory: 'quebrada' as const, desc: 'Vinos de altura cultivados sobre 2.500 msnm con gastronomía andina.' },
+  { id: 'metal-noa', name: 'Metal & Construcción NOA', sector: 'Industria', stand: 'B-22', territory: 'yungas' as const, desc: 'Estructuras metálicas modulares, naves industriales y carpintería de aluminio.' },
+];
+
+const territoryIcon: Record<string, string> = {
+  yungas:   'text-yungas bg-yungas/10',
+  valles:   'text-valles bg-valles/10',
+  puna:     'text-puna bg-puna/10',
+  quebrada: 'text-quebrada bg-quebrada/10',
+};
+---
+
+<BaseLayout
+  title="Directorio de Expositores — ExpoJuy 2026"
+  description="Conocé las empresas, marcas e instituciones participantes de ExpoJuy 2026. Filtrá por sector, stand y territorio."
+>
+  <Header />
+  <BottomNav activePage="expositores" />
+
+  <main id="main-content">
+    <!-- Page header -->
+    <section class="section bg-white border-b border-ink/8">
+      <div class="container">
+        <nav aria-label="Ruta de navegación" class="flex items-center gap-2 text-caption text-ink/50 mb-6">
+          <a href={base} class="hover:text-violet-dark transition-colors">Inicio</a>
+          <span aria-hidden="true">/</span>
+          <span class="text-ink font-semibold">Expositores</span>
+        </nav>
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+          <SectionHeader
+            eyebrow="Directorio Comercial"
+            title="Directorio de Expositores"
+            lead="Explorá las empresas, marcas y organismos presentes en el predio ferial."
+            territory="yungas"
+          />
+          <Button href="#stand" icon="add_business" class="flex-shrink-0">
+            Reservar espacio de Stand
+          </Button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search + Filters -->
+    <div class="sticky top-[88px] z-30 bg-white border-b border-ink/8 shadow-sm">
+      <div class="container py-3 flex flex-col sm:flex-row gap-3">
+        <!-- Search -->
+        <div class="relative flex-1">
+          <label for="search-expositores" class="sr-only">Buscar expositor</label>
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-ink/30 text-[18px]" aria-hidden="true">search</span>
+          <input
+            id="search-expositores"
+            type="search"
+            placeholder="Buscar por nombre, sector o stand..."
+            class="w-full h-10 pl-9 pr-4 rounded-md bg-paper border border-ink/15 text-small focus:outline-none focus:ring-2 focus:ring-violet-mid"
+          />
+        </div>
+        <!-- Sector filter -->
+        <div class="flex overflow-x-auto scrollbar-none gap-2 pb-1 sm:pb-0" role="group" aria-label="Filtros de sector">
+          {sectors.map((s, i) => (
+            <button
+              type="button"
+              class={`px-3 py-1.5 rounded-pill text-small font-semibold flex-shrink-0 transition-all ${i === 0 ? 'bg-violet-dark text-white' : 'bg-paper text-ink/60 hover:bg-ink/8'}`}
+              data-sector={s}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Exhibitor grid -->
+    <section class="section bg-paper" aria-label="Listado de expositores">
+      <div class="container">
+        <p class="text-small text-ink/50 mb-6">
+          Mostrando <strong class="text-ink">{exhibitors.length}</strong> expositores
+        </p>
+
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          id="exhibitor-grid"
+          role="list"
+          aria-label="Expositores"
+        >
+          {exhibitors.map(ex => (
+            <Card
+              territory={ex.territory}
+              class="group"
+              aria-label={ex.name}
+            >
+              <div class="flex flex-col h-full p-5 gap-4" role="listitem" data-sector={ex.sector}>
+                <!-- Header -->
+                <div class="flex items-start gap-3">
+                  <div class={`w-12 h-12 rounded-md flex items-center justify-center flex-shrink-0 ${territoryIcon[ex.territory]}`}>
+                    <span class="material-symbols-outlined text-[24px]" aria-hidden="true">storefront</span>
+                  </div>
+                  <div class="min-w-0">
+                    <h3 class="text-body font-bold text-ink truncate">{ex.name}</h3>
+                    <div class="flex items-center gap-2 mt-0.5 flex-wrap">
+                      <Badge territory={ex.territory} size="sm">{ex.sector}</Badge>
+                      <span class="text-caption text-ink/40">Stand {ex.stand}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Description -->
+                <p class="text-small text-ink/65 leading-relaxed flex-1">{ex.desc}</p>
+
+                <!-- Actions -->
+                <div class="flex gap-2 pt-2 mt-auto border-t border-ink/8">
+                  <Button href={`${base}expositores/${ex.id}`} variant="outline" size="sm" class="flex-1 justify-center">
+                    Ver ficha
+                  </Button>
+                  {ex.website && (
+                    <a
+                      href={ex.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="h-9 w-9 flex items-center justify-center rounded-md border border-ink/15 text-ink/40 hover:text-violet-dark hover:border-violet-mid transition-colors"
+                      aria-label={`Visitar sitio de ${ex.name}`}
+                    >
+                      <span class="material-symbols-outlined text-[16px]" aria-hidden="true">open_in_new</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        <!-- Empty state (hidden initially) -->
+        <div id="empty-state" class="hidden flex flex-col items-center gap-4 py-16 text-center">
+          <span class="material-symbols-outlined text-[48px] text-ink/20" aria-hidden="true">search_off</span>
+          <p class="text-body font-semibold text-ink/50">No encontramos expositores con esos filtros</p>
+          <Button variant="outline" id="reset-filters">Restaurar directorio</Button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  const searchInput = document.getElementById('search-expositores') as HTMLInputElement;
+  const filterBtns = document.querySelectorAll('[data-sector]');
+  const cards = document.querySelectorAll('#exhibitor-grid [data-sector]');
+  const emptyState = document.getElementById('empty-state');
+  let activeFilter = 'Todos';
+
+  function filterCards() {
+    const q = searchInput.value.toLowerCase().trim();
+    let visible = 0;
+    cards.forEach(card => {
+      const el = card.closest('[role="listitem"]') as HTMLElement;
+      const sector = card.getAttribute('data-sector') || '';
+      const text = (el?.textContent || '').toLowerCase();
+      const matchSector = activeFilter === 'Todos' || sector === activeFilter;
+      const matchSearch = !q || text.includes(q);
+      const show = matchSector && matchSearch;
+      (el?.parentElement as HTMLElement).style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    emptyState?.classList.toggle('hidden', visible > 0);
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeFilter = btn.getAttribute('data-sector') || 'Todos';
+      filterBtns.forEach(b => {
+        b.classList.toggle('bg-violet-dark', b === btn);
+        b.classList.toggle('text-white', b === btn);
+        b.classList.toggle('bg-paper', b !== btn);
+        b.classList.toggle('text-ink/60', b !== btn);
+      });
+      filterCards();
+    });
+  });
+
+  searchInput?.addEventListener('input', filterCards);
+  document.getElementById('reset-filters')?.addEventListener('click', () => {
+    searchInput.value = '';
+    activeFilter = 'Todos';
+    filterBtns.forEach((b, i) => {
+      b.classList.toggle('bg-violet-dark', i === 0);
+      b.classList.toggle('text-white', i === 0);
+    });
+    filterCards();
+  });
+</script>

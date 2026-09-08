@@ -1,6 +1,0 @@
-/* Agenda View Styles */
-.day-tab.active-tab {
-  background-color: var(--color-primary-container) !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(115, 13, 217, 0.25);
-}

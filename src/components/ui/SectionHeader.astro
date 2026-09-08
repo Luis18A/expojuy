@@ -1,0 +1,44 @@
+---
+// src/components/ui/SectionHeader.astro
+import Badge from './Badge.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  align?: 'left' | 'center';
+  territory?: 'yungas' | 'valles' | 'puna' | 'quebrada' | 'violet' | 'cyan';
+  class?: string;
+  titleTag?: 'h1' | 'h2' | 'h3';
+}
+
+const {
+  eyebrow,
+  title,
+  lead,
+  align = 'left',
+  territory = 'violet',
+  class: className = '',
+  titleTag: TitleTag = 'h2',
+} = Astro.props;
+
+const alignClasses = align === 'center'
+  ? 'items-center text-center'
+  : 'items-start text-left';
+---
+
+<div class={`flex flex-col gap-3 ${alignClasses} ${className}`}>
+  {eyebrow && (
+    <Badge territory={territory}>
+      {eyebrow}
+    </Badge>
+  )}
+  <TitleTag class="text-h2 text-ink">
+    {title}
+  </TitleTag>
+  {lead && (
+    <p class={`text-body-lg text-ink/65 leading-relaxed ${align === 'center' ? 'max-w-2xl mx-auto' : 'max-w-reading'}`}>
+      {lead}
+    </p>
+  )}
+</div>

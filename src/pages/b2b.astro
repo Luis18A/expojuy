@@ -1,0 +1,249 @@
+---
+// src/pages/b2b.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import BottomNav from '../components/layout/BottomNav.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const countries = [
+  { flag: '🇦🇷', name: 'Argentina', count: '+80', desc: 'Empresas nacionales confirmadas' },
+  { flag: '🇨🇱', name: 'Chile', count: '+25', desc: 'Delegación comercial de Antofagasta y Atacama' },
+  { flag: '🇵🇾', name: 'Paraguay', count: '+15', desc: 'Empresas y cámaras de comercio' },
+  { flag: '🇧🇷', name: 'Brasil', count: '+20', desc: 'Conglomerados del Sur y Rio Grande' },
+];
+
+const sectors = [
+  { icon: 'bolt', name: 'Litio & Minerales Críticos' },
+  { icon: 'eco', name: 'Agroindustria & Alimentos' },
+  { icon: 'memory', name: 'Tecnología & Software' },
+  { icon: 'local_shipping', name: 'Logística & Transporte' },
+  { icon: 'account_balance', name: 'Finanzas & Inversión' },
+  { icon: 'flight', name: 'Turismo & MICE' },
+];
+---
+
+<BaseLayout
+  title="Rondas de Vinculación B2B — ExpoJuy 2026"
+  description="Agendá reuniones de negocios uno a uno con empresas y compradores de Argentina, Chile, Paraguay y Brasil durante ExpoJuy 2026. Registrá tu empresa."
+>
+  <Header />
+  <BottomNav activePage="b2b" />
+
+  <main id="main-content">
+    <!-- Hero B2B -->
+    <section class="relative section bg-ink overflow-hidden" aria-label="Rondas B2B ExpoJuy 2026">
+      <div class="absolute inset-0 bg-gradient-puna opacity-40" aria-hidden="true"></div>
+      <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 24px 24px;" aria-hidden="true"></div>
+      <div class="container relative z-10">
+        <div class="max-w-2xl flex flex-col gap-6">
+          <Badge territory="cyan">Acreditación Comercial Bioceánica</Badge>
+          <h1 class="text-h1 text-white font-bold">
+            Rondas de Negocios<br /><span class="text-cyan">B2B ExpoJuy 2026</span>
+          </h1>
+          <p class="text-body-lg text-white/70 leading-relaxed">
+            Encuentros programados uno a uno entre empresas locales, compradores y delegaciones del Corredor Bioceánico. Maximizá el retorno de tu participación ferial.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <Button href="#registro" size="lg" icon="how_to_reg">Inscribir mi empresa</Button>
+            <Button href="#como-funciona" variant="outline" size="lg" class="border-white/30 text-white hover:bg-white/10">¿Cómo funcionan?</Button>
+          </div>
+          <!-- Key stats -->
+          <div class="flex flex-wrap gap-6 pt-4 border-t border-white/15">
+            {['+140', '+60', '8', '3'].map((v, i) => {
+              const labels = ['Participantes Registro', 'Compradores', 'Sectores', 'Países'];
+              return (
+                <div>
+                  <p class="text-h2 font-bold text-white">{v}</p>
+                  <p class="text-caption text-white/50 uppercase tracking-wide">{labels[i]}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section bg-white" id="como-funciona" aria-label="Cómo funcionan las Rondas B2B">
+      <div class="container">
+        <SectionHeader
+          eyebrow="Proceso"
+          title="3 pasos hacia tu próxima alianza."
+          territory="violet"
+          align="center"
+          class="mb-10"
+        />
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { step: '01', icon: 'edit_note', title: 'Registro y Perfil Comercial', desc: 'Completá el formulario con los datos de tu empresa, sector, origen y objetivos de negocios para el matchmaking.' },
+            { step: '02', icon: 'schema', title: 'Matchmaking Inteligente', desc: 'Nuestro equipo cruza perfiles compradores y vendedores del mismo sector para construir tu agenda de reuniones.' },
+            { step: '03', icon: 'event_seat', title: 'Reuniones en el Predio', desc: 'Meetings de 30 min en el Salón B2B con traducción simultánea ES/PT/EN y registro formal de la reunión.' },
+          ].map(step => (
+            <Card class="overflow-visible">
+              <div class="flex flex-col p-6 gap-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-full bg-gradient-hero text-white flex items-center justify-center font-bold text-body flex-shrink-0 shadow-violet">
+                    {step.step}
+                  </div>
+                  <div class="w-8 h-8 rounded-md bg-violet-lavender/30 text-violet-dark flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[18px]" aria-hidden="true">{step.icon}</span>
+                  </div>
+                </div>
+                <h3 class="text-body font-bold text-ink">{step.title}</h3>
+                <p class="text-small text-ink/65 leading-relaxed">{step.desc}</p>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Countries & Sectors -->
+    <section class="section bg-paper" aria-label="Países y sectores participantes">
+      <div class="container">
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Countries -->
+          <div>
+            <SectionHeader eyebrow="Delegaciones" title="Compradores internacionales." territory="puna" class="mb-6" />
+            <div class="flex flex-col gap-3">
+              {countries.map(c => (
+                <div class="flex items-center gap-4 bg-white rounded-md border border-ink/8 p-4 hover:shadow-sm transition-shadow">
+                  <span class="text-[32px] flex-shrink-0" aria-hidden="true">{c.flag}</span>
+                  <div>
+                    <p class="text-body font-bold text-ink">{c.name} <span class="text-violet-mid ml-1">{c.count}</span></p>
+                    <p class="text-caption text-ink/50">{c.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Sectors -->
+          <div>
+            <SectionHeader eyebrow="Industrias" title="Sectores disponibles para matching." territory="yungas" class="mb-6" />
+            <div class="grid grid-cols-2 gap-3">
+              {sectors.map(s => (
+                <div class="flex items-center gap-3 bg-white rounded-md border border-ink/8 p-4 hover:shadow-sm transition-shadow">
+                  <div class="w-9 h-9 rounded-md bg-yungas/10 text-yungas flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined text-[18px]" aria-hidden="true">{s.icon}</span>
+                  </div>
+                  <p class="text-small font-semibold text-ink leading-snug">{s.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registration form -->
+    <section class="section bg-white" id="registro" aria-label="Registro para Rondas B2B">
+      <div class="container max-w-2xl">
+        <SectionHeader
+          eyebrow="Registro"
+          title="Inscribí tu empresa."
+          lead="Completá el formulario para participar en las Rondas de Vinculación B2B. El equipo de ExpoJuy te confirmará tu agenda en las próximas 72 horas."
+          align="center"
+          territory="violet"
+          class="mb-8"
+        />
+
+        <form
+          class="flex flex-col gap-5 bg-paper rounded-lg border border-ink/8 p-6"
+          aria-label="Formulario de registro B2B"
+          id="b2b-form"
+        >
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1.5">
+              <label for="empresa" class="text-small font-semibold text-ink">Empresa *</label>
+              <input id="empresa" name="empresa" type="text" required placeholder="Nombre legal de la empresa"
+                class="h-11 px-4 rounded-md bg-white border border-ink/15 text-small focus:outline-none focus:ring-2 focus:ring-violet-mid" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="pais" class="text-small font-semibold text-ink">País *</label>
+              <select id="pais" name="pais" required
+                class="h-11 px-4 rounded-md bg-white border border-ink/15 text-small focus:outline-none focus:ring-2 focus:ring-violet-mid">
+                <option value="">Seleccioná el país</option>
+                <option>Argentina</option>
+                <option>Chile</option>
+                <option>Paraguay</option>
+                <option>Brasil</option>
+                <option>Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="flex flex-col gap-1.5">
+              <label for="nombre" class="text-small font-semibold text-ink">Nombre y apellido *</label>
+              <input id="nombre" name="nombre" type="text" required placeholder="Tu nombre completo"
+                class="h-11 px-4 rounded-md bg-white border border-ink/15 text-small focus:outline-none focus:ring-2 focus:ring-violet-mid" />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label for="cargo" class="text-small font-semibold text-ink">Cargo</label>
+              <input id="cargo" name="cargo" type="text" placeholder="Ej. Gerente Comercial"
+                class="h-11 px-4 rounded-md bg-white border border-ink/15 text-small focus:outline-none focus:ring-2 focus:ring-violet-mid" />
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label for="email-b2b" class="text-small font-semibold text-ink">Correo electrónico *</label>
+            <input id="email-b2b" name="email" type="email" required placeholder="contacto@empresa.com"
+              class="h-11 px-4 rounded-md bg-white border border-ink/15 text-small focus:outline-none focus:ring-2 focus:ring-violet-mid" />
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label for="sector-b2b" class="text-small font-semibold text-ink">Sector *</label>
+            <select id="sector-b2b" name="sector" required
+              class="h-11 px-4 rounded-md bg-white border border-ink/15 text-small focus:outline-none focus:ring-2 focus:ring-violet-mid">
+              <option value="">Seleccioná el sector</option>
+              <option>Litio & Minerales Críticos</option>
+              <option>Agroindustria & Alimentos</option>
+              <option>Tecnología & Software</option>
+              <option>Logística & Transporte</option>
+              <option>Finanzas & Inversión</option>
+              <option>Turismo & MICE</option>
+              <option>Otro</option>
+            </select>
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label for="interes" class="text-small font-semibold text-ink">¿Qué buscás en las rondas?</label>
+            <textarea id="interes" name="interes" rows={3} placeholder="Describí tu oferta/demanda y los perfiles de empresas de interés..."
+              class="px-4 py-3 rounded-md bg-white border border-ink/15 text-small resize-none focus:outline-none focus:ring-2 focus:ring-violet-mid"></textarea>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <input id="acepto" name="acepto" type="checkbox" required class="mt-1 accent-violet-dark" />
+            <label for="acepto" class="text-small text-ink/65">
+              Acepto los <a href="#" class="text-violet-mid hover:underline">términos y condiciones</a> de participación en las Rondas B2B de ExpoJuy 2026.
+            </label>
+          </div>
+
+          <Button type="submit" size="lg" class="w-full justify-center" icon="send">
+            Enviar inscripción
+          </Button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('b2b-form') as HTMLFormElement;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Replace with real API submission
+    alert('¡Inscripción recibida! Te contactaremos en las próximas 72 horas para confirmar tu agenda de reuniones.');
+    form.reset();
+  });
+</script>

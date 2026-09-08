@@ -1,0 +1,47 @@
+---
+// src/components/ui/Card.astro
+interface Props {
+  href?: string;
+  variant?: 'default' | 'territory' | 'expositor' | 'activity' | 'news';
+  territory?: 'yungas' | 'valles' | 'puna' | 'quebrada' | 'violet';
+  class?: string;
+  'aria-label'?: string;
+}
+
+const {
+  href,
+  variant = 'default',
+  territory,
+  class: className = '',
+  'aria-label': ariaLabel,
+} = Astro.props;
+
+const Tag = href ? 'a' : 'div';
+
+const borderMap: Record<string, string> = {
+  yungas:   'border-t-4 border-yungas',
+  valles:   'border-t-4 border-valles',
+  puna:     'border-t-4 border-puna',
+  quebrada: 'border-t-4 border-quebrada',
+  violet:   'border-t-4 border-violet-mid',
+};
+
+const base = [
+  'flex flex-col bg-white rounded-md shadow-sm',
+  'border border-ink/8',
+  href ? 'hover:shadow-md hover:-translate-y-0.5 transition-all duration-normal cursor-pointer' : '',
+  territory ? borderMap[territory] ?? '' : '',
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-mid focus-visible:ring-offset-2',
+  className,
+].join(' ');
+---
+
+{href ? (
+  <a href={href} class={base} aria-label={ariaLabel}>
+    <slot />
+  </a>
+) : (
+  <div class={base} aria-label={ariaLabel}>
+    <slot />
+  </div>
+)}

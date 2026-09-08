@@ -1,0 +1,51 @@
+---
+// src/components/ui/Badge.astro
+interface Props {
+  territory?: 'yungas' | 'valles' | 'puna' | 'quebrada' | 'violet' | 'cyan';
+  size?: 'sm' | 'md';
+  dot?: boolean;
+  class?: string;
+}
+
+const {
+  territory = 'violet',
+  size = 'md',
+  dot = false,
+  class: className = '',
+} = Astro.props;
+
+const colorMap = {
+  yungas:   'bg-yungas-soft text-yungas',
+  valles:   'bg-valles/10 text-valles-deep',
+  puna:     'bg-puna/10 text-puna',
+  quebrada: 'bg-quebrada/10 text-quebrada',
+  violet:   'bg-violet-lavender/30 text-violet-dark',
+  cyan:     'bg-cyan/15 text-cyan',
+};
+
+const dotMap = {
+  yungas:   'bg-yungas',
+  valles:   'bg-valles',
+  puna:     'bg-puna',
+  quebrada: 'bg-quebrada',
+  violet:   'bg-violet-dark',
+  cyan:     'bg-cyan',
+};
+
+const sizeClasses = {
+  sm: 'px-2 py-0.5 text-[11px]',
+  md: 'px-3 py-1 text-caption',
+};
+
+const base = [
+  'inline-flex items-center gap-1.5 rounded-pill font-semibold uppercase tracking-wider',
+  sizeClasses[size],
+  colorMap[territory],
+  className,
+].join(' ');
+---
+
+<span class={base}>
+  {dot && <span class={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${dotMap[territory]}`} aria-hidden="true" />}
+  <slot />
+</span>

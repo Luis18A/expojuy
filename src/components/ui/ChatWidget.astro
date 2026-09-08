@@ -1,0 +1,460 @@
+---
+// src/components/ui/ChatWidget.astro
+---
+
+<!-- WIDGET DE CHATBOT FLOTANTE EXPOJUY 2026 -->
+<style is:global>
+  /* Variables de diseño del Widget */
+  :root {
+    --ej-primary: #730DD9;
+    --ej-primary-hover: #5500A6;
+    --ej-secondary: #7957F7;
+    --ej-bg: #FFFFFF;
+    --ej-surface: #F3F3F3;
+    --ej-text: #1A1C1C;
+    --ej-text-muted: #6B7280;
+    --ej-radius: 18px;
+    --ej-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Botón Flotante */
+  .ej-chat-trigger {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ej-primary), var(--ej-secondary));
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--ej-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+  }
+
+  .ej-chat-trigger:hover {
+    transform: scale(1.08);
+  }
+
+  .ej-chat-trigger svg {
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+    transition: transform 0.2s ease;
+  }
+
+  /* Ventana Modal del Chat */
+  .ej-chat-window {
+    position: fixed;
+    bottom: 96px;
+    right: 24px;
+    width: 360px;
+    max-width: calc(100vw - 40px);
+    height: 520px;
+    max-height: calc(100vh - 120px);
+    background-color: var(--ej-bg);
+    border-radius: var(--ej-radius);
+    box-shadow: var(--ej-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.95);
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .ej-chat-window.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Header del Chat */
+  .ej-chat-header {
+    background: linear-gradient(135deg, var(--ej-primary), var(--ej-primary-hover));
+    color: #ffffff;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ej-chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ej-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .ej-chat-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .ej-chat-status {
+    font-size: 11px;
+    opacity: 0.85;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .ej-status-dot {
+    width: 7px;
+    height: 7px;
+    background-color: #10B981;
+    border-radius: 50%;
+  }
+
+  .ej-chat-close {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 20px;
+    opacity: 0.8;
+    padding: 4px;
+    transition: opacity 0.2s;
+  }
+
+  .ej-chat-close:hover {
+    opacity: 1;
+  }
+
+  /* Cuerpo de Mensajes */
+  .ej-chat-body {
+    flex: 1;
+    padding: 14px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #F9FAFB;
+  }
+
+  /* Globos / Burbujas de Mensaje */
+  .ej-msg {
+    max-width: 85%;
+    padding: 11px 15px;
+    border-radius: 16px;
+    font-size: 13.5px;
+    line-height: 1.45;
+    word-break: break-word;
+    box-sizing: border-box;
+    animation: ejFadeIn 0.25s ease-out;
+  }
+
+  @keyframes ejFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .ej-msg.bot {
+    background-color: #FFFFFF;
+    color: #1A1C1C;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+
+  .ej-msg.user {
+    background: linear-gradient(135deg, var(--ej-primary), var(--ej-primary-hover));
+    color: #FFFFFF;
+    align-self: flex-end;
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 2px 8px rgba(115, 13, 217, 0.25);
+  }
+
+  .ej-msg strong {
+    font-weight: 700;
+  }
+
+  /* Chips de FAQs Rápidas */
+  .ej-quick-faqs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .ej-chip-btn {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    color: var(--ej-primary);
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ej-chip-btn:hover {
+    background-color: #F3E8FF;
+    border-color: var(--ej-secondary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(115, 13, 217, 0.1);
+  }
+
+  /* Footer e Input */
+  .ej-chat-footer {
+    padding: 10px 12px;
+    background-color: var(--ej-bg);
+    border-top: 1px solid #E5E7EB;
+  }
+
+  .ej-chat-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ej-chat-input {
+    flex: 1;
+    border: 1px solid #D1D5DB;
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-size: 13.5px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .ej-chat-input:focus {
+    border-color: var(--ej-primary);
+  }
+
+  .ej-send-btn {
+    background-color: var(--ej-primary);
+    color: #ffffff;
+    border: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+
+  .ej-send-btn:hover {
+    background-color: var(--ej-primary-hover);
+  }
+
+  .ej-send-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+</style>
+
+<!-- Elementos HTML del Widget -->
+<div id="expojuy-chat-widget">
+  <!-- Botón Flotante -->
+  <button class="ej-chat-trigger" id="ejChatTrigger" aria-label="Abrir asistente de ayuda">
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+  </button>
+
+  <!-- Ventana de Chat -->
+  <div class="ej-chat-window" id="ejChatWindow">
+    <!-- Encabezado -->
+    <div class="ej-chat-header">
+      <div class="ej-chat-header-info">
+        <div class="ej-avatar">EJ</div>
+        <div>
+          <h3 class="ej-chat-title">ExpoBot Jujuy</h3>
+          <span class="ej-chat-status"><span class="ej-status-dot"></span> En línea · Asistente Oficial</span>
+        </div>
+      </div>
+      <button class="ej-chat-close" id="ejChatClose" aria-label="Cerrar ventana">&times;</button>
+    </div>
+
+    <!-- Cuerpo de Mensajes -->
+    <div class="ej-chat-body" id="ejChatBody">
+      <div class="ej-msg bot">
+        ¡Hola! 👋 Bienvenido al Asistente Virtual de <strong>ExpoJuy 2026</strong>. ¿En qué puedo ayudarte hoy?
+      </div>
+      
+      <!-- Opciones Rápidas -->
+      <div class="ej-quick-faqs" id="ejQuickFaqs">
+        <button class="ej-chip-btn" data-faq="fecha">📅 ¿Cuándo y dónde se realiza?</button>
+        <button class="ej-chip-btn" data-faq="entradas">🎟️ ¿Cómo compro entradas?</button>
+        <button class="ej-chip-btn" data-faq="estacionamiento">🚗 ¿Hay estacionamiento?</button>
+        <button class="ej-chip-btn" data-faq="b2b">💼 ¿Cómo participo en Rondas B2B?</button>
+      </div>
+    </div>
+
+    <!-- Footer con Entrada de Texto -->
+    <div class="ej-chat-footer">
+      <form class="ej-chat-form" id="ejChatForm">
+        <input type="text" class="ej-chat-input" id="ejChatInput" placeholder="Escribe tu consulta aquí..." autocomplete="off" required />
+        <button type="submit" class="ej-send-btn" aria-label="Enviar mensaje">
+          <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function() {
+    function initWidget() {
+      // Base de datos de conocimiento de las FAQs
+      const faqData = {
+        fecha: {
+          q: "¿Cuándo y dónde se realiza?",
+          a: "ExpoJuy 2026 se realizará del 9 al 12 de Octubre de 2026 en el predio Ciudad Cultural (San Salvador de Jujuy). Horario: 10:00 a 22:00 hs."
+        },
+        entradas: {
+          q: "¿Cómo compro entradas?",
+          a: "Puedes comprarlas de forma digital en la web con código QR para mostrar en tu celular, o de manera presencial en las boleterías del predio."
+        },
+        estacionamiento: {
+          q: "¿Hay estacionamiento?",
+          a: "Sí, el predio cuenta con una amplia playa de estacionamiento vigilada, con lugares reservados para personas con movilidad reducida."
+        },
+        b2b: {
+          q: "¿Cómo participo en Rondas B2B?",
+          a: "Puedes inscribirte desde la sección 'Vinculate B2B' en el menú de navegación de nuestra web o acreditándote con el Pase Profesional/VIP."
+        },
+        menores: {
+          q: "¿Los menores pagan entrada?",
+          a: "Los niños menores de hasta 10 años ingresan de forma gratuita acompañados por un adulto responsable."
+        },
+        prensa: {
+          q: "¿Cómo me acredito como prensa?",
+          a: "Debes solicitar tu acreditación con al menos 15 días de anticipación enviando tu credencial al área de comunicación desde la sección de contacto."
+        }
+      };
+
+      // Referencias al DOM
+      const trigger = document.getElementById('ejChatTrigger');
+      const windowEl = document.getElementById('ejChatWindow');
+      const closeBtn = document.getElementById('ejChatClose');
+      const bodyEl = document.getElementById('ejChatBody');
+      const formEl = document.getElementById('ejChatForm');
+      const inputEl = document.getElementById('ejChatInput');
+      const quickFaqs = document.getElementById('ejQuickFaqs');
+
+      if (!trigger || !windowEl || trigger.dataset.bound) return;
+      trigger.dataset.bound = 'true';
+
+      // Toggle Modal
+      function toggleChat() {
+        windowEl.classList.toggle('active');
+        if (windowEl.classList.contains('active') && inputEl) {
+          inputEl.focus();
+        }
+      }
+
+      trigger.addEventListener('click', toggleChat);
+      if (closeBtn) closeBtn.addEventListener('click', toggleChat);
+
+      // Renderizar Mensaje
+      function appendMessage(text, sender) {
+        if (!bodyEl) return;
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `ej-msg ${sender}`;
+        msgDiv.innerHTML = text;
+        bodyEl.appendChild(msgDiv);
+        bodyEl.scrollTop = bodyEl.scrollHeight;
+      }
+
+      // Manejar Clic en FAQs Rápidas
+      if (quickFaqs) {
+        quickFaqs.addEventListener('click', function(e) {
+          const btn = e.target.closest('.ej-chip-btn');
+          if (!btn) return;
+          
+          const key = btn.getAttribute('data-faq');
+          const item = faqData[key];
+          if (item) {
+            appendMessage(item.q, 'user');
+            setTimeout(() => {
+              appendMessage(item.a, 'bot');
+            }, 400);
+          }
+        });
+      }
+
+      // Procesar Entrada del Usuario
+      if (formEl) {
+        formEl.addEventListener('submit', function(e) {
+          e.preventDefault();
+          if (!inputEl) return;
+          const userQuery = inputEl.value.trim();
+          if (!userQuery) return;
+
+          appendMessage(userQuery, 'user');
+          inputEl.value = '';
+
+          // Búsqueda simple de palabras clave
+          const queryLower = userQuery.toLowerCase();
+          let reply = "";
+
+          if (queryLower.includes('cuando') || queryLower.includes('fecha') || queryLower.includes('horario') || queryLower.includes('donde') || queryLower.includes('lugar')) {
+            reply = faqData.fecha.a;
+          } else if (queryLower.includes('entrada') || queryLower.includes('ticket') || queryLower.includes('comprar') || queryLower.includes('precio') || queryLower.includes('qr')) {
+            reply = faqData.entradas.a;
+          } else if (queryLower.includes('auto') || queryLower.includes('estacionamiento') || queryLower.includes('colectivo') || queryLower.includes('llegar')) {
+            reply = faqData.estacionamiento.a;
+          } else if (queryLower.includes('b2b') || queryLower.includes('negocio') || queryLower.includes('empresa') || queryLower.includes('expositor') || queryLower.includes('stand')) {
+            reply = faqData.b2b.a;
+          } else if (queryLower.includes('niño') || queryLower.includes('menor') || queryLower.includes('hijo') || queryLower.includes('gratis')) {
+            reply = faqData.menores.a;
+          } else if (queryLower.includes('prensa') || queryLower.includes('periodista') || queryLower.includes('medio')) {
+            reply = faqData.prensa.a;
+          } else {
+            // Respuesta fallback empática sin alucinaciones
+            reply = "Gracias por tu consulta. Para detalles específicos no indicados aquí, por favor ponte en contacto con nuestro equipo oficial vía correo a <strong>contacto@expojuy.com.ar</strong>.";
+          }
+
+          setTimeout(() => {
+            appendMessage(reply, 'bot');
+          }, 500);
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initWidget);
+    } else {
+      initWidget();
+    }
+  })();
+</script>

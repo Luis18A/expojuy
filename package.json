@@ -1,0 +1,25 @@
+{
+  "name": "expojuy-2026",
+  "version": "1.0.0",
+  "description": "Portal oficial ExpoJuy 2026 — Feria Multisectorial del NOA y Corredor Bioceánico",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^4.15.0",
+    "@astrojs/tailwind": "^5.1.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

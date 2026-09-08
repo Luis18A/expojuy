@@ -1,0 +1,104 @@
+---
+// src/components/ui/Button.astro
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'inverse';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  loading?: boolean;
+  icon?: string;
+  iconPosition?: 'left' | 'right';
+  class?: string;
+  id?: string;
+  'aria-label'?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  disabled = false,
+  loading = false,
+  icon,
+  iconPosition = 'right',
+  class: className = '',
+  id,
+  'aria-label': ariaLabel,
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+
+const sizeClasses = {
+  sm: 'h-9 px-4 text-small gap-1.5',
+  md: 'h-11 px-5 text-body gap-2',
+  lg: 'h-14 px-7 text-body-lg gap-2',
+};
+
+const variantClasses = {
+  primary:   'bg-violet-dark text-white hover:bg-violet-mid shadow-violet hover:-translate-y-0.5 active:translate-y-0',
+  secondary: 'bg-white text-violet-dark border-2 border-violet-dark hover:bg-violet-dark hover:text-white',
+  outline:   'bg-transparent text-violet-mid border-2 border-violet-mid hover:bg-violet-mid hover:text-white',
+  ghost:     'bg-transparent text-violet-mid hover:bg-violet-lavender/30',
+  inverse:   'bg-white text-violet-dark hover:bg-paper',
+};
+
+const base = [
+  'inline-flex items-center justify-center font-semibold rounded-pill',
+  'transition-all duration-normal ease-default',
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-mid focus-visible:ring-offset-2',
+  'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
+  'select-none whitespace-nowrap',
+  sizeClasses[size],
+  variantClasses[variant],
+  className,
+].join(' ');
+---
+
+{href ? (
+  <a
+    href={disabled ? undefined : href}
+    class={base}
+    id={id}
+    aria-label={ariaLabel}
+    aria-disabled={disabled}
+  >
+    {loading && (
+      <svg class="animate-spin h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+      </svg>
+    )}
+    {!loading && icon && iconPosition === 'left' && (
+      <span class="material-symbols-outlined text-[1.1em] leading-none flex-shrink-0" aria-hidden="true">{icon}</span>
+    )}
+    <slot />
+    {!loading && icon && iconPosition === 'right' && (
+      <span class="material-symbols-outlined text-[1.1em] leading-none flex-shrink-0" aria-hidden="true">{icon}</span>
+    )}
+  </a>
+) : (
+  <button
+    type={type}
+    class={base}
+    disabled={disabled || loading}
+    id={id}
+    aria-label={ariaLabel}
+    aria-busy={loading}
+  >
+    {loading && (
+      <svg class="animate-spin h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+      </svg>
+    )}
+    {!loading && icon && iconPosition === 'left' && (
+      <span class="material-symbols-outlined text-[1.1em] leading-none flex-shrink-0" aria-hidden="true">{icon}</span>
+    )}
+    <slot />
+    {!loading && icon && iconPosition === 'right' && (
+      <span class="material-symbols-outlined text-[1.1em] leading-none flex-shrink-0" aria-hidden="true">{icon}</span>
+    )}
+  </button>
+)}
