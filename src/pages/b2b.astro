@@ -381,26 +381,26 @@ const benefits = [
 
     <!-- Registration CTA -->
     <section class="section bg-white" id="registro" aria-label="Registro para Rondas B2B">
-      <div class="container max-w-3xl">
-        <Card territory="violet" class="bg-gradient-to-br from-paper via-white to-violet-50/50 p-8 sm:p-12 text-center shadow-lg rounded-2xl relative overflow-hidden">
+      <div class="container max-w-3xl px-4 sm:px-6">
+        <Card territory="violet" class="bg-gradient-to-br from-paper via-white to-violet-50/50 p-5 sm:p-8 lg:p-12 text-center shadow-lg rounded-2xl relative overflow-hidden">
           <!-- Ambient glow -->
           <div class="absolute -top-16 -right-16 w-48 h-48 bg-violet-mid/10 rounded-full blur-2xl pointer-events-none" aria-hidden="true"></div>
 
-          <div class="relative z-10 flex flex-col items-center gap-6 max-w-xl mx-auto">
-            <div class="w-16 h-16 rounded-2xl bg-violet-dark text-white flex items-center justify-center shadow-violet text-3xl">
-              <span class="material-symbols-outlined text-[32px]" aria-hidden="true">handshake</span>
+          <div class="relative z-10 flex flex-col items-center gap-5 sm:gap-6 max-w-xl mx-auto">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-violet-dark text-white flex items-center justify-center shadow-violet text-3xl flex-shrink-0">
+              <span class="material-symbols-outlined text-[28px] sm:text-[32px]" aria-hidden="true">handshake</span>
             </div>
 
             <div>
               <Badge territory="violet" class="mb-3">Plataforma Oficial B2B</Badge>
-              <h2 class="text-h2 font-bold text-ink mb-3">Inscripción a las Rondas de Negocios</h2>
-              <p class="text-body text-ink/75 leading-relaxed">
+              <h2 class="text-h3 sm:text-h2 font-bold text-ink mb-3 leading-tight">Inscripción a las Rondas de Negocios</h2>
+              <p class="text-body-sm sm:text-body text-ink/75 leading-relaxed">
                 La inscripción y gestión de agendas comerciales para las Rondas de Vinculación B2B de ExpoJuy 2026 se realiza a través de la plataforma externa de <strong>Sauken</strong>.
               </p>
             </div>
 
             <div class="flex flex-col sm:flex-row gap-4 items-center justify-center w-full pt-2">
-              <Button type="button" size="lg" icon="open_in_new" class="btn-open-b2b-modal shadow-violet hover:scale-[1.02] transition-transform">
+              <Button type="button" size="lg" icon="open_in_new" class="btn-open-b2b-modal shadow-violet hover:scale-[1.02] transition-transform w-full sm:w-auto justify-center">
                 Inscribir mi Empresa en Sauken
               </Button>
             </div>
@@ -418,14 +418,14 @@ const benefits = [
   <!-- Modal Redirección Externa B2B -->
   <div
     id="b2b-modal"
-    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/75 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300"
+    class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-ink/75 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300"
     role="dialog"
     aria-labelledby="b2b-modal-title"
     aria-modal="true"
   >
     <div 
       id="b2b-modal-card" 
-      class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-ink/10 scale-95 transition-transform duration-300 relative"
+      class="bg-white rounded-2xl max-w-md w-full p-5 sm:p-8 shadow-2xl border border-ink/10 scale-95 transition-transform duration-300 relative max-h-[88vh] overflow-y-auto"
     >
       <button
         id="b2b-modal-close-x"
@@ -436,29 +436,29 @@ const benefits = [
         <span class="material-symbols-outlined text-[20px]" aria-hidden="true">close</span>
       </button>
 
-      <div class="flex flex-col items-center text-center gap-5">
-        <div class="w-14 h-14 rounded-full bg-violet-50 text-violet-dark border border-violet-100 flex items-center justify-center flex-shrink-0 shadow-sm">
-          <span class="material-symbols-outlined text-[28px]" aria-hidden="true">open_in_new</span>
+      <div class="flex flex-col items-center text-center gap-4 sm:gap-5">
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-violet-50 text-violet-dark border border-violet-100 flex items-center justify-center flex-shrink-0 shadow-sm">
+          <span class="material-symbols-outlined text-[24px] sm:text-[28px]" aria-hidden="true">open_in_new</span>
         </div>
 
         <div class="flex flex-col gap-2">
-          <h3 id="b2b-modal-title" class="text-h3 font-bold text-ink">
+          <h3 id="b2b-modal-title" class="text-lg sm:text-h3 font-bold text-ink leading-tight">
             Aviso de redirección externa
           </h3>
-          <p class="text-body-sm text-ink/75 leading-relaxed">
+          <p class="text-xs sm:text-body-sm text-ink/75 leading-relaxed">
             Estás siendo redirigido a un sitio externo para la inscripción a las Rondas de Negocio.
           </p>
-          <div class="mt-2 p-3 bg-paper rounded-lg border border-ink/8 text-caption text-ink/60 font-mono break-all flex items-center justify-center gap-2">
-            <span class="material-symbols-outlined text-[16px] text-violet-mid" aria-hidden="true">link</span>
-            https://app.sauken.com.ar/
+          <div class="mt-2 p-2.5 sm:p-3 bg-paper rounded-lg border border-ink/8 text-[11px] sm:text-caption text-ink/60 font-mono break-all flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-[16px] text-violet-mid flex-shrink-0" aria-hidden="true">link</span>
+            <span>https://app.sauken.com.ar/</span>
           </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-3 w-full mt-2">
+        <div class="flex flex-col sm:flex-row gap-2.5 sm:gap-3 w-full mt-1">
           <button
             id="b2b-modal-cancel"
             type="button"
-            class="w-full sm:w-1/2 h-11 px-5 rounded-pill border-2 border-ink/20 text-ink/80 hover:bg-paper font-semibold transition-all text-small"
+            class="w-full sm:w-1/2 h-11 px-5 rounded-pill border-2 border-ink/20 text-ink/80 hover:bg-paper font-semibold transition-all text-small flex items-center justify-center"
           >
             Cancelar
           </button>

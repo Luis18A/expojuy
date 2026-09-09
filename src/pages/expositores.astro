@@ -1073,7 +1073,7 @@ const exhibitors: Exhibitor[] = [
           </p>
 
           <div class="flex flex-wrap gap-3 pt-2">
-            <Button href="#reserva-stand" size="lg" icon="add_business" class="shadow-violet">
+            <Button href="#reserva-stand" size="lg" icon="add_business" class="shadow-violet btn-open-exhibitor-modal">
               Ser Expositor / Reservar Stand
             </Button>
             <button
@@ -1198,41 +1198,41 @@ const exhibitors: Exhibitor[] = [
          SOLICITUD DE STAND / RESERVA CTA
          ═══════════════════════════════════════════ -->
     <section class="section bg-white border-b border-ink/5" id="reserva-stand" aria-label="Solicitud de reserva de stand">
-      <div class="container max-w-4xl">
-        <Card territory="violet" class="bg-gradient-to-br from-paper via-white to-violet-50/60 p-8 sm:p-12 text-center shadow-xl rounded-2xl relative overflow-hidden">
+      <div class="container max-w-4xl px-4 sm:px-6">
+        <Card territory="violet" class="bg-gradient-to-br from-paper via-white to-violet-50/60 p-5 sm:p-8 lg:p-12 text-center shadow-xl rounded-2xl relative overflow-hidden">
           <div class="absolute -top-20 -right-20 w-56 h-56 bg-violet-mid/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
-          <div class="relative z-10 flex flex-col items-center gap-6 max-w-2xl mx-auto">
-            <div class="w-16 h-16 rounded-2xl bg-violet-dark text-white flex items-center justify-center shadow-violet text-3xl">
-              <span class="material-symbols-outlined text-[34px]" aria-hidden="true">storefront</span>
+          <div class="relative z-10 flex flex-col items-center gap-5 sm:gap-6 max-w-2xl mx-auto">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-violet-dark text-white flex items-center justify-center shadow-violet text-3xl flex-shrink-0">
+              <span class="material-symbols-outlined text-[28px] sm:text-[34px]" aria-hidden="true">storefront</span>
             </div>
 
             <div>
               <Badge territory="violet" class="mb-3">Convocatoria Oficial a Expositores</Badge>
-              <h2 class="text-h2 font-bold text-ink mb-3">Reservá el Stand de tu Empresa en ExpoJuy 2026</h2>
-              <p class="text-body text-ink/75 leading-relaxed">
+              <h2 class="text-h3 sm:text-h2 font-bold text-ink mb-3 leading-tight">Reservá el Stand de tu Empresa en ExpoJuy 2026</h2>
+              <p class="text-body-sm sm:text-body text-ink/75 leading-relaxed">
                 Recibí asesoramiento personalizado de los oficiales de vinculación de la <strong>Cámara de Comercio Exterior de Jujuy</strong> para seleccionar tu ubicación y planificar tu participación ferial.
               </p>
             </div>
 
-            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center w-full pt-2">
-              <Button type="button" size="lg" icon="contact_support" class="btn-open-exhibitor-modal shadow-violet hover:scale-[1.02] transition-transform">
+            <div class="flex flex-col sm:flex-row gap-3.5 sm:gap-4 items-center justify-center w-full pt-2">
+              <Button type="button" size="lg" icon="contact_support" class="btn-open-exhibitor-modal shadow-violet hover:scale-[1.02] transition-transform w-full sm:w-auto justify-center">
                 Solicitar Cotización de Stand
               </Button>
               <a
                 href="https://wa.me/5493880000000?text=Hola,%20quisiera%20recibir%20información%20para%20reservar%20un%20stand%20en%20ExpoJuy%202026"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="h-12 px-6 rounded-pill border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-bold flex items-center justify-center gap-2 transition-all text-small"
+                class="w-full sm:w-auto h-12 px-5 sm:px-6 rounded-pill border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-bold flex items-center justify-center gap-2 transition-all text-small text-center justify-center"
               >
-                <span class="material-symbols-outlined text-[20px]">chat</span>
+                <span class="material-symbols-outlined text-[20px] flex-shrink-0">chat</span>
                 <span>Consulta Rápida por WhatsApp</span>
               </a>
             </div>
 
-            <p class="text-caption text-ink/50 flex items-center gap-1.5 justify-center">
-              <span class="material-symbols-outlined text-[16px] text-violet-mid" aria-hidden="true">verified_user</span>
-              Atención directa por la Cámara de Comercio Exterior de Jujuy (CamComEx)
+            <p class="text-caption text-ink/50 flex items-center gap-1.5 justify-center text-center">
+              <span class="material-symbols-outlined text-[16px] text-violet-mid flex-shrink-0" aria-hidden="true">verified_user</span>
+              <span>Atención directa por la Cámara de Comercio Exterior de Jujuy (CamComEx)</span>
             </p>
           </div>
         </Card>
@@ -1522,14 +1522,14 @@ const exhibitors: Exhibitor[] = [
   <!-- Modal Solicitud de Stand Expositores -->
   <div
     id="exhibitor-modal"
-    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/75 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300"
+    class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-ink/75 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300"
     role="dialog"
     aria-labelledby="exhibitor-modal-title"
     aria-modal="true"
   >
     <div 
       id="exhibitor-modal-card" 
-      class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-ink/10 scale-95 transition-transform duration-300 relative max-h-[90vh] overflow-y-auto"
+      class="bg-white rounded-2xl max-w-lg w-full p-5 sm:p-8 shadow-2xl border border-ink/10 scale-95 transition-transform duration-300 relative max-h-[88vh] overflow-y-auto"
     >
       <button
         id="exhibitor-modal-close-x"
@@ -1540,13 +1540,13 @@ const exhibitors: Exhibitor[] = [
         <span class="material-symbols-outlined text-[20px]" aria-hidden="true">close</span>
       </button>
 
-      <div class="flex flex-col gap-5">
+      <div class="flex flex-col gap-4 sm:gap-5">
         <div class="flex items-center gap-3 border-b border-ink/8 pb-4">
-          <div class="w-12 h-12 rounded-xl bg-violet-50 text-violet-dark border border-violet-100 flex items-center justify-center flex-shrink-0 shadow-sm">
-            <span class="material-symbols-outlined text-[26px]" aria-hidden="true">storefront</span>
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-violet-50 text-violet-dark border border-violet-100 flex items-center justify-center flex-shrink-0 shadow-sm">
+            <span class="material-symbols-outlined text-[22px] sm:text-[26px]" aria-hidden="true">storefront</span>
           </div>
           <div>
-            <h3 id="exhibitor-modal-title" class="text-h3 font-bold text-ink">
+            <h3 id="exhibitor-modal-title" class="text-base sm:text-h3 font-bold text-ink leading-tight">
               Solicitar Stand — ExpoJuy 2026
             </h3>
             <p class="text-caption text-ink/60">
@@ -1555,7 +1555,7 @@ const exhibitors: Exhibitor[] = [
           </div>
         </div>
 
-        <form id="exhibitor-request-form" class="flex flex-col gap-4">
+        <form id="exhibitor-request-form" class="flex flex-col gap-3.5 sm:gap-4">
           <div>
             <label class="block text-caption font-bold text-ink mb-1">Nombre de la Empresa / Razón Social *</label>
             <input
@@ -1600,7 +1600,7 @@ const exhibitors: Exhibitor[] = [
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label class="block text-caption font-bold text-ink mb-1">Sector Productivo</label>
-              <select class="w-full h-10 px-3.5 rounded-xl bg-paper border border-ink/12 text-small text-ink focus:outline-none focus:ring-2 focus:ring-violet-dark/20 focus:border-violet-dark transition-all">
+              <select class="w-full h-10 px-3 rounded-xl bg-paper border border-ink/12 text-small text-ink focus:outline-none focus:ring-2 focus:ring-violet-dark/20 focus:border-violet-dark transition-all">
                 <option value="mineria">Minería & Litio</option>
                 <option value="agro">Agroindustria & Alimentos</option>
                 <option value="construccion">Construcción & Industria</option>
@@ -1611,7 +1611,7 @@ const exhibitors: Exhibitor[] = [
             </div>
             <div>
               <label class="block text-caption font-bold text-ink mb-1">Pabellón de Interés</label>
-              <select class="w-full h-10 px-3.5 rounded-xl bg-paper border border-ink/12 text-small text-ink focus:outline-none focus:ring-2 focus:ring-violet-dark/20 focus:border-violet-dark transition-all">
+              <select class="w-full h-10 px-3 rounded-xl bg-paper border border-ink/12 text-small text-ink focus:outline-none focus:ring-2 focus:ring-violet-dark/20 focus:border-violet-dark transition-all">
                 <option value="pabellon-a">Pabellón A (Minería)</option>
                 <option value="pabellon-b">Pabellón B (Valles & Comercio)</option>
                 <option value="pabellon-c">Pabellón C (Servicios & IT)</option>
@@ -1629,11 +1629,11 @@ const exhibitors: Exhibitor[] = [
             ></textarea>
           </div>
 
-          <div class="flex flex-col sm:flex-row gap-3 w-full pt-2">
+          <div class="flex flex-col sm:flex-row gap-2.5 sm:gap-3 w-full pt-2">
             <button
               id="exhibitor-modal-cancel"
               type="button"
-              class="w-full sm:w-1/2 h-11 px-5 rounded-pill border-2 border-ink/20 text-ink/80 hover:bg-paper font-semibold transition-all text-small"
+              class="w-full sm:w-1/2 h-11 px-5 rounded-pill border-2 border-ink/20 text-ink/80 hover:bg-paper font-semibold transition-all text-small flex items-center justify-center"
             >
               Cancelar
             </button>

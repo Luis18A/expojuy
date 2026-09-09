@@ -20,10 +20,10 @@
   /* Botón Flotante */
   .ej-chat-trigger {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 60px;
-    height: 60px;
+    bottom: 92px;
+    right: 16px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--ej-primary), var(--ej-secondary));
     color: #ffffff;
@@ -34,7 +34,16 @@
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, bottom 0.2s ease;
+  }
+
+  @media (min-width: 768px) {
+    .ej-chat-trigger {
+      bottom: 28px;
+      right: 28px;
+      width: 60px;
+      height: 60px;
+    }
   }
 
   .ej-chat-trigger:hover {
@@ -51,12 +60,12 @@
   /* Ventana Modal del Chat */
   .ej-chat-window {
     position: fixed;
-    bottom: 96px;
-    right: 24px;
+    bottom: 156px;
+    right: 16px;
     width: 360px;
-    max-width: calc(100vw - 40px);
+    max-width: calc(100vw - 32px);
     height: 520px;
-    max-height: calc(100vh - 120px);
+    max-height: calc(100vh - 180px);
     background-color: var(--ej-bg);
     border-radius: var(--ej-radius);
     box-shadow: var(--ej-shadow);
@@ -67,8 +76,16 @@
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px) scale(0.95);
-    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s, bottom 0.2s ease;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  @media (min-width: 768px) {
+    .ej-chat-window {
+      bottom: 100px;
+      right: 28px;
+      max-height: calc(100vh - 120px);
+    }
   }
 
   .ej-chat-window.active {
