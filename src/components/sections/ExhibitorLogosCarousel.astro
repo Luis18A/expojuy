@@ -1,0 +1,292 @@
+---
+// src/components/sections/ExhibitorLogosCarousel.astro
+const base = import.meta.env.BASE_URL;
+const cleanBase = base === '/' ? '' : base.replace(/\/$/, '');
+
+const exhibitors = [
+  { src: `${cleanBase}/images/logos-expositores/agostini-inmobiliaria.png`, alt: 'Agostini Inmobiliaria' },
+  { src: `${cleanBase}/images/logos-expositores/Argencrops SA.svg`, alt: 'Argencrops SA' },
+  { src: `${cleanBase}/images/logos-expositores/avelino.jpg`, alt: 'Avelino' },
+  { src: `${cleanBase}/images/logos-expositores/balut_amarillo_141ddbaad7.png`, alt: 'Balut' },
+  { src: `${cleanBase}/images/logos-expositores/burquina.jpg`, alt: 'Burquina' },
+  { src: `${cleanBase}/images/logos-expositores/CAJUTAC.jpg`, alt: 'CAJUTAC' },
+  { src: `${cleanBase}/images/logos-expositores/camara minera de jujuy.webp`, alt: 'Cámara Minera de Jujuy' },
+  { src: `${cleanBase}/images/logos-expositores/circularinfo.webp`, alt: 'Circular Info' },
+  { src: `${cleanBase}/images/logos-expositores/consejo de la microempresa.png`, alt: 'Consejo de la Microempresa' },
+  { src: `${cleanBase}/images/logos-expositores/cooperativa de tabacaleros de jujuy.jpg`, alt: 'Cooperativa de Tabacaleros de Jujuy' },
+  { src: `${cleanBase}/images/logos-expositores/creacionesOb.jpg`, alt: 'Creaciones OB' },
+  { src: `${cleanBase}/images/logos-expositores/cultura y turismo.png`, alt: 'Cultura y Turismo de Jujuy' },
+  { src: `${cleanBase}/images/logos-expositores/Cámara PyME de Jujuy.webp`, alt: 'Cámara PyME de Jujuy' },
+  { src: `${cleanBase}/images/logos-expositores/diario pregon de jujuy.webp`, alt: 'Diario Pregón' },
+  { src: `${cleanBase}/images/logos-expositores/eltribuno-logo.svg`, alt: 'El Tribuno de Jujuy' },
+  { src: `${cleanBase}/images/logos-expositores/exar_logo-blanco-1536x270.png`, alt: 'Minera Exar' },
+  { src: `${cleanBase}/images/logos-expositores/fullblocksrl.webp`, alt: 'Full Block SRL' },
+  { src: `${cleanBase}/images/logos-expositores/gobierno-salta-2023.svg`, alt: 'Gobierno de Salta' },
+  { src: `${cleanBase}/images/logos-expositores/grupo cenoa.png`, alt: 'Grupo Cenoa' },
+  { src: `${cleanBase}/images/logos-expositores/Grupo NGA (NGA Construcciones SRL).png`, alt: 'Grupo NGA Construcciones' },
+  { src: `${cleanBase}/images/logos-expositores/Hanaq_Group1-1.png`, alt: 'Hanaq Group' },
+  { src: `${cleanBase}/images/logos-expositores/hiperplaca.webp`, alt: 'Hiperplaca' },
+  { src: `${cleanBase}/images/logos-expositores/jujuy al momento.svg`, alt: 'Jujuy al Momento' },
+  { src: `${cleanBase}/images/logos-expositores/just.png`, alt: 'Just' },
+  { src: `${cleanBase}/images/logos-expositores/kappa construcciones.jpg`, alt: 'Kappa Construcciones' },
+  { src: `${cleanBase}/images/logos-expositores/laquiaca.png`, alt: 'Municipalidad de La Quiaca' },
+  { src: `${cleanBase}/images/logos-expositores/ledesma srl.jpg`, alt: 'Ledesma' },
+  { src: `${cleanBase}/images/logos-expositores/Logo___BNA.svg`, alt: 'Banco de la Nación Argentina' },
+  { src: `${cleanBase}/images/logos-expositores/Macro.svg`, alt: 'Banco Macro' },
+  { src: `${cleanBase}/images/logos-expositores/mina pirquitas.jpg`, alt: 'Mina Pirquitas' },
+  { src: `${cleanBase}/images/logos-expositores/Ministerio de Salud de Jujuy.png`, alt: 'Ministerio de Salud de Jujuy' },
+  { src: `${cleanBase}/images/logos-expositores/municiopios de los valles jujeños.jpg`, alt: 'Municipios de los Valles Jujeños' },
+  { src: `${cleanBase}/images/logos-expositores/municipalidad de san salvador de jujuy.png`, alt: 'Municipalidad de San Salvador de Jujuy' },
+  { src: `${cleanBase}/images/logos-expositores/Norte_Panel.png`, alt: 'Norte Panel' },
+  { src: `${cleanBase}/images/logos-expositores/pauny_landing.png`, alt: 'Pauny' },
+  { src: `${cleanBase}/images/logos-expositores/psalogo.svg`, alt: 'PSA' },
+  { src: `${cleanBase}/images/logos-expositores/PUSSETTO-HORIZONTAL-AZUL@4x-scaled.png`, alt: 'Pussetto' },
+  { src: `${cleanBase}/images/logos-expositores/radiovision.png`, alt: 'Radio Visión Jujuy' },
+  { src: `${cleanBase}/images/logos-expositores/remax.svg`, alt: 'RE/MAX' },
+  { src: `${cleanBase}/images/logos-expositores/rentas jujuy.png`, alt: 'Rentas Jujuy' },
+  { src: `${cleanBase}/images/logos-expositores/royalprestigelogovector.svg`, alt: 'Royal Prestige' },
+  { src: `${cleanBase}/images/logos-expositores/san pedro de jujuy.png`, alt: 'Municipalidad de San Pedro de Jujuy' },
+  { src: `${cleanBase}/images/logos-expositores/secretaría de energía de jujuy.jpg`, alt: 'Secretaría de Energía de Jujuy' },
+  { src: `${cleanBase}/images/logos-expositores/tacitadeplatajoyas.webp`, alt: 'Tacita de Plata Joyas' },
+  { src: `${cleanBase}/images/logos-expositores/TB-Cargo_LOGO-50ANIVERSARIO.svg`, alt: 'TB Cargo' },
+  { src: `${cleanBase}/images/logos-expositores/terramac.jpg`, alt: 'Terramac' },
+  { src: `${cleanBase}/images/logos-expositores/travilsas.webp`, alt: 'Travil SAS' },
+  { src: `${cleanBase}/images/logos-expositores/ucasal-logo.png`, alt: 'UCASAL' },
+  { src: `${cleanBase}/images/logos-expositores/uces.svg`, alt: 'UCES' },
+  { src: `${cleanBase}/images/logos-expositores/VILLANUEVA_LOGO_color_horizontal.webp`, alt: 'Villanueva e Hijos' },
+  { src: `${cleanBase}/images/logos-expositores/yaguar.png`, alt: 'Yaguar' },
+];
+---
+
+{exhibitors.length > 0 && (
+  <section
+    class="exhibitor-logos section"
+    aria-labelledby="exhibitor-logos-title"
+  >
+    <div class="container">
+      <header class="exhibitor-logos__heading">
+        <p class="eyebrow">EMPRESAS PARTICIPANTES</p>
+        <h2 id="exhibitor-logos-title">
+          Marcas y organizaciones presentes en ExpoJuy 2026
+        </h2>
+      </header>
+
+      <div
+        class="exhibitor-logos__viewport"
+        data-exhibitor-logos-carousel
+        tabindex="0"
+        aria-label="Carrusel de logos de empresas participantes"
+      >
+        <div class="exhibitor-logos__track">
+          <div class="exhibitor-logos__group">
+            {exhibitors.map((exhibitor) => (
+              <div class="exhibitor-logo">
+                <img
+                  src={exhibitor.src}
+                  alt={exhibitor.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ))}
+          </div>
+
+          <div class="exhibitor-logos__group" aria-hidden="true">
+            {exhibitors.map((exhibitor) => (
+              <div class="exhibitor-logo">
+                <img
+                  src={exhibitor.src}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .exhibitor-logos {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-page, #f2f2f2);
+    padding-top: clamp(48px, 6vw, 80px);
+    padding-bottom: clamp(64px, 8vw, 104px);
+  }
+
+  .exhibitor-logos__heading {
+    max-width: 720px;
+    margin-bottom: clamp(28px, 4vw, 48px);
+  }
+
+  .eyebrow {
+    font-family: 'Ambit', system-ui, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--theme-primary, #4a1d96);
+    margin: 0;
+    transition: color 250ms ease;
+  }
+
+  .exhibitor-logos__heading h2 {
+    max-width: 680px;
+    margin: 8px 0 0;
+    color: var(--color-ink, #3c3c3b);
+    font-family: 'Ambit', system-ui, sans-serif;
+    font-size: clamp(30px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+
+  .exhibitor-logos__viewport {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    outline: none;
+  }
+
+  .exhibitor-logos__viewport::before,
+  .exhibitor-logos__viewport::after {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    width: clamp(36px, 8vw, 120px);
+    content: '';
+    pointer-events: none;
+  }
+
+  .exhibitor-logos__viewport::before {
+    left: 0;
+    background: linear-gradient(
+      90deg,
+      var(--color-page, #f2f2f2) 0%,
+      transparent 100%
+    );
+  }
+
+  .exhibitor-logos__viewport::after {
+    right: 0;
+    background: linear-gradient(
+      270deg,
+      var(--color-page, #f2f2f2) 0%,
+      transparent 100%
+    );
+  }
+
+  .exhibitor-logos__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: exhibitor-logos-marquee 42s linear infinite;
+  }
+
+  .exhibitor-logos__group {
+    display: flex;
+    align-items: center;
+    gap: clamp(18px, 3vw, 40px);
+    padding-right: clamp(18px, 3vw, 40px);
+  }
+
+  .exhibitor-logo {
+    display: flex;
+    width: clamp(145px, 15vw, 210px);
+    height: 92px;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 22px;
+    border: 1px solid rgb(60 60 59 / 10%);
+    border-radius: 10px;
+    background: rgb(255 255 255 / 66%);
+    transition:
+      transform 220ms ease,
+      border-color 220ms ease,
+      background-color 220ms ease;
+  }
+
+  .exhibitor-logo img {
+    display: block;
+    width: 100%;
+    max-width: 146px;
+    max-height: 50px;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(1) contrast(0.92);
+    opacity: 0.72;
+    transition:
+      filter 220ms ease,
+      opacity 220ms ease;
+  }
+
+  .exhibitor-logo:hover {
+    border-color: var(--theme-primary, #4a1d96);
+    background: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .exhibitor-logo:hover img {
+    filter: grayscale(0) contrast(1);
+    opacity: 1;
+  }
+
+  @keyframes exhibitor-logos-marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .exhibitor-logos__viewport:hover .exhibitor-logos__track,
+  .exhibitor-logos__viewport:focus-within .exhibitor-logos__track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .exhibitor-logos__track {
+      animation: none;
+    }
+
+    .exhibitor-logos__viewport {
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .exhibitor-logos {
+      padding-top: 48px;
+      padding-bottom: 72px;
+    }
+
+    .exhibitor-logos__heading {
+      margin-bottom: 28px;
+    }
+
+    .exhibitor-logo {
+      width: 138px;
+      height: 80px;
+      padding: 14px 16px;
+      border-radius: 8px;
+    }
+
+    .exhibitor-logo img {
+      max-width: 106px;
+      max-height: 40px;
+    }
+
+    .exhibitor-logos__track {
+      animation-duration: 48s;
+    }
+  }
+</style>

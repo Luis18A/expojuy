@@ -1,0 +1,246 @@
+---
+// src/components/sections/SponsorsCarousel.astro
+// Carrusel infinito de sponsors y aliados oficiales — CSS-only marquee
+
+const sponsors = [
+  { src: '/images/logos-sponsors/1-BGVsbHVM.webp', alt: '' },
+  { src: '/images/logos-sponsors/1-DqeJkg9W.webp', alt: '' },
+  { src: '/images/logos-sponsors/1-eVB6Y33o.webp', alt: '' },
+  { src: '/images/logos-sponsors/2-BIEp5tms.webp', alt: '' },
+  { src: '/images/logos-sponsors/2-ClaA1KXV.webp', alt: '' },
+  { src: '/images/logos-sponsors/2-_DJwGfw4.webp', alt: '' },
+  { src: '/images/logos-sponsors/3-Bvxgh0dh.webp', alt: '' },
+  { src: '/images/logos-sponsors/3-DZG25MF5.webp', alt: '' },
+  { src: '/images/logos-sponsors/4-BhWZMpSy.webp', alt: '' },
+  { src: '/images/logos-sponsors/4-CCqQwTbg.webp', alt: '' },
+  { src: '/images/logos-sponsors/5-po3hVP4a.webp', alt: '' },
+  { src: '/images/logos-sponsors/6-BXeXyAx6.webp', alt: '' },
+  { src: '/images/logos-sponsors/11-Bv-B7Fmn.webp', alt: '' },
+  { src: '/images/logos-sponsors/12-eua9-wcT.webp', alt: '' },
+  { src: '/images/logos-sponsors/28-CwhgGBgx.webp', alt: '' },
+  { src: '/images/logos-sponsors/30-Bn-dXcV9.webp', alt: '' },
+  { src: '/images/logos-sponsors/expojuy-C_qKI6ou.webp', alt: '' },
+  { src: '/images/logos-sponsors/logo-CO53XbFE.webp', alt: '' },
+];
+---
+
+{sponsors.length > 0 && (
+  <section
+    class="sponsors-carousel section"
+    aria-labelledby="sponsors-title"
+  >
+    <div class="container">
+      <header class="sponsors-carousel__heading">
+        <p class="eyebrow">SPONSORS Y ALIADOS</p>
+        <h2 id="sponsors-title">Impulsan ExpoJuy 2026</h2>
+      </header>
+    </div>
+
+    <div
+      class="sponsors-carousel__viewport"
+      data-sponsors-carousel
+      tabindex="0"
+      aria-label="Carrusel de sponsors y aliados oficiales de ExpoJuy 2026"
+    >
+      <div class="sponsors-carousel__track">
+        <div class="sponsors-carousel__group">
+          {sponsors.map((sponsor) => (
+            <div class="sponsor-logo">
+              <img
+                src={sponsor.src}
+                alt={sponsor.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ))}
+        </div>
+
+        <div class="sponsors-carousel__group" aria-hidden="true">
+          {sponsors.map((sponsor) => (
+            <div class="sponsor-logo">
+              <img
+                src={sponsor.src}
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  /* ─── Sección Sponsors ──────────────────────────────────────── */
+  .sponsors-carousel {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-page);
+    padding-top: clamp(48px, 6vw, 80px);
+    padding-bottom: clamp(64px, 8vw, 96px);
+  }
+
+  .sponsors-carousel__heading {
+    max-width: 720px;
+    margin-bottom: clamp(28px, 4vw, 44px);
+  }
+
+  .sponsors-carousel__heading h2 {
+    margin: 8px 0 0;
+    max-width: 640px;
+    color: var(--color-ink);
+    font-size: clamp(30px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+
+  /* ─── Viewport con fade edges ───────────────────────────────── */
+  .sponsors-carousel__viewport {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    outline: none;
+  }
+
+  .sponsors-carousel__viewport::before,
+  .sponsors-carousel__viewport::after {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    width: clamp(36px, 8vw, 120px);
+    content: '';
+    pointer-events: none;
+  }
+
+  .sponsors-carousel__viewport::before {
+    left: 0;
+    background: linear-gradient(
+      90deg,
+      var(--color-page) 0%,
+      transparent 100%
+    );
+  }
+
+  .sponsors-carousel__viewport::after {
+    right: 0;
+    background: linear-gradient(
+      270deg,
+      var(--color-page) 0%,
+      transparent 100%
+    );
+  }
+
+  /* ─── Track y loop continuo ─────────────────────────────────── */
+  .sponsors-carousel__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: sponsors-marquee 36s linear infinite;
+  }
+
+  .sponsors-carousel__group {
+    display: flex;
+    align-items: center;
+    gap: clamp(18px, 3vw, 40px);
+    padding-right: clamp(18px, 3vw, 40px);
+  }
+
+  @keyframes sponsors-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* ─── Cards de logos ────────────────────────────────────────── */
+  .sponsor-logo {
+    display: flex;
+    width: clamp(150px, 15vw, 212px);
+    height: 92px;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 22px;
+    border: 1px solid rgb(60 60 59 / 10%);
+    border-radius: 10px;
+    background: rgb(255 255 255 / 66%);
+    transition:
+      transform 220ms ease,
+      border-color 220ms ease,
+      background-color 220ms ease;
+  }
+
+  .sponsor-logo img {
+    display: block;
+    width: 100%;
+    max-width: 150px;
+    max-height: 50px;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(1) contrast(0.9);
+    opacity: 0.74;
+    transition:
+      filter 220ms ease,
+      opacity 220ms ease;
+  }
+
+  .sponsor-logo:hover {
+    border-color: var(--theme-primary);
+    background: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .sponsor-logo:hover img {
+    filter: grayscale(0) contrast(1);
+    opacity: 1;
+  }
+
+  /* ─── Pausa en hover y focus ────────────────────────────────── */
+  .sponsors-carousel__viewport:hover .sponsors-carousel__track,
+  .sponsors-carousel__viewport:focus-within .sponsors-carousel__track {
+    animation-play-state: paused;
+  }
+
+  /* ─── Reduced motion ────────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .sponsors-carousel__track {
+      animation: none;
+    }
+
+    .sponsors-carousel__viewport {
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+  }
+
+  /* ─── Mobile ────────────────────────────────────────────────── */
+  @media (max-width: 767px) {
+    .sponsors-carousel {
+      padding-top: 48px;
+      padding-bottom: 72px;
+    }
+
+    .sponsor-logo {
+      width: 138px;
+      height: 80px;
+      padding: 14px 16px;
+      border-radius: 8px;
+    }
+
+    .sponsor-logo img {
+      max-width: 108px;
+      max-height: 40px;
+    }
+
+    .sponsors-carousel__track {
+      animation-duration: 42s;
+    }
+  }
+</style>

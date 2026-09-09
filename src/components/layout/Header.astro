@@ -1,103 +1,108 @@
 ---
 // src/components/layout/Header.astro
-import Button from '../ui/Button.astro';
-
 interface Props {
   lang?: 'es' | 'en';
+  activePage?: string;
 }
-const { lang = 'es' } = Astro.props;
+const { lang = 'es', activePage } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
 const navLinks = [
-  { href: `${base}`,            labelEs: 'La Expo',      labelEn: 'The Expo'       },
+  { href: `${base}`,            labelEs: 'La Expo',       labelEn: 'The Expo'        },
   { href: `${base}b2b`,         labelEs: 'Vinculate B2B', labelEn: 'B2B Matchmaking' },
-  { href: `${base}expositores`, labelEs: 'Expositores',  labelEn: 'Exhibitors'     },
-  { href: `${base}agenda`,      labelEs: 'Agenda',       labelEn: 'Schedule'       },
-  { href: `${base}visita`,      labelEs: 'Visitá',       labelEn: 'Visit Us'       },
+  { href: `${base}expositores`, labelEs: 'Expositores',   labelEn: 'Exhibitors'      },
+  { href: `${base}agenda`,      labelEs: 'Agenda',        labelEn: 'Schedule'        },
+  { href: `${base}#novedades`,  labelEs: 'Novedades',     labelEn: 'News'            },
+  { href: `${base}visita`,      labelEs: 'Visitá',        labelEn: 'Visit Us'        },
 ];
 
 const currentPath = Astro.url.pathname;
+const isHome = activePage === 'home' || currentPath === base || currentPath === '/' || currentPath === '';
 ---
 
 <header
   id="site-header"
-  class="fixed top-0 inset-x-0 z-50 transition-all duration-normal"
+  class="site-header"
   aria-label="Navegación principal"
 >
-  <!-- Pill navbar centered (MWC style) -->
-  <div class="container pt-4">
-    <div class="flex items-center justify-between h-16 bg-white/90 backdrop-blur-xl rounded-pill px-5 shadow-md border border-ink/6">
+  <div class="header-shell">
+    <!-- Logo oficial ExpoJuy 2026 -->
+    <a
+      href={base}
+      class="header-logo flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--theme-focus-ring)] rounded-lg"
+      aria-label="ExpoJuy 2026 — Inicio"
+    >
+      <img
+        src="/logos/expojuy26.png"
+        alt="ExpoJuy 2026"
+        class="header-logo__image"
+      />
+    </a>
 
-      <!-- Logo -->
+    <!-- Navegación central con Tubelight (Desktop) -->
+    <nav class="header-nav" data-tubelight-nav aria-label="Menú principal">
+      <!-- Indicador luminoso Tubelight dinámico -->
+      <span class="header-nav__tubelight" aria-hidden="true"></span>
+
+      {navLinks.map(link => {
+        const isActive = currentPath === link.href || (link.href !== base && currentPath.startsWith(link.href));
+        return (
+          <a
+            href={link.href}
+            class={`header-nav__link ${isActive ? 'is-active' : ''}`}
+            data-nav-link
+            aria-current={isActive ? 'page' : undefined}
+            data-label-es={link.labelEs}
+            data-label-en={link.labelEn}
+          >
+            {lang === 'en' ? link.labelEn : link.labelEs}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Acciones a la derecha: Idioma, CTA y Menú Mobile -->
+    <div class="header-actions flex items-center gap-2 sm:gap-3 ml-auto">
+      <!-- Selector de idioma compacto neutro sobre vidrio plateado -->
+      <div class="language-switcher hidden sm:inline-flex" role="group" aria-label="Seleccionar idioma">
+        <button
+          id="btn-lang-es"
+          type="button"
+          class={lang === 'es' ? 'is-active' : ''}
+          aria-pressed={lang === 'es'}
+          aria-current={lang === 'es' ? 'true' : undefined}
+        >ES</button>
+        <button
+          id="btn-lang-en"
+          type="button"
+          class={lang === 'en' ? 'is-active' : ''}
+          aria-pressed={lang === 'en'}
+          aria-current={lang === 'en' ? 'true' : undefined}
+        >EN</button>
+      </div>
+
+      <!-- CTA Comprar entradas dinámica territorial -->
       <a
-        href={base}
-        class="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-mid rounded-lg"
-        aria-label="ExpoJuy 2026 — Inicio"
+        href={`${base}visita`}
+        class="header-cta"
+        data-header-cta
+        data-label-es="Comprar entradas"
+        data-label-en="Buy tickets"
       >
-        <div class="flex flex-col leading-none">
-          <span class="font-ambit font-bold text-[18px] text-violet-dark tracking-tight">EXPOJUY 2026</span>
-          <span class="text-[9px] font-semibold tracking-[0.12em] uppercase text-ink/50">CONECTANDO PAÍSES, CREANDO OPORTUNIDADES</span>
-        </div>
+        {lang === 'en' ? 'Buy tickets' : 'Comprar entradas'}
       </a>
 
-      <!-- Desktop nav -->
-      <nav class="hidden lg:flex items-center gap-1" aria-label="Menú principal">
-        {navLinks.map(link => {
-          const isActive = currentPath === link.href || (link.href !== base && currentPath.startsWith(link.href));
-          return (
-            <a
-              href={link.href}
-              class={[
-                'px-4 py-2 rounded-pill text-small font-semibold transition-all duration-fast',
-                isActive
-                  ? 'bg-violet-dark text-white'
-                  : 'text-ink/70 hover:text-ink hover:bg-paper'
-              ].join(' ')}
-              aria-current={isActive ? 'page' : undefined}
-              data-label-es={link.labelEs}
-              data-label-en={link.labelEn}
-            >
-              {lang === 'en' ? link.labelEn : link.labelEs}
-            </a>
-          );
-        })}
-      </nav>
-
-      <!-- Actions -->
-      <div class="flex items-center gap-2">
-        <!-- Language switcher -->
-        <div class="hidden sm:flex items-center bg-paper rounded-pill p-0.5" role="group" aria-label="Seleccionar idioma">
-          <button
-            id="btn-lang-es"
-            type="button"
-            class={`px-3 py-1 rounded-pill text-caption font-bold transition-all ${lang === 'es' ? 'bg-white shadow-sm text-ink' : 'text-ink/50 hover:text-ink'}`}
-            aria-pressed={lang === 'es'}
-          >ES</button>
-          <button
-            id="btn-lang-en"
-            type="button"
-            class={`px-3 py-1 rounded-pill text-caption font-bold transition-all ${lang === 'en' ? 'bg-white shadow-sm text-ink' : 'text-ink/50 hover:text-ink'}`}
-            aria-pressed={lang === 'en'}
-          >EN</button>
-        </div>
-
-        <!-- CTA -->
-        <Button href={`${base}visita`} size="sm" class="hidden sm:inline-flex">
-          Comprar entradas
-        </Button>
-
-        <!-- Mobile hamburger -->
-        <button
-          id="mobile-menu-btn"
-          type="button"
-          class="lg:hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-paper transition-colors"
-          aria-label="Abrir menú"
-          aria-expanded="false"
-          aria-controls="mobile-menu"
-        >
-          <span class="material-symbols-outlined text-[22px]" aria-hidden="true">menu</span>
-        </button>
-      </div>
+      <!-- Botón menú mobile (hamburguesa con acento dinámico) -->
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        class="header-menu-button lg:hidden"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="material-symbols-outlined text-[22px]" aria-hidden="true">menu</span>
+      </button>
     </div>
   </div>
 </header>
@@ -105,7 +110,7 @@ const currentPath = Astro.url.pathname;
 <!-- Mobile drawer -->
 <div
   id="mobile-menu"
-  class="fixed inset-0 z-[60] hidden"
+  class="fixed inset-0 z-[120] hidden"
   role="dialog"
   aria-modal="true"
   aria-label="Menú de navegación"
@@ -116,11 +121,15 @@ const currentPath = Astro.url.pathname;
   <!-- Panel -->
   <div class="absolute top-0 right-0 h-full w-72 bg-white shadow-lg flex flex-col">
     <div class="flex items-center justify-between px-5 py-4 border-b border-ink/8">
-      <span class="font-bold text-violet-dark">ExpoJuy 2026</span>
+      <img
+        src="/logos/expojuy26.png"
+        alt="ExpoJuy 2026"
+        class="h-7 w-auto object-contain"
+      />
       <button
         id="mobile-menu-close"
         type="button"
-        class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-paper"
+        class="header-drawer__close w-10 h-10 flex items-center justify-center rounded-full text-ink transition-colors"
         aria-label="Cerrar menú"
       >
         <span class="material-symbols-outlined text-[22px]" aria-hidden="true">close</span>
@@ -133,11 +142,11 @@ const currentPath = Astro.url.pathname;
         return (
           <a
             href={link.href}
-            class={[
-              'px-4 py-3 rounded-md text-body font-semibold transition-colors',
-              isActive ? 'bg-violet-dark text-white' : 'text-ink hover:bg-paper'
-            ].join(' ')}
+            class={`header-drawer__link ${isActive ? 'is-active' : ''}`}
             aria-current={isActive ? 'page' : undefined}
+            data-drawer-link
+            data-label-es={link.labelEs}
+            data-label-en={link.labelEn}
           >
             {lang === 'en' ? link.labelEn : link.labelEs}
           </a>
@@ -148,26 +157,88 @@ const currentPath = Astro.url.pathname;
     <div class="p-5 border-t border-ink/8 flex flex-col gap-3">
       <!-- Lang switcher mobile -->
       <div class="flex items-center gap-2" role="group" aria-label="Idioma">
-        <button id="mobile-btn-lang-es" type="button" class={`flex-1 py-2 rounded-pill text-small font-bold border-2 transition-all ${lang === 'es' ? 'bg-violet-dark border-violet-dark text-white' : 'border-ink/20 text-ink/60'}`}>ES</button>
-        <button id="mobile-btn-lang-en" type="button" class={`flex-1 py-2 rounded-pill text-small font-bold border-2 transition-all ${lang === 'en' ? 'bg-violet-dark border-violet-dark text-white' : 'border-ink/20 text-ink/60'}`}>EN</button>
+        <button
+          id="mobile-btn-lang-es"
+          type="button"
+          class={`header-drawer__lang-btn ${lang === 'es' ? 'is-active' : ''}`}
+        >ES</button>
+        <button
+          id="mobile-btn-lang-en"
+          type="button"
+          class={`header-drawer__lang-btn ${lang === 'en' ? 'is-active' : ''}`}
+        >EN</button>
       </div>
-      <Button href={`${base}visita`} class="w-full justify-center">Comprar entradas</Button>
+      <a
+        href={`${base}visita`}
+        class="header-cta w-full justify-center text-center"
+        data-header-cta
+        data-label-es="Comprar entradas"
+        data-label-en="Buy tickets"
+      >
+        {lang === 'en' ? 'Buy tickets' : 'Comprar entradas'}
+      </a>
     </div>
   </div>
 </div>
 
-<!-- Spacer for fixed header -->
-<div class="h-24" aria-hidden="true"></div>
+<!-- Spacer for fixed/absolute header en páginas no-home para evitar solapamiento -->
+{!isHome && <div class="h-24" aria-hidden="true"></div>}
 
 <script>
-  // Header scroll behavior
-  const header = document.getElementById('site-header');
-  const observer = new IntersectionObserver(
-    ([entry]) => header?.classList.toggle('shadow-lg', !entry.isIntersecting),
-    { rootMargin: '-80px 0px 0px 0px' }
-  );
-  const sentinel = document.querySelector('main');
-  if (sentinel) observer.observe(sentinel);
+  // Tubelight interaction nativa
+  function initTubelight() {
+    const nav = document.querySelector('[data-tubelight-nav]');
+    if (!nav || nav.dataset.tubelightReady) return;
+    nav.dataset.tubelightReady = 'true';
+
+    const light = nav.querySelector('.header-nav__tubelight');
+    const links = Array.from(nav.querySelectorAll('[data-nav-link]'));
+    if (!light || links.length === 0) return;
+
+    const getActiveLink = () =>
+      nav.querySelector('[aria-current="page"]') ||
+      nav.querySelector('.is-active') ||
+      links[0];
+
+    const moveTubelight = (target) => {
+      if (!target || !light) return;
+
+      const navRect = nav.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const inset = Math.min(10, Math.max(6, targetRect.width * 0.14));
+      const width = Math.max(18, targetRect.width - inset * 2);
+      const left = targetRect.left - navRect.left + inset;
+
+      nav.style.setProperty('--tubelight-left', `${left}px`);
+      nav.style.setProperty('--tubelight-width', `${width}px`);
+      nav.style.setProperty('--tubelight-opacity', '1');
+    };
+
+    const resetTubelight = () => moveTubelight(getActiveLink());
+
+    requestAnimationFrame(resetTubelight);
+
+    links.forEach((link) => {
+      link.addEventListener('mouseenter', () => moveTubelight(link));
+      link.addEventListener('focus', () => moveTubelight(link));
+      link.addEventListener('click', () => requestAnimationFrame(() => moveTubelight(link)));
+    });
+
+    nav.addEventListener('mouseleave', resetTubelight);
+
+    const resizeObserver = new ResizeObserver(() => {
+      requestAnimationFrame(resetTubelight);
+    });
+
+    resizeObserver.observe(nav);
+    window.addEventListener('resize', resetTubelight);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTubelight);
+  } else {
+    initTubelight();
+  }
 
   // Mobile menu
   const menuBtn = document.getElementById('mobile-menu-btn');
@@ -194,10 +265,54 @@ const currentPath = Astro.url.pathname;
   menu?.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
 
   // Language switcher
-  function setLang(lang: string) {
+  function updateHeaderUI(lang) {
+    const isEn = lang === 'en';
+
+    const btnEs = document.getElementById('btn-lang-es');
+    const btnEn = document.getElementById('btn-lang-en');
+    const mBtnEs = document.getElementById('mobile-btn-lang-es');
+    const mBtnEn = document.getElementById('mobile-btn-lang-en');
+
+    [btnEs, mBtnEs].forEach((btn) => {
+      btn?.classList.toggle('is-active', !isEn);
+      btn?.setAttribute('aria-pressed', String(!isEn));
+    });
+    [btnEn, mBtnEn].forEach((btn) => {
+      btn?.classList.toggle('is-active', isEn);
+      btn?.setAttribute('aria-pressed', String(isEn));
+    });
+
+    // Update nav links in desktop and mobile drawer
+    document.querySelectorAll('[data-nav-link], [data-drawer-link]').forEach((link) => {
+      const text = isEn ? link.dataset.labelEn : link.dataset.labelEs;
+      if (text) link.textContent = text;
+    });
+
+    // Update CTAs
+    document.querySelectorAll('[data-header-cta]').forEach((cta) => {
+      const text = isEn ? cta.dataset.labelEn : cta.dataset.labelEs;
+      if (text) cta.textContent = text;
+    });
+
+    // Reposition tubelight after text change
+    const activeLink = document.querySelector('.header-nav__link.is-active');
+    if (activeLink && tubelight) {
+      requestAnimationFrame(() => {
+        const linkRect = activeLink.getBoundingClientRect();
+        const navRect = navList?.getBoundingClientRect();
+        if (navRect) {
+          tubelight.style.left = `${linkRect.left - navRect.left}px`;
+          tubelight.style.width = `${linkRect.width}px`;
+        }
+      });
+    }
+  }
+
+  function setLang(lang) {
     localStorage.setItem('expojuy_lang', lang);
     document.documentElement.lang = lang;
     document.documentElement.dataset.lang = lang;
+    updateHeaderUI(lang);
     window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
   }
 
@@ -205,4 +320,379 @@ const currentPath = Astro.url.pathname;
   document.getElementById('btn-lang-en')?.addEventListener('click', () => setLang('en'));
   document.getElementById('mobile-btn-lang-es')?.addEventListener('click', () => setLang('es'));
   document.getElementById('mobile-btn-lang-en')?.addEventListener('click', () => setLang('en'));
+
+  // Sync initial language preference on load
+  const initialLang = localStorage.getItem('expojuy_lang') || document.documentElement.lang || 'es';
+  if (initialLang === 'en') {
+    updateHeaderUI('en');
+  }
 </script>
+
+<style>
+  .site-header {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 12px 16px;
+    pointer-events: none;
+  }
+
+  /* ─── Barra principal: Vidrio plateado translúcido ───────────── */
+  .header-shell {
+    width: min(100%, 1360px);
+    min-height: 64px;
+    margin-inline: auto;
+    padding: 8px 10px 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    border: 1px solid rgb(255 255 255 / 68%);
+    border-radius: 16px;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgb(255 255 255 / 72%),
+        rgb(235 235 235 / 58%)
+      );
+
+    box-shadow:
+      0 12px 36px rgb(60 60 59 / 12%),
+      inset 0 1px 0 rgb(255 255 255 / 82%),
+      inset 0 -1px 0 rgb(60 60 59 / 8%);
+
+    backdrop-filter: blur(22px) saturate(135%);
+    -webkit-backdrop-filter: blur(22px) saturate(135%);
+
+    pointer-events: auto;
+
+    transition:
+      background 500ms ease,
+      border-color 500ms ease,
+      box-shadow 500ms ease;
+  }
+
+  .header-logo__image {
+    display: block;
+    width: auto;
+    height: 38px;
+    max-width: 210px;
+    object-fit: contain;
+  }
+
+  /* ─── Navegación central con Tubelight sobre vidrio plateado ─── */
+  .header-nav {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 4px;
+
+    border: 1px solid rgb(255 255 255 / 52%);
+    border-radius: 12px;
+
+    background: rgb(255 255 255 / 20%);
+
+    backdrop-filter: blur(14px) saturate(125%);
+    -webkit-backdrop-filter: blur(14px) saturate(125%);
+
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 38%),
+      inset 0 -1px 0 rgb(60 60 59 / 6%);
+  }
+
+  .header-nav__link {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 13px;
+    border-radius: 9px;
+    color: rgb(60 60 59 / 74%);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+
+    transition:
+      color 240ms ease,
+      background-color 240ms ease,
+      box-shadow 240ms ease,
+      border-color 240ms ease;
+  }
+
+  .header-nav__link:hover {
+    color: var(--color-ink, #3c3c3b);
+    background: rgb(255 255 255 / 48%);
+  }
+
+  .header-nav__link.is-active,
+  .header-nav__link[aria-current='page'] {
+    color: var(--color-ink, #3c3c3b);
+    background: rgb(255 255 255 / 58%);
+    box-shadow:
+      inset 0 0 0 1px rgb(60 60 59 / 10%),
+      0 3px 10px rgb(60 60 59 / 8%);
+    border-bottom: 2px solid var(--theme-primary);
+  }
+
+  /* ─── Indicador luminoso Tubelight sobre fondo claro ─────────── */
+  .header-nav__tubelight {
+    position: absolute;
+    z-index: 3;
+    top: -5px;
+    left: var(--tubelight-left, 0px);
+    width: var(--tubelight-width, 0px);
+    height: 3px;
+    border-radius: 999px;
+    pointer-events: none;
+    opacity: var(--tubelight-opacity, 0);
+    background: var(--theme-primary);
+
+    box-shadow:
+      0 0 6px var(--theme-primary),
+      0 -3px 11px color-mix(
+        in srgb,
+        var(--theme-primary) 45%,
+        transparent
+      );
+
+    transition:
+      left 480ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      width 480ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      opacity 220ms ease,
+      background-color 650ms ease,
+      box-shadow 650ms ease;
+  }
+
+  .header-nav__tubelight::before,
+  .header-nav__tubelight::after {
+    position: absolute;
+    left: 50%;
+    border-radius: 999px;
+    content: '';
+    transform: translateX(-50%);
+    background: var(--theme-primary);
+    pointer-events: none;
+    transition: background-color 650ms ease;
+  }
+
+  .header-nav__tubelight::before {
+    top: -5px;
+    width: 140%;
+    height: 10px;
+    opacity: 0.22;
+    filter: blur(6px);
+  }
+
+  .header-nav__tubelight::after {
+    top: -11px;
+    width: 200%;
+    height: 20px;
+    opacity: 0.08;
+    filter: blur(12px);
+  }
+
+  /* ─── Selector de idioma integrado en barra clara ────────────── */
+  .language-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px;
+    border: 1px solid rgb(60 60 59 / 12%);
+    border-radius: 10px;
+    background: rgb(255 255 255 / 42%);
+  }
+
+  .language-switcher button,
+  .language-switcher a {
+    display: inline-flex;
+    min-height: 32px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 9px;
+    border-radius: 7px;
+    color: rgb(60 60 59 / 62%);
+    font-size: 12px;
+    font-weight: 700;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    transition: color 180ms ease, background-color 180ms ease;
+  }
+
+  .language-switcher .is-active,
+  .language-switcher [aria-current='true'],
+  .language-switcher [aria-pressed='true'] {
+    background: rgb(255 255 255 / 78%);
+    color: var(--color-ink, #3c3c3b);
+    box-shadow: 0 2px 7px rgb(60 60 59 / 8%);
+  }
+
+  .language-switcher button:focus-visible {
+    outline: 2px solid var(--theme-focus-ring);
+    outline-offset: 2px;
+  }
+
+  /* ─── CTA Comprar entradas armonizada con barra plateada ──────── */
+  .header-cta {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 18px;
+    border: 1px solid var(--theme-primary);
+    border-radius: 10px;
+    background: var(--theme-primary);
+    color: var(--theme-on-primary);
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    text-decoration: none;
+
+    transition:
+      transform 220ms ease,
+      filter 220ms ease,
+      background-color 650ms ease,
+      border-color 650ms ease;
+  }
+
+  .header-cta:hover {
+    background: var(--theme-primary-hover);
+    border-color: var(--theme-primary-hover);
+    transform: translateY(-1px);
+  }
+
+  .header-cta:focus-visible,
+  .header-nav__link:focus-visible {
+    outline: 3px solid var(--theme-focus-ring);
+    outline-offset: 3px;
+  }
+
+  /* ─── Botón Menú Mobile sobre fondo claro ────────────────────── */
+  .header-menu-button {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgb(255 255 255 / 42%);
+    border: 1px solid rgb(60 60 59 / 12%);
+    color: var(--color-ink, #3c3c3b);
+    cursor: pointer;
+    transition:
+      color 200ms ease,
+      background-color 200ms ease,
+      border-color 200ms ease;
+  }
+
+  .header-menu-button:hover,
+  .header-menu-button[aria-expanded='true'] {
+    border-color: var(--theme-primary);
+    color: var(--theme-primary);
+    background: rgb(255 255 255 / 78%);
+  }
+
+  .header-menu-button:focus-visible {
+    outline: 3px solid var(--theme-focus-ring);
+    outline-offset: 3px;
+  }
+
+  /* ─── Drawer Mobile items ────────────────────────────────────── */
+  .header-drawer__link {
+    display: block;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-ink, #3c3c3b);
+    text-decoration: none;
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+
+  .header-drawer__link:hover {
+    background: var(--color-paper, #f2f2f2);
+  }
+
+  .header-drawer__link.is-active {
+    background: var(--theme-primary);
+    color: var(--theme-on-primary);
+  }
+
+  .header-drawer__lang-btn {
+    flex: 1;
+    padding: 8px 0;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    border: 2px solid rgba(60, 60, 59, 0.2);
+    color: rgba(60, 60, 59, 0.6);
+    background: transparent;
+    cursor: pointer;
+    transition: all 200ms ease;
+  }
+
+  .header-drawer__lang-btn.is-active {
+    background: var(--theme-primary);
+    border-color: var(--theme-primary);
+    color: var(--theme-on-primary);
+  }
+
+  .header-drawer__close:hover {
+    color: var(--theme-primary);
+    background: var(--theme-tint);
+  }
+
+  /* ─── Responsive Media Queries ───────────────────────────────── */
+  @media (max-width: 1023px) {
+    .site-header {
+      padding: 10px 12px;
+    }
+
+    .header-shell {
+      min-height: 58px;
+      padding: 7px 8px 7px 14px;
+      border-radius: 14px;
+      gap: 10px;
+      background:
+        linear-gradient(
+          135deg,
+          rgb(255 255 255 / 78%),
+          rgb(232 232 232 / 64%)
+        );
+    }
+
+    .header-nav {
+      display: none;
+    }
+
+    .header-logo__image {
+      height: 28px;
+      max-width: 160px;
+    }
+
+    .header-cta {
+      min-height: 40px;
+      padding-inline: 12px;
+      border-radius: 9px;
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .header-logo__image {
+      height: 28px;
+      max-width: 145px;
+    }
+  }
+</style>

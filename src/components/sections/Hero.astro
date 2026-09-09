@@ -1,102 +1,1016 @@
 ---
 // src/components/sections/Hero.astro
-import Button from '../ui/Button.astro';
-import Badge from '../ui/Badge.astro';
+import { heroExhibitors } from '../../data/hero-expositores';
 
 const base = import.meta.env.BASE_URL;
+
+const stats = [
+  { value: '+250', label: 'Expositores' },
+  { value: '4', label: 'Países' },
+  { value: '+40K', label: 'Visitantes' },
+  { value: '4', label: 'Días' },
+];
+
+const regions = [
+  { id: 'all', label: 'Todos' },
+  { id: 'yungas', label: 'Yungas' },
+  { id: 'valles', label: 'Valles' },
+  { id: 'puna', label: 'Puna' },
+  { id: 'quebrada', label: 'Quebrada' },
+];
+
+// Muestra equilibrada inicial para "Todos los territorios" (máximo 5)
+const initialBalancedIds = ['minera-exar', 'ledesma', 'villanueva-hijos', 'nga-group', 'hanacolla'];
 ---
 
 <section
-  class="relative min-h-[90svh] flex items-center overflow-hidden bg-violet-dark"
+  class="hero-spotlight theme-transition"
+  data-hero-spotlight
+  data-region="all"
   aria-label="Hero — ExpoJuy 2026"
 >
-  <!-- Gradient background -->
-  <div class="absolute inset-0 bg-gradient-hero opacity-90" aria-hidden="true"></div>
-
-  <!-- Geometric decoration circles -->
-  <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/5 blur-3xl pointer-events-none" aria-hidden="true"></div>
-  <div class="absolute bottom-0 -left-16 w-72 h-72 rounded-full bg-cyan/10 blur-3xl pointer-events-none" aria-hidden="true"></div>
-
-  <!-- Grid pattern overlay -->
-  <div
-    class="absolute inset-0 opacity-[0.04] pointer-events-none"
-    style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 32px 32px;"
+  <!-- Video institucional general ExpoJuy (visible en "all") -->
+  <video
+    class="hero-spotlight__video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
     aria-hidden="true"
-  ></div>
+  >
+    <source src="/video-institucionalexpo.mp4" type="video/mp4" />
+  </video>
 
-  <div class="container relative z-10 py-20 lg:py-28">
-    <div class="max-w-3xl flex flex-col gap-6">
+  <!-- Capas de fondo e iluminación editorial desde top: 0 -->
+  <div class="hero-spotlight__image-layer" aria-hidden="true"></div>
+  <div class="hero-spotlight__backdrop" aria-hidden="true"></div>
+  <div class="hero-spotlight__territory-overlay" aria-hidden="true"></div>
 
-      <!-- Eyebrow badges -->
-      <div class="flex flex-wrap items-center gap-2 animate-[fadeInUp_0.5s_ease_both]">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill bg-white/15 text-white/90 text-caption font-semibold uppercase tracking-wider border border-white/20">
-          <span class="w-2 h-2 rounded-full bg-cyan animate-pulse flex-shrink-0" aria-hidden="true"></span>
-          17.ª Edición Multisectorial
+  <!-- Contenido principal -->
+  <div class="hero-spotlight__content container">
+    
+    <!-- Columna izquierda: Copy institucional, CTAs, Cifras y Selector -->
+    <div class="hero-spotlight__copy">
+      
+      <!-- Eyebrows badges -->
+      <div class="hero__eyebrows">
+        <span class="hero__eyebrow-pill">
+          <span class="hero__pulse-dot" aria-hidden="true"></span>
+          <span>17.ª Edición Multisectorial</span>
         </span>
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-pill bg-cyan/20 text-cyan text-caption font-semibold uppercase tracking-wider border border-cyan/30">
-          9-12 Oct 2026 · Ciudad Cultural
+        <span class="hero__eyebrow-pill hero__eyebrow-pill--accent">
+          <span>9-12 Oct 2026 · Ciudad Cultural</span>
         </span>
       </div>
 
-      <!-- H1 -->
+      <!-- Gran titular H1 Editorial -->
       <h1
-        class="text-display text-white font-extrabold tracking-tight leading-none animate-[fadeInUp_0.5s_0.1s_ease_both_backwards]"
+        class="hero__title text-white font-extrabold"
         data-label-es="Jujuy en el centro de todo."
         data-label-en="Jujuy at the center of everything."
       >
         Jujuy en el<br />
-        <span class="text-cyan">centro de todo.</span>
+        <span class="hero__title-accent">centro de todo.</span>
       </h1>
 
-      <!-- Subtitle -->
+      <!-- Descripción institucional -->
       <p
-        class="text-body-lg text-white/75 max-w-xl leading-relaxed animate-[fadeInUp_0.5s_0.2s_ease_both_backwards]"
+        class="hero__subtitle text-white/80 leading-relaxed"
         data-label-es="ExpoJuy 2026 conecta el talento, la industria y el trabajo jujeño con el Corredor Bioceánico e inversores internacionales."
         data-label-en="ExpoJuy 2026 connects Jujuy's talent, industry, and workforce with the Bioceanic Corridor and international investors."
       >
         ExpoJuy 2026 conecta el talento, la industria y el trabajo jujeño con el Corredor Bioceánico e inversores internacionales.
       </p>
 
-      <!-- CTAs -->
-      <div class="flex flex-wrap gap-3 animate-[fadeInUp_0.5s_0.3s_ease_both_backwards]">
-        <Button href={`${base}visita`} variant="inverse" size="lg" icon="confirmation_number">
-          Comprar entradas
-        </Button>
-        <Button href={`${base}agenda`} variant="outline" size="lg" class="border-white/40 text-white hover:bg-white/10" icon="calendar_month">
-          Ver agenda
-        </Button>
+      <!-- CTAs principales -->
+      <div class="hero__ctas flex flex-wrap items-center gap-3.5">
+        <a href={`${base}visita`} class="hero__cta-primary">
+          <span class="material-symbols-outlined text-[20px]" aria-hidden="true">confirmation_number</span>
+          <span>Comprar entradas</span>
+        </a>
+
+        <a href={`${base}agenda`} class="hero__cta-secondary">
+          <span class="material-symbols-outlined text-[20px]" aria-hidden="true">calendar_month</span>
+          <span>Ver agenda</span>
+        </a>
       </div>
 
-      <!-- Stats strip -->
+      <!-- Selector territorial accesible -->
       <div
-        class="flex flex-wrap gap-x-8 gap-y-3 pt-4 border-t border-white/15 animate-[fadeInUp_0.5s_0.4s_ease_both_backwards]"
-        role="list"
-        aria-label="Cifras del evento"
+        class="hero__selector"
+        role="group"
+        aria-label="Selector de territorio"
       >
-        {[
-          { value: '+250', label: 'Expositores' },
-          { value: '4', label: 'Países' },
-          { value: '+40K', label: 'Visitantes' },
-          { value: '4', label: 'Días' },
-        ].map(stat => (
-          <div class="flex flex-col" role="listitem">
-            <span class="text-h2 font-extrabold text-white leading-none">{stat.value}</span>
-            <span class="text-caption text-white/55 uppercase tracking-wider">{stat.label}</span>
+        <div class="hero__selector-header">
+          <span>Territorios de Jujuy</span>
+          <span class="hero__selector-active-label" data-region-label>Todos los territorios</span>
+        </div>
+
+        <div class="hero__selector-pills">
+          {regions.map((r) => (
+            <button
+              type="button"
+              class={`hero__region-btn ${r.id === 'all' ? 'is-active' : ''}`}
+              data-region-trigger={r.id}
+              aria-pressed={r.id === 'all' ? 'true' : 'false'}
+            >
+              <span class="hero__region-dot" aria-hidden="true"></span>
+              <span>{r.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Franja compacta de cifras del evento -->
+      <div class="hero__stats-strip" role="list" aria-label="Cifras del evento">
+        {stats.map((s) => (
+          <div class="hero__stat-mini" role="listitem">
+            <span class="hero__stat-mini-val">{s.value}</span>
+            <span class="hero__stat-mini-lbl">{s.label}</span>
           </div>
         ))}
       </div>
-    </div>
-  </div>
 
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
-    <span class="material-symbols-outlined text-white/40 text-[28px]">keyboard_arrow_down</span>
+    </div>
+
+    <!-- Zona derecha inferior: Spotlight Frames de Expositores -->
+    <div class="hero-spotlight__exhibitors" aria-label="Expositores destacados">
+      <div class="hero-spotlight__exhibitors-heading">
+        <p class="hero-spotlight__exhibitors-eyebrow">Expositores destacados</p>
+        <p class="hero-spotlight__exhibitors-region" data-region-heading>
+          Todos los territorios
+        </p>
+      </div>
+
+      <!-- Tira de tarjetas verticales interactivas -->
+      <div
+        class="spotlight-track"
+        data-spotlight-track
+        role="group"
+        aria-label="Expositores destacados por territorio"
+      >
+        {heroExhibitors.map((ex) => {
+          const isInitial = initialBalancedIds.includes(ex.id);
+          const isFirstOpen = ex.id === 'minera-exar';
+          return (
+            <button
+              type="button"
+              class="spotlight-panel"
+              data-spotlight-panel
+              data-id={ex.id}
+              data-territory={ex.territory}
+              data-open={isFirstOpen ? 'true' : 'false'}
+              aria-pressed={isFirstOpen ? 'true' : 'false'}
+              aria-label={`Ver expositor ${ex.name}`}
+              hidden={!isInitial}
+              aria-hidden={!isInitial ? 'true' : 'false'}
+              tabindex="0"
+            >
+              <img
+                src={ex.image}
+                alt={ex.name}
+                class="spotlight-panel__image"
+                loading="eager"
+              />
+              <div class="spotlight-panel__content">
+                {ex.category && (
+                  <span class="spotlight-panel__category">{ex.category}</span>
+                )}
+                <h3 class="spotlight-panel__name">{ex.name}</h3>
+                <span class="spotlight-panel__link">
+                  <span>Conocer más</span>
+                  <span class="material-symbols-outlined text-[15px]" aria-hidden="true">arrow_forward</span>
+                </span>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      <!-- Estado vacío sobrio para territorios sin expositores registrados aún (ej. Quebrada) -->
+      <p class="spotlight-empty" data-spotlight-empty hidden>
+        Próximamente, nuevos expositores de este territorio.
+      </p>
+    </div>
+
   </div>
 </section>
 
+<!-- Lógica nativa de interacción, filtrado y sincronización territorial -->
+<script is:inline>
+  (() => {
+    const validRegions = ['all', 'yungas', 'valles', 'puna', 'quebrada'];
+    const regionNames = {
+      all: 'Todos los territorios',
+      yungas: 'Región Yungas',
+      valles: 'Región Valles',
+      puna: 'Región Puna',
+      quebrada: 'Región Quebrada',
+    };
+
+    const hero = document.querySelector('[data-hero-spotlight]');
+    if (!hero) return;
+
+    const video = hero.querySelector('.hero-spotlight__video');
+    const imageLayer = hero.querySelector('.hero-spotlight__image-layer');
+    const track = hero.querySelector('[data-spotlight-track]');
+    const emptyState = hero.querySelector('[data-spotlight-empty]');
+    const regionLabel = hero.querySelector('[data-region-label]');
+    const regionHeading = hero.querySelector('[data-region-heading]');
+    const triggers = hero.querySelectorAll('[data-region-trigger]');
+    const panels = Array.from(hero.querySelectorAll('[data-spotlight-panel]'));
+
+    // Lista equilibrada para 'all'
+    const defaultAllIds = ['minera-exar', 'ledesma', 'villanueva-hijos', 'nga-group', 'hanacolla'];
+
+    function getInitialRegion() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const urlRegion = params.get('region');
+        if (urlRegion && validRegions.includes(urlRegion.toLowerCase())) {
+          return urlRegion.toLowerCase();
+        }
+        const saved = localStorage.getItem('expoJuyRegion');
+        if (saved && validRegions.includes(saved.toLowerCase())) {
+          return saved.toLowerCase();
+        }
+      } catch (e) {}
+      return 'all';
+    }
+
+    function openPanel(panelToOpen) {
+      if (!panelToOpen) return;
+      panels.forEach((p) => {
+        const isOpen = p === panelToOpen;
+        p.setAttribute('data-open', isOpen ? 'true' : 'false');
+        p.setAttribute('aria-pressed', isOpen ? 'true' : 'false');
+      });
+    }
+
+    function filterPanels(region) {
+      let targetPanels = [];
+
+      if (region === 'all') {
+        targetPanels = panels.filter((p) => defaultAllIds.includes(p.dataset.id));
+      } else {
+        targetPanels = panels.filter((p) => p.dataset.territory === region);
+      }
+
+      // Limitar a 5 tarjetas máximo
+      const visiblePanels = targetPanels.slice(0, 5);
+
+      panels.forEach((p) => {
+        const isVisible = visiblePanels.includes(p);
+        p.hidden = !isVisible;
+        p.setAttribute('aria-hidden', String(!isVisible));
+        if (!isVisible) {
+          p.setAttribute('data-open', 'false');
+          p.setAttribute('aria-pressed', 'false');
+        }
+      });
+
+      if (visiblePanels.length > 0) {
+        if (emptyState) emptyState.hidden = true;
+        if (track) track.hidden = false;
+        openPanel(visiblePanels[0]);
+      } else {
+        if (track) track.hidden = true;
+        if (emptyState) emptyState.hidden = false;
+      }
+    }
+
+    function applyRegion(region, syncUrl = true) {
+      if (!validRegions.includes(region)) return;
+
+      // 1. Tema global y atributo en hero
+      document.documentElement.dataset.theme = region;
+      hero.dataset.region = region;
+
+      // 2. Fondo (Video vs Imagen territorial)
+      if (region === 'all') {
+        if (imageLayer) imageLayer.style.opacity = '0';
+        if (video) {
+          video.style.opacity = '1';
+          if (video.paused) {
+            video.play().catch(() => {});
+          }
+        }
+      } else {
+        const bgUrl = `/images/hero/${region}.jpg`;
+        if (imageLayer) {
+          imageLayer.style.backgroundImage = `url('${bgUrl}')`;
+          imageLayer.style.opacity = '1';
+        }
+        if (video) {
+          video.style.opacity = '0';
+          if (!video.paused) {
+            video.pause();
+          }
+        }
+      }
+
+      // 3. Etiquetas de región activa
+      const currentName = regionNames[region] || region;
+      if (regionLabel) regionLabel.textContent = currentName;
+      if (regionHeading) regionHeading.textContent = currentName;
+
+      // 4. Botones regionales (aria-pressed y clase activa)
+      triggers.forEach((btn) => {
+        const btnReg = btn.getAttribute('data-region-trigger');
+        const isActive = btnReg === region;
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        btn.classList.toggle('is-active', isActive);
+      });
+
+      // 5. Filtrar paneles y abrir el primero disponible
+      filterPanels(region);
+
+      // 6. Persistencia
+      try {
+        localStorage.setItem('expoJuyRegion', region);
+      } catch (e) {}
+
+      // 7. Sincronización de URL
+      if (syncUrl) {
+        try {
+          const url = new URL(window.location.href);
+          if (region === 'all') {
+            url.searchParams.delete('region');
+          } else {
+            url.searchParams.set('region', region);
+          }
+          window.history.replaceState(null, '', url.pathname + url.search + url.hash);
+        } catch (e) {}
+      }
+    }
+
+    // Inicialización y eventos
+    function initHeroSpotlight() {
+      const initial = getInitialRegion();
+      applyRegion(initial, false);
+
+      // Triggers regionales
+      triggers.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetReg = btn.getAttribute('data-region-trigger');
+          if (targetReg) {
+            applyRegion(targetReg, true);
+          }
+        });
+      });
+
+      // Interacción de paneles de expositores
+      panels.forEach((panel) => {
+        // Hover en dispositivos con cursor
+        panel.addEventListener('pointerenter', (e) => {
+          if (e.pointerType === 'mouse') {
+            openPanel(panel);
+          }
+        });
+
+        // Click / Touch
+        panel.addEventListener('click', (e) => {
+          const isCurrentlyOpen = panel.getAttribute('data-open') === 'true';
+          if (!isCurrentlyOpen) {
+            e.preventDefault();
+            openPanel(panel);
+          } else {
+            // Si ya está abierto, navega al directorio de expositores
+            window.location.href = `${base}expositores`;
+          }
+        });
+
+        // Focus con teclado
+        panel.addEventListener('focus', () => {
+          openPanel(panel);
+        });
+
+        // Navegación con teclado (Flechas, Enter, Espacio)
+        panel.addEventListener('keydown', (e) => {
+          const visible = panels.filter((p) => !p.hidden);
+          const currentIndex = visible.indexOf(panel);
+
+          if (e.key === 'ArrowRight' && currentIndex < visible.length - 1) {
+            e.preventDefault();
+            const next = visible[currentIndex + 1];
+            next.focus();
+            openPanel(next);
+          } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+            e.preventDefault();
+            const prev = visible[currentIndex - 1];
+            prev.focus();
+            openPanel(prev);
+          } else if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            if (panel.getAttribute('data-open') === 'true') {
+              window.location.href = `${base}expositores`;
+            } else {
+              openPanel(panel);
+            }
+          }
+        });
+      });
+
+      // Historial atrás / adelante
+      window.addEventListener('popstate', () => {
+        const reg = getInitialRegion();
+        applyRegion(reg, false);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHeroSpotlight);
+    } else {
+      initHeroSpotlight();
+    }
+  })();
+</script>
+
 <style>
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+  /* ─── Hero Spotlight Base ────────────────────────────────────── */
+  .hero-spotlight {
+    position: relative;
+    isolation: isolate;
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow: hidden;
+    background: #111111;
+    margin: 0;
+    padding: 0;
+    border-bottom-right-radius: 24px;
+    border-bottom-left-radius: 24px;
+  }
+
+  .hero-spotlight__video,
+  .hero-spotlight__image-layer,
+  .hero-spotlight__backdrop,
+  .hero-spotlight__territory-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+  }
+
+  .hero-spotlight__video {
+    z-index: -4;
+    object-fit: cover;
+    object-position: center;
+    transition: opacity 850ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .hero-spotlight__image-layer {
+    z-index: -3;
+    opacity: 0;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: opacity 850ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .hero-spotlight__backdrop {
+    z-index: -2;
+    background:
+      linear-gradient(
+        90deg,
+        rgb(0 0 0 / 74%) 0%,
+        rgb(0 0 0 / 52%) 48%,
+        rgb(0 0 0 / 38%) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgb(0 0 0 / 34%) 0%,
+        rgb(0 0 0 / 54%) 100%
+      );
+  }
+
+  .hero-spotlight__territory-overlay {
+    z-index: -1;
+    background: var(--theme-gradient);
+    opacity: 0.18;
+    mix-blend-mode: multiply;
+    transition:
+      background 850ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      opacity 850ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* ─── Grid de contenido ──────────────────────────────────────── */
+  .hero-spotlight__content {
+    position: relative;
+    z-index: 2;
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(460px, 1.1fr);
+    align-items: end;
+    gap: clamp(32px, 4.5vw, 68px);
+    padding-top: clamp(124px, 15vh, 172px);
+    padding-bottom: clamp(40px, 5vh, 72px);
+  }
+
+  .hero-spotlight__copy {
+    align-self: center;
+    max-width: 620px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .hero-spotlight__exhibitors {
+    width: min(100%, 720px);
+    margin-left: auto;
+    align-self: end;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* ─── Encabezado de la tira de expositores ───────────────────── */
+  .hero-spotlight__exhibitors-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-inline: 4px;
+  }
+
+  .hero-spotlight__exhibitors-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.62);
+    margin: 0;
+  }
+
+  .hero-spotlight__exhibitors-region {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--theme-primary-soft, #ffffff);
+    margin: 0;
+    transition: color 400ms ease;
+  }
+
+  /* ─── Pista de tarjetas Spotlight (Accordion horizontal) ──────── */
+  .spotlight-track {
+    --panel-collapsed-width: 68px;
+    --panel-expanded-width: 320px;
+
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-end;
+    gap: 6px;
+    width: 100%;
+    height: clamp(250px, 32vh, 360px);
+    margin-left: auto;
+  }
+
+  .spotlight-panel {
+    position: relative;
+    flex: 0 1 var(--panel-collapsed-width);
+    min-width: 0;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 16%);
+    border-radius: 12px;
+    background: rgb(12 12 12 / 34%);
+    cursor: pointer;
+    isolation: isolate;
+    padding: 0;
+    text-align: left;
+    transition:
+      flex-basis 850ms cubic-bezier(0.075, 0.82, 0.165, 1),
+      flex-grow 850ms cubic-bezier(0.075, 0.82, 0.165, 1),
+      filter 600ms cubic-bezier(0.075, 0.82, 0.165, 1),
+      border-color 300ms ease,
+      box-shadow 500ms ease;
+  }
+
+  .spotlight-panel:focus-visible {
+    outline: 2px solid var(--theme-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .spotlight-panel[data-open='true'] {
+    flex: 0 0 var(--panel-expanded-width);
+    border-color: var(--theme-primary);
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 14%),
+      0 14px 32px rgb(0 0 0 / 32%);
+  }
+
+  .spotlight-panel__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    user-select: none;
+    pointer-events: none;
+    filter: brightness(0.44) saturate(0.55);
+    transition:
+      filter 600ms cubic-bezier(0.075, 0.82, 0.165, 1),
+      transform 850ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
+  .spotlight-panel[data-open='true'] .spotlight-panel__image {
+    filter: brightness(1) saturate(1);
+    transform: scale(1.02);
+  }
+
+  .spotlight-panel::after {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    content: '';
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgb(0 0 0 / 84%) 0%,
+      rgb(0 0 0 / 32%) 46%,
+      transparent 76%
+    );
+  }
+
+  .spotlight-panel__content {
+    position: absolute;
+    z-index: 2;
+    right: 18px;
+    bottom: 18px;
+    left: 18px;
+    color: #ffffff;
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 300ms ease 240ms,
+      transform 450ms cubic-bezier(0.2, 0.8, 0.2, 1) 240ms;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    pointer-events: none;
+  }
+
+  .spotlight-panel[data-open='true'] .spotlight-panel__content {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .spotlight-panel__category {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--theme-primary-soft, #25c0d4);
+  }
+
+  .spotlight-panel__name {
+    font-size: clamp(16px, 1.6vw, 20px);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .spotlight-panel__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.02em;
+  }
+
+  /* Estado vacío sobrio */
+  .spotlight-empty {
+    margin: 0;
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    background: rgba(12, 12, 12, 0.35);
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    backdrop-filter: blur(10px);
+  }
+
+  /* ─── Elementos del Copy ──────────────────────────────────────── */
+  .hero__eyebrows {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero__eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+  }
+
+  .hero__eyebrow-pill--accent {
+    background: rgba(37, 192, 212, 0.15);
+    border-color: rgba(37, 192, 212, 0.35);
+    color: var(--color-cyan, #25c0d4);
+  }
+
+  .hero__pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--color-cyan, #25c0d4);
+    animation: pulseGlow 2s infinite ease-in-out;
+  }
+
+  .hero__title {
+    font-size: clamp(36px, 4.4vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+
+  .hero__title-accent {
+    color: var(--theme-primary-soft, var(--color-cyan, #25c0d4));
+    transition: color 500ms ease;
+  }
+
+  .hero__subtitle {
+    font-size: clamp(14px, 1.4vw, 16px);
+    margin: 0;
+  }
+
+  /* CTAs */
+  .hero__cta-primary {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: 1px solid var(--theme-primary);
+    border-radius: var(--radius-sm, 10px);
+    background-color: var(--theme-primary);
+    color: #ffffff;
+    padding: 0 22px;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    transition: all 220ms ease;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .hero__cta-primary:hover {
+    background-color: var(--theme-primary-hover, #20201f);
+    border-color: var(--theme-primary-hover, #20201f);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.38);
+  }
+
+  .hero__cta-secondary {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    border-radius: var(--radius-sm, 10px);
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    padding: 0 22px;
+    font-size: 14px;
+    font-weight: 700;
+    backdrop-filter: blur(10px);
+    transition: all 220ms ease;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .hero__cta-secondary:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+  }
+
+  /* Selector Territorial */
+  .hero__selector {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 2px;
+  }
+
+  .hero__selector-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.62);
+    font-weight: 600;
+  }
+
+  .hero__selector-active-label {
+    color: var(--theme-primary-soft, #ffffff);
+    font-weight: 700;
+    transition: color 400ms ease;
+  }
+
+  .hero__selector-pills {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hero__selector-pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero__region-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 13px;
+    border-radius: var(--radius-sm, 8px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(8px);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 12.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 200ms ease;
+  }
+
+  .hero__region-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.36);
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .hero__region-btn[aria-pressed="true"],
+  .hero__region-btn.is-active {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.65);
+    color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
+  }
+
+  .hero__region-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.4);
+    transition: all 200ms ease;
+  }
+
+  .hero__region-btn[aria-pressed="true"] .hero__region-dot,
+  .hero__region-btn.is-active .hero__region-dot {
+    background: var(--theme-primary-soft, #25c0d4);
+    transform: scale(1.3);
+  }
+
+  /* Franja compacta de cifras */
+  .hero__stats-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .hero__stat-mini {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero__stat-mini-val {
+    font-size: 20px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .hero__stat-mini-lbl {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* ─── Responsive Mobile (< 900px) ────────────────────────────── */
+  @media (max-width: 899px) {
+    .hero-spotlight {
+      min-height: auto;
+    }
+
+    .hero-spotlight__content {
+      display: flex;
+      min-height: 100svh;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 28px;
+      padding-top: 124px;
+      padding-bottom: 28px;
+    }
+
+    .hero-spotlight__copy {
+      align-self: stretch;
+      max-width: 100%;
+    }
+
+    .hero-spotlight__exhibitors {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .spotlight-track {
+      --panel-collapsed-width: 52px;
+      --panel-expanded-width: min(56vw, 280px);
+
+      width: 100%;
+      height: clamp(190px, 29vh, 250px);
+      overflow-x: auto;
+      justify-content: flex-start;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+
+    .spotlight-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .spotlight-panel {
+      flex: 0 0 var(--panel-collapsed-width);
+    }
+
+    .spotlight-panel[data-open='true'] {
+      flex-basis: var(--panel-expanded-width);
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(0.85);
+    }
+  }
+
+  /* ─── Responsive Mobile (< 768px) ────────────────────────────── */
+  @media (max-width: 767px) {
+    .hero-spotlight {
+      border-bottom-right-radius: 16px;
+      border-bottom-left-radius: 16px;
+    }
+  }
+
+  /* Reducción de movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-spotlight__video {
+      display: none !important;
+    }
+    .hero-spotlight__image-layer {
+      opacity: 1 !important;
+      transition: none !important;
+    }
+    .spotlight-panel,
+    .spotlight-panel__image,
+    .spotlight-panel__content,
+    .hero__pulse-dot {
+      transition: none !important;
+      animation: none !important;
+    }
   }
 </style>

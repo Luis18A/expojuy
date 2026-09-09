@@ -5,9 +5,12 @@
 
 interface Props {
   activePage?: 'home' | 'agenda' | 'visita' | 'b2b' | 'expositores';
+  locale?: 'es' | 'en';
+  lang?: 'es' | 'en';
 }
 
-const { activePage = 'home' } = Astro.props;
+const { activePage = 'home', locale, lang = 'es' } = Astro.props;
+const currentLocale = locale || lang;
 const base = import.meta.env.BASE_URL;
 
 const items = [
@@ -50,6 +53,7 @@ const items = [
   <div class="flex items-center h-16">
     {items.map(item => {
       const isActive = item.id === activePage;
+      const initialLabel = currentLocale === 'en' ? item.labelEn : item.labelEs;
       return (
         <a
           href={item.href}
@@ -58,8 +62,11 @@ const items = [
             'transition-colors duration-fast',
             isActive ? 'text-violet-dark' : 'text-ink/40 hover:text-ink/70',
           ].join(' ')}
-          aria-label={item.labelEs}
+          aria-label={initialLabel}
           aria-current={isActive ? 'page' : undefined}
+          data-bottomnav-item
+          data-label-es={item.labelEs}
+          data-label-en={item.labelEn}
         >
           <!-- Active indicator pill -->
           <div class={`relative flex flex-col items-center gap-0.5`}>
@@ -69,10 +76,11 @@ const items = [
             <span class="material-symbols-outlined text-[24px] leading-none" aria-hidden="true">{item.icon}</span>
             <span
               class="text-[10px] font-semibold tracking-wide"
+              data-bottomnav-label
               data-label-es={item.labelEs}
               data-label-en={item.labelEn}
             >
-              {item.labelEs}
+              {initialLabel}
             </span>
           </div>
         </a>
@@ -80,3 +88,41 @@ const items = [
     })}
   </div>
 </nav>
+
+<script>
+  function updateBottomNavLanguage(newLang?: string) {
+    const lang = newLang || localStorage.getItem('expojuy_lang') || document.documentElement.lang || 'es';
+    const isEn = lang === 'en';
+
+    document.querySelectorAll<HTMLElement>('[data-bottomnav-item]').forEach(item => {
+      const label = isEn ? item.dataset.labelEn : item.dataset.labelEs;
+      if (label) item.setAttribute('aria-label', label);
+    });
+
+    document.querySelectorAll<HTMLElement>('[data-bottomnav-label]').forEach(label => {
+      const text = isEn ? label.dataset.labelEn : label.dataset.labelEs;
+      if (text) label.textContent = text;
+    });
+  }
+
+  // Escuchar el cambio de idioma emitido por el Header al presionar ES / EN
+  window.addEventListener('langchange', (e: any) => {
+    updateBottomNavLanguage(e.detail?.lang);
+  });
+
+  // Sincronizar cambios entre ventanas / tabs
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'expojuy_lang') {
+      updateBottomNavLanguage(e.newValue || 'es');
+    }
+  });
+
+  // Inicializar al cargar el DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => updateBottomNavLanguage());
+  } else {
+    updateBottomNavLanguage();
+  }
+
+  document.addEventListener('astro:page-load', () => updateBottomNavLanguage());
+</script>
