@@ -5,206 +5,1908 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import BottomNav from '../components/layout/BottomNav.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
-import Badge from '../components/ui/Badge.astro';
 import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
 import Card from '../components/ui/Card.astro';
 
 const base = import.meta.env.BASE_URL;
 
-const sectors = ['Todos', 'Minería & Energía', 'Agroindustria', 'Tecnología', 'Turismo', 'Industria', 'Servicios'];
-
-const exhibitors = [
-  { id: 'litio-solar', name: 'Litio Solar Jujuy S.A.', sector: 'Minería & Energía', stand: 'A-12', territory: 'puna' as const, desc: 'Producción sustentable de carbonato de litio grado batería en Salar de Olaroz.', website: 'https://example.com' },
-  { id: 'agro-jujuy', name: 'AgroJujuy Biocombustibles', sector: 'Agroindustria', stand: 'B-08', territory: 'valles' as const, desc: 'Azúcar, bioetanol y frutas cítricas de exportación con denominación de origen.' },
-  { id: 'noa-tech', name: 'NOA Tech Solutions', sector: 'Tecnología', stand: 'C-03', territory: 'yungas' as const, desc: 'Software de gestión agrícola, IoT e infraestructura de centros de cómputo.' },
-  { id: 'puna-solar', name: 'Puna Solar Energy', sector: 'Minería & Energía', stand: 'A-05', territory: 'puna' as const, desc: 'Parque fotovoltaico a 4.000 msnm. Energía limpia para la red nacional.' },
-  { id: 'quebranda-wines', name: 'Quebrada Wines', sector: 'Turismo', stand: 'B-15', territory: 'quebrada' as const, desc: 'Vinos de altura cultivados sobre 2.500 msnm con gastronomía andina.' },
-  { id: 'metal-noa', name: 'Metal & Construcción NOA', sector: 'Industria', stand: 'B-22', territory: 'yungas' as const, desc: 'Estructuras metálicas modulares, naves industriales y carpintería de aluminio.' },
+const exhibitorBenefits = [
+  {
+    icon: 'visibility',
+    title: 'Visibilidad e impacto masivo de marca',
+    desc: 'Llegá de forma directa a miles de potenciales clientes, compradores calificados, prensa regional y autoridades gubernamentales durante 10 días de exposición continua.',
+    tag: '+120K Visitantes',
+    statLabel: 'COBERTURA MEDIÁTICA',
+    statValue: 'NOA & Nacional',
+    statIcon: 'campaign',
+    accentColor: 'from-violet-dark via-violet-mid to-violet-lavender',
+    iconBg: 'bg-violet-lavender/40 text-violet-dark border-violet-mid/30',
+    pillBg: 'bg-violet-lavender/50 text-violet-dark border border-violet-mid/20',
+  },
+  {
+    icon: 'handshake',
+    title: 'Rondas de Negocios B2B asistidas',
+    desc: 'Acceso preferencial a agendas personalizadas 1 a 1 con compradores de Argentina, Chile, Brasil y Paraguay a través de la plataforma inteligente Sauken.',
+    tag: 'Matchmaking Sauken',
+    statLabel: 'CONEXIONES B2B',
+    statValue: 'Sin Intermediarios',
+    statIcon: 'groups',
+    accentColor: 'from-violet-mid via-cyan to-cyan-dark',
+    iconBg: 'bg-violet-lavender/40 text-violet-dark border-violet-mid/30',
+    pillBg: 'bg-violet-lavender/50 text-violet-dark border border-violet-mid/20',
+  },
+  {
+    icon: 'public',
+    title: 'Posicionamiento en el Corredor Bioceánico',
+    desc: 'Integración comercial activa con los sectores dinámicos de minería de litio, agroindustria, transporte y economía del conocimiento en el eje ZICOSUR.',
+    tag: 'Eje ZICOSUR',
+    statLabel: 'INTEGRACIÓN REGIONAL',
+    statValue: 'Mercado Andino',
+    statIcon: 'explore',
+    accentColor: 'from-cyan via-yungas to-yungas-dark',
+    iconBg: 'bg-cyan/15 text-cyan-dark border-cyan/30',
+    pillBg: 'bg-cyan/20 text-cyan-dark border border-cyan/30',
+  },
+  {
+    icon: 'foundation',
+    title: 'Infraestructura & soporte 360°',
+    desc: 'Servicios de exposición llave en mano: pabellones cubiertos climatizados, diseño modular, seguridad 24/7, acreditación digital y soporte técnico permanente.',
+    tag: 'Servicios Integrales',
+    statLabel: 'INFRAESTRUCTURA',
+    statValue: 'Ciudad Cultural',
+    statIcon: 'verified',
+    accentColor: 'from-valles via-puna to-quebrada',
+    iconBg: 'bg-valles/15 text-valles-dark border-valles/30',
+    pillBg: 'bg-valles/20 text-valles-dark border border-valles/30',
+  },
 ];
 
-const territoryIcon: Record<string, string> = {
-  yungas:   'text-yungas bg-yungas/10',
-  valles:   'text-valles bg-valles/10',
-  puna:     'text-puna bg-puna/10',
-  quebrada: 'text-quebrada bg-quebrada/10',
-};
+const exhibitorPavilionsInfo = [
+  {
+    id: 'pabellon-a',
+    code: 'A',
+    name: 'Pabellón A (Minería & Litio)',
+    desc: 'Espacio exclusivo para minería crítica, litio, energías renovables y grandes proveedores industriales.',
+    badge: 'Alto Impacto',
+    territory: 'puna',
+    icon: 'bolt',
+    features: ['Climatización central', 'Pisos reforzados', 'Red trifásica de alta potencia'],
+  },
+  {
+    id: 'pabellon-b',
+    code: 'B',
+    name: 'Pabellón B (Valles & Comercio)',
+    desc: 'Punto neurálgico para agroindustria, PyMEs jujeñas, desarrollo comercial y cámaras empresariales.',
+    badge: 'Gran Afluencia',
+    territory: 'valles',
+    icon: 'storefront',
+    features: ['Ubicación central', 'Escenario institucional', 'Área de networking'],
+  },
+  {
+    id: 'pabellon-c',
+    code: 'C',
+    name: 'Pabellón C (Tecnología & Servicios)',
+    desc: 'Dedicado a la banca, finanzas, soluciones IT, logística, transporte y entidades gubernamentales.',
+    badge: 'Innovación B2B',
+    territory: 'violet',
+    icon: 'devices',
+    features: ['Conexión de fibra óptica', 'Salas de reuniones VIP', 'Puntos de acreditación'],
+  },
+  {
+    id: 'area-exterior',
+    code: 'EXT',
+    name: 'Área Exterior (Maquinarias)',
+    desc: 'Exposición al aire libre para maquinaria agrícola, vehículos de gran porte, automotriz y gastronomía.',
+    badge: 'Gran Escala',
+    territory: 'yungas',
+    icon: 'local_shipping',
+    features: ['Superficie descubierta', 'Lotes desde 50 m²', 'Acceso de transporte pesado'],
+  },
+];
+
+// Sectors for filter pills
+const sectors = [
+  { name: 'Todos los sectores', value: 'Todos', icon: 'apps' },
+  { name: 'Minería & Litio', value: 'Minería & Litio', icon: 'bolt' },
+  { name: 'Agroindustria & Alimentos', value: 'Agroindustria & Alimentos', icon: 'eco' },
+  { name: 'Construcción & Industria', value: 'Construcción & Industria', icon: 'factory' },
+  { name: 'Tecnología & Servicios', value: 'Tecnología & Servicios', icon: 'devices' },
+  { name: 'Turismo & Cultura', value: 'Turismo & Cultura', icon: 'landscape' },
+  { name: 'Institucional & Medios', value: 'Institucional & Medios', icon: 'account_balance' },
+];
+
+const origins = [
+  'Todo Origen',
+  'Valles',
+  'Puna',
+  'Yungas',
+  'Nacional',
+  'Extraprovincial',
+];
+
+const pavilions = [
+  'Todos los Pabellones',
+  'Pabellón A (Minería)',
+  'Pabellón B (Valles & Comercio)',
+  'Pabellón C (Empresas & Servicios)',
+  'Área Exterior',
+];
+
+interface Exhibitor {
+  id: string;
+  initials: string;
+  name: string;
+  sector: string;
+  origin: string;
+  location: string;
+  pavilion: string;
+  stand: string;
+  territory: 'valles' | 'puna' | 'yungas' | 'quebrada';
+  badgeColor: string;
+  avatarBg: string;
+  desc: string;
+  website?: string;
+  demo?: boolean;
+}
+
+const exhibitors: Exhibitor[] = [
+  // --- VALLES ---
+  {
+    id: 'camara-pyme-jujuy',
+    initials: 'CP',
+    name: 'Cámara PyME de Jujuy',
+    sector: 'Institucional & Medios',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-01',
+    territory: 'valles',
+    badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+    avatarBg: 'bg-emerald-100 text-emerald-700',
+    desc: 'Entidad gremial empresarial dedicada al desarrollo, financiamiento y fortalecimiento del sector pyme jujeño.',
+    website: 'https://camarapymejujuy.com.ar',
+  },
+  {
+    id: 'villanueva-e-hijos',
+    initials: 'VH',
+    name: 'Villanueva e Hijos S.A.',
+    sector: 'Construcción & Industria',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-02',
+    territory: 'valles',
+    badgeColor: 'bg-blue-100 text-blue-800 border-blue-300',
+    avatarBg: 'bg-blue-100 text-blue-700',
+    desc: 'Empresa constructora líder en desarrollos inmobiliarios, viviendas residenciales y obras de infraestructura en el NOA.',
+    website: 'https://villanuevaehijos.com.ar',
+  },
+  {
+    id: 'cajutac',
+    initials: 'CJ',
+    name: 'CAJUTAC (Cámara Jujeña de Transporte Automotor)',
+    sector: 'Tecnología & Servicios',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-03',
+    territory: 'valles',
+    badgeColor: 'bg-sky-100 text-sky-800 border-sky-300',
+    avatarBg: 'bg-sky-100 text-sky-700',
+    desc: 'Organización representativa del transporte automotor de cargas y logística terrestre en la provincia.',
+    website: 'https://cajutac.org/home',
+  },
+  {
+    id: 'grupo-nga',
+    initials: 'NG',
+    name: 'Grupo NGA (NGA Construcciones SRL)',
+    sector: 'Construcción & Industria',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-04',
+    territory: 'valles',
+    badgeColor: 'bg-slate-100 text-slate-800 border-slate-300',
+    avatarBg: 'bg-slate-200 text-slate-700',
+    desc: 'Soluciones integrales de ingeniería, arquitectura corporativa y construcción de obras civiles e industriales.',
+    website: 'https://ngagroup.com.ar/',
+  },
+  {
+    id: 'ministerio-de-salud-jujuy',
+    initials: 'MS',
+    name: 'Ministerio de Salud de Jujuy',
+    sector: 'Institucional & Medios',
+    origin: 'Valles',
+    location: 'Gobierno de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-05',
+    territory: 'valles',
+    badgeColor: 'bg-teal-100 text-teal-800 border-teal-300',
+    avatarBg: 'bg-teal-100 text-teal-700',
+    desc: 'Stand institucional con campañas de prevención, programas de salud pública y atención sanitaria preventiva.',
+    website: 'https://salud.jujuy.gob.ar/',
+  },
+  {
+    id: 'lenarduzzi-automotores',
+    initials: 'LA',
+    name: 'Lenarduzzi Automotores',
+    sector: 'Tecnología & Servicios',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-06',
+    territory: 'valles',
+    badgeColor: 'bg-indigo-100 text-indigo-800 border-indigo-300',
+    avatarBg: 'bg-indigo-100 text-indigo-700',
+    desc: 'Concesionario especializado en la comercialización de vehículos 0km, usados seleccionados y servicio posventa.',
+  },
+  {
+    id: 'eet-n1-general-savio',
+    initials: 'ES',
+    name: 'Escuela de Educación Técnica N°1 "Gral. Savio"',
+    sector: 'Tecnología & Servicios',
+    origin: 'Valles',
+    location: 'Palpalá, Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-07',
+    territory: 'valles',
+    badgeColor: 'bg-cyan-100 text-cyan-800 border-cyan-300',
+    avatarBg: 'bg-cyan-100 text-cyan-700',
+    desc: 'Institución técnica de Palpalá exponente en proyectos tecnológicos, robótica industrial y formación técnica joven.',
+    website: 'https://eet1saviopalpala.edu.ar/',
+  },
+  {
+    id: 'jujuy-al-momento',
+    initials: 'JM',
+    name: 'Jujuy al momento',
+    sector: 'Institucional & Medios',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-09',
+    territory: 'valles',
+    badgeColor: 'bg-purple-100 text-purple-800 border-purple-300',
+    avatarBg: 'bg-purple-100 text-purple-700',
+    desc: 'Periódico digital líder de noticias locales, cobertura periodística en vivo e información de actualidad provincial.',
+    website: 'https://www.jujuyalmomento.com/',
+  },
+  {
+    id: 'circular-info',
+    initials: 'CI',
+    name: 'Circular.info',
+    sector: 'Institucional & Medios',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-10',
+    territory: 'valles',
+    badgeColor: 'bg-violet-100 text-violet-800 border-violet-300',
+    avatarBg: 'bg-violet-100 text-violet-700',
+    desc: 'Plataforma digital de noticias, comunicación corporativa y análisis de tendencias económicas regionales.',
+    website: 'https://circularinfo.ar/',
+  },
+  {
+    id: 'consejo-de-la-microempresa',
+    initials: 'CM',
+    name: 'Consejo de la Microempresa',
+    sector: 'Institucional & Medios',
+    origin: 'Valles',
+    location: 'Gobierno de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-11',
+    territory: 'valles',
+    badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+    avatarBg: 'bg-emerald-100 text-emerald-700',
+    desc: 'Organismo provincial de asistencia financiera y capacitación técnica para emprendedores y microempresas jujeñas.',
+    website: 'https://microempresa.gob.ar/',
+  },
+  {
+    id: 'diario-pregon-jujuy',
+    initials: 'DP',
+    name: 'Diario Pregón de Jujuy',
+    sector: 'Institucional & Medios',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-12',
+    territory: 'valles',
+    badgeColor: 'bg-slate-100 text-slate-800 border-slate-300',
+    avatarBg: 'bg-slate-200 text-slate-700',
+    desc: 'El matutino histórico de la provincia de Jujuy con más de 65 años de trayectoria periodística e impresa.',
+    website: 'https://www.pregon.com.ar/',
+  },
+  {
+    id: 'argencrops-sa',
+    initials: 'AC',
+    name: 'Argencrops SA',
+    sector: 'Agroindustria & Alimentos',
+    origin: 'Valles',
+    location: 'Perico, Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-13',
+    territory: 'valles',
+    badgeColor: 'bg-yellow-100 text-yellow-800 border-yellow-300',
+    avatarBg: 'bg-yellow-100 text-yellow-700',
+    desc: 'Empresa agroexportadora especializada en legumbres, porotos seleccionados y especialidades agrícolas de alta calidad.',
+    website: 'https://argencrops.com/es',
+  },
+  {
+    id: 'cooperativa-tabacaleros-jujuy',
+    initials: 'CT',
+    name: 'Cooperativa de Tabacaleros de Jujuy Ltda.',
+    sector: 'Agroindustria & Alimentos',
+    origin: 'Valles',
+    location: 'Perico, Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-14',
+    territory: 'valles',
+    badgeColor: 'bg-amber-100 text-amber-800 border-amber-300',
+    avatarBg: 'bg-amber-100 text-amber-700',
+    desc: 'Entidad cooperativa pilar del acopio, procesamiento y exportación de producción tabacalera jujeña.',
+    website: 'https://tabacojujuy.com.ar/2024/',
+  },
+  {
+    id: 'kaju-frutos-secos',
+    initials: 'KJ',
+    name: 'Kaju Frutos Secos',
+    sector: 'Agroindustria & Alimentos',
+    origin: 'Valles',
+    location: 'Perico, Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-15',
+    territory: 'valles',
+    badgeColor: 'bg-orange-100 text-orange-800 border-orange-300',
+    avatarBg: 'bg-orange-100 text-orange-700',
+    desc: 'Procesamiento y comercialización de frutos secos seleccionados, mix saludables y productos regionales gourmet.',
+  },
+  {
+    id: 'travil-sas',
+    initials: 'TR',
+    name: 'Travil SAS',
+    sector: 'Construcción & Industria',
+    origin: 'Valles',
+    location: 'Palpalá, Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-16',
+    territory: 'valles',
+    badgeColor: 'bg-slate-100 text-slate-800 border-slate-300',
+    avatarBg: 'bg-slate-200 text-slate-700',
+    desc: 'Provisión de equipamiento industrial, repuestos pesados y soluciones técnicas para minería y construcción.',
+    website: 'https://travil.com.ar/',
+  },
+  {
+    id: 'camara-minera-jujuy',
+    initials: 'CM',
+    name: 'Cámara Minera de Jujuy',
+    sector: 'Minería & Litio',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón A (Minería)',
+    stand: 'A-01',
+    territory: 'valles',
+    badgeColor: 'bg-purple-100 text-purple-800 border-purple-300',
+    avatarBg: 'bg-purple-100 text-purple-700',
+    desc: 'Institución gremial que agrupa a las empresas mineras promoviendo el desarrollo sustentable del litio y minerales.',
+    website: 'https://camaramineradejujuy.com.ar/',
+  },
+  {
+    id: 'remax-noa-ii',
+    initials: 'RX',
+    name: 'Remax Noa II',
+    sector: 'Tecnología & Servicios',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-17',
+    territory: 'valles',
+    badgeColor: 'bg-red-100 text-red-800 border-red-300',
+    avatarBg: 'bg-red-100 text-red-700',
+    desc: 'Red de servicios inmobiliarios internacionales con asesoramiento profesional en compra, venta y tasaciones.',
+    website: 'https://www.remax.com.ar/noaii',
+  },
+  {
+    id: 'municipios-de-los-valles',
+    initials: 'MV',
+    name: 'Municipios de los Valles',
+    sector: 'Institucional & Medios',
+    origin: 'Valles',
+    location: 'Región Valles',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-18',
+    territory: 'valles',
+    badgeColor: 'bg-teal-100 text-teal-800 border-teal-300',
+    avatarBg: 'bg-teal-100 text-teal-700',
+    desc: 'Espacio unificado de difusión turística, cultural y oportunidades productivas de los municipios del circuito Valles.',
+  },
+  {
+    id: 'municipalidad-san-salvador-jujuy',
+    initials: 'SS',
+    name: 'Municipalidad de San Salvador de Jujuy',
+    sector: 'Institucional & Medios',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-19',
+    territory: 'valles',
+    badgeColor: 'bg-sky-100 text-sky-800 border-sky-300',
+    avatarBg: 'bg-sky-100 text-sky-700',
+    desc: 'Stand capitalino con iniciativas de desarrollo urbano, sustentabilidad, servicios digitales y atracción turística.',
+    website: 'https://sansalvadordejujuy.gob.ar/',
+  },
+  {
+    id: 'fullblock-srl',
+    initials: 'FB',
+    name: 'Fullblock SRL',
+    sector: 'Construcción & Industria',
+    origin: 'Valles',
+    location: 'Palpalá, Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-20',
+    territory: 'valles',
+    badgeColor: 'bg-stone-100 text-stone-800 border-stone-300',
+    avatarBg: 'bg-stone-200 text-stone-700',
+    desc: 'Fabricación de bloques de hormigón vibrado, adoquines intertrabados y elementos prefabricados para arquitectura.',
+    website: 'https://fullblock.com.ar/',
+  },
+  {
+    id: 'paiva-apicola',
+    initials: 'PA',
+    name: 'Paiva Apícola',
+    sector: 'Agroindustria & Alimentos',
+    origin: 'Valles',
+    location: 'El Carmen, Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-21',
+    territory: 'valles',
+    badgeColor: 'bg-amber-100 text-amber-800 border-amber-300',
+    avatarBg: 'bg-amber-100 text-amber-700',
+    desc: 'Producción artesanal de miel pura multifloral de monte, polen fraccionado y derivados apícolas de la provincia.',
+    website: 'http://paivaapicola.com.ar',
+  },
+  {
+    id: 'asoc-civil-valles-quebrada-puna',
+    initials: 'AC',
+    name: 'Asoc. Civil y Cultural de los Valles, Quebrada y Puna',
+    sector: 'Turismo & Cultura',
+    origin: 'Valles',
+    location: 'Jujuy, Argentina',
+    pavilion: 'Área Exterior',
+    stand: 'EXT-01',
+    territory: 'valles',
+    badgeColor: 'bg-rose-100 text-rose-800 border-rose-300',
+    avatarBg: 'bg-rose-100 text-rose-700',
+    desc: 'Asociación dedicada a la difusión del patrimonio cultural, preservación de tradiciones e intercambio artesanal.',
+  },
+  {
+    id: 'nort-panel',
+    initials: 'NP',
+    name: 'Nort Panel',
+    sector: 'Construcción & Industria',
+    origin: 'Valles',
+    location: 'Palpalá, Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-22',
+    territory: 'valles',
+    badgeColor: 'bg-indigo-100 text-indigo-800 border-indigo-300',
+    avatarBg: 'bg-indigo-100 text-indigo-700',
+    desc: 'Soluciones en paneles termoaislantes e ignífugos para cámaras frigoríficas, naves industriales y módulos.',
+    website: 'https://nortpanel.com/',
+  },
+  {
+    id: 'avelino-panaderia',
+    initials: 'AP',
+    name: 'Avelino Panadería & Pastelería',
+    sector: 'Agroindustria & Alimentos',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-23',
+    territory: 'valles',
+    badgeColor: 'bg-orange-100 text-orange-800 border-orange-300',
+    avatarBg: 'bg-orange-100 text-orange-700',
+    desc: 'Tradicional marca jujeña de panificados, especialidades de pastelería artesanal y productos regionales de calidad.',
+  },
+  {
+    id: 'radio-vision-jujuy',
+    initials: 'RV',
+    name: 'Radio Visión Jujuy',
+    sector: 'Institucional & Medios',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-24',
+    territory: 'valles',
+    badgeColor: 'bg-purple-100 text-purple-800 border-purple-300',
+    avatarBg: 'bg-purple-100 text-purple-700',
+    desc: 'Multimedio referente de Jujuy integrando televisión abierta (Canal 7), frecuencias de radio y cobertura multiplataforma.',
+    website: 'http://radiovisionjujuy.com.ar/',
+  },
+  {
+    id: 'sec-de-energia-prov-de-jujuy',
+    initials: 'SE',
+    name: 'Sec. de Energía Prov. de Jujuy (MISPTYV)',
+    sector: 'Minería & Litio',
+    origin: 'Valles',
+    location: 'Gobierno de Jujuy',
+    pavilion: 'Pabellón A (Minería)',
+    stand: 'A-02',
+    territory: 'valles',
+    badgeColor: 'bg-cyan-100 text-cyan-800 border-cyan-300',
+    avatarBg: 'bg-cyan-100 text-cyan-700',
+    desc: 'Organismo oficial impulsando la transición energética, parques solares comunitarios y electrificación rural.',
+  },
+  {
+    id: 'grupo-cenoa',
+    initials: 'GC',
+    name: 'Grupo Cenoa',
+    sector: 'Tecnología & Servicios',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-25',
+    territory: 'valles',
+    badgeColor: 'bg-blue-100 text-blue-800 border-blue-300',
+    avatarBg: 'bg-blue-100 text-blue-700',
+    desc: 'Grupo empresarial automotriz líder del NOA con representación oficial de Toyota, Peugeot y marcas internacionales.',
+    website: 'https://grupocenoa.com.ar/',
+  },
+  {
+    id: 'rentas-jujuy',
+    initials: 'RP',
+    name: 'Dirección Provincial de Rentas Jujuy',
+    sector: 'Institucional & Medios',
+    origin: 'Valles',
+    location: 'Gobierno de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-26',
+    territory: 'valles',
+    badgeColor: 'bg-teal-100 text-teal-800 border-teal-300',
+    avatarBg: 'bg-teal-100 text-teal-700',
+    desc: 'Atención personalizada, consultas tributarias, canales digitales y facilidades fiscales para contribuyentes.',
+    website: 'https://rentasjujuy.gob.ar/',
+  },
+  {
+    id: 'agostini-desarrollos-inmobiliarios',
+    initials: 'AG',
+    name: 'Agostini Desarrollos Inmobiliarios SRL',
+    sector: 'Construcción & Industria',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-27',
+    territory: 'valles',
+    badgeColor: 'bg-sky-100 text-sky-800 border-sky-300',
+    avatarBg: 'bg-sky-100 text-sky-700',
+    desc: 'Desarrollos urbanísticos, loteos residenciales e industriales con infraestructura completa en toda la provincia.',
+    website: 'https://agostiniinmobiliaria.com/',
+  },
+  {
+    id: 'kappa-construcciones',
+    initials: 'KC',
+    name: 'Kappa Construcciones SRL',
+    sector: 'Construcción & Industria',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-28',
+    territory: 'valles',
+    badgeColor: 'bg-slate-100 text-slate-800 border-slate-300',
+    avatarBg: 'bg-slate-200 text-slate-700',
+    desc: 'Empresa especializada en la construcción de obras públicas, movimiento de suelos y proyectos de arquitectura.',
+  },
+  {
+    id: 'hiperplaca',
+    initials: 'HP',
+    name: 'Hiperplaca',
+    sector: 'Construcción & Industria',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-29',
+    territory: 'valles',
+    badgeColor: 'bg-indigo-100 text-indigo-800 border-indigo-300',
+    avatarBg: 'bg-indigo-100 text-indigo-700',
+    desc: 'Distribuidor mayorista de placas de yeso, perfilería metálica y aislaciones para construcción liviana en seco.',
+    website: 'https://hiperplaca.com.ar',
+  },
+  {
+    id: 'diario-el-tribuno-jujuy',
+    initials: 'ET',
+    name: 'Diario El Tribuno de Jujuy',
+    sector: 'Institucional & Medios',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-30',
+    territory: 'valles',
+    badgeColor: 'bg-red-100 text-red-800 border-red-300',
+    avatarBg: 'bg-red-100 text-red-700',
+    desc: 'Periódico de referencia provincial con información diaria de política, economía, cultura y cobertura periodística.',
+    website: 'https://eltribunodejujuy.com/',
+  },
+  {
+    id: 'ministerio-de-cultura-y-turismo',
+    initials: 'MT',
+    name: 'Ministerio de Cultura y Turismo de Jujuy',
+    sector: 'Turismo & Cultura',
+    origin: 'Valles',
+    location: 'Gobierno de Jujuy',
+    pavilion: 'Área Exterior',
+    stand: 'EXT-02',
+    territory: 'valles',
+    badgeColor: 'bg-fuchsia-100 text-fuchsia-800 border-fuchsia-300',
+    avatarBg: 'bg-fuchsia-100 text-fuchsia-700',
+    desc: 'Punto oficial de promoción turística, agenda cultural, artesanías regionales y experiencias del destino Jujuy.',
+    website: 'https://culturayturismo.jujuy.gob.ar/',
+  },
+  {
+    id: 'balut-hnos-srl',
+    initials: 'BH',
+    name: 'Balut Hnos SRL',
+    sector: 'Tecnología & Servicios',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Pabellón B (Valles & Comercio)',
+    stand: 'B-31',
+    territory: 'valles',
+    badgeColor: 'bg-blue-100 text-blue-800 border-blue-300',
+    avatarBg: 'bg-blue-100 text-blue-700',
+    desc: 'Empresa pionera de transporte terrestre de larga distancia con modernas unidades y frecuencias interprovinciales.',
+    website: 'https://www.balut.com.ar/es',
+  },
+  {
+    id: 'creaciones-ob',
+    initials: 'OB',
+    name: 'Creaciones OB (Artesanías/Diseño)',
+    sector: 'Turismo & Cultura',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Área Exterior',
+    stand: 'EXT-03',
+    territory: 'valles',
+    badgeColor: 'bg-pink-100 text-pink-800 border-pink-300',
+    avatarBg: 'bg-pink-100 text-pink-700',
+    desc: 'Emprendimiento artesanal dedicado al diseño textil en lana de llama, indumentaria y objetos decorativos andinos.',
+    website: 'https://instagram.com/creaciones_ob',
+  },
+  {
+    id: 'tacita-de-plata-joyas',
+    initials: 'TJ',
+    name: 'Tacita de Plata Joyas',
+    sector: 'Turismo & Cultura',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Área Exterior',
+    stand: 'EXT-04',
+    territory: 'valles',
+    badgeColor: 'bg-violet-100 text-violet-800 border-violet-300',
+    avatarBg: 'bg-violet-100 text-violet-700',
+    desc: 'Orfebrería en plata 925 y pedrería autóctona jujeña con piezas únicas diseñadas y elaboradas a mano.',
+    website: 'https://linktr.ee/tacitadeplatajoyas',
+  },
+  {
+    id: 'burquina-gastronomia',
+    initials: 'BG',
+    name: 'Burquina Gastronomía sobre Ruedas',
+    sector: 'Agroindustria & Alimentos',
+    origin: 'Valles',
+    location: 'San Salvador de Jujuy',
+    pavilion: 'Área Exterior',
+    stand: 'EXT-05',
+    territory: 'valles',
+    badgeColor: 'bg-amber-100 text-amber-800 border-amber-300',
+    avatarBg: 'bg-amber-100 text-amber-700',
+    desc: 'Propuesta gastronómica en food truck con sándwiches gourmet de autor, hamburguesas de llama y papas andinas.',
+  },
+
+  // --- PUNA ---
+  {
+    id: 'municipalidad-la-quiaca',
+    initials: 'LQ',
+    name: 'Municipalidad de La Quiaca',
+    sector: 'Institucional & Medios',
+    origin: 'Puna',
+    location: 'La Quiaca, Jujuy',
+    pavilion: 'Área Exterior',
+    stand: 'EXT-06',
+    territory: 'puna',
+    badgeColor: 'bg-purple-100 text-purple-800 border-purple-300',
+    avatarBg: 'bg-purple-100 text-purple-700',
+    desc: 'Stand institucional de la ciudad fronteriza con promoción turística, patrimonio puneño y acuerdos comerciales.',
+    website: 'https://laquiaca.gob.ar/',
+  },
+  {
+    id: 'hanaq-argentina-sa',
+    initials: 'HA',
+    name: 'Hanaq Argentina SA',
+    sector: 'Minería & Litio',
+    origin: 'Puna',
+    location: 'Salar de Olaroz, Jujuy',
+    pavilion: 'Pabellón A (Minería)',
+    stand: 'A-03',
+    territory: 'puna',
+    badgeColor: 'bg-purple-100 text-purple-800 border-purple-300',
+    avatarBg: 'bg-purple-100 text-purple-700',
+    desc: 'Compañía minera enfocado en la exploración sustentable de salares de litio y proyectos de energía verde.',
+    website: 'https://hanaqgroup.com/es/',
+  },
+  {
+    id: 'minera-exar-sa',
+    initials: 'EX',
+    name: 'Minera Exar SA',
+    sector: 'Minería & Litio',
+    origin: 'Puna',
+    location: 'Salar Cauchari-Olaroz',
+    pavilion: 'Pabellón A (Minería)',
+    stand: 'A-04',
+    territory: 'puna',
+    badgeColor: 'bg-purple-100 text-purple-800 border-purple-300',
+    avatarBg: 'bg-purple-100 text-purple-700',
+    desc: 'Empresa productora de carbonato de litio grado batería con valor agregado local e inversión tecnológica.',
+    website: 'https://www.exar.com.ar/',
+  },
+  {
+    id: 'mina-pirquitas-ssr-mining',
+    initials: 'MP',
+    name: 'Mina Pirquitas (SSR Mining)',
+    sector: 'Minería & Litio',
+    origin: 'Puna',
+    location: 'Rinconada, Jujuy',
+    pavilion: 'Pabellón A (Minería)',
+    stand: 'A-05',
+    territory: 'puna',
+    badgeColor: 'bg-purple-100 text-purple-800 border-purple-300',
+    avatarBg: 'bg-purple-100 text-purple-700',
+    desc: 'Operación polimetálica histórica extractora de plata y zinc en la Puna con compromiso social y ambiental.',
+    website: 'https://www.ssrmining.com/operations/production/puna/',
+  },
+  {
+    id: 'camara-minera-jujuy-rse',
+    initials: 'CM',
+    name: 'Cámara Minera de Jujuy (Desarrollo Comunitario)',
+    sector: 'Minería & Litio',
+    origin: 'Puna',
+    location: 'Puna Jujeña',
+    pavilion: 'Pabellón A (Minería)',
+    stand: 'A-06',
+    territory: 'puna',
+    badgeColor: 'bg-purple-100 text-purple-800 border-purple-300',
+    avatarBg: 'bg-purple-100 text-purple-700',
+    desc: 'Programa de integración socio-comunitaria, desarrollo de proveedores puneños y empleo minero local.',
+    website: 'https://camaramineradejujuy.com.ar/',
+  },
+
+  // --- YUNGAS ---
+  {
+    id: 'municipalidad-san-pedro-jujuy',
+    initials: 'SP',
+    name: 'Municipalidad de San Pedro de Jujuy',
+    sector: 'Institucional & Medios',
+    origin: 'Yungas',
+    location: 'San Pedro, Jujuy',
+    pavilion: 'Área Exterior',
+    stand: 'EXT-07',
+    territory: 'yungas',
+    badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+    avatarBg: 'bg-emerald-100 text-emerald-700',
+    desc: 'Presentación del potencial agrícola, industrial y atractivo ecoturístico del departamento de San Pedro.',
+    website: 'https://sanpedrodejujuy.gob.ar/',
+  },
+  {
+    id: 'grupo-ledesma-srl',
+    initials: 'GL',
+    name: 'Grupo Ledesma SRL',
+    sector: 'Agroindustria & Alimentos',
+    origin: 'Yungas',
+    location: 'Libertador Gral. San Martín',
+    pavilion: 'Pabellón C (Empresas & Servicios)',
+    stand: 'C-01',
+    territory: 'yungas',
+    badgeColor: 'bg-teal-100 text-teal-800 border-teal-300',
+    avatarBg: 'bg-teal-100 text-teal-700',
+    desc: 'Complejo agroindustrial diversificado en producción de azúcar, fibra de caña, bioetanol y cítricos de exportación.',
+    website: 'https://www.ledesma.com.ar/',
+  },
+  {
+    id: 'ledesma-saai',
+    initials: 'LD',
+    name: 'Ledesma SAAI',
+    sector: 'Agroindustria & Alimentos',
+    origin: 'Yungas',
+    location: 'Jujuy, Argentina',
+    pavilion: 'Pabellón C (Empresas & Servicios)',
+    stand: 'C-02',
+    territory: 'yungas',
+    badgeColor: 'bg-teal-100 text-teal-800 border-teal-300',
+    avatarBg: 'bg-teal-100 text-teal-700',
+    desc: 'Empresa emblemática centenaria comprometida con la producción sostenible y la conservación de la Reserva de Biósfera Yungas.',
+    website: 'https://www.ledesma.com.ar/',
+  },
+
+  // --- NACIONAL ---
+  {
+    id: 'banco-nacion',
+    initials: 'BN',
+    name: 'Banco Nación',
+    sector: 'Tecnología & Servicios',
+    origin: 'Nacional',
+    location: 'Argentina',
+    pavilion: 'Pabellón C (Empresas & Servicios)',
+    stand: 'C-03',
+    territory: 'valles',
+    badgeColor: 'bg-sky-100 text-sky-800 border-sky-300',
+    avatarBg: 'bg-sky-100 text-sky-700',
+    desc: 'Entidad bancaria pública de fomento con líneas financieras preferenciales para la producción y el comercio exterior.',
+    website: 'https://bna.com.ar/',
+  },
+  {
+    id: 'psa-purificadores-de-agua',
+    initials: 'PS',
+    name: 'PSA (Purificadores de Agua)',
+    sector: 'Tecnología & Servicios',
+    origin: 'Nacional',
+    location: 'Argentina',
+    pavilion: 'Pabellón C (Empresas & Servicios)',
+    stand: 'C-04',
+    territory: 'valles',
+    badgeColor: 'bg-cyan-100 text-cyan-800 border-cyan-300',
+    avatarBg: 'bg-cyan-100 text-cyan-700',
+    desc: 'Sistemas avanzados de purificación de agua para consumo en hogares, comercios e industrias.',
+    website: 'https://www.psa.com.ar/',
+  },
+  {
+    id: 'supermercado-mayorista-yaguar',
+    initials: 'YG',
+    name: 'Supermercado Mayorista Yaguar SA',
+    sector: 'Agroindustria & Alimentos',
+    origin: 'Nacional',
+    location: 'Argentina',
+    pavilion: 'Pabellón C (Empresas & Servicios)',
+    stand: 'C-05',
+    territory: 'valles',
+    badgeColor: 'bg-red-100 text-red-800 border-red-300',
+    avatarBg: 'bg-red-100 text-red-700',
+    desc: 'Cadena distribuidora mayorista abastecedora del canal minorista y gastronómico con cobertura nacional.',
+    website: 'https://yaguar.com.ar/',
+  },
+  {
+    id: 'uces-universidad',
+    initials: 'UC',
+    name: 'Universidad de Cs. Empresariales y Sociales (UCES)',
+    sector: 'Institucional & Medios',
+    origin: 'Nacional',
+    location: 'Argentina',
+    pavilion: 'Pabellón C (Empresas & Servicios)',
+    stand: 'C-06',
+    territory: 'valles',
+    badgeColor: 'bg-blue-100 text-blue-800 border-blue-300',
+    avatarBg: 'bg-blue-100 text-blue-700',
+    desc: 'Institución universitaria de formación profesional en negocios, salud, ciencias humanas e innovación.',
+    website: 'https://www.uces.edu.ar/',
+  },
+  {
+    id: 'just-region-sogud',
+    initials: 'JT',
+    name: 'Just (Región Sogud)',
+    sector: 'Tecnología & Servicios',
+    origin: 'Nacional',
+    location: 'Argentina',
+    pavilion: 'Pabellón C (Empresas & Servicios)',
+    stand: 'C-07',
+    territory: 'valles',
+    badgeColor: 'bg-rose-100 text-rose-800 border-rose-300',
+    avatarBg: 'bg-rose-100 text-rose-700',
+    desc: 'Productos suizos de bienestar dermocosmético y aromaterapia basados en extractos naturales de plantas.',
+    website: 'https://www.justargentina.com/',
+  },
+  {
+    id: 'royal-prestige',
+    initials: 'RP',
+    name: 'Royal Prestige',
+    sector: 'Tecnología & Servicios',
+    origin: 'Nacional',
+    location: 'Argentina',
+    pavilion: 'Pabellón C (Empresas & Servicios)',
+    stand: 'C-08',
+    territory: 'valles',
+    badgeColor: 'bg-amber-100 text-amber-800 border-amber-300',
+    avatarBg: 'bg-amber-100 text-amber-700',
+    desc: 'Sistemas de cocción de grado quirúrgico y utensilios de cocina diseñados para una nutrición saludable.',
+    website: 'https://www.royalprestige.com/',
+  },
+  {
+    id: 'banco-macro',
+    initials: 'BM',
+    name: 'Banco Macro',
+    sector: 'Tecnología & Servicios',
+    origin: 'Nacional',
+    location: 'Argentina',
+    pavilion: 'Pabellón C (Empresas & Servicios)',
+    stand: 'C-09',
+    territory: 'valles',
+    badgeColor: 'bg-blue-100 text-blue-800 border-blue-300',
+    avatarBg: 'bg-blue-100 text-blue-700',
+    desc: 'Banco privado de mayor red en el norte argentino, referente en financiamiento pyme e inclusión financiera.',
+    website: 'https://www.macro.com.ar/',
+  },
+
+  // --- EXTRAPROVINCIAL ---
+  {
+    id: 'gobierno-provincia-salta',
+    initials: 'GS',
+    name: 'Gobierno de la Provincia de Salta',
+    sector: 'Institucional & Medios',
+    origin: 'Extraprovincial',
+    location: 'Salta, Argentina',
+    pavilion: 'Área Exterior',
+    stand: 'EXT-08',
+    territory: 'valles',
+    badgeColor: 'bg-red-100 text-red-800 border-red-300',
+    avatarBg: 'bg-red-100 text-red-700',
+    desc: 'Stand institucional de la vecina provincia con oferta turística, cultural e integración económica regional.',
+    website: 'https://www.salta.gob.ar/',
+  },
+  {
+    id: 'ucasal-universidad',
+    initials: 'US',
+    name: 'Universidad Católica de Salta (UCASAL)',
+    sector: 'Institucional & Medios',
+    origin: 'Extraprovincial',
+    location: 'Salta, Argentina',
+    pavilion: 'Pabellón C (Empresas & Servicios)',
+    stand: 'C-10',
+    territory: 'valles',
+    badgeColor: 'bg-indigo-100 text-indigo-800 border-indigo-300',
+    avatarBg: 'bg-indigo-100 text-indigo-700',
+    desc: 'Universidad referente del NOA con propuesta de educación a distancia y carreras universitarias de grado.',
+    website: 'https://www.ucasal.edu.ar/',
+  },
+  {
+    id: 'pussetto-salta-sa',
+    initials: 'PS',
+    name: 'Pussetto Salta SA',
+    sector: 'Tecnología & Servicios',
+    origin: 'Extraprovincial',
+    location: 'Salta, Argentina',
+    pavilion: 'Pabellón C (Empresas & Servicios)',
+    stand: 'C-11',
+    territory: 'valles',
+    badgeColor: 'bg-blue-100 text-blue-800 border-blue-300',
+    avatarBg: 'bg-blue-100 text-blue-700',
+    desc: 'Concesionario oficial Ford para la región NOA con utilitarios de flota, pick-ups y servicio corporativo.',
+    website: 'https://fordpussetto.com.ar/',
+  },
+  {
+    id: 'tb-cargo-santa-fe-oil-rigs',
+    initials: 'TB',
+    name: 'TB Cargo / Santa Fe Oil Rigs',
+    sector: 'Construcción & Industria',
+    origin: 'Extraprovincial',
+    location: 'Santa Fe, Argentina',
+    pavilion: 'Pabellón C (Empresas & Servicios)',
+    stand: 'C-12',
+    territory: 'valles',
+    badgeColor: 'bg-slate-100 text-slate-800 border-slate-300',
+    avatarBg: 'bg-slate-200 text-slate-700',
+    desc: 'Transporte de cargas especiales de gran porte, logística hidrocarburífera y soporte a proyectos mineros.',
+    website: 'https://tbcargo.com/',
+  },
+  {
+    id: 'terramaq-srl',
+    initials: 'TM',
+    name: 'Terramaq SRL',
+    sector: 'Construcción & Industria',
+    origin: 'Extraprovincial',
+    location: 'Argentina',
+    pavilion: 'Área Exterior',
+    stand: 'EXT-09',
+    territory: 'valles',
+    badgeColor: 'bg-stone-100 text-stone-800 border-stone-300',
+    avatarBg: 'bg-stone-200 text-stone-700',
+    desc: 'Venta y alquiler de maquinaria vial, equipos para movimiento de suelos y perforación industrial.',
+  },
+  {
+    id: 'pauny-el-algarrobal',
+    initials: 'PY',
+    name: 'Pauny - El Algarrobal',
+    sector: 'Construcción & Industria',
+    origin: 'Extraprovincial',
+    location: 'Córdoba / Salta',
+    pavilion: 'Área Exterior',
+    stand: 'EXT-10',
+    territory: 'valles',
+    badgeColor: 'bg-amber-100 text-amber-800 border-amber-300',
+    avatarBg: 'bg-amber-100 text-amber-700',
+    desc: 'Fabricación nacional de tractores, maquinaria agrícola pesada e implementos de alto rendimiento para el campo.',
+    website: 'https://www.pauny.com.ar/ar/',
+  },
+];
 ---
 
 <BaseLayout
   title="Directorio de Expositores — ExpoJuy 2026"
-  description="Conocé las empresas, marcas e instituciones participantes de ExpoJuy 2026. Filtrá por sector, stand y territorio."
+  description="Buscá empresas, stands, rubros e instituciones participantes en ExpoJuy 2026 con plano interactivo de Ciudad Cultural."
 >
   <Header />
   <BottomNav activePage="expositores" />
 
-  <main id="main-content">
-    <!-- Page header -->
-    <section class="section bg-white border-b border-ink/8">
-      <div class="container">
-        <nav aria-label="Ruta de navegación" class="flex items-center gap-2 text-caption text-ink/50 mb-6">
-          <a href={base} class="hover:text-violet-dark transition-colors">Inicio</a>
-          <span aria-hidden="true">/</span>
-          <span class="text-ink font-semibold">Expositores</span>
-        </nav>
-        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-          <SectionHeader
-            eyebrow="Directorio Comercial"
-            title="Directorio de Expositores"
-            lead="Explorá las empresas, marcas y organismos presentes en el predio ferial."
-            territory="yungas"
+  <main id="main-content" class="bg-paper min-h-screen pb-24">
+
+    <!-- ═══════════════════════════════════════════
+         EXHIBITOR HERO — High Impact Dark Theme with Image & Counters
+         ═══════════════════════════════════════════ -->
+    <section class="relative bg-ink text-white overflow-hidden py-14 lg:py-20 border-b border-ink/20" aria-label="Convocatoria a Expositores ExpoJuy 2026">
+      {/* Background Image Container with Gradient Fade */}
+      <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute right-0 top-0 bottom-0 w-full lg:w-3/5">
+          <img
+            src={`${base}Mostrar_personas_trabajando_2K_202609082137.jpeg`}
+            alt="Empresas y personas trabajando en ExpoJuy"
+            class="w-full h-full object-cover object-center opacity-45 mix-blend-luminosity"
           />
-          <Button href="#stand" icon="add_business" class="flex-shrink-0">
-            Reservar espacio de Stand
-          </Button>
+          <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40"></div>
+        </div>
+      </div>
+
+      <div class="absolute inset-0 bg-gradient-puna opacity-30 pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 24px 24px;" aria-hidden="true"></div>
+
+      <div class="container relative z-10">
+        <!-- Breadcrumb -->
+        <nav aria-label="Ruta de navegación" class="flex items-center gap-1.5 text-[11px] text-white/50 font-medium mb-6">
+          <a href={base} class="hover:text-cyan transition-colors">Inicio</a>
+          <span class="material-symbols-outlined text-[12px]" aria-hidden="true">chevron_right</span>
+          <span class="text-white/90 font-semibold">Expositores</span>
+        </nav>
+
+        <div class="max-w-2xl flex flex-col gap-6">
+          <Badge territory="cyan">Exposición Comercial & Feria Internacional</Badge>
+          
+          <h1 class="text-h1 text-white font-bold leading-tight">
+            Exhibí tu Empresa en la <span class="text-cyan">Vitrina Productiva del NOA</span>
+          </h1>
+
+          <p class="text-body-lg text-white/80 leading-relaxed">
+            Conectá con más de 120.000 visitantes, compradores calificados del Corredor Bioceánico e inversores internacionales en el evento socio-productivo más importante de Jujuy.
+          </p>
+
+          <div class="flex flex-wrap gap-3 pt-2">
+            <Button href="#reserva-stand" size="lg" icon="add_business" class="shadow-violet">
+              Ser Expositor / Reservar Stand
+            </Button>
+            <button
+              type="button"
+              id="btn-download-pdf-header"
+              class="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-pill text-small font-semibold border border-white/20 text-white/90 hover:bg-white/10 transition-all active:scale-[0.98]"
+            >
+              <span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+              <span>Mapa del Predio (PDF)</span>
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Search + Filters -->
-    <div class="sticky top-[88px] z-30 bg-white border-b border-ink/8 shadow-sm">
-      <div class="container py-3 flex flex-col sm:flex-row gap-3">
-        <!-- Search -->
-        <div class="relative flex-1">
-          <label for="search-expositores" class="sr-only">Buscar expositor</label>
-          <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-ink/30 text-[18px]" aria-hidden="true">search</span>
-          <input
-            id="search-expositores"
-            type="search"
-            placeholder="Buscar por nombre, sector o stand..."
-            class="w-full h-10 pl-9 pr-4 rounded-md bg-paper border border-ink/15 text-small focus:outline-none focus:ring-2 focus:ring-violet-mid"
-          />
+    <!-- ═══════════════════════════════════════════
+         VALOR ESTRATÉGICO — Beneficios de Exponer en ExpoJuy 2026 (Grid 2x2 Optimizado)
+         ═══════════════════════════════════════════ -->
+    <section class="section bg-white border-b border-ink/5" aria-label="Beneficios de participar como empresa expositora">
+      <div class="container">
+        <div class="grid lg:grid-cols-12 gap-6 items-end mb-10">
+          <div class="lg:col-span-8">
+            <SectionHeader
+              eyebrow="PROPUESTA DE VALOR"
+              title="¿Por qué exponer en ExpoJuy 2026?"
+              territory="violet"
+            />
+          </div>
+          <div class="lg:col-span-4">
+            <p class="text-small text-ink/70 leading-relaxed lg:text-right">
+              Un escenario comercial estratégico diseñado para acelerar ventas, consolidar presencia de marca e integrar redes de negocios regionales.
+            </p>
+          </div>
         </div>
-        <!-- Sector filter -->
-        <div class="flex overflow-x-auto scrollbar-none gap-2 pb-1 sm:pb-0" role="group" aria-label="Filtros de sector">
-          {sectors.map((s, i) => (
-            <button
-              type="button"
-              class={`px-3 py-1.5 rounded-pill text-small font-semibold flex-shrink-0 transition-all ${i === 0 ? 'bg-violet-dark text-white' : 'bg-paper text-ink/60 hover:bg-ink/8'}`}
-              data-sector={s}
-            >
-              {s}
-            </button>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {exhibitorBenefits.map(b => (
+            <div class="relative flex flex-col justify-between bg-white rounded-2xl border border-ink/8 p-6 sm:p-8 hover:border-violet-mid/40 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group overflow-hidden">
+              {/* Top Accent Gradient Bar */}
+              <div class={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${b.accentColor}`} />
+
+              <div class="flex flex-col gap-5 pt-1">
+                <div class="flex items-center justify-between gap-3">
+                  <div class={`w-12 h-12 rounded-xl ${b.iconBg} border flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300`}>
+                    <span class="material-symbols-outlined text-[26px]" aria-hidden="true">{b.icon}</span>
+                  </div>
+                  <span class={`text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-2xs ${b.pillBg}`}>
+                    {b.tag}
+                  </span>
+                </div>
+
+                <div>
+                  <h3 class="text-xl font-bold font-display text-ink group-hover:text-violet-dark transition-colors duration-200 leading-snug mb-2.5">
+                    {b.title}
+                  </h3>
+                  <p class="text-body-sm text-ink/75 leading-relaxed">
+                    {b.desc}
+                  </p>
+                </div>
+              </div>
+
+              {/* Bottom Stat Highlight Footer */}
+              <div class="mt-6 pt-4 border-t border-ink/8 flex items-center justify-between text-xs">
+                <span class="text-[11px] font-extrabold text-ink/50 uppercase tracking-wider flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-[16px] text-violet-mid" aria-hidden="true">{b.statIcon}</span>
+                  {b.statLabel}
+                </span>
+                <span class="font-black text-ink text-sm group-hover:text-violet-dark transition-colors">
+                  {b.statValue}
+                </span>
+              </div>
+            </div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Exhibitor grid -->
-    <section class="section bg-paper" aria-label="Listado de expositores">
+    <!-- ═══════════════════════════════════════════
+         PABELLONES Y ESPACIOS DE EXHIBICIÓN
+         ═══════════════════════════════════════════ -->
+    <section class="section bg-paper border-b border-ink/5" aria-label="Espacios y pabellones de exhibición">
       <div class="container">
-        <p class="text-small text-ink/50 mb-6">
-          Mostrando <strong class="text-ink">{exhibitors.length}</strong> expositores
-        </p>
+        <SectionHeader
+          eyebrow="INFRAESTRUCTURA Y UBICACIONES"
+          title="Elegí el pabellón estratégico para tu marca"
+          territory="cyan"
+          class="mb-10"
+        />
 
-        <div
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
-          id="exhibitor-grid"
-          role="list"
-          aria-label="Expositores"
-        >
-          {exhibitors.map(ex => (
-            <Card
-              territory={ex.territory}
-              class="group"
-              aria-label={ex.name}
-            >
-              <div class="flex flex-col h-full p-5 gap-4" role="listitem" data-sector={ex.sector}>
-                <!-- Header -->
-                <div class="flex items-start gap-3">
-                  <div class={`w-12 h-12 rounded-md flex items-center justify-center flex-shrink-0 ${territoryIcon[ex.territory]}`}>
-                    <span class="material-symbols-outlined text-[24px]" aria-hidden="true">storefront</span>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {exhibitorPavilionsInfo.map(p => (
+            <Card territory={p.territory} class="hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-full bg-white">
+              <div class="p-6 flex flex-col gap-4 flex-1">
+                <div class="flex items-center justify-between">
+                  <div class="w-10 h-10 rounded-xl bg-violet-50 text-violet-dark border border-violet-100 flex items-center justify-center font-black text-lg">
+                    {p.code}
                   </div>
-                  <div class="min-w-0">
-                    <h3 class="text-body font-bold text-ink truncate">{ex.name}</h3>
-                    <div class="flex items-center gap-2 mt-0.5 flex-wrap">
-                      <Badge territory={ex.territory} size="sm">{ex.sector}</Badge>
-                      <span class="text-caption text-ink/40">Stand {ex.stand}</span>
-                    </div>
-                  </div>
+                  <Badge territory={p.territory}>{p.badge}</Badge>
                 </div>
 
-                <!-- Description -->
-                <p class="text-small text-ink/65 leading-relaxed flex-1">{ex.desc}</p>
+                <div>
+                  <h3 class="text-h3 font-bold text-ink mb-2 leading-snug">{p.name}</h3>
+                  <p class="text-small text-ink/70 leading-relaxed mb-4">{p.desc}</p>
+                </div>
 
-                <!-- Actions -->
-                <div class="flex gap-2 pt-2 mt-auto border-t border-ink/8">
-                  <Button href={`${base}expositores/${ex.id}`} variant="outline" size="sm" class="flex-1 justify-center">
-                    Ver ficha
-                  </Button>
-                  {ex.website && (
-                    <a
-                      href={ex.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="h-9 w-9 flex items-center justify-center rounded-md border border-ink/15 text-ink/40 hover:text-violet-dark hover:border-violet-mid transition-colors"
-                      aria-label={`Visitar sitio de ${ex.name}`}
-                    >
-                      <span class="material-symbols-outlined text-[16px]" aria-hidden="true">open_in_new</span>
-                    </a>
-                  )}
+                <div class="mt-auto pt-4 border-t border-ink/8 flex flex-col gap-2">
+                  {p.features.map(f => (
+                    <span class="text-caption text-ink/70 flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-[15px] text-violet-dark" aria-hidden="true">check_circle</span>
+                      {f}
+                    </span>
+                  ))}
                 </div>
               </div>
             </Card>
           ))}
         </div>
+      </div>
+    </section>
 
-        <!-- Empty state (hidden initially) -->
-        <div id="empty-state" class="hidden flex flex-col items-center gap-4 py-16 text-center">
-          <span class="material-symbols-outlined text-[48px] text-ink/20" aria-hidden="true">search_off</span>
-          <p class="text-body font-semibold text-ink/50">No encontramos expositores con esos filtros</p>
-          <Button variant="outline" id="reset-filters">Restaurar directorio</Button>
+    <!-- ═══════════════════════════════════════════
+         SOLICITUD DE STAND / RESERVA CTA
+         ═══════════════════════════════════════════ -->
+    <section class="section bg-white border-b border-ink/5" id="reserva-stand" aria-label="Solicitud de reserva de stand">
+      <div class="container max-w-4xl">
+        <Card territory="violet" class="bg-gradient-to-br from-paper via-white to-violet-50/60 p-8 sm:p-12 text-center shadow-xl rounded-2xl relative overflow-hidden">
+          <div class="absolute -top-20 -right-20 w-56 h-56 bg-violet-mid/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+          <div class="relative z-10 flex flex-col items-center gap-6 max-w-2xl mx-auto">
+            <div class="w-16 h-16 rounded-2xl bg-violet-dark text-white flex items-center justify-center shadow-violet text-3xl">
+              <span class="material-symbols-outlined text-[34px]" aria-hidden="true">storefront</span>
+            </div>
+
+            <div>
+              <Badge territory="violet" class="mb-3">Convocatoria Oficial a Expositores</Badge>
+              <h2 class="text-h2 font-bold text-ink mb-3">Reservá el Stand de tu Empresa en ExpoJuy 2026</h2>
+              <p class="text-body text-ink/75 leading-relaxed">
+                Recibí asesoramiento personalizado de los oficiales de vinculación de la <strong>Cámara de Comercio Exterior de Jujuy</strong> para seleccionar tu ubicación y planificar tu participación ferial.
+              </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center w-full pt-2">
+              <Button type="button" size="lg" icon="contact_support" class="btn-open-exhibitor-modal shadow-violet hover:scale-[1.02] transition-transform">
+                Solicitar Cotización de Stand
+              </Button>
+              <a
+                href="https://wa.me/5493880000000?text=Hola,%20quisiera%20recibir%20información%20para%20reservar%20un%20stand%20en%20ExpoJuy%202026"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="h-12 px-6 rounded-pill border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-bold flex items-center justify-center gap-2 transition-all text-small"
+              >
+                <span class="material-symbols-outlined text-[20px]">chat</span>
+                <span>Consulta Rápida por WhatsApp</span>
+              </a>
+            </div>
+
+            <p class="text-caption text-ink/50 flex items-center gap-1.5 justify-center">
+              <span class="material-symbols-outlined text-[16px] text-violet-mid" aria-hidden="true">verified_user</span>
+              Atención directa por la Cámara de Comercio Exterior de Jujuy (CamComEx)
+            </p>
+          </div>
+        </Card>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         PANEL DE FILTROS Y BÚSQUEDA DEL DIRECTORIO
+         ═══════════════════════════════════════════ -->
+    <section class="bg-paper py-5 sm:py-6 border-b border-ink/8" id="directorio">
+      <div class="container">
+
+        <!-- Card Contenedora de Filtros -->
+        <div class="bg-white rounded-2xl border border-ink/10 shadow-xs p-4 sm:p-5 space-y-4">
+
+          <!-- Fila 1: Buscador e inputs con dimensiones calibradas para que todo quepa -->
+          <div class="flex flex-col md:flex-row items-stretch md:items-center gap-2.5 flex-wrap xl:flex-nowrap">
+
+            <!-- Buscador general -->
+            <div class="relative flex-1 min-w-[200px] sm:min-w-[240px]">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-ink/40 text-[17px] pointer-events-none" aria-hidden="true">search</span>
+              <input
+                id="search-expositores"
+                type="search"
+                placeholder="Empresa, rubro o stand..."
+                class="w-full h-10 pl-9 pr-3.5 rounded-xl bg-paper border border-ink/12 text-xs font-medium text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2 focus:ring-violet-dark/20 focus:border-violet-dark focus:bg-white transition-all shadow-2xs"
+                aria-label="Buscar expositor"
+              />
+            </div>
+
+            <!-- Desplegable Origen (ancho suficiente para 'Extraprovincial') -->
+            <div class="relative h-10 w-full sm:w-36 flex-shrink-0">
+              <span class="absolute left-2.5 top-1/2 -translate-y-1/2 material-symbols-outlined text-ink/40 text-[16px] pointer-events-none" aria-hidden="true">public</span>
+              <select
+                id="select-origin"
+                aria-label="Filtrar por origen"
+                class="w-full h-10 pl-8 pr-7 rounded-xl bg-paper border border-ink/12 text-xs font-medium text-ink/80 focus:outline-none focus:ring-2 focus:ring-violet-dark/20 focus:border-violet-dark appearance-none cursor-pointer transition-all shadow-2xs truncate"
+              >
+                {origins.map(o => (
+                  <option value={o}>{o}</option>
+                ))}
+              </select>
+              <span class="absolute right-2 top-1/2 -translate-y-1/2 material-symbols-outlined text-ink/40 text-[16px] pointer-events-none">expand_more</span>
+            </div>
+
+            <!-- Desplegable Pabellón (ancho amplio para 'Pabellón B (Valles & Comercio)') -->
+            <div class="relative h-10 w-full sm:w-56 flex-shrink-0">
+              <span class="absolute left-2.5 top-1/2 -translate-y-1/2 material-symbols-outlined text-ink/40 text-[16px] pointer-events-none" aria-hidden="true">storefront</span>
+              <select
+                id="select-pavilion"
+                aria-label="Filtrar por pabellón"
+                class="w-full h-10 pl-8 pr-7 rounded-xl bg-paper border border-ink/12 text-xs font-medium text-ink/80 focus:outline-none focus:ring-2 focus:ring-violet-dark/20 focus:border-violet-dark appearance-none cursor-pointer transition-all shadow-2xs truncate"
+              >
+                {pavilions.map(p => (
+                  <option value={p}>{p}</option>
+                ))}
+              </select>
+              <span class="absolute right-2 top-1/2 -translate-y-1/2 material-symbols-outlined text-ink/40 text-[16px] pointer-events-none">expand_more</span>
+            </div>
+
+            <!-- Acciones: Botón Limpiar + Conmutador de Vista -->
+            <div class="flex items-center justify-between sm:justify-end gap-2 flex-shrink-0">
+              <!-- Botón Limpiar Filtros -->
+              <button
+                id="btn-clear-filters"
+                type="button"
+                aria-label="Limpiar todos los filtros"
+                class="h-10 px-3 inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-ink/65 hover:text-red-600 bg-paper hover:bg-red-50 border border-ink/12 hover:border-red-200 rounded-xl transition-all whitespace-nowrap active:scale-[0.98] shadow-2xs"
+              >
+                <span class="material-symbols-outlined text-[15px]">close</span>
+                <span>Limpiar</span>
+              </button>
+
+              <!-- Conmutador de Vista (Cuadrícula / Lista) -->
+              <div class="flex items-center h-10 p-1 bg-paper border border-ink/12 rounded-xl gap-1 shadow-2xs flex-shrink-0 overflow-hidden">
+                <button
+                  id="btn-view-grid"
+                  type="button"
+                  title="Vista cuadrícula"
+                  aria-label="Vista en cuadrícula"
+                  class="h-8 w-8 flex items-center justify-center rounded-lg bg-violet-dark text-white transition-all flex-shrink-0"
+                >
+                  <span class="material-symbols-outlined text-[16px]">grid_view</span>
+                </button>
+                <button
+                  id="btn-view-list"
+                  type="button"
+                  title="Vista lista"
+                  aria-label="Vista en lista"
+                  class="h-8 w-8 flex items-center justify-center rounded-lg text-ink/50 hover:text-violet-dark transition-all flex-shrink-0"
+                >
+                  <span class="material-symbols-outlined text-[16px]">view_list</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Separador sutil -->
+          <div class="border-t border-ink/8 pt-3.5">
+            <!-- Fila Inferior: Selección por Sector Temático (Diseño Exacto a la Referencia) -->
+            <div class="relative flex items-center gap-2">
+
+              <span class="text-[11px] font-extrabold uppercase tracking-wider text-ink/40 flex-shrink-0 pr-1 flex items-center gap-1">
+                <span>SECTOR:</span>
+              </span>
+
+              <!-- Contenedor con Scroll Horizontal y Degradado -->
+              <div class="relative flex-1 min-w-0 overflow-hidden flex items-center">
+                <div
+                  id="sectors-scroll-container"
+                  class="flex items-center gap-2.5 overflow-x-auto scrollbar-none py-1 px-0.5 scroll-smooth w-full"
+                  role="group"
+                  aria-label="Filtrar por sector"
+                >
+                  {sectors.map((sec, idx) => (
+                    <button
+                      type="button"
+                      data-sector={sec.value}
+                      class={`filter-sector-pill inline-flex items-center gap-2 h-10 px-5 rounded-full text-xs whitespace-nowrap transition-all border flex-shrink-0 ${
+                        idx === 0
+                          ? 'bg-violet-dark text-white border-violet-dark font-bold shadow-xs'
+                          : 'bg-paper text-ink/75 border-ink/12 hover:bg-violet-50 hover:text-violet-dark hover:border-violet-200 font-semibold'
+                      }`}
+                      aria-pressed={idx === 0 ? 'true' : 'false'}
+                    >
+                      <span class="material-symbols-outlined text-[15px]">{sec.icon}</span>
+                      <span>{sec.name}</span>
+                    </button>
+                  ))}
+                </div>
+
+                <!-- Degradado sutil a la derecha -->
+                <div class="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white via-white/80 to-transparent"></div>
+              </div>
+
+              <!-- Botones de Navegación de Sectores (Izquierda / Derecha) -->
+              <div class="flex items-center gap-1 flex-shrink-0">
+                <button
+                  type="button"
+                  id="btn-scroll-sectors-left"
+                  aria-label="Desplazar sectores a la izquierda"
+                  title="Ver sectores anteriores"
+                  class="w-7 h-7 flex items-center justify-center rounded-full bg-paper hover:bg-violet-50 text-ink/60 hover:text-violet-dark border border-ink/12 hover:border-violet-200 transition-all active:scale-95 shadow-2xs"
+                >
+                  <span class="material-symbols-outlined text-[16px]">chevron_left</span>
+                </button>
+                <button
+                  type="button"
+                  id="btn-scroll-sectors-right"
+                  aria-label="Desplazar sectores a la derecha"
+                  title="Ver más sectores a la derecha"
+                  class="w-7 h-7 flex items-center justify-center rounded-full bg-violet-50 hover:bg-violet-dark text-violet-dark hover:text-white border border-violet-200 hover:border-violet-dark transition-all active:scale-95 shadow-xs"
+                >
+                  <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                </button>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
+
+    <!-- ═══════════════════════════════════════════
+         EXHIBITORS DIRECTORY GRID
+         ═══════════════════════════════════════════ -->
+    <div class="container py-6">
+      <div class="space-y-5">
+
+        <!-- Section title + counter -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-violet-dark text-[18px]" aria-hidden="true">corporate_fare</span>
+            <h2 class="text-sm font-bold text-ink">Firmas participantes</h2>
+          </div>
+          <p class="text-[11px] text-ink/45 font-medium">
+            <span id="counter-count" class="text-violet-dark font-extrabold text-[13px]">{exhibitors.length}</span>
+            <span class="ml-1">resultados</span>
+          </p>
+        </div>
+
+        <!-- Grid -->
+        <div id="exhibitors-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
+          {exhibitors.map(ex => (
+            <article
+              class="exhibitor-card group relative flex flex-col bg-white rounded-2xl border border-ink/10 shadow-2xs overflow-hidden hover:shadow-md hover:border-violet-dark/30 hover:-translate-y-0.5 transition-all duration-200"
+              data-id={ex.id}
+              data-sector={ex.sector}
+              data-origin={ex.origin}
+              data-pavilion={ex.pavilion}
+              data-stand={ex.stand}
+              data-name={ex.name.toLowerCase()}
+              data-desc={ex.desc.toLowerCase()}
+            >
+              <!-- Card top accent line colored by sector -->
+              <div class={`h-[3px] w-full flex-shrink-0 ${ex.avatarBg.includes('purple') ? 'bg-gradient-to-r from-purple-500 to-violet-400' : ex.avatarBg.includes('cyan') || ex.avatarBg.includes('teal') ? 'bg-gradient-to-r from-cyan-500 to-teal-400' : ex.avatarBg.includes('amber') || ex.avatarBg.includes('yellow') || ex.avatarBg.includes('orange') ? 'bg-gradient-to-r from-amber-400 to-orange-400' : ex.avatarBg.includes('emerald') || ex.avatarBg.includes('green') ? 'bg-gradient-to-r from-emerald-500 to-green-400' : ex.avatarBg.includes('blue') || ex.avatarBg.includes('sky') || ex.avatarBg.includes('indigo') ? 'bg-gradient-to-r from-blue-500 to-indigo-400' : ex.avatarBg.includes('rose') || ex.avatarBg.includes('red') || ex.avatarBg.includes('pink') ? 'bg-gradient-to-r from-rose-500 to-pink-400' : 'bg-gradient-to-r from-violet-500 to-purple-400'}`} aria-hidden="true"></div>
+
+              <div class="flex flex-col flex-1 p-4 sm:p-4.5">
+                <!-- Avatar + badges row -->
+                <div class="flex items-start justify-between gap-2 mb-3">
+                  <!-- Avatar -->
+                  <div class={`w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-sm flex-shrink-0 shadow-2xs ${ex.avatarBg}`}>
+                    {ex.initials}
+                  </div>
+                  <!-- Sector + stand badge column -->
+                  <div class="flex flex-col items-end gap-1 min-w-0">
+                    <span class={`inline-block text-[10px] font-bold tracking-wide uppercase px-2 py-0.5 rounded-lg border ${ex.badgeColor} truncate max-w-[140px]`}>
+                      {ex.sector}
+                    </span>
+                    <span class="inline-flex items-center gap-1 text-[11px] text-ink/50 font-medium">
+                      <span class="material-symbols-outlined text-[12px] text-ink/40" aria-hidden="true">location_on</span>
+                      <span class="truncate max-w-[120px]">{ex.location}</span>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Company name -->
+                <h3 class="text-sm font-bold text-ink leading-snug mb-1.5 group-hover:text-violet-dark transition-colors line-clamp-2">
+                  {ex.name}
+                </h3>
+
+                <!-- Description -->
+                <p class="text-xs text-ink/60 leading-relaxed line-clamp-2 flex-1 mb-3.5">
+                  {ex.desc}
+                </p>
+
+                <!-- Footer -->
+                <div class="flex items-center justify-between gap-2 pt-3 border-t border-ink/8 mt-auto">
+                  <!-- Stand pill -->
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-violet-50 text-violet-dark border border-violet-100 text-xs font-bold">
+                    <span class="material-symbols-outlined text-[13px]" aria-hidden="true">storefront</span>
+                    {ex.stand}
+                  </span>
+
+                  <!-- Website or local badge -->
+                  {ex.website ? (
+                    <a
+                      href={ex.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-violet-dark hover:bg-violet-mid text-white text-xs font-bold transition-all shadow-2xs hover:shadow-xs active:scale-95"
+                      title={`Sitio oficial de ${ex.name}`}
+                    >
+                      <span>Ver sitio</span>
+                      <span class="material-symbols-outlined text-[12px]" aria-hidden="true">open_in_new</span>
+                    </a>
+                  ) : (
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-paper text-ink/40 text-xs font-medium border border-ink/10">
+                      <span class="material-symbols-outlined text-[12px]" aria-hidden="true">info</span>
+                      Sin sitio
+                    </span>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden">
+          <div class="bg-white rounded-2xl border border-ink/8 p-12 sm:p-16 text-center space-y-4 shadow-xs">
+            <div class="w-16 h-16 rounded-full bg-ink/5 flex items-center justify-center mx-auto">
+              <span class="material-symbols-outlined text-[36px] text-ink/25">search_off</span>
+            </div>
+            <div class="space-y-1.5">
+              <h3 class="text-lg font-bold text-ink">Sin resultados</h3>
+              <p class="text-sm text-ink/50 max-w-sm mx-auto leading-relaxed">
+                Probá con otro término o limpiá los filtros activos para ver todas las empresas.
+              </p>
+            </div>
+            <button
+              id="btn-reset-empty"
+              type="button"
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-violet-dark text-white rounded-full text-sm font-semibold shadow-sm hover:bg-violet-mid transition-all active:scale-95"
+            >
+              <span class="material-symbols-outlined text-[17px]">restart_alt</span>
+              <span>Restaurar directorio</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
+
+  <!-- Modal Solicitud de Stand Expositores -->
+  <div
+    id="exhibitor-modal"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/75 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300"
+    role="dialog"
+    aria-labelledby="exhibitor-modal-title"
+    aria-modal="true"
+  >
+    <div 
+      id="exhibitor-modal-card" 
+      class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-ink/10 scale-95 transition-transform duration-300 relative max-h-[90vh] overflow-y-auto"
+    >
+      <button
+        id="exhibitor-modal-close-x"
+        type="button"
+        class="absolute top-4 right-4 text-ink/40 hover:text-ink w-8 h-8 rounded-full flex items-center justify-center hover:bg-paper transition-colors"
+        aria-label="Cerrar modal"
+      >
+        <span class="material-symbols-outlined text-[20px]" aria-hidden="true">close</span>
+      </button>
+
+      <div class="flex flex-col gap-5">
+        <div class="flex items-center gap-3 border-b border-ink/8 pb-4">
+          <div class="w-12 h-12 rounded-xl bg-violet-50 text-violet-dark border border-violet-100 flex items-center justify-center flex-shrink-0 shadow-sm">
+            <span class="material-symbols-outlined text-[26px]" aria-hidden="true">storefront</span>
+          </div>
+          <div>
+            <h3 id="exhibitor-modal-title" class="text-h3 font-bold text-ink">
+              Solicitar Stand — ExpoJuy 2026
+            </h3>
+            <p class="text-caption text-ink/60">
+              Cámara de Comercio Exterior de Jujuy
+            </p>
+          </div>
+        </div>
+
+        <form id="exhibitor-request-form" class="flex flex-col gap-4">
+          <div>
+            <label class="block text-caption font-bold text-ink mb-1">Nombre de la Empresa / Razón Social *</label>
+            <input
+              type="text"
+              required
+              placeholder="Ej: Minera del Norte S.A."
+              class="w-full h-10 px-3.5 rounded-xl bg-paper border border-ink/12 text-small text-ink focus:outline-none focus:ring-2 focus:ring-violet-dark/20 focus:border-violet-dark transition-all"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-caption font-bold text-ink mb-1">Nombre de Contacto *</label>
+              <input
+                type="text"
+                required
+                placeholder="Ej: Juan Pérez"
+                class="w-full h-10 px-3.5 rounded-xl bg-paper border border-ink/12 text-small text-ink focus:outline-none focus:ring-2 focus:ring-violet-dark/20 focus:border-violet-dark transition-all"
+              />
+            </div>
+            <div>
+              <label class="block text-caption font-bold text-ink mb-1">WhatsApp / Teléfono *</label>
+              <input
+                type="tel"
+                required
+                placeholder="Ej: +54 388 4000000"
+                class="w-full h-10 px-3.5 rounded-xl bg-paper border border-ink/12 text-small text-ink focus:outline-none focus:ring-2 focus:ring-violet-dark/20 focus:border-violet-dark transition-all"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-caption font-bold text-ink mb-1">Correo Electrónico Corporativo *</label>
+            <input
+              type="email"
+              required
+              placeholder="contacto@empresa.com"
+              class="w-full h-10 px-3.5 rounded-xl bg-paper border border-ink/12 text-small text-ink focus:outline-none focus:ring-2 focus:ring-violet-dark/20 focus:border-violet-dark transition-all"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-caption font-bold text-ink mb-1">Sector Productivo</label>
+              <select class="w-full h-10 px-3.5 rounded-xl bg-paper border border-ink/12 text-small text-ink focus:outline-none focus:ring-2 focus:ring-violet-dark/20 focus:border-violet-dark transition-all">
+                <option value="mineria">Minería & Litio</option>
+                <option value="agro">Agroindustria & Alimentos</option>
+                <option value="construccion">Construcción & Industria</option>
+                <option value="tecnologia">Tecnología & Servicios</option>
+                <option value="turismo">Turismo & Cultura</option>
+                <option value="otro">Otro sector</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-caption font-bold text-ink mb-1">Pabellón de Interés</label>
+              <select class="w-full h-10 px-3.5 rounded-xl bg-paper border border-ink/12 text-small text-ink focus:outline-none focus:ring-2 focus:ring-violet-dark/20 focus:border-violet-dark transition-all">
+                <option value="pabellon-a">Pabellón A (Minería)</option>
+                <option value="pabellon-b">Pabellón B (Valles & Comercio)</option>
+                <option value="pabellon-c">Pabellón C (Servicios & IT)</option>
+                <option value="area-exterior">Área Exterior</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-caption font-bold text-ink mb-1">Superficie estimada o consulta (opcional)</label>
+            <textarea
+              rows="2"
+              placeholder="Ej: Requerimos un stand modular de 12 m²..."
+              class="w-full p-3 rounded-xl bg-paper border border-ink/12 text-small text-ink focus:outline-none focus:ring-2 focus:ring-violet-dark/20 focus:border-violet-dark transition-all"
+            ></textarea>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-3 w-full pt-2">
+            <button
+              id="exhibitor-modal-cancel"
+              type="button"
+              class="w-full sm:w-1/2 h-11 px-5 rounded-pill border-2 border-ink/20 text-ink/80 hover:bg-paper font-semibold transition-all text-small"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="w-full sm:w-1/2 h-11 px-5 rounded-pill bg-violet-dark text-white hover:bg-violet-mid font-semibold flex items-center justify-center gap-2 shadow-violet transition-all text-small"
+            >
+              <span>Enviar Solicitud</span>
+              <span class="material-symbols-outlined text-[18px]" aria-hidden="true">send</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <Footer />
 </BaseLayout>
 
 <script>
+  // DOM Elements
   const searchInput = document.getElementById('search-expositores') as HTMLInputElement;
-  const filterBtns = document.querySelectorAll('[data-sector]');
-  const cards = document.querySelectorAll('#exhibitor-grid [data-sector]');
-  const emptyState = document.getElementById('empty-state');
-  let activeFilter = 'Todos';
+  const sectorPills = document.querySelectorAll('.filter-sector-pill');
+  const selectOrigin = document.getElementById('select-origin') as HTMLSelectElement;
+  const selectPavilion = document.getElementById('select-pavilion') as HTMLSelectElement;
+  const btnClearFilters = document.getElementById('btn-clear-filters');
+  const btnResetEmpty = document.getElementById('btn-reset-empty');
+  const counterCount = document.getElementById('counter-count');
 
-  function filterCards() {
-    const q = searchInput.value.toLowerCase().trim();
-    let visible = 0;
+  const btnViewGrid = document.getElementById('btn-view-grid');
+  const btnViewList = document.getElementById('btn-view-list');
+  const exhibitorsContainer = document.getElementById('exhibitors-container');
+
+  const cards = document.querySelectorAll('.exhibitor-card');
+  const emptyState = document.getElementById('empty-state');
+  const btnDownloadPdfHeader = document.getElementById('btn-download-pdf-header');
+
+  let activeSector = 'Todos';
+
+  // Filter function
+  function applyFilters() {
+    const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    const selectedOrigin = selectOrigin ? selectOrigin.value : 'Todo Origen';
+    const selectedPavilion = selectPavilion ? selectPavilion.value : 'Todos los Pabellones';
+
+    let visibleCount = 0;
+
     cards.forEach(card => {
-      const el = card.closest('[role="listitem"]') as HTMLElement;
-      const sector = card.getAttribute('data-sector') || '';
-      const text = (el?.textContent || '').toLowerCase();
-      const matchSector = activeFilter === 'Todos' || sector === activeFilter;
-      const matchSearch = !q || text.includes(q);
-      const show = matchSector && matchSearch;
-      (el?.parentElement as HTMLElement).style.display = show ? '' : 'none';
-      if (show) visible++;
+      const el = card as HTMLElement;
+      const sector = el.dataset.sector || '';
+      const origin = el.dataset.origin || '';
+      const pavilion = el.dataset.pavilion || '';
+      const name = el.dataset.name || '';
+      const desc = el.dataset.desc || '';
+      const stand = (el.dataset.stand || '').toLowerCase();
+
+      // Matches
+      const matchSearch = !q || name.includes(q) || desc.includes(q) || sector.toLowerCase().includes(q) || stand.includes(q);
+      const matchSector = activeSector === 'Todos' || sector === activeSector;
+      const matchOrigin = selectedOrigin === 'Todo Origen' || origin === selectedOrigin;
+      const matchPavilion = selectedPavilion === 'Todos los Pabellones' || pavilion === selectedPavilion;
+
+      if (matchSearch && matchSector && matchOrigin && matchPavilion) {
+        el.style.display = '';
+        visibleCount++;
+      } else {
+        el.style.display = 'none';
+      }
     });
-    emptyState?.classList.toggle('hidden', visible > 0);
+
+    if (counterCount) {
+      counterCount.textContent = visibleCount.toString();
+    }
+
+    if (emptyState) {
+      emptyState.classList.toggle('hidden', visibleCount > 0);
+    }
   }
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      activeFilter = btn.getAttribute('data-sector') || 'Todos';
-      filterBtns.forEach(b => {
-        b.classList.toggle('bg-violet-dark', b === btn);
-        b.classList.toggle('text-white', b === btn);
-        b.classList.toggle('bg-paper', b !== btn);
-        b.classList.toggle('text-ink/60', b !== btn);
+  // Sector pill click
+  sectorPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const targetSector = pill.getAttribute('data-sector') || 'Todos';
+      activeSector = targetSector;
+
+      sectorPills.forEach(p => {
+        const isCurrent = p.getAttribute('data-sector') === targetSector;
+        p.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
+
+        p.classList.toggle('bg-violet-dark', isCurrent);
+        p.classList.toggle('text-white', isCurrent);
+        p.classList.toggle('border-violet-dark', isCurrent);
+        p.classList.toggle('font-bold', isCurrent);
+        p.classList.toggle('shadow-xs', isCurrent);
+
+        p.classList.toggle('bg-paper', !isCurrent);
+        p.classList.toggle('text-ink/75', !isCurrent);
+        p.classList.toggle('border-ink/12', !isCurrent);
+        p.classList.toggle('font-semibold', !isCurrent);
       });
-      filterCards();
+
+      applyFilters();
     });
   });
 
-  searchInput?.addEventListener('input', filterCards);
-  document.getElementById('reset-filters')?.addEventListener('click', () => {
-    searchInput.value = '';
-    activeFilter = 'Todos';
-    filterBtns.forEach((b, i) => {
-      b.classList.toggle('bg-violet-dark', i === 0);
-      b.classList.toggle('text-white', i === 0);
+  // Search input change
+  searchInput?.addEventListener('input', applyFilters);
+
+  // Dropdown changes
+  selectOrigin?.addEventListener('change', applyFilters);
+  selectPavilion?.addEventListener('change', applyFilters);
+
+  // Clear filters button
+  function resetAllFilters() {
+    if (searchInput) searchInput.value = '';
+    if (selectOrigin) selectOrigin.value = 'Todo Origen';
+    if (selectPavilion) selectPavilion.value = 'Todos los Pabellones';
+    activeSector = 'Todos';
+
+    sectorPills.forEach((p, i) => {
+      const isCurrent = i === 0;
+      p.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
+
+      p.classList.toggle('bg-violet-dark', isCurrent);
+      p.classList.toggle('text-white', isCurrent);
+      p.classList.toggle('border-violet-dark', isCurrent);
+      p.classList.toggle('font-bold', isCurrent);
+      p.classList.toggle('shadow-xs', isCurrent);
+
+      p.classList.toggle('bg-paper', !isCurrent);
+      p.classList.toggle('text-ink/75', !isCurrent);
+      p.classList.toggle('border-ink/12', !isCurrent);
+      p.classList.toggle('font-semibold', !isCurrent);
     });
-    filterCards();
+
+    applyFilters();
+  }
+
+  btnClearFilters?.addEventListener('click', resetAllFilters);
+  btnResetEmpty?.addEventListener('click', resetAllFilters);
+
+  // View switch (Grid vs List)
+  btnViewGrid?.addEventListener('click', () => {
+    exhibitorsContainer?.classList.remove('grid-cols-1');
+    exhibitorsContainer?.classList.add('sm:grid-cols-2', 'md:grid-cols-3', 'xl:grid-cols-4');
+
+    btnViewGrid.classList.add('bg-violet-dark', 'text-white');
+    btnViewGrid.classList.remove('text-ink/60');
+    btnViewList?.classList.remove('bg-violet-dark', 'text-white');
+    btnViewList?.classList.add('text-ink/60');
   });
+
+  btnViewList?.addEventListener('click', () => {
+    exhibitorsContainer?.classList.remove('sm:grid-cols-2', 'md:grid-cols-3', 'xl:grid-cols-4');
+    exhibitorsContainer?.classList.add('grid-cols-1');
+
+    btnViewList.classList.add('bg-violet-dark', 'text-white');
+    btnViewList.classList.remove('text-ink/60');
+    btnViewGrid?.classList.remove('bg-violet-dark', 'text-white');
+    btnViewGrid?.classList.add('text-ink/60');
+  });
+
+  // PDF Map Download
+  btnDownloadPdfHeader?.addEventListener('click', () => {
+    window.print();
+  });
+
+  // Sector Scroll Buttons (Left / Right)
+  const sectorsScrollContainer = document.getElementById('sectors-scroll-container');
+  const btnScrollSectorsLeft = document.getElementById('btn-scroll-sectors-left');
+  const btnScrollSectorsRight = document.getElementById('btn-scroll-sectors-right');
+
+  btnScrollSectorsLeft?.addEventListener('click', () => {
+    sectorsScrollContainer?.scrollBy({ left: -200, behavior: 'smooth' });
+  });
+
+  btnScrollSectorsRight?.addEventListener('click', () => {
+    sectorsScrollContainer?.scrollBy({ left: 200, behavior: 'smooth' });
+  });
+
+  // Modal Solicitud de Stand Expositores
+  const modal = document.getElementById('exhibitor-modal');
+  const modalContainer = document.getElementById('exhibitor-modal-card');
+  const openBtns = document.querySelectorAll('.btn-open-exhibitor-modal');
+  const cancelBtn = document.getElementById('exhibitor-modal-cancel');
+  const closeX = document.getElementById('exhibitor-modal-close-x');
+  const exhibitorForm = document.getElementById('exhibitor-request-form');
+
+  function openModal(e?: Event) {
+    if (e) e.preventDefault();
+    if (!modal) return;
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modal.classList.add('opacity-100', 'pointer-events-auto');
+    if (modalContainer) {
+      modalContainer.classList.remove('scale-95');
+      modalContainer.classList.add('scale-100');
+    }
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('opacity-100', 'pointer-events-auto');
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    if (modalContainer) {
+      modalContainer.classList.remove('scale-100');
+      modalContainer.classList.add('scale-95');
+    }
+    document.body.style.overflow = '';
+  }
+
+  openBtns.forEach((btn) => btn.addEventListener('click', openModal));
+  cancelBtn?.addEventListener('click', closeModal);
+  closeX?.addEventListener('click', closeModal);
+
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && !modal.classList.contains('opacity-0')) {
+      closeModal();
+    }
+  });
+
+  exhibitorForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('¡Gracias por tu solicitud! Un oficial de vinculación de la Cámara de Comercio Exterior de Jujuy se pondrá en contacto a la brevedad.');
+    closeModal();
+  });
+
+  // Animated stat counter (MWC style)
+  function initCounters() {
+    const counters = document.querySelectorAll('.stat-counter');
+    if (!counters.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const target = parseInt(el.getAttribute('data-target') || '0', 10);
+            const prefix = el.getAttribute('data-prefix') || '';
+            const suffix = el.getAttribute('data-suffix') || '';
+            const duration = 1600; // ms
+            const startTime = performance.now();
+
+            function update(now: number) {
+              const elapsed = now - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+              const current = Math.floor(easeOut * target);
+
+              el.textContent = `${prefix}${current}${suffix}`;
+
+              if (progress < 1) {
+                requestAnimationFrame(update);
+              } else {
+                el.textContent = `${prefix}${target}${suffix}`;
+              }
+            }
+
+            requestAnimationFrame(update);
+            obs.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    counters.forEach((counter) => observer.observe(counter));
+  }
+
+  initCounters();
 </script>
+

@@ -12,19 +12,138 @@ import Card from '../components/ui/Card.astro';
 const base = import.meta.env.BASE_URL;
 
 const countries = [
-  { flag: '🇦🇷', name: 'Argentina', count: '+80', desc: 'Empresas nacionales confirmadas' },
-  { flag: '🇨🇱', name: 'Chile', count: '+25', desc: 'Delegación comercial de Antofagasta y Atacama' },
-  { flag: '🇵🇾', name: 'Paraguay', count: '+15', desc: 'Empresas y cámaras de comercio' },
-  { flag: '🇧🇷', name: 'Brasil', count: '+20', desc: 'Conglomerados del Sur y Rio Grande' },
+  { 
+    code: 'AR', 
+    flag: '🇦🇷', 
+    name: 'Argentina', 
+    val: 80, 
+    prefix: '+', 
+    desc: 'Empresas y consorcios confirmados de minería, agroindustria y tecnología.',
+    highlights: 'Triángulo del Litio · Alimentos procesados · Software'
+  },
+  { 
+    code: 'CL', 
+    flag: '🇨🇱', 
+    name: 'Chile', 
+    val: 25, 
+    prefix: '+', 
+    desc: 'Delegaciones de Antofagasta, Iquique y Atacama vinculadas al Pacífico.',
+    highlights: 'Puertos del Pacífico · Logística minera · Comercio'
+  },
+  { 
+    code: 'PY', 
+    flag: '🇵🇾', 
+    name: 'Paraguay', 
+    val: 15, 
+    prefix: '+', 
+    desc: 'Cámaras agroindustriales y operadores del hub fluvial y ferroviario.',
+    highlights: 'Consorcios graneleros · Hidrovía · Ferrocarril'
+  },
+  { 
+    code: 'BR', 
+    flag: '🇧🇷', 
+    name: 'Brasil', 
+    val: 20, 
+    prefix: '+', 
+    desc: 'Conglomerados industriales e importadores del Sur y Rio Grande.',
+    highlights: 'Grupos industriales · Maquinaria · Insumos'
+  },
 ];
 
 const sectors = [
-  { icon: 'bolt', name: 'Litio & Minerales Críticos' },
-  { icon: 'eco', name: 'Agroindustria & Alimentos' },
-  { icon: 'memory', name: 'Tecnología & Software' },
-  { icon: 'local_shipping', name: 'Logística & Transporte' },
-  { icon: 'account_balance', name: 'Finanzas & Inversión' },
-  { icon: 'flight', name: 'Turismo & MICE' },
+  { 
+    icon: 'bolt', 
+    name: 'Litio & Minerales Críticos', 
+    badge: 'Alto Impacto', 
+    color: 'bg-puna/10 text-puna border-puna/20',
+    desc: 'Transición energética, baterías y proveedores locales.' 
+  },
+  { 
+    icon: 'eco', 
+    name: 'Agroindustria & Alimentos', 
+    badge: 'Exportación', 
+    color: 'bg-yungas/10 text-yungas border-yungas/20',
+    desc: 'Legumbres, frutas tropicales y vinos de extrema altura.' 
+  },
+  { 
+    icon: 'memory', 
+    name: 'Tecnología & Software', 
+    badge: 'Innovación', 
+    color: 'bg-violet-mid/10 text-violet-dark border-violet-mid/20',
+    desc: 'Servicios del conocimiento y soluciones IT globales.' 
+  },
+  { 
+    icon: 'local_shipping', 
+    name: 'Logística & Transporte', 
+    badge: 'Corredor', 
+    color: 'bg-quebrada/10 text-quebrada border-quebrada/20',
+    desc: 'Paso de Jama y rutas multimodales Atlántico ↔ Pacífico.' 
+  },
+  { 
+    icon: 'account_balance', 
+    name: 'Finanzas & Inversión', 
+    badge: 'Capitales', 
+    color: 'bg-valles/10 text-valles border-valles/20',
+    desc: 'Fondos de desarrollo, banca y financiamiento productivo.' 
+  },
+  { 
+    icon: 'flight', 
+    name: 'Turismo & MICE', 
+    badge: 'Infraestructura', 
+    color: 'bg-cyan/15 text-cyan-dark border-cyan/30',
+    desc: 'Desarrollo hotelero, eventos y gastronomía regional.' 
+  },
+];
+
+const benefits = [
+  {
+    icon: 'handshake',
+    title: 'Reuniones por interés comercial',
+    desc: 'Cruce inteligente de demanda y oferta previa confirmación de ambas partes para garantizar encuentros altamente productivos y sin dispersión.',
+    tag: 'Satisfacción 94%',
+    statLabel: 'TASA DE SATISFACCIÓN',
+    statValue: '94%',
+    statIcon: 'thumb_up',
+    accentColor: 'from-violet-dark via-violet-mid to-violet-lavender',
+    iconBg: 'bg-violet-lavender/40 text-violet-dark border-violet-mid/30',
+    pillBg: 'bg-violet-lavender/50 text-violet-dark border border-violet-mid/20',
+  },
+  {
+    icon: 'schema',
+    title: 'Nuevos proveedores y aliados',
+    desc: 'Acceso directo a cadenas de suministro del NOA, minería del litio, bioenergías, agroalimentos y empresas de base tecnológica exportadora.',
+    tag: '+250 Empresas',
+    statLabel: 'EMPRESAS CONFIRMADAS',
+    statValue: '+250',
+    statIcon: 'groups',
+    accentColor: 'from-violet-mid via-cyan to-cyan-dark',
+    iconBg: 'bg-violet-lavender/40 text-violet-dark border-violet-mid/30',
+    pillBg: 'bg-violet-lavender/50 text-violet-dark border border-violet-mid/20',
+  },
+  {
+    icon: 'connecting_airports',
+    title: 'Acceso a oportunidades regionales',
+    desc: 'Conexión directa con cámaras y delegaciones de Chile (Antofagasta, Iquique), Paraguay y Brasil (Mato Grosso do Sul) en el eje bioceánico.',
+    tag: 'Eje ZICOSUR',
+    statLabel: 'INTEGRACIÓN COMERCIAL',
+    statValue: 'ZICOSUR',
+    statIcon: 'public',
+    accentColor: 'from-cyan via-yungas to-yungas-dark',
+    iconBg: 'bg-cyan/15 text-cyan-dark border-cyan/30',
+    pillBg: 'bg-cyan/20 text-cyan-dark border border-cyan/30',
+  },
+  {
+    icon: 'verified_user',
+    title: 'Acompañamiento institucional',
+    desc: 'Soporte permanente de los oficiales de vinculación de la Cámara de Comercio Exterior de Jujuy y técnicos del Ministerio de Desarrollo Económico.',
+    tag: 'Soporte Oficial',
+    statLabel: 'ASESORAMIENTO',
+    statValue: 'Aduanero & Legal',
+    statIcon: 'gavel',
+    accentColor: 'from-valles via-puna to-quebrada',
+    iconBg: 'bg-valles/15 text-valles-dark border-valles/30',
+    pillBg: 'bg-valles/20 text-valles-dark border border-valles/30',
+  },
 ];
 ---
 
@@ -38,33 +157,116 @@ const sectors = [
   <main id="main-content">
     <!-- Hero B2B -->
     <section class="relative section bg-ink overflow-hidden" aria-label="Rondas B2B ExpoJuy 2026">
-      <div class="absolute inset-0 bg-gradient-puna opacity-40" aria-hidden="true"></div>
+      <!-- Right-side Hero Image with Left-to-Right Gradient Overlay -->
+      <div class="absolute inset-y-0 right-0 w-full lg:w-1/2 overflow-hidden pointer-events-none" aria-hidden="true">
+        <img
+          src={`${base}Inversión_en_empresas_jujeñas_2K_202609082114.jpeg`}
+          alt="Inversión en empresas jujeñas ExpoJuy 2026"
+          class="w-full h-full object-cover object-center opacity-85"
+        />
+        <!-- Left to right gradient fade -->
+        <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/65 to-transparent"></div>
+        <!-- Top and bottom subtle vignettes -->
+        <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40"></div>
+      </div>
+
+      <div class="absolute inset-0 bg-gradient-puna opacity-30 pointer-events-none" aria-hidden="true"></div>
       <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 24px 24px;" aria-hidden="true"></div>
+
       <div class="container relative z-10">
         <div class="max-w-2xl flex flex-col gap-6">
           <Badge territory="cyan">Acreditación Comercial Bioceánica</Badge>
           <h1 class="text-h1 text-white font-bold">
             Rondas de Negocios<br /><span class="text-cyan">B2B ExpoJuy 2026</span>
           </h1>
-          <p class="text-body-lg text-white/70 leading-relaxed">
-            Encuentros programados uno a uno entre empresas locales, compradores y delegaciones del Corredor Bioceánico. Maximizá el retorno de tu participación ferial.
+          <p class="text-body-lg text-white/80 leading-relaxed">
+            Encuentros programados uno a uno entre empresas locales, compradores e inversores del Corredor Bioceánico. Maximizá el retorno de tu participación ferial.
           </p>
           <div class="flex flex-wrap gap-3">
-            <Button href="#registro" size="lg" icon="how_to_reg">Inscribir mi empresa</Button>
+            <Button href="#registro" size="lg" icon="how_to_reg" class="shadow-violet">Inscribir mi empresa</Button>
             <Button href="#como-funciona" variant="outline" size="lg" class="border-white/30 text-white hover:bg-white/10">¿Cómo funcionan?</Button>
           </div>
           <!-- Key stats -->
-          <div class="flex flex-wrap gap-6 pt-4 border-t border-white/15">
-            {['+140', '+60', '8', '3'].map((v, i) => {
-              const labels = ['Participantes Registro', 'Compradores', 'Sectores', 'Países'];
-              return (
-                <div>
-                  <p class="text-h2 font-bold text-white">{v}</p>
-                  <p class="text-caption text-white/50 uppercase tracking-wide">{labels[i]}</p>
-                </div>
-              );
-            })}
+          <div class="flex flex-wrap gap-8 pt-6 border-t border-white/15">
+            {[
+              { val: 140, prefix: '+', suffix: '', label: 'Participantes Registro' },
+              { val: 60, prefix: '+', suffix: '', label: 'Compradores' },
+              { val: 8, prefix: '', suffix: '', label: 'Sectores' },
+              { val: 4, prefix: '', suffix: '', label: 'Países' },
+            ].map((stat) => (
+              <div>
+                <p 
+                  class="text-h2 font-extrabold text-white stat-counter tabular-nums leading-none" 
+                  data-target={stat.val} 
+                  data-prefix={stat.prefix}
+                  data-suffix={stat.suffix}
+                >
+                  {stat.prefix}0{stat.suffix}
+                </p>
+                <p class="text-caption text-white/60 uppercase tracking-wider mt-1 font-semibold">{stat.label}</p>
+              </div>
+            ))}
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Beneficios / Valor Estratégico (Grid 2x2 Optimizado) -->
+    <section class="section bg-white border-b border-ink/5" aria-label="Beneficios de participar en las Rondas">
+      <div class="container">
+        <div class="grid lg:grid-cols-12 gap-6 items-end mb-10">
+          <div class="lg:col-span-8">
+            <SectionHeader
+              eyebrow="VALOR ESTRATÉGICO"
+              title="Beneficios de participar en las Rondas"
+              territory="violet"
+            />
+          </div>
+          <div class="lg:col-span-4">
+            <p class="text-small text-ink/70 leading-relaxed lg:text-right">
+              Optimizá tu tiempo comercial mediante cruce asistido de oferta y demanda en un entorno profesional certificado.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {benefits.map(b => (
+            <div class="relative flex flex-col justify-between bg-white rounded-2xl border border-ink/8 p-6 sm:p-8 hover:border-violet-mid/40 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group overflow-hidden">
+              {/* Top Accent Gradient Bar */}
+              <div class={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${b.accentColor}`} />
+
+              <div class="flex flex-col gap-5 pt-1">
+                <div class="flex items-center justify-between gap-3">
+                  <div class={`w-12 h-12 rounded-xl ${b.iconBg} border flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300`}>
+                    <span class="material-symbols-outlined text-[26px]" aria-hidden="true">{b.icon}</span>
+                  </div>
+                  <span class={`text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-2xs ${b.pillBg}`}>
+                    {b.tag}
+                  </span>
+                </div>
+
+                <div>
+                  <h3 class="text-xl font-bold font-display text-ink group-hover:text-violet-dark transition-colors duration-200 leading-snug mb-2.5">
+                    {b.title}
+                  </h3>
+                  <p class="text-body-sm text-ink/75 leading-relaxed">
+                    {b.desc}
+                  </p>
+                </div>
+              </div>
+
+              {/* Bottom Stat Highlight Footer */}
+              <div class="mt-6 pt-4 border-t border-ink/8 flex items-center justify-between text-xs">
+                <span class="text-[11px] font-extrabold text-ink/50 uppercase tracking-wider flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-[16px] text-violet-mid" aria-hidden="true">{b.statIcon}</span>
+                  {b.statLabel}
+                </span>
+                <span class="font-black text-ink text-sm group-hover:text-violet-dark transition-colors">
+                  {b.statValue}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -77,27 +279,29 @@ const sectors = [
           title="3 pasos hacia tu próxima alianza."
           territory="violet"
           align="center"
-          class="mb-10"
+          class="mb-12"
         />
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { step: '01', icon: 'edit_note', title: 'Registro y Perfil Comercial', desc: 'Completá el formulario con los datos de tu empresa, sector, origen y objetivos de negocios para el matchmaking.' },
-            { step: '02', icon: 'schema', title: 'Matchmaking Inteligente', desc: 'Nuestro equipo cruza perfiles compradores y vendedores del mismo sector para construir tu agenda de reuniones.' },
-            { step: '03', icon: 'event_seat', title: 'Reuniones en el Predio', desc: 'Meetings de 30 min en el Salón B2B con traducción simultánea ES/PT/EN y registro formal de la reunión.' },
+            { step: '01', icon: 'edit_note', title: 'Registro en Sauken B2B', desc: 'Accedé a la plataforma oficial Sauken para cargar el perfil de tu empresa, sector, origen y oferta/demanda comercial.' },
+            { step: '02', icon: 'schema', title: 'Matchmaking Inteligente', desc: 'El sistema cruza perfiles compradores y vendedores del mismo sector para construir tu agenda de reuniones.' },
+            { step: '03', icon: 'event_seat', title: 'Reuniones en el Predio', desc: 'Meetings de 30 min en el Salón B2B con traducción simultánea ES/PT/EN y registro formal de acuerdos.' },
           ].map(step => (
-            <Card class="overflow-visible">
-              <div class="flex flex-col p-6 gap-4">
-                <div class="flex items-center gap-3">
-                  <div class="w-12 h-12 rounded-full bg-gradient-hero text-white flex items-center justify-center font-bold text-body flex-shrink-0 shadow-violet">
+            <Card territory="violet" class="hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              <div class="flex flex-col p-6 gap-5">
+                <div class="flex items-center justify-between border-b border-ink/8 pb-4">
+                  <div class="w-10 h-10 rounded-full bg-violet-dark text-white flex items-center justify-center font-extrabold text-small shadow-sm">
                     {step.step}
                   </div>
-                  <div class="w-8 h-8 rounded-md bg-violet-lavender/30 text-violet-dark flex items-center justify-center">
-                    <span class="material-symbols-outlined text-[18px]" aria-hidden="true">{step.icon}</span>
+                  <div class="w-10 h-10 rounded-lg bg-violet-lavender/30 text-violet-dark flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[20px]" aria-hidden="true">{step.icon}</span>
                   </div>
                 </div>
-                <h3 class="text-body font-bold text-ink">{step.title}</h3>
-                <p class="text-small text-ink/65 leading-relaxed">{step.desc}</p>
+                <div>
+                  <h3 class="text-h3 font-bold text-ink mb-2">{step.title}</h3>
+                  <p class="text-small text-ink/70 leading-relaxed">{step.desc}</p>
+                </div>
               </div>
             </Card>
           ))}
@@ -105,145 +309,275 @@ const sectors = [
       </div>
     </section>
 
-    <!-- Countries & Sectors -->
+    <!-- Countries & Sectors (Investor Focus) -->
     <section class="section bg-paper" aria-label="Países y sectores participantes">
       <div class="container">
-        <div class="grid md:grid-cols-2 gap-12">
-          <!-- Countries -->
-          <div>
-            <SectionHeader eyebrow="Delegaciones" title="Compradores internacionales." territory="puna" class="mb-6" />
-            <div class="flex flex-col gap-3">
+        <div class="grid lg:grid-cols-12 gap-12 items-start">
+          
+          <!-- Delegaciones Internacionales -->
+          <div class="lg:col-span-6 flex flex-col gap-6">
+            <SectionHeader eyebrow="Delegaciones" title="Compradores internacionales." territory="puna" class="mb-2" />
+            <div class="flex flex-col gap-4">
               {countries.map(c => (
-                <div class="flex items-center gap-4 bg-white rounded-md border border-ink/8 p-4 hover:shadow-sm transition-shadow">
-                  <span class="text-[32px] flex-shrink-0" aria-hidden="true">{c.flag}</span>
-                  <div>
-                    <p class="text-body font-bold text-ink">{c.name} <span class="text-violet-mid ml-1">{c.count}</span></p>
-                    <p class="text-caption text-ink/50">{c.desc}</p>
+                <div class="flex flex-col bg-white rounded-xl border border-ink/8 p-5 hover:shadow-md hover:-translate-y-0.5 transition-all gap-2.5">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                      <div class="w-11 h-11 rounded-xl bg-violet-dark text-white font-extrabold text-small flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <span class="text-[22px] mr-1">{c.flag}</span>
+                      </div>
+                      <div>
+                        <h3 class="text-body font-bold text-ink leading-tight">{c.name}</h3>
+                        <p class="text-caption text-ink/50">Delegación Bioceánica</p>
+                      </div>
+                    </div>
+                    <div class="flex items-baseline gap-1 bg-violet-lavender/30 text-violet-dark px-3 py-1 rounded-pill">
+                      <span 
+                        class="text-h3 font-extrabold stat-counter tabular-nums leading-none" 
+                        data-target={c.val} 
+                        data-prefix={c.prefix}
+                      >
+                        {c.prefix}0
+                      </span>
+                      <span class="text-caption font-bold">Empresas</span>
+                    </div>
+                  </div>
+                  <p class="text-small text-ink/75 leading-relaxed">{c.desc}</p>
+                  <div class="pt-2 border-t border-ink/5 flex items-center gap-1.5 text-caption font-semibold text-violet-mid">
+                    <span class="material-symbols-outlined text-[15px]">trending_up</span>
+                    <span>{c.highlights}</span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <!-- Sectors -->
-          <div>
-            <SectionHeader eyebrow="Industrias" title="Sectores disponibles para matching." territory="yungas" class="mb-6" />
-            <div class="grid grid-cols-2 gap-3">
+          <!-- Sectores para Matching -->
+          <div class="lg:col-span-6 flex flex-col gap-6">
+            <SectionHeader eyebrow="Industrias" title="Sectores disponibles para matching." territory="yungas" class="mb-2" />
+            <div class="grid sm:grid-cols-2 gap-4">
               {sectors.map(s => (
-                <div class="flex items-center gap-3 bg-white rounded-md border border-ink/8 p-4 hover:shadow-sm transition-shadow">
-                  <div class="w-9 h-9 rounded-md bg-yungas/10 text-yungas flex items-center justify-center flex-shrink-0">
-                    <span class="material-symbols-outlined text-[18px]" aria-hidden="true">{s.icon}</span>
+                <div class="flex flex-col bg-white rounded-xl border border-ink/8 p-5 hover:shadow-md hover:-translate-y-0.5 transition-all gap-3">
+                  <div class="flex items-center justify-between">
+                    <div class={`w-10 h-10 rounded-lg ${s.color} border flex items-center justify-center flex-shrink-0`}>
+                      <span class="material-symbols-outlined text-[20px]" aria-hidden="true">{s.icon}</span>
+                    </div>
+                    <span class="text-caption font-bold px-2 py-0.5 rounded-pill bg-paper text-ink/60 border border-ink/8">
+                      {s.badge}
+                    </span>
                   </div>
-                  <p class="text-small font-semibold text-ink leading-snug">{s.name}</p>
+                  <div>
+                    <h3 class="text-small font-bold text-ink mb-1 leading-snug">{s.name}</h3>
+                    <p class="text-caption text-ink/65 leading-relaxed">{s.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
+
         </div>
       </div>
     </section>
 
-    <!-- Registration form -->
+
+    <!-- Registration CTA -->
     <section class="section bg-white" id="registro" aria-label="Registro para Rondas B2B">
-      <div class="container max-w-2xl">
-        <SectionHeader
-          eyebrow="Registro"
-          title="Inscribí tu empresa."
-          lead="Completá el formulario para participar en las Rondas de Vinculación B2B. El equipo de ExpoJuy te confirmará tu agenda en las próximas 72 horas."
-          align="center"
-          territory="violet"
-          class="mb-8"
-        />
+      <div class="container max-w-3xl">
+        <Card territory="violet" class="bg-gradient-to-br from-paper via-white to-violet-50/50 p-8 sm:p-12 text-center shadow-lg rounded-2xl relative overflow-hidden">
+          <!-- Ambient glow -->
+          <div class="absolute -top-16 -right-16 w-48 h-48 bg-violet-mid/10 rounded-full blur-2xl pointer-events-none" aria-hidden="true"></div>
 
-        <form
-          class="flex flex-col gap-5 bg-paper rounded-lg border border-ink/8 p-6"
-          aria-label="Formulario de registro B2B"
-          id="b2b-form"
-        >
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div class="flex flex-col gap-1.5">
-              <label for="empresa" class="text-small font-semibold text-ink">Empresa *</label>
-              <input id="empresa" name="empresa" type="text" required placeholder="Nombre legal de la empresa"
-                class="h-11 px-4 rounded-md bg-white border border-ink/15 text-small focus:outline-none focus:ring-2 focus:ring-violet-mid" />
+          <div class="relative z-10 flex flex-col items-center gap-6 max-w-xl mx-auto">
+            <div class="w-16 h-16 rounded-2xl bg-violet-dark text-white flex items-center justify-center shadow-violet text-3xl">
+              <span class="material-symbols-outlined text-[32px]" aria-hidden="true">handshake</span>
             </div>
-            <div class="flex flex-col gap-1.5">
-              <label for="pais" class="text-small font-semibold text-ink">País *</label>
-              <select id="pais" name="pais" required
-                class="h-11 px-4 rounded-md bg-white border border-ink/15 text-small focus:outline-none focus:ring-2 focus:ring-violet-mid">
-                <option value="">Seleccioná el país</option>
-                <option>Argentina</option>
-                <option>Chile</option>
-                <option>Paraguay</option>
-                <option>Brasil</option>
-                <option>Otro</option>
-              </select>
+
+            <div>
+              <Badge territory="violet" class="mb-3">Plataforma Oficial B2B</Badge>
+              <h2 class="text-h2 font-bold text-ink mb-3">Inscripción a las Rondas de Negocios</h2>
+              <p class="text-body text-ink/75 leading-relaxed">
+                La inscripción y gestión de agendas comerciales para las Rondas de Vinculación B2B de ExpoJuy 2026 se realiza a través de la plataforma externa de <strong>Sauken</strong>.
+              </p>
             </div>
-          </div>
 
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div class="flex flex-col gap-1.5">
-              <label for="nombre" class="text-small font-semibold text-ink">Nombre y apellido *</label>
-              <input id="nombre" name="nombre" type="text" required placeholder="Tu nombre completo"
-                class="h-11 px-4 rounded-md bg-white border border-ink/15 text-small focus:outline-none focus:ring-2 focus:ring-violet-mid" />
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center w-full pt-2">
+              <Button type="button" size="lg" icon="open_in_new" class="btn-open-b2b-modal shadow-violet hover:scale-[1.02] transition-transform">
+                Inscribir mi Empresa en Sauken
+              </Button>
             </div>
-            <div class="flex flex-col gap-1.5">
-              <label for="cargo" class="text-small font-semibold text-ink">Cargo</label>
-              <input id="cargo" name="cargo" type="text" placeholder="Ej. Gerente Comercial"
-                class="h-11 px-4 rounded-md bg-white border border-ink/15 text-small focus:outline-none focus:ring-2 focus:ring-violet-mid" />
-            </div>
-          </div>
 
-          <div class="flex flex-col gap-1.5">
-            <label for="email-b2b" class="text-small font-semibold text-ink">Correo electrónico *</label>
-            <input id="email-b2b" name="email" type="email" required placeholder="contacto@empresa.com"
-              class="h-11 px-4 rounded-md bg-white border border-ink/15 text-small focus:outline-none focus:ring-2 focus:ring-violet-mid" />
+            <p class="text-caption text-ink/50 flex items-center gap-1.5 justify-center">
+              <span class="material-symbols-outlined text-[16px] text-violet-mid" aria-hidden="true">lock</span>
+              Serás redirigido al portal seguro app.sauken.com.ar
+            </p>
           </div>
-
-          <div class="flex flex-col gap-1.5">
-            <label for="sector-b2b" class="text-small font-semibold text-ink">Sector *</label>
-            <select id="sector-b2b" name="sector" required
-              class="h-11 px-4 rounded-md bg-white border border-ink/15 text-small focus:outline-none focus:ring-2 focus:ring-violet-mid">
-              <option value="">Seleccioná el sector</option>
-              <option>Litio & Minerales Críticos</option>
-              <option>Agroindustria & Alimentos</option>
-              <option>Tecnología & Software</option>
-              <option>Logística & Transporte</option>
-              <option>Finanzas & Inversión</option>
-              <option>Turismo & MICE</option>
-              <option>Otro</option>
-            </select>
-          </div>
-
-          <div class="flex flex-col gap-1.5">
-            <label for="interes" class="text-small font-semibold text-ink">¿Qué buscás en las rondas?</label>
-            <textarea id="interes" name="interes" rows={3} placeholder="Describí tu oferta/demanda y los perfiles de empresas de interés..."
-              class="px-4 py-3 rounded-md bg-white border border-ink/15 text-small resize-none focus:outline-none focus:ring-2 focus:ring-violet-mid"></textarea>
-          </div>
-
-          <div class="flex items-start gap-3">
-            <input id="acepto" name="acepto" type="checkbox" required class="mt-1 accent-violet-dark" />
-            <label for="acepto" class="text-small text-ink/65">
-              Acepto los <a href="#" class="text-violet-mid hover:underline">términos y condiciones</a> de participación en las Rondas B2B de ExpoJuy 2026.
-            </label>
-          </div>
-
-          <Button type="submit" size="lg" class="w-full justify-center" icon="send">
-            Enviar inscripción
-          </Button>
-        </form>
+        </Card>
       </div>
     </section>
   </main>
+
+  <!-- Modal Redirección Externa B2B -->
+  <div
+    id="b2b-modal"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/75 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300"
+    role="dialog"
+    aria-labelledby="b2b-modal-title"
+    aria-modal="true"
+  >
+    <div 
+      id="b2b-modal-card" 
+      class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-ink/10 scale-95 transition-transform duration-300 relative"
+    >
+      <button
+        id="b2b-modal-close-x"
+        type="button"
+        class="absolute top-4 right-4 text-ink/40 hover:text-ink w-8 h-8 rounded-full flex items-center justify-center hover:bg-paper transition-colors"
+        aria-label="Cerrar modal"
+      >
+        <span class="material-symbols-outlined text-[20px]" aria-hidden="true">close</span>
+      </button>
+
+      <div class="flex flex-col items-center text-center gap-5">
+        <div class="w-14 h-14 rounded-full bg-violet-50 text-violet-dark border border-violet-100 flex items-center justify-center flex-shrink-0 shadow-sm">
+          <span class="material-symbols-outlined text-[28px]" aria-hidden="true">open_in_new</span>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <h3 id="b2b-modal-title" class="text-h3 font-bold text-ink">
+            Aviso de redirección externa
+          </h3>
+          <p class="text-body-sm text-ink/75 leading-relaxed">
+            Estás siendo redirigido a un sitio externo para la inscripción a las Rondas de Negocio.
+          </p>
+          <div class="mt-2 p-3 bg-paper rounded-lg border border-ink/8 text-caption text-ink/60 font-mono break-all flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-[16px] text-violet-mid" aria-hidden="true">link</span>
+            https://app.sauken.com.ar/
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 w-full mt-2">
+          <button
+            id="b2b-modal-cancel"
+            type="button"
+            class="w-full sm:w-1/2 h-11 px-5 rounded-pill border-2 border-ink/20 text-ink/80 hover:bg-paper font-semibold transition-all text-small"
+          >
+            Cancelar
+          </button>
+          <a
+            id="b2b-modal-confirm"
+            href="https://app.sauken.com.ar/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full sm:w-1/2 h-11 px-5 rounded-pill bg-violet-dark text-white hover:bg-violet-mid font-semibold flex items-center justify-center gap-2 shadow-violet transition-all text-small"
+          >
+            <span>Confirmar</span>
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <Footer />
 </BaseLayout>
 
 <script>
-  const form = document.getElementById('b2b-form') as HTMLFormElement;
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // Replace with real API submission
-    alert('¡Inscripción recibida! Te contactaremos en las próximas 72 horas para confirmar tu agenda de reuniones.');
-    form.reset();
+  const modal = document.getElementById('b2b-modal');
+  const modalContainer = document.getElementById('b2b-modal-card');
+  const openBtns = document.querySelectorAll('.btn-open-b2b-modal');
+  const cancelBtn = document.getElementById('b2b-modal-cancel');
+  const confirmBtn = document.getElementById('b2b-modal-confirm');
+  const closeX = document.getElementById('b2b-modal-close-x');
+
+  function openModal(e?: Event) {
+    if (e) e.preventDefault();
+    if (!modal) return;
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modal.classList.add('opacity-100', 'pointer-events-auto');
+    if (modalContainer) {
+      modalContainer.classList.remove('scale-95');
+      modalContainer.classList.add('scale-100');
+    }
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('opacity-100', 'pointer-events-auto');
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    if (modalContainer) {
+      modalContainer.classList.remove('scale-100');
+      modalContainer.classList.add('scale-95');
+    }
+    document.body.style.overflow = '';
+  }
+
+  openBtns.forEach((btn) => btn.addEventListener('click', openModal));
+  cancelBtn?.addEventListener('click', closeModal);
+  closeX?.addEventListener('click', closeModal);
+
+  // Backdrop click
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
   });
+
+  // Confirm button click closes modal
+  confirmBtn?.addEventListener('click', () => {
+    closeModal();
+  });
+
+  // ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && !modal.classList.contains('opacity-0')) {
+      closeModal();
+    }
+  });
+
+  // Animated stat counter (MWC style)
+  function initCounters() {
+    const counters = document.querySelectorAll('.stat-counter');
+    if (!counters.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const target = parseInt(el.getAttribute('data-target') || '0', 10);
+            const prefix = el.getAttribute('data-prefix') || '';
+            const suffix = el.getAttribute('data-suffix') || '';
+            const duration = 1600; // ms
+            const startTime = performance.now();
+
+            function update(now: number) {
+              const elapsed = now - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              // Ease-out exponential for smooth, crisp counter feel
+              const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+              const current = Math.floor(easeOut * target);
+
+              el.textContent = `${prefix}${current}${suffix}`;
+
+              if (progress < 1) {
+                requestAnimationFrame(update);
+              } else {
+                el.textContent = `${prefix}${target}${suffix}`;
+              }
+            }
+
+            requestAnimationFrame(update);
+            obs.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    counters.forEach((counter) => observer.observe(counter));
+  }
+
+  initCounters();
 </script>
+
+
+
+

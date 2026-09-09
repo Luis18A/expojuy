@@ -26,6 +26,7 @@ const {
   class: className = '',
   id,
   'aria-label': ariaLabel,
+  ...rest
 } = Astro.props;
 
 const Tag = href ? 'a' : 'button';
@@ -63,6 +64,7 @@ const base = [
     id={id}
     aria-label={ariaLabel}
     aria-disabled={disabled}
+    {...rest}
   >
     {loading && (
       <svg class="animate-spin h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -86,6 +88,7 @@ const base = [
     id={id}
     aria-label={ariaLabel}
     aria-busy={loading}
+    {...rest}
   >
     {loading && (
       <svg class="animate-spin h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
