@@ -312,8 +312,10 @@
       
       <!-- Opciones Rápidas -->
       <div class="ej-quick-faqs" id="ejQuickFaqs">
-        <button class="ej-chip-btn" data-faq="fecha">📅 ¿Cuándo y dónde se realiza?</button>
-        <button class="ej-chip-btn" data-faq="entradas">🎟️ ¿Cómo compro entradas?</button>
+        <button class="ej-chip-btn" data-faq="llegar">📍 ¿Cómo llego a Ciudad Cultural?</button>
+        <button class="ej-chip-btn" data-faq="entrada_ingreso">🎟️ ¿Necesito entrada para ingresar?</button>
+        <button class="ej-chip-btn" data-faq="prensa">📰 ¿Hay acreditación de prensa?</button>
+        <button class="ej-chip-btn" data-faq="asistir_dias">🗓️ ¿Se puede asistir solo un día?</button>
         <button class="ej-chip-btn" data-faq="estacionamiento">🚗 ¿Hay estacionamiento?</button>
         <button class="ej-chip-btn" data-faq="b2b">💼 ¿Cómo participo en Rondas B2B?</button>
       </div>
@@ -336,29 +338,33 @@
     function initWidget() {
       // Base de datos de conocimiento de las FAQs
       const faqData = {
+        llegar: {
+          q: "¿Cómo llego a Ciudad Cultural?",
+          a: "Ciudad Cultural Jujuy está ubicada en Av. Bolivia s/n, a 10 minutos del centro. Hay servicio de transporte público frecuente y estacionamiento en el predio para vehículos particulares."
+        },
+        entrada_ingreso: {
+          q: "¿Necesito una entrada para ingresar?",
+          a: "El ingreso al sector de exposición general es libre y gratuito. Algunos eventos especiales y las Rondas B2B requieren inscripción previa."
+        },
+        prensa: {
+          q: "¿Hay acreditación de prensa?",
+          a: "Sí. Periodistas y medios acreditados tienen acceso especial. Completá el formulario de prensa con 15 días de antelación enviando tu credencial al área de comunicación."
+        },
+        asistir_dias: {
+          q: "¿Se puede asistir solo un día?",
+          a: "Sí. La entrada gratuita permite asistir cualquier día entre el 9 y el 12 de octubre. Los Pases Profesional y VIP son válidos durante los 4 días."
+        },
+        estacionamiento: {
+          q: "¿Hay estacionamiento?",
+          a: "Ciudad Cultural cuenta con playa de estacionamiento gratuita con capacidad limitada. Se recomienda transporte público o los shuttles habilitados desde el centro de la ciudad."
+        },
         fecha: {
           q: "¿Cuándo y dónde se realiza?",
           a: "ExpoJuy 2026 se realizará del 9 al 12 de Octubre de 2026 en el predio Ciudad Cultural (San Salvador de Jujuy). Horario: 10:00 a 22:00 hs."
         },
-        entradas: {
-          q: "¿Cómo compro entradas?",
-          a: "Puedes comprarlas de forma digital en la web con código QR para mostrar en tu celular, o de manera presencial en las boleterías del predio."
-        },
-        estacionamiento: {
-          q: "¿Hay estacionamiento?",
-          a: "Sí, el predio cuenta con una amplia playa de estacionamiento vigilada, con lugares reservados para personas con movilidad reducida."
-        },
         b2b: {
           q: "¿Cómo participo en Rondas B2B?",
           a: "Puedes inscribirte desde la sección 'Vinculate B2B' en el menú de navegación de nuestra web o acreditándote con el Pase Profesional/VIP."
-        },
-        menores: {
-          q: "¿Los menores pagan entrada?",
-          a: "Los niños menores de hasta 10 años ingresan de forma gratuita acompañados por un adulto responsable."
-        },
-        prensa: {
-          q: "¿Cómo me acredito como prensa?",
-          a: "Debes solicitar tu acreditación con al menos 15 días de anticipación enviando tu credencial al área de comunicación desde la sección de contacto."
         }
       };
 
@@ -427,18 +433,20 @@
           const queryLower = userQuery.toLowerCase();
           let reply = "";
 
-          if (queryLower.includes('cuando') || queryLower.includes('fecha') || queryLower.includes('horario') || queryLower.includes('donde') || queryLower.includes('lugar')) {
-            reply = faqData.fecha.a;
-          } else if (queryLower.includes('entrada') || queryLower.includes('ticket') || queryLower.includes('comprar') || queryLower.includes('precio') || queryLower.includes('qr')) {
-            reply = faqData.entradas.a;
-          } else if (queryLower.includes('auto') || queryLower.includes('estacionamiento') || queryLower.includes('colectivo') || queryLower.includes('llegar')) {
+          if (queryLower.includes('llegar') || queryLower.includes('como llego') || queryLower.includes('ubicacion') || queryLower.includes('donde queda') || queryLower.includes('av. bolivia')) {
+            reply = faqData.llegar.a;
+          } else if (queryLower.includes('necesito entrada') || queryLower.includes('ingresar') || queryLower.includes('ingreso') || queryLower.includes('libre')) {
+            reply = faqData.entrada_ingreso.a;
+          } else if (queryLower.includes('prensa') || queryLower.includes('periodista') || queryLower.includes('medio') || queryLower.includes('acreditacion')) {
+            reply = faqData.prensa.a;
+          } else if (queryLower.includes('solo un dia') || queryLower.includes('un dia') || queryLower.includes('cuantos dias') || queryLower.includes('asistir')) {
+            reply = faqData.asistir_dias.a;
+          } else if (queryLower.includes('estacionamiento') || queryLower.includes('auto') || queryLower.includes('vehiculo') || queryLower.includes('playa')) {
             reply = faqData.estacionamiento.a;
+          } else if (queryLower.includes('cuando') || queryLower.includes('fecha') || queryLower.includes('horario') || queryLower.includes('donde') || queryLower.includes('lugar')) {
+            reply = faqData.fecha.a;
           } else if (queryLower.includes('b2b') || queryLower.includes('negocio') || queryLower.includes('empresa') || queryLower.includes('expositor') || queryLower.includes('stand')) {
             reply = faqData.b2b.a;
-          } else if (queryLower.includes('niño') || queryLower.includes('menor') || queryLower.includes('hijo') || queryLower.includes('gratis')) {
-            reply = faqData.menores.a;
-          } else if (queryLower.includes('prensa') || queryLower.includes('periodista') || queryLower.includes('medio')) {
-            reply = faqData.prensa.a;
           } else {
             // Respuesta fallback empática sin alucinaciones
             reply = "Gracias por tu consulta. Para detalles específicos no indicados aquí, por favor ponte en contacto con nuestro equipo oficial vía correo a <strong>contacto@expojuy.com.ar</strong>.";

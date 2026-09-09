@@ -5,29 +5,37 @@ import SectionHeader from '../ui/SectionHeader.astro';
 
 const stats = [
   {
-    value: '17',
-    suffix: '.ª',
+    target: 17,
+    prefix: '',
+    suffix: '',
+    unitSuffix: '.ª',
     label: 'Ediciones',
     sublabel: 'Trayectoria regional consolidada',
     territory: 'bg-yungas/10 text-yungas',
   },
   {
-    value: '4',
+    target: 4,
+    prefix: '',
     suffix: '',
+    unitSuffix: '',
     label: 'Países',
     sublabel: 'AR · CL · PY · BR — Corredor Bioceánico',
     territory: 'bg-valles/10 text-valles',
   },
   {
-    value: '+250',
+    target: 250,
+    prefix: '+',
     suffix: '',
+    unitSuffix: '',
     label: 'Expositores',
     sublabel: 'Industria, minería, agro y tecnología',
     territory: 'bg-puna/10 text-puna',
   },
   {
-    value: '+40K',
-    suffix: '',
+    target: 40,
+    prefix: '+',
+    suffix: 'K',
+    unitSuffix: '',
     label: 'Visitantes',
     sublabel: 'Estimación de afluencia general',
     territory: 'bg-quebrada/10 text-quebrada',
@@ -64,8 +72,15 @@ const stats = [
           role="listitem"
         >
           <div class="flex items-baseline gap-0.5 leading-none">
-            <span class="text-display font-extrabold leading-none">{stat.value}</span>
-            {stat.suffix && <span class="text-h2 font-bold">{stat.suffix}</span>}
+            <span 
+              class="text-display font-extrabold leading-none stat-counter tabular-nums"
+              data-target={stat.target}
+              data-prefix={stat.prefix}
+              data-suffix={stat.suffix}
+            >
+              {stat.prefix}0{stat.suffix}
+            </span>
+            {stat.unitSuffix && <span class="text-h2 font-bold">{stat.unitSuffix}</span>}
           </div>
           <p class="text-h3 font-bold">{stat.label}</p>
           <p class="text-small opacity-70 leading-snug">{stat.sublabel}</p>
@@ -79,3 +94,49 @@ const stats = [
     </p>
   </div>
 </section>
+
+<script>
+  function initCounters() {
+    const counters = document.querySelectorAll('#trayectoria .stat-counter');
+    if (!counters.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const target = parseInt(el.getAttribute('data-target') || '0', 10);
+            const prefix = el.getAttribute('data-prefix') || '';
+            const suffix = el.getAttribute('data-suffix') || '';
+            const duration = 1600;
+            const startTime = performance.now();
+
+            function update(now: number) {
+              const elapsed = now - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+              const current = Math.floor(easeOut * target);
+
+              el.textContent = `${prefix}${current}${suffix}`;
+
+              if (progress < 1) {
+                requestAnimationFrame(update);
+              } else {
+                el.textContent = `${prefix}${target}${suffix}`;
+              }
+            }
+
+            requestAnimationFrame(update);
+            obs.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    counters.forEach((counter) => observer.observe(counter));
+  }
+
+  initCounters();
+</script>
+

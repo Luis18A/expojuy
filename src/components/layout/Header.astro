@@ -82,7 +82,15 @@ const currentPath = Astro.url.pathname;
         </div>
 
         <!-- CTA -->
-        <Button href={`${base}visita`} size="sm" class="hidden sm:inline-flex">
+        <Button
+          href={`${base}visita#entradas`}
+          size="sm"
+          class="hidden sm:inline-flex buy-ticket-btn"
+          data-ticket-title="Abono 4 Días ExpoJuy"
+          data-ticket-price="ARS 50.000"
+          data-ticket-detail="Acceso ilimitado del 9 al 12 de Octubre"
+          data-ticket-badge="Pase Recomendado"
+        >
           Comprar entradas
         </Button>
 

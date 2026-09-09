@@ -8,63 +8,183 @@ import SectionHeader from '../components/ui/SectionHeader.astro';
 import Badge from '../components/ui/Badge.astro';
 import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
+import TicketModal from '../components/ui/TicketModal.astro';
 
 const base = import.meta.env.BASE_URL;
+
+const visitorBenefits = [
+  {
+    icon: 'qr_code_2',
+    title: 'Acreditación y accesos 100% digitales',
+    desc: 'Comprá o registrate online y recibí tu credencial digital con código QR para ingresar de forma ágil sin demoras en molinetes.',
+    tag: 'Acceso Ágil',
+    statLabel: 'TECNOLOGÍA DE INGRESO',
+    statValue: 'Código QR Instantáneo',
+    statIcon: 'smartphone',
+    accentColor: 'from-violet-dark via-violet-mid to-violet-lavender',
+    iconBg: 'bg-violet-lavender/40 text-violet-dark border-violet-mid/30',
+    pillBg: 'bg-violet-lavender/50 text-violet-dark border border-violet-mid/20',
+  },
+  {
+    icon: 'directions_bus',
+    title: 'Conectividad y transporte gratuito',
+    desc: 'Llegada directa mediante colectivos urbanos reforzados y servicio exclusivo de Shuttle gratuito desde Plaza Belgrano y Terminal.',
+    tag: 'Shuttle Gratuito',
+    statLabel: 'CONEXIÓN DIRECTA',
+    statValue: 'Cada 30 Minutos',
+    statIcon: 'near_me',
+    accentColor: 'from-violet-mid via-cyan to-cyan-dark',
+    iconBg: 'bg-violet-lavender/40 text-violet-dark border-violet-mid/30',
+    pillBg: 'bg-violet-lavender/50 text-violet-dark border border-violet-mid/20',
+  },
+  {
+    icon: 'restaurant',
+    title: 'Patio gastronómico y cocina regional',
+    desc: 'Más de 20 food trucks y espacios de comida con recetas típicas jujeñas, opciones gourmet, platos vegetarianos y menúes aptos Celíacos (Sin TACC).',
+    tag: 'Sabores Jujeños',
+    statLabel: 'OFERTA GASTRONÓMICA',
+    statValue: '20+ Food Trucks',
+    statIcon: 'utensils',
+    accentColor: 'from-cyan via-yungas to-yungas-dark',
+    iconBg: 'bg-cyan/15 text-cyan-dark border-cyan/30',
+    pillBg: 'bg-cyan/20 text-cyan-dark border border-cyan/30',
+  },
+  {
+    icon: 'family_star',
+    title: 'Pabellones integrales y accesibilidad 360°',
+    desc: 'Infraestructura climatizada, rampas normalizadas, sanitarios adaptados, primeros auxilios 24/7 y espectáculos culturales para toda la familia.',
+    tag: 'Accesibilidad 360°',
+    statLabel: 'COMODIDAD EN PREDIO',
+    statValue: 'Pabellones Cubiertos',
+    statIcon: 'verified',
+    accentColor: 'from-valles via-puna to-quebrada',
+    iconBg: 'bg-valles/15 text-valles-dark border-valles/30',
+    pillBg: 'bg-valles/20 text-valles-dark border border-valles/30',
+  },
+];
 
 const tickets = [
   {
     id: 'general',
-    badge: 'Público General',
+    badge: 'Unipersonal',
+    label: '1 Día',
+    labelColor: 'valles',
+    title: 'Pase General Diario',
+    priceNote: 'precio general en puerta',
+    price: 'ARS 15.000',
+    numPrice: 15000,
+    priceDetail: 'Precio de preventa con descuento',
     territory: 'valles' as const,
-    price: 'Gratuito',
-    subtitle: 'Acceso general los 4 días',
     features: [
-      'Acceso a todos los pabellones expositivos',
-      'Espectáculos culturales y gastronómicos',
-      'Charlas abiertas al público',
-      'Mapa interactivo del predio',
+      'Acceso a pabellones comerciales',
+      'Muestras culturales y espectáculos',
+      'Ingreso libre a Patio Gastronómico',
     ],
-    cta: 'Reservar entrada gratuita',
+    ctaNote: 'Recibí tu acceso digital con QR en tu mail.',
+    cta: 'Registrarme para preventa',
+    ctaVariant: 'outline' as const,
+    href: '#',
   },
   {
-    id: 'profesional',
-    badge: 'Pase Profesional',
-    territory: 'yungas' as const,
-    price: '$5.000',
-    subtitle: 'Por persona · 4 días',
+    id: 'completo',
+    badge: 'Pase Completo',
+    label: '4 Jornadas',
+    labelColor: 'quebrada',
+    title: 'Abono 4 Días ExpoJuy',
+    priceNote: 'Ahorra más del 35% anticipado',
+    price: 'ARS 50.000',
+    numPrice: 50000,
+    priceDetail: 'Acceso ilimitado del 9 al 12 oct.',
+    territory: 'quebrada' as const,
     featured: true,
     features: [
-      'Todo lo incluido en General',
-      'Acceso prioritario a conferencias',
-      'Networking Area Exclusiva',
-      'Credencial de Profesional del Sector',
-      'Café y cowork en el predio',
+      'Ingreso rápido por molinete exclusivo',
+      'Acceso a las 4 jornadas de feria',
+      'Descuentos en patio de comidas',
+      'Acceso digital intransferible con QR',
     ],
-    cta: 'Adquirir Pase Profesional',
+    ctaNote: 'Acceso digital intransferible con QR.',
+    cta: 'Comprar entrada anticipada',
+    ctaVariant: 'primary' as const,
+    href: '#',
   },
   {
-    id: 'vip',
-    badge: 'Acceso VIP / B2B',
-    territory: 'puna' as const,
-    price: '$15.000',
-    subtitle: 'Por persona · 4 días',
+    id: 'estudiante',
+    badge: 'Bonificado',
+    label: 'Social',
+    labelColor: 'yungas',
+    title: 'Pase Estudiante / Jubilados',
+    priceNote: 'Tarifa comunitaria subsidiada',
+    price: 'ARS 5.000',
+    numPrice: 5000,
+    priceDetail: 'Válido con credencial física',
+    territory: 'yungas' as const,
     features: [
-      'Todo lo incluido en Profesional',
-      'Inscripción a Rondas B2B incluida',
-      'Salón de reuniones reservado',
-      'Parking exclusivo en el predio',
-      'Kits institucionales y merchandising',
+      'Acceso a pabellones educativos',
+      'Acreditación obligatoria en puerta',
+      'Ingreso a conferencias abiertas',
     ],
-    cta: 'Adquirir Pase VIP',
+    ctaNote: 'Presentar DNI y carnet al ingresar.',
+    cta: 'Consultar requisitos',
+    ctaVariant: 'outline' as const,
+    href: '#',
+  },
+  {
+    id: 'corporativo',
+    badge: 'Corporativo',
+    label: 'B2B',
+    labelColor: 'puna',
+    title: 'Pase Profesional / Negocios',
+    priceNote: 'Acreditación comercial completa',
+    price: 'ARS 25.000',
+    numPrice: 25000,
+    priceDetail: 'Incluye directorio y coffee lounge',
+    territory: 'puna' as const,
+    features: [
+      'Acceso prioritario a Rondas B2B',
+      'Directorio oficial de expositores',
+      'Sala VIP para reuniones privadas',
+    ],
+    ctaNote: 'Acreditación comercial con constancia.',
+    cta: 'Acreditarme B2B',
+    ctaVariant: 'outline' as const,
+    href: `${base}b2b#registro`,
   },
 ];
 
-const faq = [
-  { q: '¿Cómo llego a Ciudad Cultural?', a: 'Ciudad Cultural Jujuy está ubicada en Av. Bolivia s/n, a 10 minutos del centro. Hay servicio de transporte público frecuente y estacionamiento en el predio para vehículos particulares.' },
-  { q: '¿Necesito una entrada para ingresar?', a: 'El ingreso al sector de exposición general es libre y gratuito. Algunos eventos especiales y las Rondas B2B requieren inscripción previa.' },
-  { q: '¿Hay acreditación de prensa?', a: 'Sí. Periodistas y medios acreditados tienen acceso especial. Completá el formulario de prensa con 15 días de antelación enviando tu credencial al área de comunicación.' },
-  { q: '¿Se puede asistir solo un día?', a: 'Sí. La entrada gratuita permite asistir cualquier día entre el 9 y el 12 de octubre. Los Pases Profesional y VIP son válidos durante los 4 días.' },
-  { q: '¿Hay estacionamiento?', a: 'Ciudad Cultural cuenta con playa de estacionamiento gratuita con capacidad limitada. Se recomienda transporte público o los shuttles habilitados desde el centro de la ciudad.' },
+const infoItems = [
+  {
+    icon: 'calendar_month',
+    label: 'Fecha Oficial',
+    value: '9 al 12 de oct.',
+    sub: 'Edición anual 2026',
+    color: 'text-quebrada',
+    bg: 'bg-quebrada/8',
+  },
+  {
+    icon: 'location_on',
+    label: 'Sede Principal',
+    value: 'Ciudad Cultural',
+    sub: 'San Salvador de Jujuy',
+    color: 'text-valles',
+    bg: 'bg-valles/8',
+  },
+  {
+    icon: 'schedule',
+    label: 'Horarios Previstos',
+    value: '10:00 a 22:00 hs',
+    sub: 'Sujeto a cronograma',
+    color: 'text-yungas',
+    bg: 'bg-yungas/8',
+  },
+  {
+    icon: 'qr_code_2',
+    label: 'Acceso Digital',
+    value: 'Entradas con QR',
+    sub: 'Próxima preventa',
+    color: 'text-puna',
+    bg: 'bg-puna/8',
+  },
 ];
 ---
 
@@ -76,70 +196,252 @@ const faq = [
   <BottomNav activePage="visita" />
 
   <main id="main-content">
-    <!-- Page header -->
-    <section class="section bg-white border-b border-ink/8">
-      <div class="container">
-        <nav aria-label="Ruta de navegación" class="flex items-center gap-2 text-caption text-ink/50 mb-6">
-          <a href={base} class="hover:text-violet-dark transition-colors">Inicio</a>
-          <span aria-hidden="true">/</span>
-          <span class="text-ink font-semibold">Visitá ExpoJuy</span>
+    <!-- Hero Header with Image expojuy.jpeg & MWC Stat Counters -->
+    <section class="relative bg-ink text-white overflow-hidden py-14 lg:py-20 border-b border-ink/20" aria-label="Información para visitar ExpoJuy 2026">
+      {/* Background Image Container with Left-to-Right Gradient Overlay & Zoom-Out Scale */}
+      <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute right-0 top-0 bottom-0 w-full lg:w-[50%] flex items-center justify-end overflow-hidden">
+          <img
+            src={`${base}expojuy.jpeg`}
+            alt="Feria Multisectorial ExpoJuy en Ciudad Cultural"
+            class="w-full h-full object-cover object-center scale-90 lg:scale-[0.82] transform-gpu opacity-50 mix-blend-luminosity"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40"></div>
+        </div>
+      </div>
+
+      <div class="absolute inset-0 bg-gradient-puna opacity-30 pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 24px 24px;" aria-hidden="true"></div>
+
+      <div class="container relative z-10">
+        <!-- Breadcrumb -->
+        <nav aria-label="Ruta de navegación" class="flex items-center gap-1.5 text-[11px] text-white/50 font-medium mb-6">
+          <a href={base} class="hover:text-cyan transition-colors">Inicio</a>
+          <span class="material-symbols-outlined text-[12px]" aria-hidden="true">chevron_right</span>
+          <span class="text-white/90 font-semibold">Visitá ExpoJuy</span>
         </nav>
-        <SectionHeader
-          eyebrow="Información Práctica"
-          title="Todo lo que necesitás para visitar ExpoJuy."
-          lead="Entradas, plano del predio, cómo llegar y preguntas frecuentes. Planificá tu visita a la feria multisectorial del Norte Grande."
-          territory="valles"
-        />
+
+        <div class="max-w-2xl flex flex-col gap-5">
+          
+
+          <h1 class="text-h1 text-white font-bold leading-tight">
+            Todo lo que necesitás para <span class="text-cyan">visitar ExpoJuy 2026</span>
+          </h1>
+
+          <p class="text-body-lg text-white/80 leading-relaxed">
+            Entradas, plano del predio, estacionamiento y cómo llegar a Ciudad Cultural. Planificá tu recorrido por el mayor evento multisectorial del Norte Grande.
+          </p>
+
+          <div class="flex flex-wrap gap-3 pt-2">
+            <Button href="#entradas" size="lg" icon="confirmation_number" class="shadow-violet">
+              Comprar Entradas
+            </Button>
+            <Button href="#como-llegar" variant="outline" size="lg" icon="directions_bus" class="border-white/30 text-white hover:bg-white/10">
+              Cómo Llegar
+            </Button>
+          </div>
+
+        </div>
       </div>
     </section>
 
-    <!-- Tickets -->
-    <section class="section bg-paper" id="entradas" aria-label="Tipos de entrada">
+    <!-- ═══════════════════════════════════════════
+         VALOR ESTRATÉGICO — Experiencia del Visitante (Grid 2x2 Optimizado)
+         ═══════════════════════════════════════════ -->
+    <section class="section bg-white border-b border-ink/5" aria-label="Experiencia del visitante en ExpoJuy">
       <div class="container">
-        <SectionHeader
-          eyebrow="Entradas & Pases"
-          title="Elegí el acceso que se adapta a vos."
-          align="center"
-          territory="quebrada"
-          class="mb-10"
-        />
+        <div class="grid lg:grid-cols-12 gap-6 items-end mb-10">
+          <div class="lg:col-span-8">
+            <SectionHeader
+              eyebrow="EXPERIENCIA DEL VISITANTE"
+              title="Tu visita a ExpoJuy 2026, sin complicaciones"
+              territory="valles"
+            />
+          </div>
+          <div class="lg:col-span-4">
+            <p class="text-small text-ink/70 leading-relaxed lg:text-right">
+              Servicios pensados para garantizar confort, accesibilidad universal y la mejor gastronomía durante tu permanencia en el predio.
+            </p>
+          </div>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {tickets.map(ticket => (
-            <Card
-              territory={ticket.territory}
-              class={ticket.featured ? 'ring-2 ring-violet-mid ring-offset-2' : ''}
-            >
-              <div class="flex flex-col h-full p-6 gap-4">
-                <div class="flex items-start justify-between">
-                  <Badge territory={ticket.territory}>{ticket.badge}</Badge>
-                  {ticket.featured && <span class="text-caption font-bold text-violet-mid">★ Recomendado</span>}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {visitorBenefits.map(b => (
+            <div class="relative flex flex-col justify-between bg-white rounded-2xl border border-ink/8 p-6 sm:p-8 hover:border-violet-mid/40 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group overflow-hidden">
+              {/* Top Accent Gradient Bar */}
+              <div class={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${b.accentColor}`} />
+
+              <div class="flex flex-col gap-5 pt-1">
+                <div class="flex items-center justify-between gap-3">
+                  <div class={`w-12 h-12 rounded-xl ${b.iconBg} border flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300`}>
+                    <span class="material-symbols-outlined text-[26px]" aria-hidden="true">{b.icon}</span>
+                  </div>
+                  <span class={`text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-2xs ${b.pillBg}`}>
+                    {b.tag}
+                  </span>
                 </div>
 
                 <div>
-                  <p class="text-display-sm font-extrabold text-ink leading-none">{ticket.price}</p>
-                  <p class="text-small text-ink/50 mt-1">{ticket.subtitle}</p>
+                  <h3 class="text-xl font-bold font-display text-ink group-hover:text-violet-dark transition-colors duration-200 leading-snug mb-2.5">
+                    {b.title}
+                  </h3>
+                  <p class="text-body-sm text-ink/75 leading-relaxed">
+                    {b.desc}
+                  </p>
                 </div>
-
-                <ul class="flex flex-col gap-2 flex-1" role="list">
-                  {ticket.features.map(f => (
-                    <li class="flex items-start gap-2 text-small text-ink/70" role="listitem">
-                      <span class="material-symbols-outlined text-[16px] text-valles mt-0.5 flex-shrink-0" aria-hidden="true">check_circle</span>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-
-                <Button
-                  href={ticket.id === 'vip' ? `${base}b2b#registro` : '#'}
-                  variant={ticket.featured ? 'primary' : 'outline'}
-                  class="w-full justify-center"
-                  icon="confirmation_number"
-                >
-                  {ticket.cta}
-                </Button>
               </div>
-            </Card>
+
+              {/* Bottom Stat Highlight Footer */}
+              <div class="mt-6 pt-4 border-t border-ink/8 flex items-center justify-between text-xs">
+                <span class="text-[11px] font-extrabold text-ink/50 uppercase tracking-wider flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-[16px] text-violet-mid" aria-hidden="true">{b.statIcon}</span>
+                  {b.statLabel}
+                </span>
+                <span class="font-black text-ink text-sm group-hover:text-violet-dark transition-colors">
+                  {b.statValue}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Info Rápida: 4 datos clave en strip -->
+    <div class="bg-white border-b border-ink/8">
+      <div class="container">
+        <div class="grid grid-cols-2 lg:grid-cols-4">
+          {infoItems.map((item, i) => (
+            <div class={`flex items-center gap-4 py-6 px-5 lg:px-8 border-ink/8 ${
+              i % 2 === 0 ? 'border-r' : ''
+            } ${
+              i < 2 ? 'border-b lg:border-b-0' : ''
+            } ${
+              i < 3 ? 'lg:border-r' : 'lg:border-r-0'
+            }`}>
+              <div class={`w-10 h-10 rounded-lg ${item.bg} ${item.color} flex items-center justify-center flex-shrink-0`}>
+                <span class="material-symbols-outlined text-[20px]" aria-hidden="true">{item.icon}</span>
+              </div>
+              <div class="flex-1">
+                <p class="text-caption text-ink/40 uppercase tracking-widest font-semibold">{item.label}</p>
+                <p class="text-body font-bold text-ink leading-tight mt-0.5">{item.value}</p>
+                <p class="text-caption text-ink/45 mt-0.5">{item.sub}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Tickets -->
+    <section class="section bg-white" id="entradas" aria-label="Tipos de entrada">
+      <div class="container">
+        <SectionHeader
+          eyebrow="Accesos & Tickets Digitales"
+          title="Tipos de entradas y acceso general."
+          lead="Adquirí tu pase oficial de manera digital. Al comprar, recibís tu credencial intransferible con código QR lista para validar en molinetes."
+          territory="quebrada"
+          align="center"
+          class="mb-8"
+        />
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 items-stretch">
+          {tickets.map(ticket => (
+            <div class="flex flex-col h-full">
+              {/* Espaciador uniforme — badge para el featured, invisible para el resto */}
+              <div class="flex items-center justify-center mb-2 h-[28px]">
+                {ticket.featured && (
+                  <span class="bg-violet-mid text-white text-caption font-bold px-4 py-1 rounded-pill tracking-wide">
+                    ★ RECOMENDADO · 4 DÍAS
+                  </span>
+                )}
+              </div>
+
+              <div
+                class={`relative flex flex-col flex-1 bg-white rounded-xl border overflow-hidden cursor-pointer buy-ticket-btn ${
+                  ticket.featured ? 'border-violet-mid shadow-lg shadow-violet-mid/10' : 'border-ink/10 hover:border-ink/20 hover:shadow-sm transition-shadow'
+                }`}
+                data-ticket-id={ticket.id}
+                data-ticket-title={ticket.title}
+                data-ticket-price={ticket.price}
+                data-ticket-numprice={ticket.numPrice}
+                data-ticket-detail={ticket.priceDetail}
+                data-ticket-badge={ticket.badge}
+                data-ticket-territory={ticket.territory}
+                data-ticket-features={JSON.stringify(ticket.features)}
+              >
+                {/* Barra de color territorial en el top */}
+                <div class={`h-1 w-full ${
+                  ticket.territory === 'quebrada' ? 'bg-quebrada' :
+                  ticket.territory === 'yungas'   ? 'bg-yungas' :
+                  ticket.territory === 'puna'     ? 'bg-puna' :
+                                                    'bg-valles'
+                }`} aria-hidden="true" />
+
+                <div class="flex flex-col flex-1 p-5 gap-4">
+                  <!-- Header -->
+                  <div class="flex items-start justify-between gap-2 min-h-[48px]">
+                    <div>
+                      <p class="text-caption text-ink/40 uppercase tracking-widest font-semibold">{ticket.badge}</p>
+                      <h3 class="text-small font-bold text-ink mt-0.5 leading-snug">{ticket.title}</h3>
+                    </div>
+                    <span class={`text-caption font-bold px-2.5 py-1 rounded-full whitespace-nowrap flex-shrink-0 ${
+                      ticket.labelColor === 'quebrada' ? 'bg-quebrada/10 text-quebrada' :
+                      ticket.labelColor === 'yungas'   ? 'bg-yungas/10 text-yungas' :
+                      ticket.labelColor === 'puna'     ? 'bg-puna/10 text-puna' :
+                                                         'bg-valles/10 text-valles'
+                    }`}>{ticket.label}</span>
+                  </div>
+
+                  <!-- Precio -->
+                  <div class="rounded-lg bg-paper px-4 py-3">
+                    <p class="text-caption text-ink/35 line-through mb-0.5">{ticket.priceNote}</p>
+                    <p class={`text-h3 font-extrabold leading-none ${
+                      ticket.featured ? 'text-violet-dark' : 'text-ink'
+                    }`}>{ticket.price}</p>
+                    <p class="text-caption text-ink/45 mt-1">{ticket.priceDetail}</p>
+                  </div>
+
+                  <!-- Features -->
+                  <ul class="flex flex-col gap-2.5 flex-1" role="list">
+                    {ticket.features.map(f => (
+                      <li class="flex items-start gap-2 text-small text-ink/65" role="listitem">
+                        <span class={`material-symbols-outlined text-[16px] mt-0.5 flex-shrink-0 ${
+                          ticket.territory === 'quebrada' ? 'text-quebrada' :
+                          ticket.territory === 'yungas'   ? 'text-yungas' :
+                          ticket.territory === 'puna'     ? 'text-puna' :
+                                                            'text-valles'
+                        }`} aria-hidden="true">check_circle</span>
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <!-- Note footer -->
+                  <div class="border-t border-ink/8 pt-3 min-h-[40px] flex items-center">
+                    <p class="text-caption text-ink/40 leading-relaxed italic">{ticket.ctaNote}</p>
+                  </div>
+
+                  <!-- CTA -->
+                  <Button
+                    href={ticket.href}
+                    variant={ticket.ctaVariant}
+                    class="w-full justify-center mt-auto buy-ticket-btn"
+                    data-ticket-id={ticket.id}
+                    data-ticket-title={ticket.title}
+                    data-ticket-price={ticket.price}
+                    data-ticket-numprice={ticket.numPrice}
+                    data-ticket-detail={ticket.priceDetail}
+                    data-ticket-badge={ticket.badge}
+                    data-ticket-territory={ticket.territory}
+                    data-ticket-features={JSON.stringify(ticket.features)}
+                  >
+                    {ticket.cta}
+                  </Button>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -148,7 +450,7 @@ const faq = [
     <!-- Map section -->
     <section class="section bg-white" id="mapa" aria-label="Plano del predio">
       <div class="container">
-        <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
           <SectionHeader
             eyebrow="Ciudad Cultural · Jujuy"
             title="Plano del predio ferial."
@@ -158,104 +460,340 @@ const faq = [
 
           <!-- SVG map placeholder -->
           <div
-            class="rounded-lg overflow-hidden border border-ink/8 bg-paper aspect-[4/3] flex items-center justify-center relative"
+            class="rounded-lg overflow-hidden border border-ink/8 bg-paper relative"
             aria-label="Plano del predio Ciudad Cultural (representación esquemática)"
           >
-            <svg viewBox="0 0 400 300" class="w-full h-full" role="img" aria-label="Mapa esquemático del predio">
+            <svg viewBox="0 0 480 380" class="w-full h-auto" role="img" aria-label="Mapa esquemático del predio" style="display:block;">
               <title>Plano esquemático del predio ExpoJuy 2026</title>
-              <!-- Outline -->
-              <rect x="20" y="20" width="360" height="260" rx="12" fill="#f2f2f2" stroke="#E0E0E0" stroke-width="1.5"/>
-              <!-- Pabellón A -->
-              <rect x="40" y="50" width="140" height="80" rx="6" fill="#0C619620" stroke="#0C6196" stroke-width="1"/>
-              <text x="110" y="86" text-anchor="middle" fill="#0C6196" font-size="12" font-weight="700">PABELLÓN A</text>
-              <text x="110" y="102" text-anchor="middle" fill="#0C619680" font-size="9">Minería · Energía</text>
-              <!-- Pabellón B -->
-              <rect x="220" y="50" width="140" height="80" rx="6" fill="#25C0D420" stroke="#25C0D4" stroke-width="1"/>
-              <text x="290" y="86" text-anchor="middle" fill="#005539" font-size="12" font-weight="700">PABELLÓN B</text>
-              <text x="290" y="102" text-anchor="middle" fill="#00553980" font-size="9">Agro · Industria</text>
-              <!-- Pabellón C (Tecnología) -->
-              <rect x="40" y="150" width="100" height="70" rx="6" fill="#820CD020" stroke="#820CD0" stroke-width="1"/>
-              <text x="90" y="183" text-anchor="middle" fill="#820CD0" font-size="11" font-weight="700">PAB. C</text>
-              <text x="90" y="198" text-anchor="middle" fill="#820CD080" font-size="9">Tech</text>
-              <!-- Auditorio -->
-              <rect x="160" y="150" width="90" height="70" rx="6" fill="#7553F220" stroke="#7553F2" stroke-width="1"/>
-              <text x="205" y="183" text-anchor="middle" fill="#7553F2" font-size="10" font-weight="700">AUDITORIO</text>
+              <defs>
+                <!-- Fills con transparencia para cada zona -->
+                <linearGradient id="fillA" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#0C6196" stop-opacity="0.12"/>
+                  <stop offset="100%" stop-color="#A0D9FF" stop-opacity="0.18"/>
+                </linearGradient>
+                <linearGradient id="fillB" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#25C0D4" stop-opacity="0.12"/>
+                  <stop offset="100%" stop-color="#005539" stop-opacity="0.14"/>
+                </linearGradient>
+                <linearGradient id="fillC" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#820CD0" stop-opacity="0.10"/>
+                  <stop offset="100%" stop-color="#B3008F" stop-opacity="0.14"/>
+                </linearGradient>
+                <linearGradient id="fillAud" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#7553F2" stop-opacity="0.10"/>
+                  <stop offset="100%" stop-color="#7553F2" stop-opacity="0.16"/>
+                </linearGradient>
+                <linearGradient id="fillB2B" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#730DD9" stop-opacity="0.10"/>
+                  <stop offset="100%" stop-color="#730DD9" stop-opacity="0.16"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Fondo del predio con borde -->
+              <rect x="16" y="16" width="448" height="348" rx="14" fill="#ffffff" stroke="#E2E8F0" stroke-width="1.5"/>
+
+              <!-- Título del plano -->
+              <text x="240" y="38" text-anchor="middle" fill="#3C3C3B" font-size="11" font-weight="600" letter-spacing="0.3">Plano orientativo — Ciudad Cultural Jujuy</text>
+              <line x1="60" y1="44" x2="420" y2="44" stroke="#E2E8F0" stroke-width="1"/>
+
+              <!-- ══ FILA 1: Pabellón A y Pabellón B ══ -->
+
+              <!-- Pabellón A — Yungas (Minería · Energía) -->
+              <rect x="36" y="58" width="185" height="110" rx="10" fill="url(#fillA)" stroke="#0C6196" stroke-width="1.5"/>
+              <!-- Ícono de punto de color superior -->
+              <rect x="36" y="58" width="185" height="5" rx="3" fill="#0C6196" opacity="0.7"/>
+              <text x="128" y="103" text-anchor="middle" fill="#0C6196" font-size="13" font-weight="700">PABELLÓN A</text>
+              <text x="128" y="121" text-anchor="middle" fill="#0C6196" font-size="9.5" opacity="0.75">Minería · Energía · Recursos Naturales</text>              
+
+              <!-- Pasillo vertical entre A y B -->
+              <rect x="225" y="58" width="26" height="110" rx="4" fill="#F2F2F2" stroke="#E2E8F0" stroke-width="1"/>
+              <text x="238" y="108" text-anchor="middle" fill="#9CA3AF" font-size="7.5" transform="rotate(-90,238,113)" letter-spacing="1">PASILLO</text>
+
+              <!-- Pabellón B — Valles (Agro · Industria) -->
+              <rect x="255" y="58" width="185" height="110" rx="10" fill="url(#fillB)" stroke="#005539" stroke-width="1.5"/>
+              <rect x="255" y="58" width="185" height="5" rx="3" fill="#25C0D4" opacity="0.7"/>
+              <text x="347" y="103" text-anchor="middle" fill="#005539" font-size="13" font-weight="700">PABELLÓN B</text>
+              <text x="347" y="121" text-anchor="middle" fill="#005539" font-size="9.5" opacity="0.75">Agro · Industria · Alimentos</text>
+              
+
+              <!-- ══ SEPARADOR HORIZONTAL ══ -->
+              <rect x="36" y="178" width="404" height="10" rx="3" fill="#F2F2F2"/>
+              <text x="240" y="187" text-anchor="middle" fill="#9CA3AF" font-size="7.5" letter-spacing="1">— PASILLO PRINCIPAL —</text>
+
+              <!-- ══ FILA 2: Pab C + Auditorio + Salón B2B ══ -->
+
+              <!-- Pabellón C — Puna (Tecnología · Innovación) -->
+              <rect x="36" y="194" width="120" height="100" rx="10" fill="url(#fillC)" stroke="#820CD0" stroke-width="1.5"/>
+              <rect x="36" y="194" width="120" height="5" rx="3" fill="#820CD0" opacity="0.7"/>
+              <text x="96" y="238" text-anchor="middle" fill="#820CD0" font-size="11" font-weight="700">PAB. C</text>
+              <text x="96" y="256" text-anchor="middle" fill="#820CD0" font-size="8.5" opacity="0.75">Tecnología · Innovación</text>
+              
+              
+
+              <!-- Auditorio — Quebrada -->
+              <rect x="168" y="194" width="130" height="100" rx="10" fill="url(#fillAud)" stroke="#7553F2" stroke-width="1.5"/>
+              <rect x="168" y="194" width="130" height="5" rx="3" fill="#7553F2" opacity="0.7"/>
+              <text x="233" y="238" text-anchor="middle" fill="#7553F2" font-size="11" font-weight="700">AUDITORIO</text>
+              <text x="233" y="256" text-anchor="middle" fill="#7553F2" font-size="8.5" opacity="0.75">Conferencias · Paneles</text>
+              
+
               <!-- Salón B2B -->
-              <rect x="270" y="150" width="90" height="70" rx="6" fill="#730DD920" stroke="#730DD9" stroke-width="1"/>
-              <text x="315" y="183" text-anchor="middle" fill="#730DD9" font-size="10" font-weight="700">SALÓN B2B</text>
-              <!-- Pasillo central -->
-              <rect x="190" y="140" width="20" height="100" rx="3" fill="#E0E0E0"/>
-              <text x="200" y="180" text-anchor="middle" fill="#999" font-size="7" transform="rotate(-90,200,185)">PASILLO</text>
-              <!-- Acceso principal -->
-              <rect x="140" y="260" width="120" height="16" rx="3" fill="#730DD940"/>
-              <text x="200" y="272" text-anchor="middle" fill="#730DD9" font-size="9" font-weight="600">↑ ACCESO PRINCIPAL</text>
-              <!-- Leyenda -->
-              <text x="200" y="30" text-anchor="middle" fill="#3C3C3B" font-size="10" font-weight="500">Plano orientativo — Ciudad Cultural Jujuy</text>
+              <rect x="310" y="194" width="130" height="100" rx="10" fill="url(#fillB2B)" stroke="#730DD9" stroke-width="1.5"/>
+              <rect x="310" y="194" width="130" height="5" rx="3" fill="#730DD9" opacity="0.7"/>
+              <text x="375" y="232" text-anchor="middle" fill="#730DD9" font-size="11" font-weight="700">SALÓN B2B</text>
+              <text x="375" y="250" text-anchor="middle" fill="#730DD9" font-size="8.5" opacity="0.75">Rondas de Negocios</text>
+              <text x="375" y="264" text-anchor="middle" fill="#730DD9" font-size="8" opacity="0.6">Solo con acreditación</text>
+
+              <!-- ══ ACCESO PRINCIPAL ══ -->
+              <rect x="160" y="306" width="160" height="28" rx="8" fill="#730DD9" opacity="0.1" stroke="#730DD9" stroke-width="1.5" stroke-dasharray="4,3"/>
+              <text x="240" y="323" text-anchor="middle" fill="#730DD9" font-size="9.5" font-weight="700">↑ ACCESO PRINCIPAL</text>
+
             </svg>
           </div>
         </div>
 
-        <!-- How to get there -->
-        <div class="grid sm:grid-cols-3 gap-4 mt-10">
-          {[
-            { icon: 'directions_bus', title: 'Transporte público', desc: 'Líneas 16, 19 y 24 desde el centro. Frecuencia cada 15 min durante el evento.' },
-            { icon: 'directions_car', title: 'Vehículo propio', desc: 'Estacionamiento gratuito en el predio. Capacidad limitada. Se recomienda llegar temprano.' },
-            { icon: 'directions_walk', title: 'Shuttle oficial', desc: 'Servicio gratuito desde Terminal de Ómnibus y Plaza Belgrano. Horario extendido.' },
-          ].map(item => (
-            <div class="flex items-start gap-4 bg-paper rounded-md p-4 border border-ink/8">
-              <div class="w-10 h-10 rounded-md bg-valles/10 text-valles flex items-center justify-center flex-shrink-0">
-                <span class="material-symbols-outlined text-[20px]" aria-hidden="true">{item.icon}</span>
+      </div>
+    </section>
+
+    <!-- Cómo llegar a Ciudad Cultural -->
+    <section class="section bg-white border-b border-ink/5" id="como-llegar" aria-label="Cómo llegar a Ciudad Cultural">
+      <div class="container">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+          <div>
+            <SectionHeader
+              eyebrow="UBICACIÓN ESTRATÉGICA"
+              title="Cómo llegar a Ciudad Cultural."
+              lead="Ubicada en el acceso norte de San Salvador de Jujuy sobre Av. Bolivia, con conectividad directa y transporte gratuito."
+              territory="yungas"
+            />
+          </div>
+          <a
+            href="https://maps.google.com/?q=Ciudad+Cultural+Jujuy+Av+Bolivia"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 h-11 px-5 rounded-full text-xs font-bold whitespace-nowrap transition-all border border-yungas/40 text-yungas hover:bg-yungas-light/20 flex-shrink-0 active:scale-95 shadow-2xs"
+          >
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">open_in_new</span>
+            <span>Abrir en Google Maps</span>
+          </a>
+        </div>
+
+        <!-- Grid de 3 Tarjetas Ultra-Escaneables -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          
+          <!-- Card 1: Colectivos Urbanos -->
+          <div class="relative flex flex-col justify-between bg-white rounded-2xl border border-ink/8 p-6 sm:p-7 hover:border-yungas/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-yungas via-yungas-mid to-yungas-dark" />
+
+            <div class="flex flex-col gap-5 pt-1">
+              <div class="flex items-center justify-between gap-3">
+                <div class="w-12 h-12 rounded-xl bg-yungas/15 text-yungas-dark border border-yungas/30 flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                  <span class="material-symbols-outlined text-[26px]" aria-hidden="true">directions_bus</span>
+                </div>
+                <span class="text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full bg-yungas/15 text-yungas-dark border border-yungas/20">
+                  Parada Directa
+                </span>
               </div>
+
               <div>
-                <p class="text-small font-bold text-ink">{item.title}</p>
-                <p class="text-caption text-ink/60 leading-relaxed mt-0.5">{item.desc}</p>
+                <h3 class="text-xl font-bold font-display text-ink group-hover:text-yungas-dark transition-colors duration-200 leading-snug mb-2">
+                  Colectivos Urbanos
+                </h3>
+                <p class="text-xs text-ink/65 leading-relaxed mb-4">
+                  Parada exclusiva frente al predio sobre Av. Bolivia.
+                </p>
+
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-center gap-2 p-2 rounded-lg bg-paper border border-ink/5">
+                    <span class="font-extrabold text-xs px-2 py-0.5 rounded bg-yungas-dark text-white shadow-2xs">L-16 y L-19</span>
+                    <span class="text-xs font-semibold text-ink/80">Centro & Terminal</span>
+                  </div>
+                  <div class="flex items-center gap-2 p-2 rounded-lg bg-paper border border-ink/5">
+                    <span class="font-extrabold text-xs px-2 py-0.5 rounded bg-yungas-dark text-white shadow-2xs">L-8 y L-24</span>
+                    <span class="text-xs font-semibold text-ink/80">Alto Comedero & Yala</span>
+                  </div>
+                </div>
               </div>
             </div>
-          ))}
+
+            <div class="mt-6 pt-4 border-t border-ink/8 text-[11px] font-bold text-ink/50 flex items-center gap-2">
+              <span class="material-symbols-outlined text-[16px] text-yungas" aria-hidden="true">schedule</span>
+              <span>Frecuencia reforzada hasta las 23:00 hs</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Shuttle Gratuito ExpoJuy -->
+          <div class="relative flex flex-col justify-between bg-white rounded-2xl border border-ink/8 p-6 sm:p-7 hover:border-violet-mid/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-violet-dark via-purple-600 to-violet-mid" />
+
+            <div class="flex flex-col gap-5 pt-1">
+              <div class="flex items-center justify-between gap-3">
+                <div class="w-12 h-12 rounded-xl bg-violet-lavender/40 text-violet-dark border border-violet-mid/30 flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                  <span class="material-symbols-outlined text-[26px]" aria-hidden="true">airport_shuttle</span>
+                </div>
+                <span class="text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full bg-violet-lavender/50 text-violet-dark border border-violet-mid/20">
+                  Servicio Oficial
+                </span>
+              </div>
+
+              <div>
+                <h3 class="text-xl font-bold font-display text-ink group-hover:text-violet-dark transition-colors duration-200 leading-snug mb-2">
+                  Shuttle Gratuito
+                </h3>
+                <p class="text-xs text-ink/65 leading-relaxed mb-4">
+                  Traslado sin costo presentando tu entrada digital QR.
+                </p>
+
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-center justify-between p-2 rounded-lg bg-violet-lavender/20 border border-violet-mid/10">
+                    <span class="text-xs font-bold text-violet-dark flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-[15px]">location_on</span> Plaza Belgrano
+                    </span>
+                    <span class="text-[11px] font-extrabold text-violet-dark/80 bg-white px-2 py-0.5 rounded shadow-2xs">c/30 min</span>
+                  </div>
+                  <div class="flex items-center justify-between p-2 rounded-lg bg-violet-lavender/20 border border-violet-mid/10">
+                    <span class="text-xs font-bold text-violet-dark flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-[15px]">directions_bus</span> Terminal Ómnibus
+                    </span>
+                    <span class="text-[11px] font-extrabold text-violet-dark/80 bg-white px-2 py-0.5 rounded shadow-2xs">c/30 min</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-ink/8 text-[11px] font-bold text-ink/50 flex items-center gap-2">
+              <span class="material-symbols-outlined text-[16px] text-violet-mid" aria-hidden="true">timer</span>
+              <span>Operativo continuo de 09:30 a 21:30 hs</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Estacionamiento en Predio -->
+          <div class="relative flex flex-col justify-between bg-white rounded-2xl border border-ink/8 p-6 sm:p-7 hover:border-valles-dark/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-valles via-puna to-quebrada" />
+
+            <div class="flex flex-col gap-5 pt-1">
+              <div class="flex items-center justify-between gap-3">
+                <div class="w-12 h-12 rounded-xl bg-valles/15 text-valles-dark border border-valles/30 flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                  <span class="material-symbols-outlined text-[26px]" aria-hidden="true">local_parking</span>
+                </div>
+                <span class="text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full bg-valles/20 text-valles-dark border border-valles/30">
+                  Acceso Gratuito
+                </span>
+              </div>
+
+              <div>
+                <h3 class="text-xl font-bold font-display text-ink group-hover:text-valles-dark transition-colors duration-200 leading-snug mb-2">
+                  Estacionamiento
+                </h3>
+                <p class="text-xs text-ink/65 leading-relaxed mb-4">
+                  Playa asfaltada e iluminada dentro del predio ferial.
+                </p>
+
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-center gap-2 p-2 rounded-lg bg-paper border border-ink/5 text-xs font-semibold text-ink/80">
+                    <span class="material-symbols-outlined text-[16px] text-valles-dark">directions_car</span>
+                    <span>Playa principal autos y camionetas</span>
+                  </div>
+                  <div class="flex items-center gap-2 p-2 rounded-lg bg-paper border border-ink/5 text-xs font-semibold text-ink/80">
+                    <span class="material-symbols-outlined text-[16px] text-valles-dark">accessible</span>
+                    <span>Sectores reservados movilidad reducida</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-ink/8 text-[11px] font-bold text-ink/50 flex items-center gap-2">
+              <span class="material-symbols-outlined text-[16px] text-valles-dark" aria-hidden="true">event_available</span>
+              <span>Apertura de playa desde las 09:00 hs</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="section bg-paper" id="faq" aria-label="Preguntas frecuentes">
-      <div class="container max-w-2xl">
-        <SectionHeader
-          eyebrow="FAQS"
-          title="Preguntas frecuentes."
-          territory="violet"
-          align="center"
-          class="mb-8"
-        />
+    <!-- Servicios del predio y accesibilidad -->
+    <section class="section bg-paper" id="servicios" aria-label="Servicios del predio">
+      <div class="container">
 
-        <div class="flex flex-col gap-3" role="list">
-          {faq.map((item, i) => (
-            <details
-              class="bg-white rounded-md border border-ink/8 group"
-              role="listitem"
-            >
-              <summary
-                class="flex items-center justify-between gap-4 p-5 cursor-pointer font-semibold text-body text-ink list-none hover:text-violet-dark transition-colors"
-                aria-expanded="false"
-              >
-                <span class="flex items-center gap-3">
-                  <span class="w-6 h-6 rounded-full bg-violet-lavender/30 text-violet-mid text-caption font-bold flex items-center justify-center flex-shrink-0">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  {item.q}
-                </span>
-                <span class="material-symbols-outlined text-ink/30 group-open:rotate-180 transition-transform flex-shrink-0" aria-hidden="true">
-                  expand_more
-                </span>
-              </summary>
-              <div class="px-5 pb-5 pt-0">
-                <p class="text-small text-ink/65 leading-relaxed pl-9">{item.a}</p>
+        <!-- Header + nota -->
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
+          <div>
+            <span class="inline-flex items-center gap-2 text-caption font-bold text-puna uppercase tracking-widest mb-2">
+              <span class="material-symbols-outlined text-[14px]" aria-hidden="true">stars</span>
+              Comodidad y Atención Integral
+            </span>
+            <h2 class="text-h2 font-bold text-ink">Servicios del predio y accesibilidad universal.</h2>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
+          {[
+            {
+              icon: 'accessible',
+              title: 'Accesos adaptados',
+              desc: 'Rampas con pendiente normalizada, senderos peatonales nivelados y prioridad de ingreso en todos los molinetes.',
+              color: 'text-puna',
+              bg: 'bg-puna/8',
+              border: 'border-puna/15',
+            },
+            {
+              icon: 'wc',
+              title: 'Sanitarios accesibles',
+              desc: 'Módulos sanitarios distribuidos en pabellones cubiertos y áreas al aire libre, adaptados para personas con movilidad reducida.',
+              color: 'text-quebrada',
+              bg: 'bg-quebrada/8',
+              border: 'border-quebrada/15',
+            },
+            {
+              icon: 'info',
+              title: 'Punto de información',
+              desc: 'Asistencia presencial continua, entrega de planos impresos y atención personalizada al visitante y delegaciones.',
+              color: 'text-yungas',
+              bg: 'bg-yungas/8',
+              border: 'border-yungas/15',
+            },
+            {
+              icon: 'restaurant',
+              title: 'Área gastronómica',
+              desc: 'Food trucks con comidas regionales, opciones vegetarianas y sin TACC, más áreas de mesas protegidas del sol.',
+              color: 'text-valles',
+              bg: 'bg-valles/8',
+              border: 'border-valles/15',
+            },
+            {
+              icon: 'medical_services',
+              title: 'Primeros auxilios',
+              desc: 'Puesto sanitario permanente con ambulancia de guardia de alta complejidad y personal médico certificado para emergencias.',
+              color: 'text-yungas',
+              bg: 'bg-yungas/8',
+              border: 'border-yungas/15',
+            },
+            {
+              icon: 'wifi',
+              title: 'Wi-Fi gratuito',
+              desc: 'Red inalámbrica abierta de alta densidad disponible para acreditaciones, consultas y networking en todo el predio.',
+              color: 'text-puna',
+              bg: 'bg-puna/8',
+              border: 'border-puna/15',
+            },
+          ].map(item => (
+            <div class={`group flex items-start gap-4 bg-white rounded-lg border ${item.border} p-5 transition-shadow hover:shadow-md h-full`}>
+              <div class={`w-11 h-11 rounded-lg ${item.bg} ${item.color} flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110`}>
+                <span class="material-symbols-outlined text-[22px]" aria-hidden="true">{item.icon}</span>
               </div>
-            </details>
+              <div class="flex-1">
+                <p class="text-small font-bold text-ink mb-1">{item.title}</p>
+                <p class="text-caption text-ink/55 leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
           ))}
         </div>
+
       </div>
     </section>
   </main>
 
   <Footer />
+  <TicketModal />
 </BaseLayout>

@@ -10,6 +10,57 @@ import Button from '../components/ui/Button.astro';
 
 const base = import.meta.env.BASE_URL;
 
+const agendaBenefits = [
+  {
+    icon: 'public',
+    title: 'Corredor Bioceánico & Comercio Exterior',
+    desc: 'Paneles magistrales sobre la integración logística y comercial del NOA con Chile, Paraguay y Brasil en el eje ZICOSUR.',
+    tag: 'Integración ZICOSUR',
+    statLabel: 'CONFERENCIAS CLAVE',
+    statValue: 'Panelistas Internacionales',
+    statIcon: 'explore',
+    accentColor: 'from-violet-dark via-violet-mid to-violet-lavender',
+    iconBg: 'bg-violet-lavender/40 text-violet-dark border-violet-mid/30',
+    pillBg: 'bg-violet-lavender/50 text-violet-dark border border-violet-mid/20',
+  },
+  {
+    icon: 'bolt',
+    title: 'Litio, Minería & Transición Energética',
+    desc: 'Exposiciones sobre extracción directa sustentable, marco regulatorio y desarrollo de la cadena de valor local del litio.',
+    tag: 'Sostenibilidad',
+    statLabel: 'SECTOR ENERGÉTICO',
+    statValue: 'Nuevas Tecnologías',
+    statIcon: 'energy_savings_leaf',
+    accentColor: 'from-violet-mid via-cyan to-cyan-dark',
+    iconBg: 'bg-violet-lavender/40 text-violet-dark border-violet-mid/30',
+    pillBg: 'bg-violet-lavender/50 text-violet-dark border border-violet-mid/20',
+  },
+  {
+    icon: 'eco',
+    title: 'Agronegocios & Cadenas de Valor',
+    desc: 'Modelos de innovación en cultivos de altura, bioenergías, tabaco, caña y alimentos procesados exportables.',
+    tag: 'Desarrollo NOA',
+    statLabel: 'AGROINDUSTRIA',
+    statValue: 'Oferta Exportadora',
+    statIcon: 'agriculture',
+    accentColor: 'from-cyan via-yungas to-yungas-dark',
+    iconBg: 'bg-cyan/15 text-cyan-dark border-cyan/30',
+    pillBg: 'bg-cyan/20 text-cyan-dark border border-cyan/30',
+  },
+  {
+    icon: 'memory',
+    title: 'Foros de Innovación & Startups NOA',
+    desc: 'Pitchs de emprendimientos de base tecnológica, soluciones de software y Smart Mining aplicadas a la producción.',
+    tag: 'Tecnología IT',
+    statLabel: 'HACKATHON NOA',
+    statValue: 'Soluciones Smart Mining',
+    statIcon: 'terminal',
+    accentColor: 'from-valles via-puna to-quebrada',
+    iconBg: 'bg-valles/15 text-valles-dark border-valles/30',
+    pillBg: 'bg-valles/20 text-valles-dark border border-valles/30',
+  },
+];
+
 const days = [
   { id: 'dia-1', label: 'Día 1', date: 'Jue 9 Oct', short: '09/10' },
   { id: 'dia-2', label: 'Día 2', date: 'Vie 10 Oct', short: '10/10' },
@@ -17,9 +68,20 @@ const days = [
   { id: 'dia-4', label: 'Día 4', date: 'Dom 12 Oct', short: '12/10' },
 ];
 
+const categories = [
+  { id: 'all', label: 'Todos' },
+  { id: 'mineria', label: 'Minería & Litio' },
+  { id: 'b2b', label: 'Rondas B2B' },
+  { id: 'tecnologia', label: 'Tecnología' },
+  { id: 'shows', label: 'Shows Centrales' },
+];
+
 const activities = [
   {
+    id: 'act-1',
     day: 'dia-1',
+    dayLabel: 'Jue 9 Oct',
+    category: 'tecnologia',
     time: '09:00',
     duration: '90 min',
     title: 'Inauguración Oficial & Conferencia: El Corredor Bioceánico',
@@ -30,7 +92,10 @@ const activities = [
     speaker: 'Panel Institucional',
   },
   {
+    id: 'act-2',
     day: 'dia-1',
+    dayLabel: 'Jue 9 Oct',
+    category: 'mineria',
     time: '11:00',
     duration: '60 min',
     title: 'Minería de Litio & Transición Energética Regional',
@@ -41,7 +106,10 @@ const activities = [
     speaker: 'Litio Solar Jujuy S.A.',
   },
   {
+    id: 'act-3',
     day: 'dia-1',
+    dayLabel: 'Jue 9 Oct',
+    category: 'b2b',
     time: '14:00',
     duration: '180 min',
     title: 'Ronda Multisectorial Internacional: Sesión 1',
@@ -52,7 +120,24 @@ const activities = [
     speaker: 'Múltiples participantes',
   },
   {
+    id: 'act-4',
+    day: 'dia-1',
+    dayLabel: 'Jue 9 Oct',
+    category: 'shows',
+    time: '18:30',
+    duration: '120 min',
+    title: 'Apertura Cultural: Orquesta Sinfónica & Ballet Jujuy',
+    desc: 'Espectáculo de apertura con repertorio andino y danza tradicional en el escenario central.',
+    location: 'Escenario Central',
+    type: 'cierre',
+    territory: 'yungas' as const,
+    speaker: 'Secretaría de Cultura',
+  },
+  {
+    id: 'act-5',
     day: 'dia-2',
+    dayLabel: 'Vie 10 Oct',
+    category: 'tecnologia',
     time: '10:00',
     duration: '60 min',
     title: 'Foro Logístico: Puertos Secos y Paso de Jama',
@@ -63,8 +148,109 @@ const activities = [
     speaker: 'Logística Corredor Andino',
   },
   {
+    id: 'act-6',
+    day: 'dia-2',
+    dayLabel: 'Vie 10 Oct',
+    category: 'tecnologia',
+    time: '12:00',
+    duration: '90 min',
+    title: 'Agronegocios & Cadenas de Valor de los Valles Jujeños',
+    desc: 'Innovaciones en cultivo de tabaco, caña y biomasa sostenible para exportación.',
+    location: 'Auditorio Principal',
+    type: 'conferencia',
+    territory: 'valles' as const,
+    speaker: 'Cámara del Tabaco & Productores',
+  },
+  {
+    id: 'act-7',
+    day: 'dia-2',
+    dayLabel: 'Vie 10 Oct',
+    category: 'b2b',
+    time: '15:00',
+    duration: '180 min',
+    title: 'Ronda Multisectorial Internacional: Sesión 2',
+    desc: 'Encuentros de compras gubernamentales y proveedores mineros e industriales.',
+    location: 'Salón B2B',
+    type: 'b2b',
+    territory: 'quebrada' as const,
+    speaker: 'Múltiples participantes',
+  },
+  {
+    id: 'act-8',
+    day: 'dia-3',
+    dayLabel: 'Sáb 11 Oct',
+    category: 'tecnologia',
+    time: '10:30',
+    duration: '120 min',
+    title: 'Hackathon Innovación & Startups NOA 2026',
+    desc: 'Presentación de prototipos tecnológicos orientados a minería inteligente y agrotech.',
+    location: 'Pabellón C (Tecnología)',
+    type: 'conferencia',
+    territory: 'puna' as const,
+    speaker: 'Polo Tecnológico Jujuy',
+  },
+  {
+    id: 'act-9',
+    day: 'dia-3',
+    dayLabel: 'Sáb 11 Oct',
+    category: 'tecnologia',
+    time: '14:30',
+    duration: '90 min',
+    title: 'Turismo Sustentable & Marca Jujuy en el Mundo',
+    desc: 'Estrategias de posicionamiento internacional de la Quebrada de Humahuaca y Puna.',
+    location: 'Auditorio Principal',
+    type: 'foro',
+    territory: 'quebrada' as const,
+    speaker: 'Ministerio de Cultura y Turismo',
+  },
+  {
+    id: 'act-10',
+    day: 'dia-3',
+    dayLabel: 'Sáb 11 Oct',
+    category: 'shows',
+    time: '17:30',
+    duration: '120 min',
+    title: 'Festival Gastronómico: Sabores Jujeños & Cocina en Vivo',
+    desc: 'Masterclass con chefs regionales utilizando insumos locales y maridaje de vinos de altura.',
+    location: 'Patio Gastronómico',
+    type: 'cierre',
+    territory: 'valles' as const,
+    speaker: 'Chefs Invitados',
+  },
+  {
+    id: 'act-11',
     day: 'dia-4',
-    time: '17:00',
+    dayLabel: 'Dom 12 Oct',
+    category: 'shows',
+    time: '11:00',
+    duration: '90 min',
+    title: 'Ensamble Juvenil & Encuentro de Delegaciones',
+    desc: 'Presentación musical interactiva con participación de jóvenes talentos de toda la provincia.',
+    location: 'Escenario Central',
+    type: 'keynote',
+    territory: 'quebrada' as const,
+    speaker: 'Red de Orquestas de Jujuy',
+  },
+  {
+    id: 'act-12',
+    day: 'dia-4',
+    dayLabel: 'Dom 12 Oct',
+    category: 'b2b',
+    time: '15:00',
+    duration: '120 min',
+    title: 'Networking Final & Oportunidades de Inversión 2027',
+    desc: 'Espacio abierto de intercambio comercial entre expositores, patrocinadores y visitantes.',
+    location: 'Salón B2B',
+    type: 'b2b',
+    territory: 'puna' as const,
+    speaker: 'Comité Organizador ExpoJuy',
+  },
+  {
+    id: 'act-13',
+    day: 'dia-4',
+    dayLabel: 'Dom 12 Oct',
+    category: 'mineria',
+    time: '17:30',
     duration: '90 min',
     title: 'Panel de Cierre: Perspectivas Económicas NOA 2027',
     desc: 'Conclusiones y presentación de convenios firmados durante la feria ExpoJuy.',
@@ -85,132 +271,416 @@ const typeBadge: Record<string, string> = {
 ---
 
 <BaseLayout
-  title="Agenda de Actividades — ExpoJuy 2026"
-  description="Cronograma oficial de ExpoJuy 2026: conferencias, rondas B2B, shows y actividades sectoriales del 9 al 12 de Octubre en Ciudad Cultural, Jujuy."
+  title="Agenda ExpoJuy 2026: Horarios, Conferencias y Rondas B2B"
+  description="Cronograma oficial de ExpoJuy 2026 del 9 al 12 de octubre en Ciudad Cultural, Jujuy. Descubrí charlas sobre Litio, Corredor Bioceánico, Rondas B2B y armá tu itinerario PDF personalizado."
 >
   <Header />
   <BottomNav activePage="agenda" />
 
   <main id="main-content">
-    <!-- Page header -->
-    <section class="section bg-white border-b border-ink/8">
-      <div class="container">
-        <nav aria-label="Ruta de navegación" class="flex items-center gap-2 text-caption text-ink/50 mb-6">
-          <a href={base} class="hover:text-violet-dark transition-colors">Inicio</a>
-          <span aria-hidden="true">/</span>
-          <span class="text-ink font-semibold">Agenda</span>
+    <!-- Hero Header with Image & MWC Stat Counters -->
+    <section class="relative bg-ink text-white overflow-hidden py-14 lg:py-20 border-b border-ink/20" aria-label="Cronograma y Agenda ExpoJuy 2026">
+      {/* Background Image Container with Left-to-Right Gradient Overlay & Zoom-Out Scale */}
+      <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute right-0 top-0 bottom-0 w-full lg:w-[50%] flex items-center justify-end overflow-hidden">
+          <img
+            src={`${base}stands.jpeg`}
+            alt="Stands y Exposición en ExpoJuy 2026"
+            class="w-full h-full object-cover object-center scale-90 lg:scale-[0.82] transform-gpu opacity-50 mix-blend-luminosity"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/40"></div>
+        </div>
+      </div>
+
+      <div class="absolute inset-0 bg-gradient-puna opacity-30 pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 24px 24px;" aria-hidden="true"></div>
+
+      <div class="container relative z-10">
+        <!-- Breadcrumb -->
+        <nav aria-label="Ruta de navegación" class="flex items-center gap-1.5 text-[11px] text-white/50 font-medium mb-6">
+          <a href={base} class="hover:text-cyan transition-colors">Inicio</a>
+          <span class="material-symbols-outlined text-[12px]" aria-hidden="true">chevron_right</span>
+          <span class="text-white/90 font-semibold">Agenda ExpoJuy 2026</span>
         </nav>
-        <SectionHeader
-          eyebrow="Cronograma Oficial · Ciudad Cultural"
-          title="Agenda de Actividades"
-          lead="Charlas magistrales, rondas de vinculación comercial, experiencias culturales y conferencias sectoriales durante los 4 días más dinámicos del Norte Grande."
-          territory="yungas"
-        />
+
+        <div class="max-w-2xl flex flex-col gap-5">
+          
+
+          <h1 class="text-h1 text-white font-bold leading-tight">
+            Conferencias, Paneles & <span class="text-cyan">Rondas de Negocios</span>
+          </h1>
+
+          <p class="text-body-lg text-white/80 leading-relaxed">
+            Planificá tu itinerario en el evento socio-productivo más importante del NOA. Descubrí charlas sobre Litio, Corredor Bioceánico, Rondas B2B y espectáculos del 9 al 12 de octubre.
+          </p>
+
+          <div class="flex flex-wrap gap-3 pt-2">
+            <Button href="#activity-list" size="lg" icon="event_note" class="shadow-violet">
+              Explorar Actividades
+            </Button>
+            <Button href={`${base}visita#entradas`} variant="outline" size="lg" icon="confirmation_number" class="border-white/30 text-white hover:bg-white/10">
+              Asegurar mi Entrada
+            </Button>
+          </div>
+
+         
+        </div>
       </div>
     </section>
 
-    <!-- Day filter tabs (scrollable on mobile) -->
-    <div class="sticky top-[88px] z-30 bg-white border-b border-ink/8 shadow-sm" role="navigation" aria-label="Filtros por día">
+    <!-- ═══════════════════════════════════════════
+         VALOR ESTRATÉGICO — Ejes de la Agenda (Grid 2x2 Optimizado)
+         ═══════════════════════════════════════════ -->
+    <section class="section bg-white border-b border-ink/5" aria-label="Ejes temáticos de la agenda">
       <div class="container">
-        <div
-          class="flex overflow-x-auto scrollbar-none gap-1 py-3"
-          role="tablist"
-          aria-label="Seleccioná un día"
-        >
-          <button
-            type="button"
-            class="px-4 py-2 rounded-pill text-small font-semibold bg-violet-dark text-white flex-shrink-0 transition-all"
-            role="tab"
-            aria-selected="true"
-            id="tab-all"
-            aria-controls="activity-list"
-          >
-            Todos los días
-          </button>
-          {days.map(day => (
+        <div class="grid lg:grid-cols-12 gap-6 items-end mb-10">
+          <div class="lg:col-span-8">
+            <SectionHeader
+              eyebrow="EJES TEMÁTICOS"
+              title="Contenido estratégico para inversores y profesionales"
+              territory="yungas"
+            />
+          </div>
+          <div class="lg:col-span-4">
+            <p class="text-small text-ink/70 leading-relaxed lg:text-right">
+              Espacios de formación, análisis geopolítico y presentación de tecnologías orientadas al desarrollo sustentable del NOA.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {agendaBenefits.map(b => (
+            <div class="relative flex flex-col justify-between bg-white rounded-2xl border border-ink/8 p-6 sm:p-8 hover:border-violet-mid/40 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group overflow-hidden">
+              {/* Top Accent Gradient Bar */}
+              <div class={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${b.accentColor}`} />
+
+              <div class="flex flex-col gap-5 pt-1">
+                <div class="flex items-center justify-between gap-3">
+                  <div class={`w-12 h-12 rounded-xl ${b.iconBg} border flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300`}>
+                    <span class="material-symbols-outlined text-[26px]" aria-hidden="true">{b.icon}</span>
+                  </div>
+                  <span class={`text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-2xs ${b.pillBg}`}>
+                    {b.tag}
+                  </span>
+                </div>
+
+                <div>
+                  <h3 class="text-xl font-bold font-display text-ink group-hover:text-violet-dark transition-colors duration-200 leading-snug mb-2.5">
+                    {b.title}
+                  </h3>
+                  <p class="text-body-sm text-ink/75 leading-relaxed">
+                    {b.desc}
+                  </p>
+                </div>
+              </div>
+
+              {/* Bottom Stat Highlight Footer */}
+              <div class="mt-6 pt-4 border-t border-ink/8 flex items-center justify-between text-xs">
+                <span class="text-[11px] font-extrabold text-ink/50 uppercase tracking-wider flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-[16px] text-violet-mid" aria-hidden="true">{b.statIcon}</span>
+                  {b.statLabel}
+                </span>
+                <span class="font-black text-ink text-sm group-hover:text-violet-dark transition-colors">
+                  {b.statValue}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter tabs (Días + Rubro) -->
+    <div class="bg-white border-b border-ink/8 py-3" role="navigation" aria-label="Filtros de agenda">
+      <div class="container flex flex-col gap-3">
+        <!-- Filtro por Día -->
+        <div class="flex items-center gap-2">
+          <span class="text-caption font-bold text-ink/40 uppercase tracking-widest min-w-[55px] flex-shrink-0">Día:</span>
+          <div class="flex overflow-x-auto scrollbar-none gap-2 py-0.5" role="tablist" aria-label="Seleccioná un día">
             <button
               type="button"
-              class="px-4 py-2 rounded-pill text-small font-semibold bg-paper text-ink/60 hover:text-ink hover:bg-ink/5 flex-shrink-0 transition-all"
+              class="tab-day px-4 py-1.5 rounded-pill text-small font-semibold bg-violet-dark text-white flex-shrink-0 transition-all cursor-pointer"
               role="tab"
-              aria-selected="false"
-              id={`tab-${day.id}`}
-              data-day={day.id}
+              aria-selected="true"
+              id="tab-day-all"
+              data-day="all"
             >
-              <span class="hidden sm:inline">{day.date}</span>
-              <span class="sm:hidden">{day.short}</span>
+              Todos los días
             </button>
-          ))}
+            {days.map(day => (
+              <button
+                type="button"
+                class="tab-day px-4 py-1.5 rounded-pill text-small font-semibold bg-paper text-ink/60 hover:text-ink hover:bg-ink/5 flex-shrink-0 transition-all cursor-pointer"
+                role="tab"
+                aria-selected="false"
+                id={`tab-${day.id}`}
+                data-day={day.id}
+              >
+                <span class="hidden sm:inline">{day.date}</span>
+                <span class="sm:hidden">{day.short}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- Filtro por Rubro / Categoría -->
+        <div class="flex items-center gap-2 border-t border-ink/5 pt-2.5">
+          <span class="text-caption font-bold text-ink/40 uppercase tracking-widest min-w-[55px] flex-shrink-0">Rubro:</span>
+          <div class="flex overflow-x-auto scrollbar-none gap-2 py-0.5" role="tablist" aria-label="Seleccioná un rubro">
+            {categories.map((cat, i) => (
+              <button
+                type="button"
+                class={`tab-category px-4 py-1.5 rounded-pill text-small font-semibold flex-shrink-0 transition-all cursor-pointer ${
+                  i === 0 ? 'bg-violet-dark text-white' : 'bg-paper text-ink/60 hover:text-ink hover:bg-ink/5'
+                }`}
+                role="tab"
+                aria-selected={i === 0 ? 'true' : 'false'}
+                data-category={cat.id}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Activities list -->
+    <!-- Activities list & Sidebar -->
     <section class="section bg-paper" id="activity-list">
       <div class="container">
-        <div class="flex flex-col gap-4" role="list" aria-label="Lista de actividades">
-          {activities.map(act => (
-            <article
-              class="flex flex-col sm:flex-row gap-4 bg-white rounded-md border border-ink/8 p-5 hover:shadow-md transition-shadow"
-              data-day={act.day}
-              role="listitem"
-            >
-              <!-- Time -->
-              <div class="flex-shrink-0 flex sm:flex-col items-center sm:items-start gap-3 sm:gap-1 sm:w-20">
-                <time class="text-h3 font-bold text-ink leading-none">{act.time}</time>
-                <span class="text-caption text-ink/40">{act.duration}</span>
+        <div class="grid lg:grid-cols-3 gap-8 items-start">
+
+          <!-- Columna Principal: Lista de Actividades -->
+          <div class="lg:col-span-2 flex flex-col gap-4" role="list" aria-label="Lista de actividades">
+            {activities.map(act => (
+              <article
+                class="flex flex-col sm:flex-row gap-4 bg-white rounded-md border border-ink/8 p-5 hover:shadow-md transition-shadow relative"
+                data-day={act.day}
+                data-category={act.category}
+                data-id={act.id}
+                data-title={act.title}
+                data-time={act.time}
+                data-daylabel={act.dayLabel}
+                data-location={act.location}
+                role="listitem"
+              >
+                <!-- Time & Day -->
+                <div class="flex-shrink-0 flex sm:flex-col items-center sm:items-start gap-3 sm:gap-1 sm:w-24">
+                  <span class="text-caption font-bold text-violet-dark uppercase tracking-wider">{act.dayLabel}</span>
+                  <time class="text-h3 font-bold text-ink leading-none">{act.time}</time>
+                  <span class="text-caption text-ink/40">{act.duration}</span>
+                </div>
+
+                <!-- Divider mobile -->
+                <div class="hidden sm:block w-0.5 bg-ink/8 self-stretch" aria-hidden="true"></div>
+
+                <!-- Content -->
+                <div class="flex flex-col gap-2 flex-1 min-w-0">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <Badge territory={typeBadge[act.type] as any} size="sm">{act.type}</Badge>
+                    <span class="text-caption text-ink/40 flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[13px]" aria-hidden="true">location_on</span>
+                      {act.location}
+                    </span>
+                  </div>
+                  <h3 class="text-body font-bold text-ink leading-snug">{act.title}</h3>
+                  <p class="text-small text-ink/60 leading-relaxed">{act.desc}</p>
+                  <p class="text-caption text-ink/40">
+                    <span class="material-symbols-outlined text-[13px] align-middle" aria-hidden="true">person</span>
+                    {act.speaker}
+                  </p>
+                </div>
+
+                <!-- Save button -->
+                <div class="flex-shrink-0 self-start sm:self-center">
+                  <button
+                    type="button"
+                    class="btn-save-activity flex items-center gap-1.5 px-3 py-1.5 rounded-pill text-caption font-semibold border border-ink/15 text-ink/60 hover:border-violet-mid hover:text-violet-mid transition-all cursor-pointer"
+                    data-id={act.id}
+                    aria-label={`Guardar "${act.title}" en mi agenda`}
+                  >
+                    <span class="material-symbols-outlined text-[14px]" aria-hidden="true">bookmark_add</span>
+                    <span class="save-label">Guardar</span>
+                  </button>
+                </div>
+              </article>
+            ))}
+
+            <div id="no-activities" class="hidden text-center py-12 bg-white rounded-xl border border-ink/8 p-6">
+              <span class="material-symbols-outlined text-[36px] text-ink/30 mb-2" aria-hidden="true">event_busy</span>
+              <p class="text-body font-bold text-ink">No hay actividades programadas para este filtro</p>
+              <p class="text-caption text-ink/50 mt-1">Seleccioná otro día o rubro para ver más conferencias</p>
+            </div>
+          </div>
+
+          <!-- Columna Lateral: Mi Agenda (Sticky en pantalla, oculta al imprimir) -->
+          <div class="lg:col-span-1 sticky top-[120px]">
+            <div class="bg-white rounded-2xl border border-ink/10 shadow-sm p-6 flex flex-col gap-5">
+              
+              <!-- Header -->
+              <div class="flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-violet-mid text-white flex items-center justify-center flex-shrink-0 shadow-sm shadow-violet-mid/20">
+                    <span class="material-symbols-outlined text-[20px]" aria-hidden="true">bookmark</span>
+                  </div>
+                  <h2 class="text-body font-bold text-ink">Mi agenda</h2>
+                </div>
+                <span id="saved-counter" class="bg-paper text-ink/60 text-caption font-bold px-3 py-1 rounded-full border border-ink/5">(0)</span>
               </div>
 
-              <!-- Divider mobile -->
-              <div class="hidden sm:block w-0.5 bg-ink/8 self-stretch" aria-hidden="true"></div>
-
-              <!-- Content -->
-              <div class="flex flex-col gap-2 flex-1 min-w-0">
-                <div class="flex flex-wrap items-center gap-2">
-                  <Badge territory={typeBadge[act.type] as any} size="sm">{act.type}</Badge>
-                  <span class="text-caption text-ink/40 flex items-center gap-1">
-                    <span class="material-symbols-outlined text-[13px]" aria-hidden="true">location_on</span>
-                    {act.location}
-                  </span>
+              <!-- Estado Vacío -->
+              <div id="agenda-empty-state" class="py-6 px-4 flex flex-col items-center text-center">
+                <div class="w-14 h-14 rounded-full bg-violet-mid/10 text-violet-mid flex items-center justify-center mb-3">
+                  <span class="material-symbols-outlined text-[26px]" aria-hidden="true">bookmarks</span>
                 </div>
-                <h3 class="text-body font-bold text-ink leading-snug">{act.title}</h3>
-                <p class="text-small text-ink/60 leading-relaxed">{act.desc}</p>
-                <p class="text-caption text-ink/40">
-                  <span class="material-symbols-outlined text-[13px] align-middle" aria-hidden="true">person</span>
-                  {act.speaker}
+                <h3 class="text-small font-bold text-ink mb-1">Aún no guardaste actividades</h3>
+                <p class="text-caption text-ink/50 leading-relaxed max-w-[260px]">
+                  Explorá el cronograma y hacé clic en "Guardar en mi agenda" para armar tu itinerario personalizado.
                 </p>
               </div>
 
-              <!-- Save button -->
-              <div class="flex-shrink-0 self-start sm:self-center">
+              <!-- Lista de Actividades Guardadas -->
+              <div id="agenda-saved-list" class="hidden flex flex-col gap-3 max-h-[320px] overflow-y-auto pr-1">
+                <!-- Se llena dinámicamente con JS -->
+              </div>
+
+              <hr class="border-ink/8 my-0" />
+
+              <!-- Botón de Descarga -->
+              <div>
                 <button
                   type="button"
-                  class="flex items-center gap-1.5 px-3 py-1.5 rounded-pill text-caption font-semibold border border-ink/15 text-ink/60 hover:border-violet-mid hover:text-violet-mid transition-all"
-                  aria-label={`Guardar "${act.title}" en mi agenda`}
+                  id="btn-download-pdf"
+                  disabled
+                  class="w-full py-3 px-4 rounded-pill font-semibold text-small flex items-center justify-center gap-2 bg-paper text-ink/30 cursor-not-allowed transition-all"
                 >
-                  <span class="material-symbols-outlined text-[14px]" aria-hidden="true">bookmark_add</span>
-                  Guardar
+                  <span class="material-symbols-outlined text-[18px]" aria-hidden="true">file_download</span>
+                  Descargar mi itinerario (PDF)
                 </button>
+                <p class="text-caption text-ink/40 text-center leading-relaxed italic mt-2">
+                  El itinerario generado guardará tus horarios y salas seleccionadas.
+                </p>
               </div>
-            </article>
-          ))}
+
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
+
+    <!-- Contenedor exclusivo para impresión PDF limpia -->
+    <div id="print-area" class="hidden p-8 bg-white text-ink font-sans">
+      <!-- Header oficial igual al de la página de agenda -->
+      <div class="border-b-2 border-violet-mid pb-6 mb-6">
+        <span class="inline-block text-xs font-bold text-violet-dark uppercase tracking-widest bg-violet-mid/10 px-3 py-1 rounded-full mb-2">
+          CRONOGRAMA OFICIAL · CIUDAD CULTURAL
+        </span>
+        <h1 class="text-3xl font-extrabold text-ink leading-tight">Agenda de Actividades</h1>
+        <p class="text-sm text-ink/65 mt-2">
+          Charlas magistrales, rondas de vinculación comercial, experiencias culturales y conferencias sectoriales durante los 4 días más dinámicos del Norte Grande.
+        </p>
+        <div class="mt-3 flex items-center justify-between border-t border-ink/8 pt-3 text-xs">
+          <span class="font-bold text-violet-dark">★ Mi Itinerario Personalizado — ExpoJuy 2026</span>
+          <span class="text-ink/50">San Salvador de Jujuy · 9 al 12 de Octubre</span>
+        </div>
+      </div>
+
+      <div id="print-saved-items" class="flex flex-col gap-4">
+        <!-- Se puebla dinámicamente -->
+      </div>
+
+      <div class="mt-8 pt-4 border-t border-ink/15 text-xs text-ink/50 flex justify-between items-center">
+        <p>Validez de orientación para el visitante durante la feria ExpoJuy 2026.</p>
+        <p class="font-bold text-ink">Comité Organizador ExpoJuy</p>
+      </div>
+    </div>
   </main>
 
   <Footer />
 </BaseLayout>
 
+<style is:global>
+  @media print {
+    /* Ocultar absolutamente todos los componentes globales (Header, Footer, Nav, ChatWidget) */
+    header,
+    footer,
+    nav,
+    main > section,
+    main > div:not(#print-area),
+    .fixed,
+    .sticky,
+    #chat-widget {
+      display: none !important;
+    }
+
+    html, body {
+      background: white !important;
+      color: #3c3c3b !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    #main-content {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    #print-area {
+      display: block !important;
+      position: absolute !important;
+      left: 0 !important;
+      top: 0 !important;
+      width: 100% !important;
+      padding: 2rem !important;
+      margin: 0 !important;
+      box-sizing: border-box !important;
+    }
+
+    #print-area * {
+      visibility: visible !important;
+    }
+  }
+</style>
+
 <script>
-  // Day filter tabs
-  const tabs = document.querySelectorAll('[role="tab"]');
-  const items = document.querySelectorAll('[data-day]');
+  // Filter tabs logic (Day + Category combination)
+  const dayTabs = document.querySelectorAll<HTMLButtonElement>('.tab-day');
+  const catTabs = document.querySelectorAll<HTMLButtonElement>('.tab-category');
+  const activityArticles = document.querySelectorAll<HTMLElement>('#activity-list article[data-day]');
+  const noActivitiesMsg = document.getElementById('no-activities');
 
-  tabs.forEach(tab => {
+  let activeDay = 'all';
+  let activeCategory = 'all';
+
+  function applyFilters() {
+    let visibleCount = 0;
+    activityArticles.forEach(item => {
+      const itemDay = item.dataset.day;
+      const itemCategory = item.dataset.category;
+
+      const matchDay = (activeDay === 'all' || itemDay === activeDay);
+      const matchCategory = (activeCategory === 'all' || itemCategory === activeCategory);
+
+      if (matchDay && matchCategory) {
+        item.style.display = '';
+        visibleCount++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    if (noActivitiesMsg) {
+      noActivitiesMsg.classList.toggle('hidden', visibleCount > 0);
+    }
+  }
+
+  dayTabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      const day = tab.getAttribute('data-day');
+      activeDay = tab.getAttribute('data-day') || 'all';
 
-      tabs.forEach(t => {
+      dayTabs.forEach(t => {
         t.setAttribute('aria-selected', 'false');
         t.classList.remove('bg-violet-dark', 'text-white');
         t.classList.add('bg-paper', 'text-ink/60');
@@ -219,14 +689,232 @@ const typeBadge: Record<string, string> = {
       tab.classList.add('bg-violet-dark', 'text-white');
       tab.classList.remove('bg-paper', 'text-ink/60');
 
-      items.forEach(item => {
-        const el = item as HTMLElement;
-        if (!day || el.dataset.day === day || tab.id === 'tab-all') {
-          el.style.display = '';
-        } else {
-          el.style.display = 'none';
-        }
-      });
+      applyFilters();
     });
   });
+
+  catTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      activeCategory = tab.getAttribute('data-category') || 'all';
+
+      catTabs.forEach(t => {
+        t.setAttribute('aria-selected', 'false');
+        t.classList.remove('bg-violet-dark', 'text-white');
+        t.classList.add('bg-paper', 'text-ink/60');
+      });
+      tab.setAttribute('aria-selected', 'true');
+      tab.classList.add('bg-violet-dark', 'text-white');
+      tab.classList.remove('bg-paper', 'text-ink/60');
+
+      applyFilters();
+    });
+  });
+
+  // Saved activities state manager
+  const STORAGE_KEY = 'expojuy_saved_agenda';
+  let savedIds: string[] = [];
+
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) savedIds = JSON.parse(stored);
+  } catch (e) {
+    savedIds = [];
+  }
+
+  const savedCounter = document.getElementById('saved-counter');
+  const emptyState = document.getElementById('agenda-empty-state');
+  const savedList = document.getElementById('agenda-saved-list');
+  const downloadBtn = document.getElementById('btn-download-pdf') as HTMLButtonElement | null;
+  const printContainer = document.getElementById('print-saved-items');
+
+  function updateAgendaUI() {
+    // 1. Update counter
+    if (savedCounter) savedCounter.textContent = `(${savedIds.length})`;
+
+    // 2. Toggle empty state vs list
+    if (savedIds.length === 0) {
+      if (emptyState) emptyState.classList.remove('hidden');
+      if (savedList) {
+        savedList.classList.add('hidden');
+        savedList.innerHTML = '';
+      }
+      if (downloadBtn) {
+        downloadBtn.disabled = true;
+        downloadBtn.className = 'w-full py-3 px-4 rounded-pill font-semibold text-small flex items-center justify-center gap-2 bg-paper text-ink/30 cursor-not-allowed transition-all';
+      }
+      if (printContainer) printContainer.innerHTML = '';
+    } else {
+      if (emptyState) emptyState.classList.add('hidden');
+      if (savedList) {
+        savedList.classList.remove('hidden');
+        savedList.innerHTML = '';
+      }
+      if (downloadBtn) {
+        downloadBtn.disabled = false;
+        downloadBtn.className = 'w-full py-3 px-4 rounded-pill font-semibold text-small flex items-center justify-center gap-2 bg-violet-mid hover:bg-violet-dark text-white shadow-md shadow-violet-mid/20 cursor-pointer transition-all';
+      }
+
+      if (printContainer) printContainer.innerHTML = '';
+
+      // Populate list & print container
+      savedIds.forEach(id => {
+        const article = document.querySelector<HTMLElement>(`article[data-id="${id}"]`);
+        if (!article) return;
+
+        const title = article.dataset.title || '';
+        const time = article.dataset.time || '';
+        const daylabel = article.dataset.daylabel || '';
+        const location = article.dataset.location || '';
+        const desc = article.querySelector('.text-small.text-ink\\/60')?.textContent || '';
+        const speaker = article.querySelector('.text-caption.text-ink\\/40:last-child')?.textContent || '';
+
+        // Sidebar list element
+        if (savedList) {
+          const itemEl = document.createElement('div');
+          itemEl.className = 'flex items-start justify-between gap-2 p-3 rounded-lg bg-paper border border-ink/8 text-small';
+          itemEl.innerHTML = `
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5 text-caption font-bold text-violet-dark">
+                <span class="material-symbols-outlined text-[13px]">schedule</span>
+                <span>${daylabel} · ${time} hs</span>
+              </div>
+              <p class="font-bold text-ink text-caption leading-tight mt-1 truncate">${title}</p>
+              <p class="text-caption text-ink/40 mt-0.5 flex items-center gap-1">
+                <span class="material-symbols-outlined text-[12px]">location_on</span>
+                ${location}
+              </p>
+            </div>
+            <button type="button" class="btn-remove-saved text-ink/30 hover:text-red-500 p-1 flex-shrink-0 transition-colors cursor-pointer" data-id="${id}" aria-label="Quitar">
+              <span class="material-symbols-outlined text-[16px]">close</span>
+            </button>
+          `;
+          savedList.appendChild(itemEl);
+        }
+
+        // Print document element
+        if (printContainer) {
+          const printEl = document.createElement('div');
+          printEl.className = 'border-b border-ink/10 pb-4 mb-2';
+          printEl.innerHTML = `
+            <div class="flex items-center gap-3 text-sm font-bold text-violet-dark mb-1">
+              <span>${daylabel}</span>
+              <span>·</span>
+              <span>${time} hs</span>
+              <span>·</span>
+              <span class="text-ink/70 font-semibold">${location}</span>
+            </div>
+            <h3 class="text-base font-bold text-ink mb-1">${title}</h3>
+            <p class="text-xs text-ink/70 leading-relaxed mb-1">${desc}</p>
+            ${speaker ? `<p class="text-xs text-ink/50 italic">${speaker}</p>` : ''}
+          `;
+          printContainer.appendChild(printEl);
+        }
+      });
+
+      // Bind remove buttons inside sidebar
+      document.querySelectorAll('.btn-remove-saved').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const target = e.currentTarget as HTMLButtonElement;
+          const removeId = target.dataset.id;
+          if (removeId) {
+            savedIds = savedIds.filter(i => i !== removeId);
+            saveState();
+          }
+        });
+      });
+    }
+
+    // 3. Update Save buttons on activity cards
+    document.querySelectorAll<HTMLButtonElement>('.btn-save-activity').forEach(btn => {
+      const id = btn.dataset.id;
+      const isSaved = id && savedIds.includes(id);
+      const icon = btn.querySelector('.material-symbols-outlined');
+      const label = btn.querySelector('.save-label');
+
+      if (isSaved) {
+        btn.className = 'btn-save-activity flex items-center gap-1.5 px-3 py-1.5 rounded-pill text-caption font-semibold bg-violet-mid text-white border border-violet-mid shadow-sm transition-all cursor-pointer';
+        if (icon) icon.textContent = 'bookmark_added';
+        if (label) label.textContent = 'Guardado';
+      } else {
+        btn.className = 'btn-save-activity flex items-center gap-1.5 px-3 py-1.5 rounded-pill text-caption font-semibold border border-ink/15 text-ink/60 hover:border-violet-mid hover:text-violet-mid transition-all cursor-pointer';
+        if (icon) icon.textContent = 'bookmark_add';
+        if (label) label.textContent = 'Guardar';
+      }
+    });
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(savedIds));
+    } catch (e) {}
+    updateAgendaUI();
+  }
+
+  // Bind activity card Save buttons
+  document.querySelectorAll<HTMLButtonElement>('.btn-save-activity').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      if (!id) return;
+      if (savedIds.includes(id)) {
+        savedIds = savedIds.filter(i => i !== id);
+      } else {
+        savedIds.push(id);
+      }
+      saveState();
+    });
+  });
+
+  // Download PDF / Print listener
+  if (downloadBtn) {
+    downloadBtn.addEventListener('click', () => {
+      if (savedIds.length === 0) return;
+      window.print();
+    });
+  }
+
+  // Animated stat counter (MWC style)
+  function initCounters() {
+    const counters = document.querySelectorAll('.stat-counter');
+    if (!counters.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const target = parseInt(el.getAttribute('data-target') || '0', 10);
+            const prefix = el.getAttribute('data-prefix') || '';
+            const suffix = el.getAttribute('data-suffix') || '';
+            const duration = 1600;
+            const startTime = performance.now();
+
+            function update(now: number) {
+              const elapsed = now - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+              const current = Math.floor(easeOut * target);
+
+              el.textContent = `${prefix}${current}${suffix}`;
+
+              if (progress < 1) {
+                requestAnimationFrame(update);
+              } else {
+                el.textContent = `${prefix}${target}${suffix}`;
+              }
+            }
+
+            requestAnimationFrame(update);
+            obs.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    counters.forEach((counter) => observer.observe(counter));
+  }
+
+  // Initialize
+  updateAgendaUI();
+  initCounters();
 </script>
